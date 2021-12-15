@@ -16,7 +16,7 @@ trait StoreImageTrait
             $filePath = $request->file($fieldName)->storeAs('public/'. $folderUpload, $fileNameOrigin); //upload file
                                                                                             // and return where upload that file
             $data = [
-                'file_name' => $fileNameOrigin,
+                // 'file_name' => $fileNameOrigin,
                 'file_path' => Storage::url($filePath), //return path on folder public/storage
             ];
 
@@ -26,12 +26,11 @@ trait StoreImageTrait
         return null;
     }
 
-    public function uploadImageMultiple($request, $fieldName, $folderUpload)
+    public function uploadImageMultiple($file, $folderUpload)
     {
-        $file = $request->$fieldName;//get info of file
-        $fileNameOrigin = date('YmdHi') . $file->getClientOriginalName();//get name file and create new fileName
-        $filePath = $request->file($fieldName)->storeAs('public/'. $folderUpload, $fileNameOrigin); //upload file
-                                                                                            // and return where upload that file
+        $fileNameOrigin = date('YmdHi') . $file->getClientOriginalName();//get name file and set filename
+        $filePath = $file->storeAs('public/'. $folderUpload, $fileNameOrigin); //upload file
+                                                                                        // and return where upload that file
         $data = [
             'file_name' => $fileNameOrigin,
             'file_path' => Storage::url($filePath), //return path on folder public/storage

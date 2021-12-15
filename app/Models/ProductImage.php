@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductTag extends Model
+class ProductImage extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
-    protected $table = 'product_tags';
+    protected $table = 'product_images';
 
     public function product()
     {

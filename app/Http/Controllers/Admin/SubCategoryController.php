@@ -84,4 +84,12 @@ class SubCategoryController extends Controller
             ]);
         }
     }
+
+    public function getSubcategories($subCategoryId)
+    {
+        $category = Category::findOrFail($subCategoryId);
+        $subCategories = $category->subCategories;
+
+        return response()->json(compact('subCategories'));
+    }
 }

@@ -29,18 +29,18 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="item in products" :key="item.id">
-                                            <td>image</td>
+                                            <td><img :src="item.image" alt="" width="50px"></td>
                                             <td>{{ item.name }}</td>
                                             <td>{{ item.description }}</td>
                                             <td>{{ item.product_price }}</td>
                                             <td>{{ item.product_qty }}</td>
                                             <td>{{ item.sell_price }}</td>
                                             <td>
-                                                <a :href="`/admin/category/edit/${item.id}`"
+                                                <a :href="`/admin/product/edit/${item.id}`"
                                                     class="btn btn-info" title="Edit Data"><i
                                                         class="fa fa-pencil"></i> </a>
                                                 <a href=""
-                                                    :data-url="`/admin/category/delete/${item.id}`"
+                                                    :data-url="`/admin/product/delete/${item.id}`"
                                                     class="btn btn-danger action-delete" title="Delete Data" id="delete">
                                                     <i class="fa fa-trash"></i></a>
                                             </td>

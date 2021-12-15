@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use Illuminate\Support\Facades\Route;
-use PHPUnit\TextUI\XmlConfiguration\Group;
 
 Route::get('/dashboard', function() {
     return view('admin.dashboard');
@@ -26,6 +26,7 @@ Route::prefix('/category')->group(function() {
     Route::post('/sub/update/{sub_category_id}', [SubCategoryController::class, 'update'])->name('sub_category.update');
     Route::get('/sub/edit/{sub_category_id}', [SubCategoryController::class, 'edit'])->name('sub_category.edit');
     Route::get('/sub/delete/{sub_category_id}', [SubCategoryController::class, 'delete'])->name('sub_category.delete');
+    Route::get('/sub/{sub_category_id}', [SubCategoryController::class, 'getSubcategories']);
 });
 
 Route::prefix('/product')->group(function() {
@@ -37,4 +38,16 @@ Route::prefix('/product')->group(function() {
     Route::post('/update/{product_id}', [ProductController::class, 'update'])->name('product.update');
     Route::get('/edit/{product_id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::get('/delete/{product_id}', [ProductController::class, 'delete'])->name('product.delete');
+});
+
+
+Route::prefix('/slider')->group(function() {
+
+    //All route product admin
+    Route::get('/view', [SliderController::class, 'index'])->name('all.sliders');
+    Route::get('/create', [SliderController::class, 'create'])->name('slider.create');
+    Route::post('/store', [SliderController::class, 'store'])->name('slider.store');
+    Route::post('/update/{slider_id}', [SliderController::class, 'update'])->name('slider.update');
+    Route::get('/edit/{slider_id}', [SliderController::class, 'edit'])->name('slider.edit');
+    Route::get('/delete/{slider_id}', [SliderController::class, 'delete'])->name('slider.delete');
 });

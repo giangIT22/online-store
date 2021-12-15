@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['titlePage' => 'Add product'])
+@extends('layouts.admin', ['titlePage' => 'edit product'])
 @section('content')
     <div class="container-full">
         <!-- Content Header (Page header) -->
@@ -8,14 +8,15 @@
             <!-- Basic Forms -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Add Product </h4>
+                    <h4 class="box-title">Edit Product </h4>
 
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
                         <div class="col">
-                            <form method="post" action="{{ route('product.store') }}" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('product.update', ['product_id' => $product->id]) }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
@@ -26,10 +27,9 @@
                                                     <div class="controls">
                                                         <select name="category_id" class="form-control"
                                                             id="list-category">
-                                                            <option value="">Select Category
-                                                            </option>
                                                             @foreach ($categories as $category)
-                                                                <option value="{{ $category->id }}">
+                                                                <option value="{{ $category->id }}"
+                                                                    {{ $category->id == $product->category_id ? 'selected' : '' }}>
                                                                     {{ $category->name }}</option>
                                                             @endforeach
                                                         </select>
@@ -43,12 +43,16 @@
 
 
                                             <div class="col-md-4">
-
                                                 <div class="form-group">
                                                     <h5>SubCategory Select <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <select name="subcategory_id" class="form-control" id="list-sub">
-
+                                                            @foreach ($subcategories as $subCategory)
+                                                                <option value="{{ $subCategory->id }}"
+                                                                    {{ $subCategory->id == $product->subCategory_id ? 'selected' : '' }}>
+                                                                    {{ $subCategory->sub_category_name }}
+                                                                </option>
+                                                            @endforeach
 
                                                         </select>
                                                         @error('subcategory_id')
@@ -69,7 +73,8 @@
                                                 <div class="form-group">
                                                     <h5>Product Name<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="name" class="form-control">
+                                                        <input type="text" name="name" class="form-control"
+                                                            value="{{ $product->name }}">
                                                         @error('name')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -78,7 +83,8 @@
                                                 <div class="form-group">
                                                     <h5>Description<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="description" class="form-control">
+                                                        <input type="text" name="description" class="form-control"
+                                                            value="{{ $product->description }}">
                                                         @error('description')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -95,7 +101,8 @@
                                                 <div class="form-group">
                                                     <h5>Product Code <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_code" class="form-control">
+                                                        <input type="text" name="product_code" class="form-control"
+                                                            value="{{ $product->product_code }}">
                                                         @error('product_code')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -111,7 +118,8 @@
                                                 <div class="form-group">
                                                     <h5>Product Amount <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_qty" class="form-control">
+                                                        <input type="text" name="product_qty" class="form-control"
+                                                            value="{{ $product->product_qty }}">
                                                         @error('product_qty')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -126,7 +134,8 @@
                                                 <div class="form-group">
                                                     <h5>Product Price <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_price" class="form-control">
+                                                        <input type="text" name="product_price" class="form-control"
+                                                            value="{{ $product->product_price }}">
                                                         @error('product_price')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -150,14 +159,15 @@
                                                 <div class="form-group">
                                                     <h5>Product Image <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="file" name="image" class="form-control" id="image">
+                                                        <input type="file" name="image" class="form-control" id="image" value="{{ $product->image }}">
                                                         @error('image')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
                                                 <div id="preview_img">
-                                                    <img width="150px" id="showImage" src="" alt="" style="margin-bottom:10px;">
+                                                    <img width="150px" id="showImage" src="{{ asset($product->image) }}"
+                                                        alt="" style="margin-bottom:10px;">
                                                 </div>
                                             </div> <!-- end col md 4 -->
 
@@ -172,6 +182,15 @@
                                                             multiple>
                                                     </div>
                                                 </div>
+                                                <div id="multile_img">
+                                                    <div class="col-md-12" style="padding: 0 !important;">
+                                                        @foreach ($product->images as $image)
+                                                            <img width="150px"
+                                                                src="{{ asset($image->image_path) }}" alt=""
+                                                                style="margin: 0 10px 10px 0;">
+                                                        @endforeach
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -179,13 +198,17 @@
                                             <div class="col-md-8">
                                                 <h5>Tags Product <span class="text-danger">*</span></h5>
                                                 <select placeholder="add tags" multiple data-role="tagsinput" name="tags[]"
-                                                    style="display: none;"></select>
+                                                    style="display: none;">
+                                                    @foreach ($product->productTags as $tag)
+                                                        <option value="{{ $tag->name }}">{{ $tag->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <hr>
 
                                         <div class="text-xs-right">
-                                            <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add">
+                                            <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update">
                                         </div>
                             </form>
 

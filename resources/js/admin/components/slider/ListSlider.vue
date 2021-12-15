@@ -8,8 +8,8 @@
                     <div class="box">
                         <div class="box-header with-border">
                             <div class="d-flex justify-content-between">
-                                <h3 class="box-title">Product List</h3>
-                                <a href="/admin/product/create" type="button" class="btn btn-rounded btn-primary mb-5">Add</a>
+                                <h3 class="box-title">Slider List</h3>
+                                <a href="/admin/slider/create" type="button" class="btn btn-rounded btn-primary mb-5">Add</a>
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -18,29 +18,28 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Image</th>
-                                            <th>Name</th>
+                                            <th>Slider image</th>
+                                            <th>Title</th>
                                             <th>Description</th>
-                                            <th>Price</th>
-                                            <th>Amount</th>
-                                            <th>Sell price</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="item in products" :key="item.id">
-                                            <td><img :src="item.image" alt="" width="50px"></td>
-                                            <td>{{ item.name }}</td>
+                                        <tr v-for="item in sliders" :key="item.id">
+                                            <td><img :src="item.slider_image" alt="" width="50px"></td>
+                                            <td>{{ item.title }}</td>
                                             <td>{{ item.description }}</td>
-                                            <td>{{ item.product_price }}</td>
-                                            <td>{{ item.product_qty }}</td>
-                                            <td>{{ item.sell_price }}</td>
                                             <td>
-                                                <a :href="`/admin/product/edit/${item.id}`"
+                                                <span v-if="item.status == 1" class="badge badge-pill badge-success"> Active </span>
+                                                <span v-if="item.status == 0" class="badge badge-pill badge-danger">Not Active </span>
+                                            </td>
+                                            <td>
+                                                <a :href="`/admin/slider/edit/${item.id}`"
                                                     class="btn btn-info" title="Edit Data"><i
                                                         class="fa fa-pencil"></i> </a>
                                                 <a href=""
-                                                    :data-url="`/admin/product/delete/${item.id}`"
+                                                    :data-url="`/admin/slider/delete/${item.id}`"
                                                     class="btn btn-danger action-delete" title="Delete Data" id="delete">
                                                     <i class="fa fa-trash"></i></a>
                                             </td>
@@ -68,7 +67,7 @@
     export default {
         components: { Paginate },
         props: {
-            products: Object,
+            sliders: Array,
             total: Number,
             lastPage: Number
         },

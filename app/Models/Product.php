@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use phpDocumentor\Reflection\DocBlock\Tag;
 
 class Product extends Model
 {
@@ -24,8 +23,13 @@ class Product extends Model
         return $this->belongsTo(SubCategory::class);
     }
 
-    public function tags()
+    public function productTags()
     {
-        return $this->hasMany(Tag::class);
+        return $this->hasMany(ProductTag::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
     }
 }

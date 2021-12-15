@@ -2,10 +2,7 @@
 
 namespace App\Services;
 
-class ProductService implements ProductServiceInterface
+class ProductService
 {
-    public function storeProduct($params)
-    {
-        
-    }
+    
 }
