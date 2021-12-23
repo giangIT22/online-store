@@ -101,9 +101,10 @@ class SliderController extends Controller
         if ($request->slider_image) {
             $sliderImage = $this->uploadImage($request, 'slider_image', 'slider');
             $data['slider_image'] = $sliderImage['file_path'];
+        } else {
+            $data['slider_image'] = $slider->slider_image;
         }
-
-        $data['slider_image'] = $slider->slider_image;
+        
         $slider->update($data);
 
         $notification = [

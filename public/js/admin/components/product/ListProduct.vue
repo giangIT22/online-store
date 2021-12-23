@@ -31,8 +31,8 @@
                                         <tr v-for="item in products" :key="item.id">
                                             <td><img :src="item.image" alt="" width="50px"></td>
                                             <td>{{ item.name }}</td>
-                                            <td>{{ item.description }}</td>
-                                            <td>{{ item.product_price }}</td>
+                                            <td style="width:350px;">{{ item.description }}</td>
+                                            <td>{{ item.product_price }} $</td>
                                             <td>{{ item.product_qty }}</td>
                                             <td>{{ item.sell_price }}</td>
                                             <td>
