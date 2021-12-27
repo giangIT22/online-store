@@ -91,6 +91,14 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="form-group">
+                                                    <h5>Product Slug<span class="text-danger">*</span></h5>
+                                                    <div class="controls">
+                                                        <input type="text" name="product_slug" class="form-control"
+                                                            value="{{ $product->product_slug }}">
+                                                    </div>
+                                                </div>
+
                                             </div> <!-- end col md 4 -->
                                         </div> <!-- end 2nd row  -->
 
@@ -142,10 +150,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <h5>Product Sell Price <span class="text-danger">*</span></h5>
+                                                    <h5>Product Sale Price <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="sell_price" class="form-control">
-                                                        @error('sell_price')
+                                                        <input type="text" name="sale_price" class="form-control">
+                                                        @error('sale_price')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
@@ -159,7 +167,8 @@
                                                 <div class="form-group">
                                                     <h5>Product Image <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="file" name="image" class="form-control" id="image" value="{{ $product->image }}">
+                                                        <input type="file" name="image" class="form-control" id="image"
+                                                            value="{{ $product->image }}">
                                                         @error('image')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -185,9 +194,8 @@
                                                 <div id="multile_img">
                                                     <div class="col-md-12" style="padding: 0 !important;">
                                                         @foreach ($product->images as $image)
-                                                            <img width="150px"
-                                                                src="{{ asset($image->image_path) }}" alt=""
-                                                                style="margin: 0 10px 10px 0;">
+                                                            <img width="150px" src="{{ asset($image->image_path) }}"
+                                                                alt="" style="margin: 0 10px 10px 0;">
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -203,6 +211,46 @@
                                                         <option value="{{ $tag->name }}">{{ $tag->name }}</option>
                                                     @endforeach
                                                 </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-20">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <div class="controls">
+                                                        <fieldset>
+                                                            <input type="checkbox" id="checkbox_2" name="hot_deals"
+                                                                value="1" {{ $product->hot_deals == 1 ? 'checked' : ''}}>
+                                                            <label for="checkbox_2">Hot Deals</label>
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <input type="checkbox" id="checkbox_3" name="featured"
+                                                                value="1" {{ $product->featured == 1 ? 'checked' : ''}}>
+                                                            <label for="checkbox_3">Featured</label>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <div class="controls">
+                                                        <fieldset>
+                                                            <input type="checkbox" id="checkbox_4" name="special_offer"
+                                                                value="1" {{ $product->special_offer == 1 ? 'checked' : ''}}>
+                                                            <label for="checkbox_4">Special Offer</label>
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <input type="checkbox" id="checkbox_5" name="special_deals"
+                                                                value="1" {{ $product->special_deals == 1 ? 'checked' : ''}}>
+                                                            <label for="checkbox_5">Special Deals</label>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <hr>

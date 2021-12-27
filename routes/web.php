@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 
+//=============Product detail=========================
+
+Route::prefix('/product')->group(function(){
+    Route::get('/detail/{product_id}/{slug}', [HomeController::class, 'productDetail'])->name('product.detail');
+});

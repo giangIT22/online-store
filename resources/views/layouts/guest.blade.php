@@ -31,6 +31,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800'
         rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    @stack('css')
 </head>
 
 <body class="cnt-home">
@@ -57,7 +58,7 @@
     <script src="{{ asset('frontend/assets/js/jquery.easing-1.3.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/bootstrap-slider.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/jquery.rateit.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('frontend/assets/js/lightbox.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/lightbox.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>

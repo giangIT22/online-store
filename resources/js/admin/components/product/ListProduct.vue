@@ -21,20 +21,22 @@
                                             <th>Image</th>
                                             <th>Name</th>
                                             <th>Description</th>
+                                            <th>Slug</th>
                                             <th>Price</th>
                                             <th>Amount</th>
-                                            <th>Sell price</th>
+                                            <th>Sale price</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="item in products" :key="item.id">
+                                        <tr class="fix-font" v-for="item in products" :key="item.id">
                                             <td><img :src="item.image" alt="" width="50px"></td>
                                             <td>{{ item.name }}</td>
-                                            <td style="width:350px;">{{ item.description }}</td>
+                                            <td class="w-200"><span>{{ item.description }}</span></td>
+                                            <td>{{ item.product_slug }}</td>
                                             <td>{{ item.product_price }} $</td>
                                             <td>{{ item.product_qty }}</td>
-                                            <td>{{ item.sell_price }}</td>
+                                            <td>{{ item.sale_price }}</td>
                                             <td>
                                                 <a :href="`/admin/product/edit/${item.id}`"
                                                     class="btn btn-info" title="Edit Data"><i
@@ -76,5 +78,17 @@
 </script>
 
 <style lang="scss" scoped>
+    .fix-font td{
+        font-size: 12px;
+    }
 
+    .fix-font td span {
+        width:100%;
+        white-space: pre-wrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+    }
 </style>

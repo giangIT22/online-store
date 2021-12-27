@@ -108,6 +108,22 @@ class ProductController extends Controller
             $data['image'] = $product->image;
         }
 
+        if (!$request->hot_deals) {
+            $data['hot_deals'] = 0;
+        }
+
+        if (!$request->special_deals) {
+            $data['special_deals'] = 0;
+        }
+
+        if (!$request->special_offer) {
+            $data['special_offer'] = 0;
+        }
+
+        if (!$request->featured) {
+            $data['featured'] = 0;
+        }
+        
         $product->update($data);
 
         if ($request->image_path) {
