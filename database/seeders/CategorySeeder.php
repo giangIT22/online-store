@@ -15,29 +15,28 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        // if (DB::table('categories')->count() == 0) {
-        //     $data = [
-        //         [
-        //             'name' => 'CONVERSE',
-        //             'slug' => 'converse',
-        //         ],
-        //         [
-        //             'name' => 'VANS',
-        //             'slug' => 'vans',
-        //         ],
-        //         [
-        //             'name' => 'ACCESSORIES',
-        //             'slug' => 'accessories',
-        //         ],
-        //         [
-        //             'name' => 'APPAREL',
-        //             'slug' => 'apparel',
-        //         ]
-        //     ];
+        if (DB::table('categories')->count() == 0) {
+            $data = [
+                [
+                    'name' => 'CONVERSE',
+                    'slug' => 'converse',
+                ],
+                [
+                    'name' => 'VANS',
+                    'slug' => 'vans',
+                ],
+                [
+                    'name' => 'ACCESSORIES',
+                    'slug' => 'accessories',
+                ],
+                [
+                    'name' => 'APPAREL',
+                    'slug' => 'apparel',
+                ]
+            ];
 
-        //     DB::table('categories')->insert($data);
-        // }
+            DB::table('categories')->insert($data);
+        }
 
-        Category::factory()->count(100)->create();
     }
 }

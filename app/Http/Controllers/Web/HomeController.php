@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductTag;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 
@@ -20,9 +21,10 @@ class HomeController extends Controller
                             ->orderBy('id', 'desc')->limit(3)->get();
         $specialOfferProducts = Product::where('special_offer', true)->orderBy('id', 'desc')->limit(9)->get();
         $specialDealsProducts = Product::where('special_deals', true)->orderBy('id', 'desc')->limit(9)->get();
+        $productTags = ProductTag::select('name')->limit(8)->groupBy('name')->get();
 
         return view('web.index', compact('categories', 'sliders', 'products', 'featuredProducts',
-            'specialOfferProducts', 'specialDealsProducts', 'hotDealProducts'));
+            'specialOfferProducts', 'specialDealsProducts', 'hotDealProducts', 'productTags'));
     }
 
     public function productDetail($productId)
@@ -33,4 +35,6 @@ class HomeController extends Controller
 
         return view('web.product.product_detail', compact('product', 'categories', 'multiImages'));
     }
+
+
 }

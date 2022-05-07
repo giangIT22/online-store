@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Web\CategoryController;
 use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,4 +22,7 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::prefix('/product')->group(function(){
     Route::get('/detail/{product_id}/{slug}', [HomeController::class, 'productDetail'])->name('product.detail');
+    Route::get('/tag/{tag_name}', [ShopController::class, 'index'])->name('product.tag');
 });
+
+Route::get('/{category}', [CategoryController::class, 'index'])->name('category.index');
