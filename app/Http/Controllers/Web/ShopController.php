@@ -27,7 +27,6 @@ class ShopController extends Controller
         // ]);
 
         $categories = Category::with('subCategories')->get();
-        $products = Product::orderBy('id', 'desc')->limit(6)->get();
         $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $productTags = ProductTag::select('name')->limit(8)->groupBy('name')->get();
         $products = $this->productService->getProductsByTag($tagName, $request->sort, $request->minPrice, $request->maxPrice);

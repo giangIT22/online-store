@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductTag;
+use App\Models\SubCategory;
 
 class ProductService implements ProductServiceInterface
 {
@@ -37,8 +39,19 @@ class ProductService implements ProductServiceInterface
         return $products;
     }
 
-    public function getProductsByCategory($categoryId)
+    public function getProductsByCategory($categorySlug)
     {
-        
+        $subCategory = SubCategory::where('sub_category_slug', $categorySlug)->first();
+        $category = Category::where('slug', $categorySlug)->first();
+
+        if ($subCategory) {
+            $products = Product::where('subcategory_id', $subCategory->id)->paginate(Product::PER_PAGE);
+        } elseif ($category) {
+            $products = Product::where('category_id', $category->id)->paginate(Product::PER_PAGE);
+        } else {
+            abort(404);
+        }
+
+        return $products;
     }
 }

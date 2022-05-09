@@ -29,12 +29,12 @@ class HomeController extends Controller
 
     public function productDetail($productId)
     {
-        $product = Product::findOrFail($productId);
+        $productDetail = Product::findOrFail($productId);
         $categories = Category::with('subCategories')->get();
-        $multiImages = $product->images;
+        $multiImages = $productDetail->images;
+        $hotDealProducts = Product::where('hot_deals', true)->where('sale_price', '!=', null)
+                            ->orderBy('id', 'desc')->limit(3)->get();
 
-        return view('web.product.product_detail', compact('product', 'categories', 'multiImages'));
+        return view('web.product.product_detail', compact('productDetail', 'categories', 'multiImages', 'hotDealProducts'));
     }
-
-
 }

@@ -23,8 +23,8 @@
                                     <div class="hot-deal-wrapper">
                                         <div class="image"> <img src="{{ asset($product->image)}}" style="height: 250px;" alt="">
                                         </div>
-                                        {{-- <div class="sale-offer-tag"><span>49%<br>
-                                                off</span></div> --}}
+                                        <div class="sale-offer-tag"><span>49%<br>
+                                                off</span></div>
                                         <div class="timing-wrapper">
                                             <div class="box-wrapper">
                                                 <div class="date box"> <span class="key">120</span> <span
@@ -50,12 +50,17 @@
                                         <h3 class="name"><a href="detail.html">{{ $product->name }}</a></h3>
                                         <div class="rating rateit-small"></div>
                                         <div class="product-price">
-                                            @if ($product->sale_price == null)
-                                                <span class="price"> ${{ $product->product_price }} </span>
-                                            @else
-                                                <span class="price"> ${{ $product->sale_price }} </span>
-                                                <span class="price-before-discount">${{ $product->product_price }}</span>
-                                            @endif
+                                            @if ($product->sale_price)
+                                                                    <span class="price">
+                                                                        {{ number_format($product->sale_price) }} đ</span>
+                                                                    <span
+                                                                        class="price-before-discount">{{ number_format($product->product_price) }}
+                                                                        đ</span>
+                                                                @else
+                                                                    <span
+                                                                        class="price">{{ number_format($product->product_price) }}
+                                                                        đ</span>
+                                                                @endIf
                                         </div>
                                         <!-- /.product-price -->
 
@@ -114,8 +119,19 @@
                                                             <h3 class="name"><a href="#">{{ $product->name }}</a>
                                                             </h3>
                                                             <div class="rating rateit-small"></div>
-                                                            <div class="product-price"> <span class="price">
-                                                                    ${{ $product->product_price }}</span> </div>
+                                                            <div class="product-price"> 
+                                                                @if ($product->sale_price)
+                                                                    <span class="price">
+                                                                        {{ number_format($product->sale_price) }} đ</span>
+                                                                    <span
+                                                                        class="price-before-discount">{{ number_format($product->product_price) }}
+                                                                        đ</span>
+                                                                @else
+                                                                    <span
+                                                                        class="price">{{ number_format($product->product_price) }}
+                                                                        đ</span>
+                                                                @endIf
+                                                            </div>
                                                             <!-- /.product-price -->
 
                                                         </div>
@@ -183,8 +199,19 @@
                                                             <h3 class="name"><a href="#">{{ $product->name }}</a>
                                                             </h3>
                                                             <div class="rating rateit-small"></div>
-                                                            <div class="product-price"> <span class="price">
-                                                                    ${{ $product->product_price }} </span> </div>
+                                                            <div class="product-price">
+                                                                @if ($product->sale_price)
+                                                                    <span class="price">
+                                                                        {{ number_format($product->sale_price) }} đ</span>
+                                                                    <span
+                                                                        class="price-before-discount">{{ number_format($product->product_price) }}
+                                                                        đ</span>
+                                                                @else
+                                                                    <span
+                                                                        class="price">{{ number_format($product->product_price) }}
+                                                                        đ</span>
+                                                                @endIf
+                                                            </div>
                                                             <!-- /.product-price -->
 
                                                         </div>
@@ -349,7 +376,7 @@
                     <!-- ============================================== SCROLL TABS ============================================== -->
                     <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp">
                         <div class="more-info-tab clearfix ">
-                            <h3 class="new-product-title pull-left">New Products</h3>
+                            <h3 class="new-product-title pull-left">Sản phẩm mới</h3>
                             <ul class="nav nav-tabs nav-tab-line pull-right" id="new-products-1">
                                 <li class="active"><a data-transition-type="backSlide" href="#all"
                                         data-toggle="tab">All</a></li>
@@ -389,8 +416,18 @@
                                                             </h3>
                                                             <div class="rating rateit-small"></div>
                                                             <div class="description"></div>
-                                                            <div class="product-price"> <span
-                                                                    class="price">${{ $product->product_price }}</span>
+                                                            <div class="product-price">
+                                                                @if ($product->sale_price)
+                                                                    <span class="price">
+                                                                        {{ number_format($product->sale_price) }} đ</span>
+                                                                    <span
+                                                                        class="price-before-discount">{{ number_format($product->product_price) }}
+                                                                        đ</span>
+                                                                @else
+                                                                    <span
+                                                                        class="price">{{ number_format($product->product_price) }}
+                                                                        đ</span>
+                                                                @endIf
                                                             </div>
                                                         </div>
                                                         <!-- /.product-info -->
@@ -576,12 +613,12 @@
                                                 <div class="description"></div>
                                                 @if (!$product->sale_price)
                                                     <div class="product-price"> <span class="price">
-                                                            ${{ $product->product_price }} </span>
+                                                            {{ number_format($product->product_price) }}đ </span>
                                                     @else
                                                         <div class="product-price"> <span class="price">
-                                                                ${{ $product->sale_price }} </span>
+                                                                {{ number_format($product->sale_price) }}đ </span>
                                                             <span
-                                                                class="price-before-discount">${{ $product->product_price }}</span>
+                                                                class="price-before-discount">${{ $product->product_price }}đ</span>
                                                 @endif
                                             </div>
                                             <!-- /.product-price -->

@@ -5,8 +5,8 @@
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">{{ $product->category->name }}</a></li>
-                    <li class='active'>{{ $product->name }}</li>
+                    <li><a href="#">{{ $productDetail->category->name }}</a></li>
+                    <li class='active'>{{ $productDetail->name }}</li>
                 </ul>
             </div><!-- /.breadcrumb-inner -->
         </div><!-- /.container -->
@@ -19,229 +19,92 @@
                         <div class="home-banner outer-top-n">
                             <img src="assets/images/banners/LHS-banner.jpg" alt="Image">
                         </div>
-
-
-
                         <!-- ============================================== HOT DEALS ============================================== -->
                         <div class="sidebar-widget hot-deals wow fadeInUp outer-top-vs">
                             <h3 class="section-title">hot deals</h3>
                             <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-xs">
+                                @foreach ($hotDealProducts as $product)
+                                    <div class="item">
+                                        <div class="products">
+                                            <div class="hot-deal-wrapper">
+                                                <div class="image">
+                                                    <img src="{{ asset($product->image) }}" alt="">
+                                                </div>
+                                                <div class="sale-offer-tag"><span>35%<br>off</span></div>
+                                                <div class="timing-wrapper">
+                                                    <div class="box-wrapper">
+                                                        <div class="date box">
+                                                            <span class="key">120</span>
+                                                            <span class="value">Days</span>
+                                                        </div>
+                                                    </div>
 
-                                <div class="item">
-                                    <div class="products">
-                                        <div class="hot-deal-wrapper">
-                                            <div class="image">
-                                                <img src="assets/images/hot-deals/p5.jpg" alt="">
+                                                    <div class="box-wrapper">
+                                                        <div class="hour box">
+                                                            <span class="key">20</span>
+                                                            <span class="value">HRS</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="box-wrapper">
+                                                        <div class="minutes box">
+                                                            <span class="key">36</span>
+                                                            <span class="value">MINS</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="box-wrapper hidden-md">
+                                                        <div class="seconds box">
+                                                            <span class="key">60</span>
+                                                            <span class="value">SEC</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.hot-deal-wrapper -->
+
+                                            <div class="product-info text-left m-t-20">
+                                                <h3 class="name">
+                                                    <a
+                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
+                                                        {{ $product->name }}
+                                                    </a>
+                                                </h3>
+                                                <div class="rating rateit-small"></div>
+
+                                                <div class="product-price">
+                                                    @if ($product->sale_price)
+                                                        <span class="price">
+                                                            {{ number_format($product->sale_price) }} đ</span>
+                                                        <span
+                                                            class="price-before-discount">{{ number_format($product->product_price) }}
+                                                            đ</span>
+                                                    @else
+                                                        <span
+                                                            class="price">{{ number_format($product->product_price) }}
+                                                            đ</span>
+                                                    @endIf
+
+                                                </div>
                                             </div>
-                                            <div class="sale-offer-tag"><span>35%<br>off</span></div>
-                                            <div class="timing-wrapper">
-                                                <div class="box-wrapper">
-                                                    <div class="date box">
-                                                        <span class="key">120</span>
-                                                        <span class="value">Days</span>
+
+                                            <div class="cart clearfix animate-effect">
+                                                <div class="action">
+
+                                                    <div class="add-cart-button btn-group">
+                                                        <button class="btn btn-primary icon" data-toggle="dropdown"
+                                                            type="button">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                        </button>
+                                                        <button class="btn btn-primary cart-btn" type="button">Add to
+                                                            cart</button>
+
                                                     </div>
-                                                </div>
 
-                                                <div class="box-wrapper">
-                                                    <div class="hour box">
-                                                        <span class="key">20</span>
-                                                        <span class="value">HRS</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="box-wrapper">
-                                                    <div class="minutes box">
-                                                        <span class="key">36</span>
-                                                        <span class="value">MINS</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="box-wrapper hidden-md">
-                                                    <div class="seconds box">
-                                                        <span class="key">60</span>
-                                                        <span class="value">SEC</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- /.hot-deal-wrapper -->
-
-                                        <div class="product-info text-left m-t-20">
-                                            <h3 class="name"><a href="detail.html"></a>
-                                            </h3>
-                                            <div class="rating rateit-small"></div>
-
-                                            <div class="product-price">
-                                                <span class="price">
-                                                    $600.00
-                                                </span>
-
-                                                <span class="price-before-discount">$800.00</span>
-
-                                            </div><!-- /.product-price -->
-
-                                        </div><!-- /.product-info -->
-
-                                        <div class="cart clearfix animate-effect">
-                                            <div class="action">
-
-                                                <div class="add-cart-button btn-group">
-                                                    <button class="btn btn-primary icon" data-toggle="dropdown"
-                                                        type="button">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </button>
-                                                    <button class="btn btn-primary cart-btn" type="button">Add to
-                                                        cart</button>
-
-                                                </div>
-
-                                            </div><!-- /.action -->
-                                        </div><!-- /.cart -->
+                                                </div><!-- /.action -->
+                                            </div><!-- /.cart -->
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="item">
-                                    <div class="products">
-                                        <div class="hot-deal-wrapper">
-                                            <div class="image">
-                                                <img src="assets/images/products/p6.jpg" alt="">
-                                            </div>
-                                            <div class="sale-offer-tag"><span>35%<br>off</span></div>
-                                            <div class="timing-wrapper">
-                                                <div class="box-wrapper">
-                                                    <div class="date box">
-                                                        <span class="key">120</span>
-                                                        <span class="value">Days</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="box-wrapper">
-                                                    <div class="hour box">
-                                                        <span class="key">20</span>
-                                                        <span class="value">HRS</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="box-wrapper">
-                                                    <div class="minutes box">
-                                                        <span class="key">36</span>
-                                                        <span class="value">MINS</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="box-wrapper hidden-md">
-                                                    <div class="seconds box">
-                                                        <span class="key">60</span>
-                                                        <span class="value">SEC</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- /.hot-deal-wrapper -->
-
-                                        <div class="product-info text-left m-t-20">
-                                            <h3 class="name"><a href="detail.html">Floral Print Buttoned</a>
-                                            </h3>
-                                            <div class="rating rateit-small"></div>
-
-                                            <div class="product-price">
-                                                <span class="price">
-                                                    $600.00
-                                                </span>
-
-                                                <span class="price-before-discount">$800.00</span>
-
-                                            </div><!-- /.product-price -->
-
-                                        </div><!-- /.product-info -->
-
-                                        <div class="cart clearfix animate-effect">
-                                            <div class="action">
-
-                                                <div class="add-cart-button btn-group">
-                                                    <button class="btn btn-primary icon" data-toggle="dropdown"
-                                                        type="button">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </button>
-                                                    <button class="btn btn-primary cart-btn" type="button">Add to
-                                                        cart</button>
-
-                                                </div>
-
-                                            </div><!-- /.action -->
-                                        </div><!-- /.cart -->
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="products">
-                                        <div class="hot-deal-wrapper">
-                                            <div class="image">
-                                                <img src="assets/images/products/p7.jpg" alt="">
-                                            </div>
-                                            <div class="sale-offer-tag"><span>35%<br>off</span></div>
-                                            <div class="timing-wrapper">
-                                                <div class="box-wrapper">
-                                                    <div class="date box">
-                                                        <span class="key">120</span>
-                                                        <span class="value">Days</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="box-wrapper">
-                                                    <div class="hour box">
-                                                        <span class="key">20</span>
-                                                        <span class="value">HRS</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="box-wrapper">
-                                                    <div class="minutes box">
-                                                        <span class="key">36</span>
-                                                        <span class="value">MINS</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="box-wrapper hidden-md">
-                                                    <div class="seconds box">
-                                                        <span class="key">60</span>
-                                                        <span class="value">SEC</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- /.hot-deal-wrapper -->
-
-                                        <div class="product-info text-left m-t-20">
-                                            <h3 class="name"><a href="detail.html">Floral Print Buttoned</a>
-                                            </h3>
-                                            <div class="rating rateit-small"></div>
-
-                                            <div class="product-price">
-                                                <span class="price">
-                                                    $600.00
-                                                </span>
-
-                                                <span class="price-before-discount">$800.00</span>
-
-                                            </div><!-- /.product-price -->
-
-                                        </div><!-- /.product-info -->
-
-                                        <div class="cart clearfix animate-effect">
-                                            <div class="action">
-
-                                                <div class="add-cart-button btn-group">
-                                                    <button class="btn btn-primary icon" data-toggle="dropdown"
-                                                        type="button">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </button>
-                                                    <button class="btn btn-primary cart-btn" type="button">Add to
-                                                        cart</button>
-
-                                                </div>
-
-                                            </div><!-- /.action -->
-                                        </div><!-- /.cart -->
-                                    </div>
-                                </div>
-
-
+                                @endforeach
                             </div><!-- /.sidebar-widget -->
                         </div>
                         <!-- ============================================== HOT DEALS: END ============================================== -->
@@ -296,9 +159,6 @@
                         </div>
 
                         <!-- ============================================== Testimonials: END ============================================== -->
-
-
-
                     </div>
                 </div><!-- /.sidebar -->
                 <div class='col-md-9'>
@@ -306,17 +166,18 @@
                         <div class="row  wow fadeInUp">
                             <div class="col-xs-12 col-sm-6 col-md-5 gallery-holder">
                                 <div class="product-item-holder size-big single-product-gallery small-gallery">
-                                        <div id="owl-single-product">
-                                            @foreach ($multiImages as $image)
-                                                <div class="single-product-gallery-item" id="slide{{ $image->id }}">
-                                                    <a data-lightbox="image-1" data-title="Gallery"
-                                                        href="{{ asset($image->image_path) }}">
-                                                        <img class="img-responsive" alt="" src="{{ asset($image->image_path) }}"
-                                                            data-echo="{{ asset($image->image_path) }}" />
-                                                    </a>
-                                                </div><!-- /.single-product-gallery-item -->
-                                            @endforeach
-                                        </div><!-- /.single-product-slider -->
+                                    <div id="owl-single-product">
+                                        @foreach ($multiImages as $image)
+                                            <div class="single-product-gallery-item" id="slide{{ $image->id }}">
+                                                <a data-lightbox="image-1" data-title="Gallery"
+                                                    href="{{ asset($image->image_path) }}">
+                                                    <img class="img-responsive" alt=""
+                                                        src="{{ asset($image->image_path) }}"
+                                                        data-echo="{{ asset($image->image_path) }}" />
+                                                </a>
+                                            </div><!-- /.single-product-gallery-item -->
+                                        @endforeach
+                                    </div><!-- /.single-product-slider -->
 
                                     <div class="single-product-gallery-thumbs gallery-thumbs">
 
@@ -338,7 +199,7 @@
                             </div><!-- /.gallery-holder -->
                             <div class='col-sm-6 col-md-7 product-info-block'>
                                 <div class="product-info">
-                                    <h1 class="name">{{ $product->name }}</h1>
+                                    <h1 class="name">{{ $productDetail->name }}</h1>
 
                                     <div class="rating-reviews m-t-20">
                                         <div class="row">
@@ -369,23 +230,19 @@
                                     </div><!-- /.stock-container -->
 
                                     <div class="description-container m-t-20">
-                                        {{ $product->description }}
+                                        {{ $productDetail->description }}
                                     </div><!-- /.description-container -->
 
                                     <div class="price-container info-container m-t-20">
                                         <div class="row">
-
-
                                             <div class="col-sm-6">
                                                 <div class="price-box">
-                                                    @if ($product->sale_price == null)
-                                                        <span
-                                                            class="price">${{ $product->product_price }}</span>
+                                                    @if ($productDetail->sale_price)
+                                                        <span class="price">{{ number_format($productDetail->sale_price) }} đ</span>
+                                                        <span class="price-before-discount">{{ number_format($productDetail->product_price) }}đ</span>
                                                     @else
-                                                        <span class="price">${{ $product->sale_price }}</span>
-                                                        <span
-                                                            class="price-strike">${{ $product->product_price }}</span>
-                                                    @endif
+                                                        <span class="price">{{ number_format($productDetail->product_price) }}đ</span>
+                                                    @endIf
                                                 </div>
                                             </div>
 
@@ -427,7 +284,7 @@
                                                                     class="ir"><i
                                                                         class="icon fa fa-sort-desc"></i></span></div>
                                                         </div>
-                                                        <input type="text" value="1">
+                                                        <input type="text" value="1" id="qty_product">
                                                     </div>
                                                 </div>
                                             </div>
@@ -458,7 +315,6 @@
                                     <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a>
                                     </li>
                                     <li><a data-toggle="tab" href="#review">REVIEW</a></li>
-                                    <li><a data-toggle="tab" href="#tags">TAGS</a></li>
                                 </ul><!-- /.nav-tabs #product-tabs -->
                             </div>
                             <div class="col-sm-9">
@@ -576,9 +432,7 @@
                                                                     <div class="form-group">
                                                                         <label for="exampleInputReview">Review <span
                                                                                 class="astk">*</span></label>
-                                                                        <textarea class="form-control txt txt-review"
-                                                                            id="exampleInputReview" rows="4"
-                                                                            placeholder=""></textarea>
+                                                                        <textarea class="form-control txt txt-review" id="exampleInputReview" rows="4" placeholder=""></textarea>
                                                                     </div><!-- /.form-group -->
                                                                 </div>
                                                             </div><!-- /.row -->
@@ -596,45 +450,14 @@
 
                                         </div><!-- /.product-tab -->
                                     </div><!-- /.tab-pane -->
-
-                                    <div id="tags" class="tab-pane">
-                                        <div class="product-tag">
-
-                                            <h4 class="title">Product Tags</h4>
-                                            <form role="form" class="form-inline form-cnt">
-                                                <div class="form-container">
-
-                                                    <div class="form-group">
-                                                        <label for="exampleInputTag">Add Your Tags: </label>
-                                                        <input type="email" id="exampleInputTag" class="form-control txt">
-
-
-                                                    </div>
-
-                                                    <button class="btn btn-upper btn-primary" type="submit">ADD
-                                                        TAGS</button>
-                                                </div><!-- /.form-container -->
-                                            </form><!-- /.form-cnt -->
-
-                                            <form role="form" class="form-inline form-cnt">
-                                                <div class="form-group">
-                                                    <label>&nbsp;</label>
-                                                    <span class="text col-md-offset-3">Use spaces to separate tags. Use
-                                                        single quotes (') for phrases.</span>
-                                                </div>
-                                            </form><!-- /.form-cnt -->
-
-                                        </div><!-- /.product-tab -->
-                                    </div><!-- /.tab-pane -->
-
                                 </div><!-- /.tab-content -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
                     </div><!-- /.product-tabs -->
 
-                    <!-- ============================================== UPSELL PRODUCTS ============================================== -->
+                    <!-- ============================================== related PRODUCTS ============================================== -->
                     <section class="section featured-product wow fadeInUp">
-                        <h3 class="section-title">upsell products</h3>
+                        <h3 class="section-title">Sản phẩm liên quan</h3>
                         <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
 
                             <div class="item item-carousel">
@@ -999,18 +822,18 @@
             </div><!-- /.row -->
         </div><!-- /.container -->
     </div><!-- /.body-content -->
-
 @endsection
 
 @push('css')
     <style>
-        .description-container{
-            width:100%;        
+        .description-container {
+            width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             display: -webkit-box;
         }
+
     </style>
 @endpush

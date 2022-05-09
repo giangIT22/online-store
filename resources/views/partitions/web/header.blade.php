@@ -6,11 +6,10 @@
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
-                        <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
-                        <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-                        <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
-                        <li><a href="#"><i class="icon fa fa-lock"></i>Login</a></li>
+                        <li><a href="#"><i class="icon fa fa-user"></i>Tài khoản</a></li>
+                        <li><a href="#"><i class="icon fa fa-heart"></i>Yêu thích</a></li>
+                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i>Giỏ hàng</a></li>
+                        <li><a href="#"><i class="icon fa fa-lock"></i>Đăng nhập</a></li>
                     </ul>
                 </div>
                 <!-- /.cnt-account -->
@@ -18,7 +17,7 @@
                 <div class="cnt-block">
                     <ul class="list-unstyled list-inline">
                         <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown"
-                                data-toggle="dropdown"><span class="value">Language
+                                data-toggle="dropdown"><span class="value">Ngôn ngữ
                                 </span><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">English</a></li>
@@ -42,7 +41,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                     <!-- ============================================================= LOGO ============================================================= -->
-                    <div class="logo"> <a href="home.html"> <img
+                    <div class="logo"> <a href="{{ route('index')}}"> <img
                                 src="{{ asset('frontend/assets/images/logo.png') }}" alt="logo">
                         </a> </div>
                     <!-- /.logo -->
@@ -58,7 +57,7 @@
                             <div class="control-group">
                                 <ul class="categories-filter animate-dropdown">
                                     <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown"
-                                            href="category.html">Categories <b class="caret"></b></a>
+                                            href="category.html">Danh mục <b class="caret"></b></a>
                                         <ul class="dropdown-menu" role="menu">
                                             @foreach ($categories as $category)
                                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">{{ $category->name }}</a></li>
@@ -66,7 +65,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                                <input class="search-field" placeholder="Search here..." />
+                                <input class="search-field" placeholder="Tìm kiếm sản phẩm" />
                                 <a class="search-button" href="#"></a>
                             </div>
                         </form>
@@ -111,11 +110,11 @@
                                 <div class="clearfix"></div>
                                 <hr>
                                 <div class="clearfix cart-total">
-                                    <div class="pull-right"> <span class="text">Sub Total
+                                    <div class="pull-right"> <span class="text">Tổng tiền
                                             :</span><span class='price'>$600.00</span> </div>
                                     <div class="clearfix"></div>
                                     <a href="checkout.html"
-                                        class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
+                                        class="btn btn-upper btn-primary btn-block m-t-20">Tiến hành thanh toán</a>
                                 </div>
                                 <!-- /.cart-total-->
 
@@ -151,10 +150,11 @@
                     <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
                         <div class="nav-outer">
                             <ul class="nav navbar-nav">
-                                <li class="active dropdown yamm-fw"> <a href="home.html" data-hover="dropdown"
-                                        class="dropdown-toggle" data-toggle="dropdown">Home</a> </li>
+                                <li class="{{Route::current()->uri == '/' ? 'active' : ''}}"> <a href="{{ route('index')}}">Trang chủ</a> </li>
                                 @foreach ($categories as $category)
-                                    <li class="dropdown hidden-sm"> <a href="category.html">{{ $category->name }}</a> </li>
+                                    <li class=" {{ $category->slug == request()->category_slug ? 'active' : ''}} dropdown hidden-sm">
+                                        <a href="{{ route('category.index', ['category_slug' => $category->slug])}}">{{ $category->name }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                             <!-- /.navbar-nav -->

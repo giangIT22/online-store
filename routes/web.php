@@ -16,13 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/not-found', function () {
+    return view('layouts.error');
+})->name('error');
 
 //=============Product detail=========================
 
-Route::prefix('/product')->group(function(){
+Route::prefix('/product')->group(function () {
     Route::get('/detail/{product_id}/{slug}', [HomeController::class, 'productDetail'])->name('product.detail');
     Route::get('/tag/{tag_name}', [ShopController::class, 'index'])->name('product.tag');
 });
 
-Route::get('/{category}', [CategoryController::class, 'index'])->name('category.index');
+Route::get('/{category_slug}', [CategoryController::class, 'index'])->name('category.index');

@@ -4207,17 +4207,6 @@ header {
     text-align: left;
 }
 
-.breadcrumb ul li:after {
-    color: #666666;
-    content: "/";
-    font-family: 'Open Sans', sans-serif, sans-serif;
-    font-size: 12px;
-    line-height: 24px;
-    margin-left: 9px;
-    margin-right: -4px;
-    padding: 0px;
-}
-
 .breadcrumb ul li:last-child:after {
     content: "";
 }
