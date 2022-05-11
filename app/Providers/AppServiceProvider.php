@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\CartService;
+use App\Services\CartServiceInterface;
 use App\Services\CategoryService;
 use App\Services\CategoryServiceInterface;
 use App\Services\ProductService;
@@ -19,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(CategoryServiceInterface::class, CategoryService::class);
         $this->app->singleton(ProductServiceInterface::class, ProductService::class);
+        $this->app->singleton(CartServiceInterface::class, CartService::class);
     }
 
     /**

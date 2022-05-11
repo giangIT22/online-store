@@ -4,8 +4,8 @@
         <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">{{ $productDetail->category->name }}</a></li>
+                    <li><a href="#">Home</a></li>/
+                    <li><a href="{{ route('category.index', ['category_slug' => $productDetail->category->slug])}}">{{ $productDetail->category->name }}</a></li>/
                     <li class='active'>{{ $productDetail->name }}</li>
                 </ul>
             </div><!-- /.breadcrumb-inner -->
@@ -16,11 +16,8 @@
             <div class='row single-product'>
                 <div class='col-md-3 sidebar'>
                     <div class="sidebar-module-container">
-                        <div class="home-banner outer-top-n">
-                            <img src="assets/images/banners/LHS-banner.jpg" alt="Image">
-                        </div>
                         <!-- ============================================== HOT DEALS ============================================== -->
-                        <div class="sidebar-widget hot-deals wow fadeInUp outer-top-vs">
+                        <div class="sidebar-widget hot-deals wow fadeInUp">
                             <h3 class="section-title">hot deals</h3>
                             <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-xs">
                                 @foreach ($hotDealProducts as $product)
@@ -89,7 +86,7 @@
 
                                             <div class="cart clearfix animate-effect">
                                                 <div class="action">
-
+                                                    <input type="hidden" value="{{ $product->id }}" class="product_id">
                                                     <div class="add-cart-button btn-group">
                                                         <button class="btn btn-primary icon" data-toggle="dropdown"
                                                             type="button">
@@ -290,18 +287,12 @@
                                             </div>
 
                                             <div class="col-sm-7">
-                                                <a href="#" class="btn btn-primary"><i
-                                                        class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+                                                <button class="btn btn-primary add-cart-product" style="outline: none">
+                                                    <i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART
+                                                </button>
                                             </div>
-
-
                                         </div><!-- /.row -->
                                     </div><!-- /.quantity-container -->
-
-
-
-
-
 
                                 </div><!-- /.product-info -->
                             </div><!-- /.col-sm-7 -->
@@ -836,4 +827,29 @@
         }
 
     </style>
+@endpush
+
+@push('script')
+    <script src="{{ asset('/js/add_to_cart.js')}}"></script>
+    <script>
+        let i = 1;
+        let qtyProduct = document.querySelector('#qty_product');
+        let plus = document.querySelector('.plus');
+        let minus = document.querySelector('.minus');
+
+        plus.addEventListener('click', function(){
+            ++i;
+            qtyProduct.value = i;
+        });
+
+        minus.addEventListener('click', function(){
+            --i;
+            if (i == 0) {
+                qtyProduct.value = 1;
+            } else {
+                qtyProduct.value = i;
+            }
+
+        });
+    </script>
 @endpush

@@ -9,6 +9,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $titlePage ?? 'Flipmart' }}</title>
 
     <!-- Bootstrap Core CSS -->
@@ -62,7 +63,7 @@
     <script src="{{ asset('frontend/assets/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
-    @stack('scrypt')
+    @stack('script')
 </body>
 
 </html>

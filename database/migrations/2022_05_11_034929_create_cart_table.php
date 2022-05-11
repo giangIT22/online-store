@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminsTables extends Migration
+class CreateCartTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class CreateAdminsTables extends Migration
      */
     public function up()
     {
-        Schema::create('admins_tables', function (Blueprint $table) {
+        Schema::create('cart', function (Blueprint $table) {
             $table->id();
+            $table->string('product_image');
+            $table->string('product_name');
+            $table->double('product_price');
+            $table->tinyInteger('amount');
+            $table->bigInteger('user_id');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateAdminsTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins_tables');
+        Schema::dropIfExists('cart');
     }
 }
