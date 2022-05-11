@@ -844,8 +844,9 @@
 
         minus.addEventListener('click', function(){
             --i;
-            if (i == 0) {
+            if (i < 1) {
                 qtyProduct.value = 1;
+                i = 1;
             } else {
                 qtyProduct.value = i;
             }
