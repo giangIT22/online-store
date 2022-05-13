@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [LoginController::class, 'index'])->name('user.login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-Route::get('/register', [RegisterController::class, 'index'])->name('user.register');
+Route::get('/register', [RegisterController::class, 'index'])->name('user.register')->middleware('guest');;
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 Route::get('/', [HomeController::class, 'index'])->name('index');

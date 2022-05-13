@@ -39,9 +39,9 @@
     <div class="main-header">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
+                <div class="col-xs-12 col-sm-12 col-md-2 logo-holder">
                     <!-- ============================================================= LOGO ============================================================= -->
-                    <div class="logo"> <a href="{{ route('index')}}"> <img
+                    <div class="logo"> <a href="{{ route('index') }}"> <img
                                 src="{{ asset('frontend/assets/images/logo.png') }}" alt="logo">
                         </a> </div>
                     <!-- /.logo -->
@@ -60,7 +60,8 @@
                                             href="category.html">Danh mục <b class="caret"></b></a>
                                         <ul class="dropdown-menu" role="menu">
                                             @foreach ($categories as $category)
-                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">{{ $category->name }}</a></li>
+                                                <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                        href="category.html">{{ $category->name }}</a></li>
                                             @endforeach
                                         </ul>
                                     </li>
@@ -75,7 +76,7 @@
                 </div>
                 <!-- /.top-search-holder -->
 
-                <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
+                <div class="col-xs-12 col-sm-12 col-md-3 animate-dropdown top-cart-row">
                     <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
 
                     <div class="dropdown dropdown-cart"> <a href="#" class="dropdown-toggle lnk-cart"
@@ -83,10 +84,20 @@
                             <div class="items-cart-inner">
                                 <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i>
                                 </div>
-                                <div class="basket-item-count"><span class="count">2</span></div>
-                                <div class="total-price-basket"> <span class="lbl">cart -</span> <span
-                                        class="total-price"> <span class="sign">$</span><span
-                                            class="value">600.00</span> </span> </div>
+                                @php
+                                    $countCart = DB::table('carts')->sum('amount');
+                                    if (Auth::check()) {
+                                        $carts = DB::table('carts')->where('user_id', Auth::id())->get();
+                                        $sum = 0;
+                                        foreach($carts as $cart) {
+                                            $sum +=  $cart->amount * $cart->product_price;
+                                        }
+                                    }
+                                @endphp
+                                <div class="basket-item-count"><span class="count">{{$countCart ?? 0}}</span></div>
+                                <div class="total-price-basket"> <span class="lbl">giỏ hàng -</span> <span
+                                        class="total-price"><span
+                                            class="value">{{$sum ? number_format($sum, 0, '', '.') . ' vnd' : 0}}</span></span></div>
                             </div>
                         </a>
                         <ul class="dropdown-menu">
@@ -113,8 +124,8 @@
                                     <div class="pull-right"> <span class="text">Tổng tiền
                                             :</span><span class='price'>$600.00</span> </div>
                                     <div class="clearfix"></div>
-                                    <a href="checkout.html"
-                                        class="btn btn-upper btn-primary btn-block m-t-20">Tiến hành thanh toán</a>
+                                    <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Tiến hành
+                                        thanh toán</a>
                                 </div>
                                 <!-- /.cart-total-->
 
@@ -150,10 +161,13 @@
                     <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
                         <div class="nav-outer">
                             <ul class="nav navbar-nav">
-                                <li class="{{Route::current()->uri == '/' ? 'active' : ''}}"> <a href="{{ route('index')}}">Trang chủ</a> </li>
+                                <li class="{{ Route::current()->uri == '/' ? 'active' : '' }}"> <a
+                                        href="{{ route('index') }}">Trang chủ</a> </li>
                                 @foreach ($categories as $category)
-                                    <li class=" {{ $category->slug == request()->category_slug ? 'active' : ''}} dropdown hidden-sm">
-                                        <a href="{{ route('category.index', ['category_slug' => $category->slug])}}">{{ $category->name }}</a>
+                                    <li
+                                        class=" {{ $category->slug == request()->category_slug ? 'active' : '' }} dropdown hidden-sm">
+                                        <a
+                                            href="{{ route('category.index', ['category_slug' => $category->slug]) }}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>

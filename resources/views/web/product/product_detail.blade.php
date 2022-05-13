@@ -86,7 +86,6 @@
 
                                             <div class="cart clearfix animate-effect">
                                                 <div class="action">
-                                                    <input type="hidden" value="{{ $product->id }}" class="product_id">
                                                     <div class="add-cart-button btn-group">
                                                         <button class="btn btn-primary icon" data-toggle="dropdown"
                                                             type="button">
@@ -265,7 +264,7 @@
 
                                     <div class="quantity-container info-container">
                                         <div class="row">
-
+                                            <input type="hidden" value="{{ $productDetail->id }}" class="product_id">
                                             <div class="col-sm-2">
                                                 <span class="label">Qty :</span>
                                             </div>

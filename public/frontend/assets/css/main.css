@@ -3278,6 +3278,8 @@ header {
 }
 
 .product .product-info .name {
+    height: 7ex;
+    line-height: 2.5ex;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
 }
@@ -3290,11 +3292,16 @@ header {
     color: #ffb400;
 }
 
+.product .product-info .product-price {
+    margin-top: 10px;
+}
+
 .product .product-info .product-price .price {
     font-weight: 700;
     font-size: 14px;
     line-height: 30px;
     margin-right: 8px;
+    color: red;
 }
 
 .product .product-info .product-price .price-before-discount {
