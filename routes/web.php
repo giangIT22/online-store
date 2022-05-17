@@ -43,3 +43,4 @@ Route::get('/{category_slug}', [CategoryController::class, 'index'])->name('cate
 
 Route::post('/store-cart', [CartController::class, 'store'])->name('cart.store');
 Route::get('cart/shopping-cart', [CartController::class, 'view'])->name('cart.view');
+Route::get('/delete-cart', [CartController::class, 'deleteCart'])->name('cart.delete');

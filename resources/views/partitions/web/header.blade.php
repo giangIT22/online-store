@@ -8,7 +8,7 @@
                     <ul class="list-unstyled">
                         <li><a href="#"><i class="icon fa fa-user"></i>Tài khoản</a></li>
                         <li><a href="#"><i class="icon fa fa-heart"></i>Yêu thích</a></li>
-                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i>Giỏ hàng</a></li>
+                        <li><a href="{{route('cart.view')}}"><i class="icon fa fa-shopping-cart"></i>Giỏ hàng</a></li>
                         <li><a href="{{ route('user.login') }}"><i class="icon fa fa-lock"></i>Đăng nhập</a></li>
                     </ul>
                 </div>

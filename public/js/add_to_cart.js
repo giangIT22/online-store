@@ -20,7 +20,6 @@ $(document).ready(function() {
                 'amount': amount
             },
             success: function(respone) {
-                console.log(respone.carts);
                 count = 0;
                 sumPrice = 0;
 
@@ -34,6 +33,8 @@ $(document).ready(function() {
 
                     document.querySelector('.basket-item-count').innerHTML = count;
                     document.querySelector('.total-price-basket .value').innerHTML = sumPrice;
+                } else {
+                    window.location.href = '/login';
                 }
             }
         });

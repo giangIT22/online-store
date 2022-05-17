@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
+use App\Models\Category;
 use App\Services\CartServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +36,14 @@ class CartController extends Controller
 
     public function view()
     {
-        return response()->json("giang");
+        $categories = Category::with('subCategories')->get();        
+        $carts = Cart::where('user_id', Auth::id())->get() ?? 0;
+
+        return view('web.cart.shopping_cart', compact('categories', 'carts'));
+    }
+
+    public function deleteCart(Request $request)
+    {
+        
     }
 }
