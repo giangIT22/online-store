@@ -9,7 +9,7 @@
                         <li><a href="#"><i class="icon fa fa-user"></i>Tài khoản</a></li>
                         <li><a href="#"><i class="icon fa fa-heart"></i>Yêu thích</a></li>
                         <li><a href="#"><i class="icon fa fa-shopping-cart"></i>Giỏ hàng</a></li>
-                        <li><a href="#"><i class="icon fa fa-lock"></i>Đăng nhập</a></li>
+                        <li><a href="{{ route('user.login') }}"><i class="icon fa fa-lock"></i>Đăng nhập</a></li>
                     </ul>
                 </div>
                 <!-- /.cnt-account -->
@@ -79,59 +79,90 @@
                 <div class="col-xs-12 col-sm-12 col-md-3 animate-dropdown top-cart-row">
                     <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
 
-                    <div class="dropdown dropdown-cart"> <a href="#" class="dropdown-toggle lnk-cart"
-                            data-toggle="dropdown">
+                    <div class="dropdown dropdown-cart">
+                        <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
                             <div class="items-cart-inner">
                                 <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i>
                                 </div>
                                 @php
-                                    $countCart = DB::table('carts')->sum('amount');
+                                    $sum = 0;
+                                    $countCart = 0;
                                     if (Auth::check()) {
-                                        $carts = DB::table('carts')->where('user_id', Auth::id())->get();
-                                        $sum = 0;
-                                        foreach($carts as $cart) {
-                                            $sum +=  $cart->amount * $cart->product_price;
+                                        $countCart = DB::table('carts')->sum('amount');
+                                        $carts = DB::table('carts')
+                                            ->where('user_id', Auth::id())
+                                            ->get();
+                                        foreach ($carts as $cart) {
+                                            $sum += $cart->amount * $cart->product_price;
                                         }
                                     }
                                 @endphp
-                                <div class="basket-item-count"><span class="count">{{$countCart ?? 0}}</span></div>
-                                <div class="total-price-basket"> <span class="lbl">giỏ hàng -</span> <span
-                                        class="total-price"><span
-                                            class="value">{{$sum ? number_format($sum, 0, '', '.') . ' vnd' : 0}}</span></span></div>
+                                <div class="basket-item-count"><span
+                                        class="count">{{ $countCart ?? 0 }}</span></div>
+                                <div class="total-price-basket"> <span class="lbl">giỏ hàng -</span>
+                                    <span class="total-price"><span
+                                            class="value">{{ $sum ? number_format($sum, 0, '', '.') . ' vnd' : 0 }}</span></span>
+                                </div>
                             </div>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <div class="cart-item product-summary">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <div class="image"> <a href="detail.html"><img
-                                                        src="assets/images/cart.jpg" alt=""></a> </div>
-                                        </div>
-                                        <div class="col-xs-7">
-                                            <h3 class="name"><a href="index.php?page-detail">Simple
-                                                    Product</a></h3>
-                                            <div class="price">$600.00</div>
-                                        </div>
-                                        <div class="col-xs-1 action"> <a href="#"><i class="fa fa-trash"></i></a>
-                                        </div>
+                        @if (Auth::check())
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="cart-item product-summary">
+                                        @foreach ($carts as $cart)
+                                            <div class="row" style="margin-bottom: 10px;">
+                                                <div class="col-xs-4">
+                                                    <div class="image"> <a href="#"><img
+                                                                src="{{ asset($cart->product_image) }}" alt=""></a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-7">
+                                                    <h3 class="name"><a
+                                                            href="#">{{ $cart->product_name }}</a>
+                                                    </h3>
+                                                    <div class="cart-quantity">
+                                                        <div class="quant-input flex">
+                                                            <button class="plus amount-btn">
+                                                                -
+                                                            </button>
+                                                            <input type="text" value="1" id="qty_product"
+                                                                class="amount-input">
+                                                            <button class="minus amount-btn">
+                                                                +
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="price">
+                                                        {{ number_format($cart->product_price, 0, '', '.') . ' vnd' }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-1 action"> <a href="#"><i
+                                                            class="fa fa-trash"></i></a>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                </div>
-                                <!-- /.cart-item -->
-                                <div class="clearfix"></div>
-                                <hr>
-                                <div class="clearfix cart-total">
-                                    <div class="pull-right"> <span class="text">Tổng tiền
-                                            :</span><span class='price'>$600.00</span> </div>
+                                    <!-- /.cart-item -->
                                     <div class="clearfix"></div>
-                                    <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Tiến hành
-                                        thanh toán</a>
-                                </div>
-                                <!-- /.cart-total-->
+                                    <hr>
+                                    <div class="clearfix cart-total">
+                                        <div class="pull-right"> <span class="text">Tổng tiền
+                                                :</span><span
+                                                class='price'>{{ $sum ? number_format($sum, 0, '', '.') . ' vnd' : 0 }}</span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <a href="checkout.html" class="btn btn-upper btn-primary m-t-20">Tiến hành
+                                            thanh toán</a>
+                                    </div>
+                                    <!-- /.cart-total-->
 
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-menu-->
+                                </li>
+                            </ul>
+                        @else
+                            <div class="dropdown-menu not-product">
+                                Không có sản phẩm nào trong giỏ hàng
+                            </div>
+                        @endif
                     </div>
                     <!-- /.dropdown-cart -->
 

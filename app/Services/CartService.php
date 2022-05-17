@@ -28,7 +28,7 @@ class CartService implements CartServiceInterface
                 $cart = Cart::create([
                     'product_image' => $product->image,
                     'product_name' => $product->name,
-                    'product_price' => $product->product_price,
+                    'product_price' => $product->sale_price ?? $product->product_price,
                     'amount' => $params['amount'],
                     'user_id' => Auth::id()
                 ]);

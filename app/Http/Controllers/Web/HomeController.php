@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $categories = Category::with('subCategories')->get();
         $products = Product::orderBy('id', 'desc')->limit(6)->get();
@@ -36,5 +36,16 @@ class HomeController extends Controller
                             ->orderBy('id', 'desc')->limit(3)->get();
 
         return view('web.product.product_detail', compact('productDetail', 'categories', 'multiImages', 'hotDealProducts'));
+    }
+
+    public function previewProduct($productId)
+    {
+        $productDetail = Product::findOrFail($productId);
+        $multiImages = $productDetail->images;
+
+        return response()->json([
+            'product_detail' => $productDetail,
+            'multi_images' => $multiImages
+        ]);
     }
 }

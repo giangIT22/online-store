@@ -7033,3 +7033,32 @@ header {
     margin-top: 30px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
 }
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.amount-btn {
+    background-color: #fff;
+    padding: 0 8px;
+    border: 0.5px #bdc3c7 solid;
+}
+
+.amount-input {
+    width: 40px;
+    text-align: center;
+    border: 0.5px #bdc3c7 solid;
+}
+
+.amount-input:focus {
+    border: 0.5px #bdc3c7 solid;
+}
+
+.not-product {
+    background-color: #fff;
+    padding: 15px 10px !important;
+    width: 280px !important;
+    font-size: 14px !important;
+}

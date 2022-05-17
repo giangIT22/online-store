@@ -34,10 +34,12 @@ Route::get('/not-found', function () {
 Route::prefix('/product')->group(function () {
     Route::get('/detail/{product_id}/{slug}', [HomeController::class, 'productDetail'])->name('product.detail');
     Route::get('/tag/{tag_name}', [ShopController::class, 'index'])->name('product.tag');
+    Route::get('/preview-product/{product_id}', [HomeController::class, 'previewProduct'])->name('preview.product');
 });
 
 Route::get('/{category_slug}', [CategoryController::class, 'index'])->name('category.index');
 
 //=======================cart=====================
 
+Route::get('/cart', [CartController::class, 'view']);
 Route::post('/store-cart', [CartController::class, 'store'])->name('cart.store');
