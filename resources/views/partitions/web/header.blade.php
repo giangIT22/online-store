@@ -151,8 +151,9 @@
                                                 class='price'>{{ $sum ? number_format($sum, 0, '', '.') . ' vnd' : 0 }}</span>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <a href="checkout.html" class="btn btn-upper btn-primary m-t-20">Tiến hành
+                                        <a href="checkout.html" class="btn btn-upper btn-primary m-t-20 btn-block" style="font-size: 12px;">Tiến hành
                                             thanh toán</a>
+                                        <a href="{{route('cart.view')}}" class="btn btn-upper btn-primary m-t-20 btn-block">Giỏ hàng</a>
                                     </div>
                                     <!-- /.cart-total-->
 

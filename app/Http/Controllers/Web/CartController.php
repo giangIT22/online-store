@@ -16,12 +16,6 @@ class CartController extends Controller
         $this->cartService = $cartService;
     }
 
-    public function view()
-    {
-        dd("giang");
-        // return view('web.cart.shopping_cart');
-    }
-
     public function store(Request $request)
     {
         if (Auth::check()) {
@@ -36,5 +30,10 @@ class CartController extends Controller
         } else {
             return response()->json(['status' => false]);
         }
+    }
+
+    public function view()
+    {
+        return response()->json("giang");
     }
 }
