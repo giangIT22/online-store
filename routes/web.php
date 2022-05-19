@@ -23,6 +23,7 @@ Route::get('/login', [LoginController::class, 'index'])->name('user.login')->mid
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::get('/register', [RegisterController::class, 'index'])->name('user.register')->middleware('guest');;
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::get('/logout', [LoginController::class, 'logout'])->name('user.logout');
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/not-found', function () {
@@ -43,4 +44,4 @@ Route::get('/{category_slug}', [CategoryController::class, 'index'])->name('cate
 
 Route::post('/store-cart', [CartController::class, 'store'])->name('cart.store');
 Route::get('cart/shopping-cart', [CartController::class, 'view'])->name('cart.view');
-Route::get('/delete-cart', [CartController::class, 'deleteCart'])->name('cart.delete');
+Route::post('/delete-cart', [CartController::class, 'deleteCart'])->name('cart.delete');

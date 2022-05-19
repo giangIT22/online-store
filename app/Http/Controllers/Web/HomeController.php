@@ -7,10 +7,18 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductTag;
 use App\Models\Slider;
+use App\Services\ProductServiceInterface;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    protected $productService;
+
+    public function __construct(ProductServiceInterface $productService)
+    {
+        $this->productService = $productService;
+    }
+
     public function index(Request $request)
     {
         $categories = Category::with('subCategories')->get();
@@ -34,8 +42,9 @@ class HomeController extends Controller
         $multiImages = $productDetail->images;
         $hotDealProducts = Product::where('hot_deals', true)->where('sale_price', '!=', null)
                             ->orderBy('id', 'desc')->limit(3)->get();
+        $relatedProducts = $this->productService->getRelatedProducts($productId);
 
-        return view('web.product.product_detail', compact('productDetail', 'categories', 'multiImages', 'hotDealProducts'));
+        return view('web.product.product_detail', compact('productDetail', 'categories', 'multiImages', 'hotDealProducts', 'relatedProducts'));
     }
 
     public function previewProduct($productId)

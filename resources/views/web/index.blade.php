@@ -233,16 +233,16 @@
                     <!-- ============================================== SPECIAL DEALS : END ============================================== -->
                     <!-- ============================================== NEWSLETTER ============================================== -->
                     <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small">
-                        <h3 class="section-title">Newsletters</h3>
+                        <h4 class="section-title" style="font-size: 13px">ĐĂNG KÝ NHẬN TIN KHUYẾN MÃI
+                        </h4>
                         <div class="sidebar-widget-body outer-top-xs">
-                            <p>Sign Up for Our Newsletter!</p>
                             <form>
                                 <div class="form-group">
-                                    <label class="sr-only" for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1"
-                                        placeholder="Subscribe to our newsletter">
+                                    <label class="sr-only">Email address</label>
+                                    <input type="email" class="form-control"
+                                        placeholder="Nhập địa chỉ email của bạn">
                                 </div>
-                                <button class="btn btn-primary">Subscribe</button>
+                                <button class="btn btn-primary">Đăng ký</button>
                             </form>
                         </div>
                         <!-- /.sidebar-widget-body -->
@@ -250,7 +250,7 @@
                     <!-- /.sidebar-widget -->
                     <!-- ============================================== NEWSLETTER: END ============================================== -->
 
-                    <!-- ============================================== Testimonials============================================== -->
+                    {{-- <!-- ============================================== Testimonials============================================== -->
                     <div class="sidebar-widget  wow fadeInUp outer-top-vs ">
                         <div id="advertisement" class="advertisement">
                             <div class="item">
@@ -284,11 +284,10 @@
 
                         </div>
                         <!-- /.owl-carousel -->
-                    </div>
+                    </div> --}}
 
                     <!-- ============================================== Testimonials: END ============================================== -->
 
-                    <div class="home-banner"> <img src="assets/images/banners/LHS-banner.jpg" alt="Image"> </div>
                 </div>
                 <!-- /.sidemenu-holder -->
                 <!-- ============================================== SIDEBAR : END ============================================== -->

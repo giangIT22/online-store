@@ -54,4 +54,19 @@ class ProductService implements ProductServiceInterface
 
         return $products;
     }
+
+    public function getRelatedProducts($productId)
+    {
+        $product = Product::findOrFail($productId);
+        $categoryId = $product->category->id;
+        $tags = ProductTag::where('product_id', $productId)->pluck('name')->toArray();
+        $productIds = ProductTag::whereIn('name', array_unique($tags))
+                        ->where('product_id', '<>', $productId)
+                        ->pluck('product_id')->toArray();
+        $products = Product::where('category_id', $categoryId)
+                        ->whereIn('id', array_unique($productIds))
+                        ->get();
+        
+        return $products;
+    }
 }

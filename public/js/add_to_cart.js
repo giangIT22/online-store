@@ -22,11 +22,11 @@ $(document).ready(function() {
             success: function(respone) {
                 count = 0;
                 sumPrice = 0;
-
+                console.log(respone);
                 if (respone.status) {
-                    for (cart of respone.carts) {
-                        count += cart.amount;
-                        sumPrice += cart.amount * cart.product_price;
+                    for (product of respone.products) {
+                        count += product.amount;
+                        sumPrice += product.amount * product.product_price;
                     }
 
                     sumPrice = sumPrice.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' });

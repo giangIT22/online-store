@@ -10,6 +10,7 @@ class Product extends Model
     use HasFactory;
 
     const PER_PAGE = 10;
+    const RELATED_PRODUCT = 6;
     
     protected $guarded = [];
 
@@ -31,5 +32,10 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(ProductImage::class);
+    }
+
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class);
     }
 }

@@ -14,8 +14,8 @@
 
     <div class="body-content outer-top-xs">
         <div class="container">
-            <div class="row ">
-                @if (Auth::check())
+            <div class="row cart">
+                @if ($productsInCart)
                     <div class="shopping-cart">
                         <div class="shopping-cart-table ">
                             <div class="table-responsive">
@@ -46,41 +46,47 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach ($carts as $cart)
+                                        @foreach ($productsInCart as $product)
                                             <tr>
                                                 <td class="cart-image">
                                                     <a class="entry-thumbnail" href="detail.html">
-                                                        <img src="{{ asset($cart->product_image)}}" alt="">
+                                                        <img src="{{ asset($product['product_image']) }}" alt="">
                                                     </a>
                                                 </td>
                                                 <td class="cart-product-name-info">
                                                     <h4 class='cart-product-description'>
-                                                        <a href="detail.html">{{$cart->product_name}}</a>
+                                                        <a href="detail.html">{{ $product['product_name'] }}</a>
                                                     </h4>
                                                     {{-- <div class="cart-product-info">
                                                             <span class="product-color">COLOR:<span>Blue</span></span>
                                                     </div> --}}
                                                 </td>
                                                 <td class="cart-product-sub-total"><span
-                                                        class="cart-sub-total-price">{{number_format($cart->product_price)}} VND</span>
+                                                        class="cart-sub-total-price">{{ number_format($product['product_price']) }}
+                                                        VND</span>
                                                 <td class="cart-product-quantity">
                                                     <div class="quant-input">
                                                         <div class="arrows">
-                                                            <div class="arrow plus gradient qty-plus" id="plus-{{$cart->id}}"><span
+                                                            <div class="arrow plus gradient qty-plus"
+                                                                id="plus-{{ $product['id'] }}"><span
                                                                     class="ir"><i
                                                                         class="icon fa fa-sort-asc"></i></span></div>
-                                                            <div class="arrow minus gradient qty-minus" id="minus-{{$cart->id}}"><span
+                                                            <div class="arrow minus gradient qty-minus"
+                                                                id="minus-{{ $product['id'] }}"><span
                                                                     class="ir"><i
                                                                         class="icon fa fa-sort-desc"></i></span></div>
                                                         </div>
-                                                        <input type="text" value="{{ $cart->amount}}" class="qty-input">
+                                                        <input type="text" value="{{ $product['amount'] }}"
+                                                            class="qty-input">
                                                     </div>
                                                 </td>
                                                 <td class="cart-product-sub-total"><span
-                                                        class="cart-sub-total-price">{{number_format($cart->product_price * $cart->amount)}} VND</span>
+                                                        class="cart-sub-total-price">{{ number_format($product['product_price'] * $product['amount']) }}
+                                                        VND</span>
                                                 </td>
-                                                <td class="romove-item"><a href="#" title="cancel" id="{{$cart->id}}"
-                                                        class="icon cart-cancel"><i class="fa fa-trash-o"></i></a></td>
+                                                <td class="romove-item"><a href="#" title="cancel"
+                                                        id="{{ $product['id'] }}" class="icon cart-cancel"><i
+                                                            class="fa fa-trash-o"></i></a></td>
                                             </tr>
                                         @endforeach
                                     </tbody><!-- /tbody -->
@@ -205,16 +211,14 @@
 
 @push('script')
     <script>
-        let i = 1;
-
         $('.qty-plus').each(function(i, obj) {
-            $(obj).click(function(){
+            $(obj).click(function() {
                 $(obj).parent().next().val(parseInt($(obj).parent().next().val()) + 1);
             });
         });
-        
+
         $('.qty-minus').each(function(i, obj) {
-            $(obj).click(function(){
+            $(obj).click(function() {
                 $(obj).parent().next().val(parseInt($(obj).parent().next().val()) - 1);
 
                 if ($(obj).parent().next().val() == 0) {
@@ -223,19 +227,55 @@
             });
         });
 
-        $('.cart-cancel').click(function(e){
+        $('.cart-cancel').click(function(e) {
             e.preventDefault();
 
-            cartId = $(this).attr('id');
-            
+            productId = $(this).attr('id');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
             $.ajax({
                 method: "POST",
-                url: '/store-cart',
+                url: '/delete-cart',
                 data: {
-                    'cart_id': cartId,
+                    'product_id': productId,
                 },
                 success: function(respone) {
-                    
+                    count = 0;
+                    sumPrice = 0;
+                    if (respone.status) {
+                        $(`#${productId}`).parent().parent().remove();
+
+                        if (respone.products.length > 0) {
+                            for (product of respone.products) {
+                                count += product.amount;
+                                sumPrice += product.amount * product.product_price;
+                            }
+
+                            sumPrice = sumPrice.toLocaleString('it-IT', {
+                                style: 'currency',
+                                currency: 'vnd'
+                            });
+
+                            document.querySelector('.basket-item-count').innerHTML = count;
+                            document.querySelector('.total-price-basket .value').innerHTML = sumPrice;
+                        } else {
+                            document.querySelector('.basket-item-count').innerHTML = count;
+                            document.querySelector('.total-price-basket .value').innerHTML = sumPrice;
+                        }
+                    }
+
+                    if (respone.flag) {
+                        $('.shopping-cart').hide();
+                        $('.cart').html(`<div class="not-cart">
+                                        <h1>Giỏ hàng</h2>
+                                        <h4>Không có sản phẩm nào trong giỏ hàng. Quay lại cửa hàng để tiếp tục mua sắm.</p>
+                                        </div>`)
+                    }
                 }
             });
         });

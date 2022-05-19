@@ -17,6 +17,8 @@ class CreateProductCartTable extends Migration
             $table->id();
             $table->bigInteger('cart_id');
             $table->bigInteger('product_id');
+            $table->tinyInteger('amount');
+            $table->double('price');
             $table->timestamps();
         });
     }

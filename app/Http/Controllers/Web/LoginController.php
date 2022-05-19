@@ -7,6 +7,7 @@ use App\Http\Requests\LoginRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Actions\AttemptToAuthenticate;
 use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
 use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
@@ -51,5 +52,16 @@ class LoginController extends Controller
             AttemptToAuthenticate::class,
             PrepareAuthenticatedSession::class,
         ]));
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('index');
     }
 }

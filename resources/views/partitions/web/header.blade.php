@@ -10,6 +10,7 @@
                         <li><a href="#"><i class="icon fa fa-heart"></i>Yêu thích</a></li>
                         <li><a href="{{route('cart.view')}}"><i class="icon fa fa-shopping-cart"></i>Giỏ hàng</a></li>
                         <li><a href="{{ route('user.login') }}"><i class="icon fa fa-lock"></i>Đăng nhập</a></li>
+                        <li><a href="{{ route('user.logout') }}"><i class="icon fa fa-lock"></i>Đăng xuất</a></li>
                     </ul>
                 </div>
                 <!-- /.cnt-account -->
@@ -86,54 +87,62 @@
                                 </div>
                                 @php
                                     $sum = 0;
-                                    $countCart = 0;
+                                    $productsInCart = collect([]);
+                                    $count = 0;
                                     if (Auth::check()) {
-                                        $countCart = DB::table('carts')->sum('amount');
-                                        $carts = DB::table('carts')
+                                        $cart = DB::table('carts')
                                             ->where('user_id', Auth::id())
-                                            ->get();
-                                        foreach ($carts as $cart) {
-                                            $sum += $cart->amount * $cart->product_price;
+                                            ->first() ?? 0;
+                                        if ($cart) {
+                                            $products = DB::table('product_cart')->select('product_id', 'amount', 'price')
+                                                            ->where('cart_id', $cart->id)->get();
+
+                                            foreach ($products as $item) {
+                                                $product = DB::table('products')->where('id', $item->product_id)->first();
+                                                $productsInCart->push([
+                                                    'product_image' => $product->image,
+                                                    'product_name' => $product->name,
+                                                    'product_price' => $item->price,
+                                                    'amount' => $item->amount,
+                                                ]);
+                                                $count += $item->amount;
+                                            }
+
+                                            if ($productsInCart) {
+                                                foreach ($productsInCart as $product) {
+                                                    $sum += $product['amount'] * $product['product_price'];
+                                                }   
+                                            }
+                                        } else {
+                                            $productsInCart = 0;
                                         }
                                     }
                                 @endphp
                                 <div class="basket-item-count"><span
-                                        class="count">{{ $countCart ?? 0 }}</span></div>
+                                        class="count">{{ $count}}</span></div>
                                 <div class="total-price-basket"> <span class="lbl">giỏ hàng -</span>
                                     <span class="total-price"><span
                                             class="value">{{ $sum ? number_format($sum, 0, '', '.') . ' vnd' : 0 }}</span></span>
                                 </div>
                             </div>
                         </a>
-                        @if (Auth::check())
+                        @if (Auth::check() && !empty($productsInCart))
                             <ul class="dropdown-menu">
                                 <li>
                                     <div class="cart-item product-summary">
-                                        @foreach ($carts as $cart)
+                                        @foreach ($productsInCart as $product)
                                             <div class="row" style="margin-bottom: 10px;">
                                                 <div class="col-xs-4">
                                                     <div class="image"> <a href="#"><img
-                                                                src="{{ asset($cart->product_image) }}" alt=""></a>
+                                                                src="{{ asset($product['product_image']) }}" alt=""></a>
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-7">
                                                     <h3 class="name"><a
-                                                            href="#">{{ $cart->product_name }}</a>
+                                                            href="#">{{ $product['product_name'] }}</a>
                                                     </h3>
-                                                    <div class="cart-quantity">
-                                                        <div class="quant-input flex">
-                                                            <button class="plus amount-btn">
-                                                                -
-                                                            </button>
-                                                            <input type="text" value="1" id="qty_product"
-                                                                class="amount-input">
-                                                            <button class="minus amount-btn">
-                                                                +
-                                                            </button>
-                                                        </div>
-                                                    </div>
                                                     <div class="price">
-                                                        {{ number_format($cart->product_price, 0, '', '.') . ' vnd' }}
+                                                        {{ number_format($product['product_price'], 0, '', '.') . ' vnd' }}
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-1 action"> <a href="#"><i

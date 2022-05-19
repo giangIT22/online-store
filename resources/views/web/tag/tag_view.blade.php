@@ -5,7 +5,7 @@
     <div class="container">
       <div class="breadcrumb-inner">
         <ul class="list-inline list-unstyled">
-          <li><a href="#">Home</a></li>
+          <li><a href="#">Home</a></li>/
           <li class='active'>{{request()->tag_name}}</li>
         </ul>
       </div>
