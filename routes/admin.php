@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
@@ -29,9 +30,8 @@ Route::prefix('/category')->group(function() {
     Route::get('/sub/{sub_category_id}', [SubCategoryController::class, 'getSubcategories']);
 });
 
+//====All route product==========
 Route::prefix('/product')->group(function() {
-
-    //All route product admin
     Route::get('/view', [ProductController::class, 'index'])->name('all.products');
     Route::get('/create', [ProductController::class, 'create'])->name('product.create');
     Route::post('/store', [ProductController::class, 'store'])->name('product.store');
@@ -40,14 +40,22 @@ Route::prefix('/product')->group(function() {
     Route::get('/delete/{product_id}', [ProductController::class, 'delete'])->name('product.delete');
 });
 
-
-Route::prefix('/slider')->group(function() {
-
-    //All route product admin
+//All route slider admin
+Route::prefix('/slider')->group(function() { 
     Route::get('/view', [SliderController::class, 'index'])->name('all.sliders');
     Route::get('/create', [SliderController::class, 'create'])->name('slider.create');
     Route::post('/store', [SliderController::class, 'store'])->name('slider.store');
     Route::post('/update/{slider_id}', [SliderController::class, 'update'])->name('slider.update');
     Route::get('/edit/{slider_id}', [SliderController::class, 'edit'])->name('slider.edit');
     Route::get('/delete/{slider_id}', [SliderController::class, 'delete'])->name('slider.delete');
+});
+
+// all route blog admin 
+Route::prefix('/blog')->group(function() {
+    Route::get('/view', [BlogController::class, 'index'])->name('all.blogs');
+    Route::get('/create', [BlogController::class, 'create'])->name('blog.create');
+    Route::post('/store', [BlogController::class, 'store'])->name('blog.store');
+    Route::post('/update/{blog_id}', [BlogController::class, 'update'])->name('blog.update');
+    Route::get('/edit/{blog_id}', [BlogController::class, 'edit'])->name('blog.edit');
+    Route::get('/delete/{blog_id}', [BlogController::class, 'delete'])->name('blog.delete');
 });

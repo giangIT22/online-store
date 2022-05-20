@@ -3,20 +3,24 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductTag;
 use App\Models\Slider;
+use App\Services\BlogServiceInterface;
 use App\Services\ProductServiceInterface;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     protected $productService;
+    protected $blogService;
 
-    public function __construct(ProductServiceInterface $productService)
+    public function __construct(ProductServiceInterface $productService, BlogServiceInterface $blogService)
     {
         $this->productService = $productService;
+        $this->blogService = $blogService;
     }
 
     public function index(Request $request)
@@ -30,9 +34,11 @@ class HomeController extends Controller
         $specialOfferProducts = Product::where('special_offer', true)->orderBy('id', 'desc')->limit(9)->get();
         $specialDealsProducts = Product::where('special_deals', true)->orderBy('id', 'desc')->limit(9)->get();
         $productTags = ProductTag::select('name')->limit(8)->groupBy('name')->get();
+        $blogs = $this->blogService->getListBlog(Blog::BLOG_SLIDER)['listBlogs'];
 
         return view('web.index', compact('categories', 'sliders', 'products', 'featuredProducts',
-            'specialOfferProducts', 'specialDealsProducts', 'hotDealProducts', 'productTags'));
+            'specialOfferProducts', 'specialDealsProducts', 'hotDealProducts', 'productTags', 'blogs'
+        ));
     }
 
     public function productDetail($productId)

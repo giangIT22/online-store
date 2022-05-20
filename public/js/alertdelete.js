@@ -3,13 +3,13 @@ function actionDelete(event) {
     let urlRequest = $(this).data('url');
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: "Delete this data !",
+        title: 'Bạn có muốn xóa không',
         icon: 'warning',
         showCancelButton: true,
+        cancelButtonText: "Hủy bỏ",
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Đòng ý'
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
@@ -17,8 +17,8 @@ function actionDelete(event) {
                 url: urlRequest,
                 success: function(data) {
                     Swal.fire(
-                        'Deleted!',
-                        'Record has been deleted.',
+                        'Xóa thành công',
+                        'Bài viết đã bị xóa',
                         'success'
                     ).then(function(isConfirm) {
                         if (isConfirm) {

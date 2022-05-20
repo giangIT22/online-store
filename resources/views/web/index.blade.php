@@ -14,76 +14,80 @@
 
                     <!-- ============================================== HOT DEALS ============================================== -->
                     @if ($hotDealProducts->count() > 0)
-                    <div class="sidebar-widget hot-deals wow fadeInUp outer-bottom-xs">
-                        <h3 class="section-title">hot deals</h3>
-                        <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
-                            @foreach ($hotDealProducts as $product)
-                            <div class="item">
-                                <div class="products">
-                                    <div class="hot-deal-wrapper">
-                                        <div class="image"> <img src="{{ asset($product->image)}}" style="height: 250px;" alt="">
-                                        </div>
-                                        <div class="sale-offer-tag"><span>49%<br>
-                                                off</span></div>
-                                        <div class="timing-wrapper">
-                                            <div class="box-wrapper">
-                                                <div class="date box"> <span class="key">120</span> <span
-                                                        class="value">DAYS</span> </div>
+                        <div class="sidebar-widget hot-deals wow fadeInUp outer-bottom-xs">
+                            <h3 class="section-title">hot deals</h3>
+                            <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
+                                @foreach ($hotDealProducts as $product)
+                                    <div class="item">
+                                        <div class="products">
+                                            <div class="hot-deal-wrapper">
+                                                <div class="image"> <img src="{{ asset($product->image) }}"
+                                                        style="height: 250px;" alt="">
+                                                </div>
+                                                <div class="sale-offer-tag"><span>49%<br>
+                                                        off</span></div>
+                                                <div class="timing-wrapper">
+                                                    <div class="box-wrapper">
+                                                        <div class="date box"> <span class="key">120</span>
+                                                            <span class="value">DAYS</span> </div>
+                                                    </div>
+                                                    <div class="box-wrapper">
+                                                        <div class="hour box"> <span class="key">20</span>
+                                                            <span class="value">HRS</span> </div>
+                                                    </div>
+                                                    <div class="box-wrapper">
+                                                        <div class="minutes box"> <span class="key">36</span>
+                                                            <span class="value">MINS</span> </div>
+                                                    </div>
+                                                    <div class="box-wrapper hidden-md">
+                                                        <div class="seconds box"> <span class="key">60</span>
+                                                            <span class="value">SEC</span> </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="box-wrapper">
-                                                <div class="hour box"> <span class="key">20</span> <span
-                                                        class="value">HRS</span> </div>
+                                            <!-- /.hot-deal-wrapper -->
+
+                                            <div class="product-info text-left m-t-20">
+                                                <h3 class="name"><a href="detail.html">{{ $product->name }}</a>
+                                                </h3>
+                                                <div class="rating rateit-small"></div>
+                                                <div class="product-price">
+                                                    @if ($product->sale_price)
+                                                        <span class="price">
+                                                            {{ number_format($product->sale_price) }} đ</span>
+                                                        <span
+                                                            class="price-before-discount">{{ number_format($product->product_price) }}
+                                                            đ</span>
+                                                    @else
+                                                        <span
+                                                            class="price">{{ number_format($product->product_price) }}
+                                                            đ</span>
+                                                    @endIf
+                                                </div>
+                                                <!-- /.product-price -->
+
                                             </div>
-                                            <div class="box-wrapper">
-                                                <div class="minutes box"> <span class="key">36</span> <span
-                                                        class="value">MINS</span> </div>
+                                            <!-- /.product-info -->
+
+                                            <div class="cart clearfix animate-effect">
+                                                <div class="action">
+                                                    <div class="add-cart-button btn-group">
+                                                        <button class="btn btn-primary icon" data-toggle="dropdown"
+                                                            type="button">
+                                                            <i class="fa fa-shopping-cart"></i> </button>
+                                                        <button class="btn btn-primary cart-btn" type="button">Add to
+                                                            cart</button>
+                                                    </div>
+                                                </div>
+                                                <!-- /.action -->
                                             </div>
-                                            <div class="box-wrapper hidden-md">
-                                                <div class="seconds box"> <span class="key">60</span> <span
-                                                        class="value">SEC</span> </div>
-                                            </div>
+                                            <!-- /.cart -->
                                         </div>
                                     </div>
-                                    <!-- /.hot-deal-wrapper -->
-
-                                    <div class="product-info text-left m-t-20">
-                                        <h3 class="name"><a href="detail.html">{{ $product->name }}</a></h3>
-                                        <div class="rating rateit-small"></div>
-                                        <div class="product-price">
-                                            @if ($product->sale_price)
-                                                                    <span class="price">
-                                                                        {{ number_format($product->sale_price) }} đ</span>
-                                                                    <span
-                                                                        class="price-before-discount">{{ number_format($product->product_price) }}
-                                                                        đ</span>
-                                                                @else
-                                                                    <span
-                                                                        class="price">{{ number_format($product->product_price) }}
-                                                                        đ</span>
-                                                                @endIf
-                                        </div>
-                                        <!-- /.product-price -->
-
-                                    </div>
-                                    <!-- /.product-info -->
-
-                                    <div class="cart clearfix animate-effect">
-                                        <div class="action">
-                                            <div class="add-cart-button btn-group">
-                                                <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-                                                    <i class="fa fa-shopping-cart"></i> </button>
-                                                <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-                                            </div>
-                                        </div>
-                                        <!-- /.action -->
-                                    </div>
-                                    <!-- /.cart -->
-                                </div>
+                                @endforeach
                             </div>
-                            @endforeach
+                            <!-- /.sidebar-widget -->
                         </div>
-                        <!-- /.sidebar-widget -->
-                    </div>
                     @endif
                     <!-- ============================================== HOT DEALS: END ============================================== -->
 
@@ -92,60 +96,62 @@
                     <div class="sidebar-widget outer-bottom-small wow fadeInUp">
                         <h3 class="section-title">Special Offer</h3>
                         <div class="sidebar-widget-body outer-top-xs">
-                            <div
-                                class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
+                            <div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
                                 <div class="item">
-                                @foreach ($specialOfferProducts as $product)   
-                                    <div class="products special-product">
-                                        <div class="product">
-                                            <div class="product-micro">
-                                                <div class="row product-micro-row">
-                                                    <div class="col col-xs-5">
-                                                        <div class="product-image">
-                                                            <div class="image">
-                                                                <a href="{{ route('product.detail', 
-                                                                ['product_id' => $product->id, 'slug' => $product->product_slug])}}"> 
-                                                                    <img src="{{ asset($product->image) }}" alt="" style="height: ">
-                                                                </a>
-                                                            </div>
-                                                            <!-- /.image -->
+                                    @foreach ($specialOfferProducts as $product)
+                                        <div class="products special-product">
+                                            <div class="product">
+                                                <div class="product-micro">
+                                                    <div class="row product-micro-row">
+                                                        <div class="col col-xs-5">
+                                                            <div class="product-image">
+                                                                <div class="image">
+                                                                    <a
+                                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
+                                                                        <img src="{{ asset($product->image) }}" alt=""
+                                                                            style="height: ">
+                                                                    </a>
+                                                                </div>
+                                                                <!-- /.image -->
 
-                                                        </div>
-                                                        <!-- /.product-image -->
-                                                    </div>
-                                                    <!-- /.col -->
-                                                    <div class="col col-xs-7">
-                                                        <div class="product-info">
-                                                            <h3 class="name"><a href="#">{{ $product->name }}</a>
-                                                            </h3>
-                                                            <div class="rating rateit-small"></div>
-                                                            <div class="product-price"> 
-                                                                @if ($product->sale_price)
-                                                                    <span class="price">
-                                                                        {{ number_format($product->sale_price) }} đ</span>
-                                                                    <span
-                                                                        class="price-before-discount">{{ number_format($product->product_price) }}
-                                                                        đ</span>
-                                                                @else
-                                                                    <span
-                                                                        class="price">{{ number_format($product->product_price) }}
-                                                                        đ</span>
-                                                                @endIf
                                                             </div>
-                                                            <!-- /.product-price -->
-
+                                                            <!-- /.product-image -->
                                                         </div>
+                                                        <!-- /.col -->
+                                                        <div class="col col-xs-7">
+                                                            <div class="product-info">
+                                                                <h3 class="name"><a
+                                                                        href="#">{{ $product->name }}</a>
+                                                                </h3>
+                                                                <div class="rating rateit-small"></div>
+                                                                <div class="product-price">
+                                                                    @if ($product->sale_price)
+                                                                        <span class="price">
+                                                                            {{ number_format($product->sale_price) }}
+                                                                            đ</span>
+                                                                        <span
+                                                                            class="price-before-discount">{{ number_format($product->product_price) }}
+                                                                            đ</span>
+                                                                    @else
+                                                                        <span
+                                                                            class="price">{{ number_format($product->product_price) }}
+                                                                            đ</span>
+                                                                    @endIf
+                                                                </div>
+                                                                <!-- /.product-price -->
+
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.col -->
                                                     </div>
-                                                    <!-- /.col -->
+                                                    <!-- /.product-micro-row -->
                                                 </div>
-                                                <!-- /.product-micro-row -->
+                                                <!-- /.product-micro -->
+
                                             </div>
-                                            <!-- /.product-micro -->
 
                                         </div>
-                                        
-                                    </div>
-                                @endforeach 
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -159,7 +165,8 @@
                         <div class="sidebar-widget-body outer-top-xs">
                             <div class="tag-list">
                                 @foreach ($productTags as $tag)
-                                <a class="item" title="Phone" href="{{ route('product.tag', ['tag_name' => $tag->name])}}">{{ $tag->name }}</a>
+                                    <a class="item" title="Phone"
+                                        href="{{ route('product.tag', ['tag_name' => $tag->name]) }}">{{ $tag->name }}</a>
                                 @endforeach
                             </div>
                         </div>
@@ -172,57 +179,59 @@
                     <div class="sidebar-widget outer-bottom-small wow fadeInUp">
                         <h3 class="section-title">Special Deals</h3>
                         <div class="sidebar-widget-body outer-top-xs">
-                            <div
-                                class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
+                            <div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
                                 <div class="item">
                                     <div class="products special-product">
-                                    @foreach ($specialDealsProducts as $product)
-                                        <div class="product">
-                                            <div class="product-micro">
-                                                <div class="row product-micro-row">
-                                                    <div class="col col-xs-5">
-                                                        <div class="product-image">
-                                                            <div class="image">
-                                                                <a href="{{ route('product.detail', 
-                                                                ['product_id' => $product->id, 'slug' => $product->product_slug])}}"> 
-                                                                    <img src="{{ asset($product->image) }}" alt="" height="98px">
-                                                                </a>
-                                                            </div>
-                                                            <!-- /.image -->
+                                        @foreach ($specialDealsProducts as $product)
+                                            <div class="product">
+                                                <div class="product-micro">
+                                                    <div class="row product-micro-row">
+                                                        <div class="col col-xs-5">
+                                                            <div class="product-image">
+                                                                <div class="image">
+                                                                    <a
+                                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
+                                                                        <img src="{{ asset($product->image) }}" alt=""
+                                                                            height="98px">
+                                                                    </a>
+                                                                </div>
+                                                                <!-- /.image -->
 
-                                                        </div>
-                                                        <!-- /.product-image -->
-                                                    </div>
-                                                    <!-- /.col -->
-                                                    <div class="col col-xs-7">
-                                                        <div class="product-info">
-                                                            <h3 class="name"><a href="#">{{ $product->name }}</a>
-                                                            </h3>
-                                                            <div class="rating rateit-small"></div>
-                                                            <div class="product-price">
-                                                                @if ($product->sale_price)
-                                                                    <span class="price">
-                                                                        {{ number_format($product->sale_price) }} đ</span>
-                                                                    <span
-                                                                        class="price-before-discount">{{ number_format($product->product_price) }}
-                                                                        đ</span>
-                                                                @else
-                                                                    <span
-                                                                        class="price">{{ number_format($product->product_price) }}
-                                                                        đ</span>
-                                                                @endIf
                                                             </div>
-                                                            <!-- /.product-price -->
-
+                                                            <!-- /.product-image -->
                                                         </div>
+                                                        <!-- /.col -->
+                                                        <div class="col col-xs-7">
+                                                            <div class="product-info">
+                                                                <h3 class="name"><a
+                                                                        href="#">{{ $product->name }}</a>
+                                                                </h3>
+                                                                <div class="rating rateit-small"></div>
+                                                                <div class="product-price">
+                                                                    @if ($product->sale_price)
+                                                                        <span class="price">
+                                                                            {{ number_format($product->sale_price) }}
+                                                                            đ</span>
+                                                                        <span
+                                                                            class="price-before-discount">{{ number_format($product->product_price) }}
+                                                                            đ</span>
+                                                                    @else
+                                                                        <span
+                                                                            class="price">{{ number_format($product->product_price) }}
+                                                                            đ</span>
+                                                                    @endIf
+                                                                </div>
+                                                                <!-- /.product-price -->
+
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.col -->
                                                     </div>
-                                                    <!-- /.col -->
+                                                    <!-- /.product-micro-row -->
                                                 </div>
-                                                <!-- /.product-micro-row -->
+                                                <!-- /.product-micro -->
                                             </div>
-                                            <!-- /.product-micro -->
-                                        </div>
-                                    @endforeach
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -239,8 +248,7 @@
                             <form>
                                 <div class="form-group">
                                     <label class="sr-only">Email address</label>
-                                    <input type="email" class="form-control"
-                                        placeholder="Nhập địa chỉ email của bạn">
+                                    <input type="email" class="form-control" placeholder="Nhập địa chỉ email của bạn">
                                 </div>
                                 <button class="btn btn-primary">Đăng ký</button>
                             </form>
@@ -418,7 +426,8 @@
                                                             <div class="product-price">
                                                                 @if ($product->sale_price)
                                                                     <span class="price">
-                                                                        {{ number_format($product->sale_price) }} đ</span>
+                                                                        {{ number_format($product->sale_price) }}
+                                                                        đ</span>
                                                                     <span
                                                                         class="price-before-discount">{{ number_format($product->product_price) }}
                                                                         đ</span>
@@ -434,7 +443,8 @@
                                                             <div class="action">
                                                                 <ul class="list-unstyled">
                                                                     <li class="add-cart-button btn-group">
-                                                                        <a href="{{route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug])}}" data-toggle="tooltip"
+                                                                        <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
+                                                                            data-toggle="tooltip"
                                                                             class="btn btn-primary icon" type="button"
                                                                             title="Chọn sản phẩm"> <i
                                                                                 class="fa fa-shopping-cart"></i> </a>
@@ -448,8 +458,9 @@
                                                                         </a> </li>
                                                                     <li class="lnk"> <a data-toggle="tooltip"
                                                                             class="add-to-cart preview-product"
-                                                                            id="{{$product->id}}"
-                                                                            title="Xem nhanh"> <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                            id="{{ $product->id }}" title="Xem nhanh"> <i
+                                                                                class="fa fa-eye"
+                                                                                aria-hidden="true"></i>
                                                                         </a> </li>
                                                                 </ul>
                                                             </div>
@@ -515,21 +526,26 @@
                                                                 <div class="action">
                                                                     <ul class="list-unstyled">
                                                                         <li class="add-cart-button btn-group">
-                                                                            <a href="{{route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug])}}" data-toggle="tooltip"
+                                                                            <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
+                                                                                data-toggle="tooltip"
                                                                                 class="btn btn-primary icon" type="button"
                                                                                 title="Chọn sản phẩm"> <i
                                                                                     class="fa fa-shopping-cart"></i> </a>
                                                                             <button class="btn btn-primary cart-btn"
                                                                                 type="button">Add to cart</button>
                                                                         </li>
-                                                                        <li class="lnk wishlist"> <a data-toggle="tooltip"
+                                                                        <li class="lnk wishlist"> <a
+                                                                                data-toggle="tooltip"
                                                                                 class="add-to-cart" href="detail.html"
                                                                                 title="Yêu thích"> <i
                                                                                     class="icon fa fa-heart"></i>
                                                                             </a> </li>
-                                                                        <li class="lnk"> <a data-toggle="tooltip"
+                                                                        <li class="lnk"> <a
+                                                                                data-toggle="tooltip"
                                                                                 class="add-to-cart" href="detail.html"
-                                                                                title="Xem nhanh"> <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                                title="Xem nhanh"> <i
+                                                                                    class="fa fa-eye"
+                                                                                    aria-hidden="true"></i>
                                                                             </a> </li>
                                                                     </ul>
                                                                 </div>
@@ -626,21 +642,20 @@
                                             <div class="action">
                                                 <ul class="list-unstyled">
                                                     <li class="add-cart-button btn-group">
-                                                        <a href="{{route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug])}}" data-toggle="tooltip"
-                                                            class="btn btn-primary icon" type="button"
-                                                            title="Chọn sản phẩm"> <i
+                                                        <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
+                                                            data-toggle="tooltip" class="btn btn-primary icon"
+                                                            type="button" title="Chọn sản phẩm"> <i
                                                                 class="fa fa-shopping-cart"></i> </a>
-                                                        <button class="btn btn-primary cart-btn"
-                                                            type="button">Add to cart</button>
+                                                        <button class="btn btn-primary cart-btn" type="button">Add to
+                                                            cart</button>
                                                     </li>
                                                     <li class="lnk wishlist"> <a data-toggle="tooltip"
-                                                            class="add-to-cart" href="detail.html"
-                                                            title="Yêu thích"> <i
+                                                            class="add-to-cart" href="detail.html" title="Yêu thích"> <i
                                                                 class="icon fa fa-heart"></i>
                                                         </a> </li>
                                                     <li class="lnk"> <a data-toggle="tooltip"
-                                                            class="add-to-cart preview-product" href=""
-                                                            title="Xem nhanh"> <i class="fa fa-eye" aria-hidden="true"></i>
+                                                            class="add-to-cart preview-product" href="" title="Xem nhanh">
+                                                            <i class="fa fa-eye" aria-hidden="true"></i>
                                                         </a> </li>
                                                 </ul>
                                             </div>
@@ -975,130 +990,34 @@
 
                 <!-- ============================================== BLOG SLIDER ============================================== -->
                 <section class="section latest-blog outer-bottom-vs wow fadeInUp">
-                    <h3 class="section-title">latest form blog</h3>
+                    <h3 class="section-title">Tin tức mới nhất</h3>
                     <div class="blog-slider-container outer-top-xs">
                         <div class="owl-carousel blog-slider custom-carousel">
-                            <div class="item">
-                                <div class="blog-post">
-                                    <div class="blog-post-image">
-                                        <div class="image"> <a href="blog.html"><img
-                                                    src="assets/images/blog-post/post1.jpg" alt=""></a> </div>
-                                    </div>
-                                    <!-- /.blog-post-image -->
+                            @foreach ($blogs as $blog)
+                                <div class="item">
+                                    <div class="blog-post">
+                                        <div class="blog-post-image">
+                                            <div class="image"> <a href="detail.html"><img
+                                                        src="{{ asset($blog->post_image) }}" alt=""></a> </div>
+                                        </div>
+                                        <!-- /.blog-post-image -->
 
-                                    <div class="blog-post-info text-left">
-                                        <h3 class="name"><a href="#">Voluptatem accusantium doloremque
-                                                laudantium</a></h3>
-                                        <span class="info">By Jone Doe &nbsp;|&nbsp; 21 March 2016 </span>
-                                        <p class="text">Sed quia non numquam eius modi tempora incidunt ut
-                                            labore et dolore magnam aliquam quaerat voluptatem.</p>
-                                        <a href="#" class="lnk btn btn-primary">Read more</a>
-                                    </div>
-                                    <!-- /.blog-post-info -->
+                                        <div class="blog-post-info text-left">
+                                            <h3 class="name"><a href="#">{{ $blog->title }}</a></h3>
+                                            <span class="info">
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                {{ $blog->created_at->toDateTimeString()}}
+                                            </span>
+                                            <p class="text">{{ $blog->content }}</p>
+                                            <a href="#" class="lnk btn btn-primary">Read more</a>
+                                        </div>
+                                        <!-- /.blog-post-info -->
 
+                                    </div>
+                                    <!-- /.blog-post -->
                                 </div>
-                                <!-- /.blog-post -->
-                            </div>
-                            <!-- /.item -->
-
-                            <div class="item">
-                                <div class="blog-post">
-                                    <div class="blog-post-image">
-                                        <div class="image"> <a href="blog.html"><img
-                                                    src="assets/images/blog-post/post2.jpg" alt=""></a> </div>
-                                    </div>
-                                    <!-- /.blog-post-image -->
-
-                                    <div class="blog-post-info text-left">
-                                        <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla
-                                                pariatur</a></h3>
-                                        <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016
-                                        </span>
-                                        <p class="text">Sed quia non numquam eius modi tempora incidunt ut
-                                            labore et dolore magnam aliquam quaerat voluptatem.</p>
-                                        <a href="#" class="lnk btn btn-primary">Read more</a>
-                                    </div>
-                                    <!-- /.blog-post-info -->
-
-                                </div>
-                                <!-- /.blog-post -->
-                            </div>
-                            <!-- /.item -->
-
-                            <!-- /.item -->
-
-                            <div class="item">
-                                <div class="blog-post">
-                                    <div class="blog-post-image">
-                                        <div class="image"> <a href="blog.html"><img
-                                                    src="assets/images/blog-post/post1.jpg" alt=""></a> </div>
-                                    </div>
-                                    <!-- /.blog-post-image -->
-
-                                    <div class="blog-post-info text-left">
-                                        <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla
-                                                pariatur</a></h3>
-                                        <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016
-                                        </span>
-                                        <p class="text">Sed ut perspiciatis unde omnis iste natus error sit
-                                            voluptatem accusantium</p>
-                                        <a href="#" class="lnk btn btn-primary">Read more</a>
-                                    </div>
-                                    <!-- /.blog-post-info -->
-
-                                </div>
-                                <!-- /.blog-post -->
-                            </div>
-                            <!-- /.item -->
-
-                            <div class="item">
-                                <div class="blog-post">
-                                    <div class="blog-post-image">
-                                        <div class="image"> <a href="blog.html"><img
-                                                    src="assets/images/blog-post/post2.jpg" alt=""></a> </div>
-                                    </div>
-                                    <!-- /.blog-post-image -->
-
-                                    <div class="blog-post-info text-left">
-                                        <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla
-                                                pariatur</a></h3>
-                                        <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016
-                                        </span>
-                                        <p class="text">Sed ut perspiciatis unde omnis iste natus error sit
-                                            voluptatem accusantium</p>
-                                        <a href="#" class="lnk btn btn-primary">Read more</a>
-                                    </div>
-                                    <!-- /.blog-post-info -->
-
-                                </div>
-                                <!-- /.blog-post -->
-                            </div>
-                            <!-- /.item -->
-
-                            <div class="item">
-                                <div class="blog-post">
-                                    <div class="blog-post-image">
-                                        <div class="image"> <a href="blog.html"><img
-                                                    src="assets/images/blog-post/post1.jpg" alt=""></a> </div>
-                                    </div>
-                                    <!-- /.blog-post-image -->
-
-                                    <div class="blog-post-info text-left">
-                                        <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla
-                                                pariatur</a></h3>
-                                        <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016
-                                        </span>
-                                        <p class="text">Sed ut perspiciatis unde omnis iste natus error sit
-                                            voluptatem accusantium</p>
-                                        <a href="#" class="lnk btn btn-primary">Read more</a>
-                                    </div>
-                                    <!-- /.blog-post-info -->
-
-                                </div>
-                                <!-- /.blog-post -->
-                            </div>
-                            <!-- /.item -->
-
+                                <!-- /.item -->
+                            @endforeach
                         </div>
                         <!-- /.owl-carousel -->
                     </div>
