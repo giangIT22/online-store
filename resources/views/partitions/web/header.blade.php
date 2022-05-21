@@ -40,7 +40,7 @@
     <div class="main-header">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-2 logo-holder">
+                <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                     <!-- ============================================================= LOGO ============================================================= -->
                     <div class="logo"> <a href="{{ route('index') }}"> <img
                                 src="{{ asset('frontend/assets/images/logo.png') }}" alt="logo">
@@ -50,25 +50,14 @@
                 </div>
                 <!-- /.logo-holder -->
 
-                <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
+                <div class="col-xs-12 col-sm-12 col-md-6 top-search-holder">
                     <!-- /.contact-row -->
                     <!-- ============================================================= SEARCH AREA ============================================================= -->
                     <div class="search-area">
-                        <form>
+                        <form method="get" action="{{ route('search.view')}}">
                             <div class="control-group">
-                                <ul class="categories-filter animate-dropdown">
-                                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown"
-                                            href="category.html">Danh mục <b class="caret"></b></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            @foreach ($categories as $category)
-                                                <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                        href="category.html">{{ $category->name }}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <input class="search-field" placeholder="Tìm kiếm sản phẩm" />
-                                <a class="search-button" href="#"></a>
+                                <input class="search-field" placeholder="Bạn đang tìm sản phẩm nào ..." name="search" />
+                                <button class="search-button" href="#"></button>
                             </div>
                         </form>
                     </div>
@@ -211,6 +200,8 @@
                                             href="{{ route('category.index', ['category_slug' => $category->slug]) }}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
+                                <li class="{{ Route::current()->uri == '/blog' ? 'active' : '' }}"> <a
+                                    href="{{ route('blog.view') }}">Tin tức</a> </li>
                             </ul>
                             <!-- /.navbar-nav -->
                             <div class="clearfix"></div>

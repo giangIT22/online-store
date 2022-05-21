@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\BlogController;
 use App\Http\Controllers\Web\CartController;
 use App\Http\Controllers\Web\CategoryController;
 use App\Http\Controllers\Web\HomeController;
@@ -38,10 +39,17 @@ Route::prefix('/product')->group(function () {
     Route::get('/preview-product/{product_id}', [HomeController::class, 'previewProduct'])->name('preview.product');
 });
 
-Route::get('/{category_slug}', [CategoryController::class, 'index'])->name('category.index');
+Route::get('/category/{category_slug}', [CategoryController::class, 'index'])->name('category.index');
 
 //=======================cart=====================
 
 Route::post('/store-cart', [CartController::class, 'store'])->name('cart.store');
 Route::get('cart/shopping-cart', [CartController::class, 'view'])->name('cart.view');
 Route::post('/delete-cart', [CartController::class, 'deleteCart'])->name('cart.delete');
+
+//====================Blog========================
+Route::get('/tin-tuc', [BlogController::class, 'view'])->name('blog.view');
+Route::get('/tin-tuc/{blog_title}', [BlogController::class, 'detailBlog'])->name('blog.detail');
+
+//=====================Search============================
+Route::get('/search', [ShopController::class, 'viewSearch'])->name('search.view');

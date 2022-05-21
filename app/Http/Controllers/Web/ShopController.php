@@ -36,4 +36,20 @@ class ShopController extends Controller
         return view('web.tag.tag_view', compact('categories', 'sliders', 'products', 'productTags', 'lastPage', 'currentPage'));
 
     }
+
+    public function viewSearch()
+    {
+        $categories = Category::with('subCategories')->get();
+        $dataSearch = Product::search(request('search'))->paginate(Product::PER_PAGE);
+        $products = $dataSearch->items();
+        $currentPage = $dataSearch->currentPage();
+        $lastPage = $dataSearch->lastPage();
+
+        if (request('search')) {
+            return view('web.search.view', compact('categories', 'products', 'currentPage', 'lastPage'));
+        } else {
+            return redirect()->route('index');
+        }
+    
+    }
 }

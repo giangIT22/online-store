@@ -3,8 +3,7 @@
     <nav class="yamm megamenu-horizontal">
         <ul class="nav">
             @foreach ($categories as $category)
-                <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon {{ $category->category_icon }}" aria-hidden="true"></i>{{ $category->name }}</a>
+                <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $category->name }}</a>
                     <ul class="dropdown-menu mega-menu">
                         <li class="yamm-content">
                             <div class="row">
@@ -28,7 +27,7 @@
                 </li>
                 <!-- /.menu-item -->
             @endforeach
-
+            <li class="dropdown menu-item"> <a href="{{ route('blog.view') }}" >Tin tức</a>
         </ul>
         <!-- /.nav -->
     </nav>
