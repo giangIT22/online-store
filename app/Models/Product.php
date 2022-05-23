@@ -56,4 +56,9 @@ class Product extends Model
             'name' => $this->name,
         ];
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

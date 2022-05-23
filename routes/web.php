@@ -7,6 +7,7 @@ use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\LoginController;
 use App\Http\Controllers\Web\RegisterController;
 use App\Http\Controllers\Web\ShopController;
+use App\Http\Controllers\Web\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,12 +25,26 @@ Route::get('/login', [LoginController::class, 'index'])->name('user.login')->mid
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::get('/register', [RegisterController::class, 'index'])->name('user.register')->middleware('guest');;
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-Route::get('/logout', [LoginController::class, 'logout'])->name('user.logout');
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/not-found', function () {
     return view('layouts.error');
 })->name('error');
+
+//=============Profile user===========================
+Route::middleware('auth')->group(function () {
+    Route::get('/user/logout', [LoginController::class, 'logout'])->name('user.logout');
+
+    Route::get('/user', [UserController::class, 'home'])->name('user.home');
+
+    Route::get('/user/profile', [UserController::class, 'userProfile'])->name('user.profile');
+
+    Route::post('/user/profile/store', [UserController::class, 'userProfileStore'])->name('user.profile.store');
+
+    Route::get('/user/change/password', [UserController::class, 'userChangePassword'])->name('user.change.password');
+
+    Route::post('/user/password/update', [UserController::class, 'userPasswordUpdate'])->name('user.password.update');
+});
 
 //=============Product detail=========================
 
@@ -37,6 +52,7 @@ Route::prefix('/product')->group(function () {
     Route::get('/detail/{product_id}/{slug}', [HomeController::class, 'productDetail'])->name('product.detail');
     Route::get('/tag/{tag_name}', [ShopController::class, 'index'])->name('product.tag');
     Route::get('/preview-product/{product_id}', [HomeController::class, 'previewProduct'])->name('preview.product');
+    ROute::post('/add-review', [HomeController::class, 'storeReview'])->name('review.store');
 });
 
 Route::get('/category/{category_slug}', [CategoryController::class, 'index'])->name('category.index');

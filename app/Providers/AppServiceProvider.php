@@ -10,6 +10,10 @@ use App\Services\CategoryService;
 use App\Services\CategoryServiceInterface;
 use App\Services\ProductService;
 use App\Services\ProductServiceInterface;
+use App\Services\ReviewService;
+use App\Services\ReviewServiceInterface;
+use App\Services\UserService;
+use App\Services\UserServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->singleton(ReviewServiceInterface::class, ReviewService::class);
+        $this->app->singleton(UserServiceInterface::class, UserService::class);
         $this->app->singleton(CategoryServiceInterface::class, CategoryService::class);
         $this->app->singleton(ProductServiceInterface::class, ProductService::class);
         $this->app->singleton(CartServiceInterface::class, CartService::class);

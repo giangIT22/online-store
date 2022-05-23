@@ -76,6 +76,19 @@
 
             <li class="treeview">
                 <a href="#">
+                    <i data-feather="mail"></i> <span>Quản lý đánh giá</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('review.pending') }}"><i class="ti-more"></i>Đánh giá chưa công khai</a></li>
+                    <li><a href="{{ route('all.reviews') }}"><i class="ti-more"></i>Đánh giá công khai</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
                     <i data-feather="file"></i>
                     <span>Pages</span>
                     <span class="pull-right-container">

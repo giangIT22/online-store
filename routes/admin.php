@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Web\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', function() {
@@ -58,4 +59,12 @@ Route::prefix('/blog')->group(function() {
     Route::post('/update/{blog_id}', [BlogController::class, 'update'])->name('blog.update');
     Route::get('/edit/{blog_id}', [BlogController::class, 'edit'])->name('blog.edit');
     Route::get('/delete/{blog_id}', [BlogController::class, 'delete'])->name('blog.delete');
+});
+
+// all route review admin 
+Route::prefix('/review')->group(function() {
+    Route::get('/view', [ReviewController::class, 'view'])->name('all.reviews');
+    Route::get('/pending-review', [ReviewController::class, 'viewPending'])->name('review.pending');
+    Route::get('/update/{review_id}', [ReviewController::class, 'update'])->name('review.update');
+    Route::get('/delete/{review_id}', [ReviewController::class, 'delete'])->name('review.delete');
 });

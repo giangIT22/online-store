@@ -5,7 +5,7 @@
         <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
-                    <li><a href="{{ route('index')}}">Trang chủ </a></li>/
+                    <li><a href="{{ route('index') }}">Trang chủ </a></li>/
                     <li class='active'>{{ request()->category_slug }}</li>
                 </ul>
             </div>
@@ -77,16 +77,15 @@
                         </div>
                     </div>
 
-
                     <div class="clearfix filters-container m-t-10">
                         <div class="row">
                             <div class="col col-sm-6 col-md-2">
                                 <div class="filter-tabs">
                                     <ul id="filter-tabs" class="nav nav-tabs nav-tab-box nav-tab-fa-icon">
                                         <li class="active"> <a data-toggle="tab" href="#grid-container"><i
-                                                    class="icon fa fa-th-large"></i>Grid</a> </li>
+                                                    class="icon fa fa-th-large"></i>Cột</a> </li>
                                         <li><a data-toggle="tab" href="#list-container"><i
-                                                    class="icon fa fa-th-list"></i>List</a></li>
+                                                    class="icon fa fa-th-list"></i>Hàng</a></li>
                                     </ul>
                                 </div>
                                 <!-- /.filter-tabs -->
@@ -94,15 +93,34 @@
                             <!-- /.col -->
                             <div class="col col-sm-12 col-md-6">
                                 <div class="col col-sm-3 col-md-6 no-padding">
-                                    <div class="lbl-cnt"> <span class="lbl">Sort by</span>
+                                    <div class="lbl-cnt"> <span class="lbl">Sắp xếp</span>
                                         <div class="fld inline">
                                             <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
                                                 <button data-toggle="dropdown" type="button" class="btn dropdown-toggle">
-                                                    Position <span class="caret"></span> </button>
+                                                    Tùy chọn<span class="caret"></span> </button>
                                                 <ul role="menu" class="dropdown-menu">
-                                                    <li role="presentation"><a href="#">position</a></li>
-                                                    <li role="presentation"><a href="?sort=0">Price:Lowest first</a></li>
-                                                    <li role="presentation"><a href="?sort=1">Price:HIghest first</a></li>
+                                                    <li role="presentation">
+                                                        <a
+                                                            href="{{ route(
+                                                                'category.index',
+                                                                array_merge(request()->query(), [
+                                                                    'category_slug' => request('category_slug'),
+                                                                    'sort' => 0,
+                                                                ]),
+                                                            ) }}">Giá:
+                                                            tăng dần</a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a
+                                                            href="{{ route(
+                                                                'category.index',
+                                                                array_merge(request()->query(), [
+                                                                    'category_slug' => request('category_slug'),
+                                                                    'sort' => 1,
+                                                                ]),
+                                                            ) }}">Giá:
+                                                            giảm dần</a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -112,22 +130,43 @@
                                 </div>
                             </div>
                             <!-- /.col -->
-
-                            <div class="col col-sm-6 col-md-4 text-right">
-                                <div class="pagination-container">
-                                    <ul class="list-inline list-unstyled">
-                                        <li class="prev"><a
-                                                href="?page={{ $currentPage == 1 ? $currentPage : $currentPage - 1 }} "><i
-                                                    class="fa fa-angle-left"></i></a></li>
-                                        @for ($i = 1; $i <= $lastPage; $i++)
-                                            <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
-                                                    href="?page={{ $i }}">{{ $i }}</a></li>
-                                        @endfor
-                                        <li class="next"><a href="?page={{ $currentPage + 1 }} "><i
-                                                    class="fa fa-angle-right"></i></a></li>
-                                    </ul>
+                            @if (!empty($products))
+                                <div class="col col-sm-6 col-md-4 text-right">
+                                    <div class="pagination-container">
+                                        <ul class="list-inline list-unstyled">
+                                            <li class="prev"><a
+                                                    href="{{ route(
+                                                        'category.index',
+                                                        array_merge(request()->query(), [
+                                                            'category_slug' => request()->category_slug,
+                                                            'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
+                                                        ]),
+                                                    ) }}">
+                                                    <i class="fa fa-angle-left"></i></a></li>
+                                            @for ($i = 1; $i <= $lastPage; $i++)
+                                                <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
+                                                        href="{{ route(
+                                                            'category.index',
+                                                            array_merge(request()->query(), [
+                                                                'category_slug' => request()->category_slug,
+                                                                'page' => $i,
+                                                            ]),
+                                                        ) }}">{{ $i }}</a>
+                                                </li>
+                                            @endfor
+                                            <li class="next"><a
+                                                    href="{{ route(
+                                                        'category.index',
+                                                        array_merge(request()->query(), [
+                                                            'category_slug' => request()->category_slug,
+                                                            'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1,
+                                                        ]),
+                                                    ) }} "><i
+                                                        class="fa fa-angle-right"></i></a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                             <!-- /.col -->
                         </div>
                         <!-- /.row -->
@@ -139,7 +178,7 @@
                                     <div class="row">
                                         {{-- item --}}
                                         @foreach ($products as $product)
-                                            <div class="col-sm-6 col-md-4 wow fadeInUp">
+                                            <div class="col-sm-6 col-md-4 wow">
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
@@ -153,12 +192,13 @@
                                                         <div class="product-info text-left">
                                                             <h3 class="name"><a
                                                                     href="detail.html">{{ $product->name }}</a></h3>
-                                                            <div class="rating rateit-small"></div>
+                                                            @include('partitions.web.rating', ['productId' => $product->id])
                                                             <div class="description"></div>
                                                             <div class="product-price">
                                                                 @if ($product->sale_price)
                                                                     <span class="price">
-                                                                        {{ number_format($product->sale_price) }} đ</span>
+                                                                        {{ number_format($product->sale_price) }}
+                                                                        đ</span>
                                                                     <span
                                                                         class="price-before-discount">{{ number_format($product->product_price) }}
                                                                         đ</span>
@@ -169,22 +209,23 @@
                                                                 @endIf
                                                             </div>
                                                         </div>
-                                                        <div class="cart clearfix animate-effect">
+                                                        <div class="cart clearfix animate-effect fix-style">
                                                             <div class="action">
                                                                 <ul class="list-unstyled">
                                                                     <li class="add-cart-button btn-group">
                                                                         <button class="btn btn-primary icon"
                                                                             data-toggle="dropdown" type="button"> <i
-                                                                                class="fa fa-shopping-cart"></i> </button>
+                                                                                class="fa fa-shopping-cart"></i>Tùy
+                                                                            chọn</button>
                                                                         <button class="btn btn-primary cart-btn"
                                                                             type="button">Add to cart</button>
                                                                     </li>
-                                                                    <li class="lnk wishlist"> <a class="add-to-cart"
-                                                                            href="detail.html" title="Wishlist"> <i
-                                                                                class="icon fa fa-heart"></i> </a> </li>
-                                                                    <li class="lnk"> <a class="add-to-cart"
-                                                                            href="detail.html" title="Compare"> <i
-                                                                                class="fa fa-signal"></i> </a> </li>
+                                                                    <li class="lnk"> <a data-toggle="tooltip"
+                                                                            class="add-to-cart preview-product"
+                                                                            id="{{ $product->id }}"> <i
+                                                                                class="fa fa-eye"
+                                                                                aria-hidden="true"></i>
+                                                                        </a> </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -198,7 +239,7 @@
 
                             <div class="tab-pane " id="list-container">
                                 <div class="category-product">
-                                    <div class="category-product-inner wow fadeInUp">
+                                    <div class="category-product-inner wow">
                                         @foreach ($products as $product)
                                             <div class="products">
                                                 <div class="product-list product">
@@ -215,7 +256,7 @@
                                                             <div class="product-info">
                                                                 <h3 class="name"><a
                                                                         href="detail.html">{{ $product->name }}</a></h3>
-                                                                <div class="rating rateit-small"></div>
+                                                                @include('partitions.web.rating', ['productId' => $product->id])
                                                                 <div class="product-price">
                                                                     @if ($product->sale_price)
                                                                         <span class="price">
@@ -268,28 +309,47 @@
                             </div>
                         </div>
                         <!-- /.tab-content -->
-                        <div class="clearfix filters-container">
-                            <div class="text-right">
-                                <div class="pagination-container">
-                                    <ul class="list-inline list-unstyled">
-                                        <li class="prev"><a
-                                                href="?page={{ $currentPage == 1 ? $currentPage : $currentPage - 1 }} "><i
-                                                    class="fa fa-angle-left"></i></a></li>
-                                        @for ($i = 1; $i <= $lastPage; $i++)
-                                            <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
-                                                    href="?page={{ $i }}">{{ $i }}</a></li>
-                                        @endfor
-                                        <li class="next"><a href="?page={{ $currentPage + 1 }} "><i
-                                                    class="fa fa-angle-right"></i></a></li>
-                                    </ul>
+                        @if (!empty($products))
+                            <div class="clearfix filters-container">
+                                <div class="text-right">
+                                    <div class="pagination-container">
+                                        <ul class="list-inline list-unstyled">
+                                            <li class="prev"><a
+                                                    href="{{ route(
+                                                        'category.index',
+                                                        array_merge(request()->query(), [
+                                                            'category_slug' => request()->category_slug,
+                                                            'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
+                                                        ]),
+                                                    ) }}">
+                                                    <i class="fa fa-angle-left"></i></a></li>
+                                            @for ($i = 1; $i <= $lastPage; $i++)
+                                                <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
+                                                        href="{{ route(
+                                                            'category.index',
+                                                            array_merge(request()->query(), [
+                                                                'category_slug' => request()->category_slug,
+                                                                'page' => $i,
+                                                            ]),
+                                                        ) }}">{{ $i }}</a>
+                                            @endfor
+                                            <li class="next"><a
+                                                    href="{{ route(
+                                                        'category.index',
+                                                        array_merge(request()->query(), [
+                                                            'category_slug' => request()->category_slug,
+                                                            'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1,
+                                                        ]),
+                                                    ) }} "><i
+                                                        class="fa fa-angle-right"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- /.pagination-container -->
                                 </div>
-                                <!-- /.pagination-container -->
+                                <!-- /.text-right -->
+
                             </div>
-                            <!-- /.text-right -->
-
-                        </div>
-                        <!-- /.filters-container -->
-
+                        @endif
                     </div>
                     <!-- /.search-result-container -->
 

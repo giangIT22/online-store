@@ -50,7 +50,7 @@
                                             <div class="product-info text-left m-t-20">
                                                 <h3 class="name"><a href="detail.html">{{ $product->name }}</a>
                                                 </h3>
-                                                <div class="rating rateit-small"></div>
+                                                @include('partitions.web.rating', ['productId' => $product->id])
                                                 <div class="product-price">
                                                     @if ($product->sale_price)
                                                         <span class="price">
@@ -123,7 +123,7 @@
                                                                 <h3 class="name"><a
                                                                         href="#">{{ $product->name }}</a>
                                                                 </h3>
-                                                                <div class="rating rateit-small"></div>
+                                                                @include('partitions.web.rating', ['productId' => $product->id])
                                                                 <div class="product-price">
                                                                     @if ($product->sale_price)
                                                                         <span class="price">
@@ -206,7 +206,7 @@
                                                                 <h3 class="name"><a
                                                                         href="#">{{ $product->name }}</a>
                                                                 </h3>
-                                                                <div class="rating rateit-small"></div>
+                                                                @include('partitions.web.rating', ['productId' => $product->id])
                                                                 <div class="product-price">
                                                                     @if ($product->sale_price)
                                                                         <span class="price">
@@ -421,7 +421,7 @@
                                                             <h3 class="name"><a
                                                                     href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
                                                             </h3>
-                                                            <div class="rating rateit-small"></div>
+                                                            @include('partitions.web.rating', ['productId' => $product->id])
                                                             <div class="description"></div>
                                                             <div class="product-price">
                                                                 @if ($product->sale_price)
@@ -616,7 +616,7 @@
                                                         href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
                                                         {{ $product->name }}</a>
                                                 </h3>
-                                                <div class="rating rateit-small"></div>
+                                                @include('partitions.web.rating', ['productId' => $product->id])
                                                 <div class="description"></div>
                                                 @if (!$product->sale_price)
                                                     <div class="product-price"> <span class="price">

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductTag;
+use App\Models\Review;
 use App\Models\SubCategory;
 
 class ProductService implements ProductServiceInterface
@@ -20,12 +21,12 @@ class ProductService implements ProductServiceInterface
         $productIds = ProductTag::where('name', $tagName)->pluck('product_id')->toArray();
         $products = Product::whereIn('id', array_unique($productIds))
                         ->orderBy('product_price')
-                        ->paginate(Product::PER_PAGE);
+                        ->paginate(2);
 
         if ($sort == 1) {
             $products = Product::whereIn('id', array_unique($productIds))
                             ->orderBy('product_price', 'desc')
-                            ->paginate(Product::PER_PAGE);
+                            ->paginate(2);
         }
 
         if ($minPrice && $maxPrice) {
@@ -39,15 +40,15 @@ class ProductService implements ProductServiceInterface
         return $products;
     }
 
-    public function getProductsByCategory($categorySlug)
+    public function getProductsByCategory($categorySlug) 
     {
         $subCategory = SubCategory::where('sub_category_slug', $categorySlug)->first();
         $category = Category::where('slug', $categorySlug)->first();
 
         if ($subCategory) {
-            $products = Product::where('subcategory_id', $subCategory->id)->paginate(Product::PER_PAGE);
+            $products = Product::where('subcategory_id', $subCategory->id)->orderBy('product_price')->paginate(Product::PER_PAGE);
         } elseif ($category) {
-            $products = Product::where('category_id', $category->id)->paginate(Product::PER_PAGE);
+            $products = Product::where('category_id', $category->id)->orderBy('product_price')->paginate(Product::PER_PAGE);
         } else {
             abort(404);
         }
@@ -68,5 +69,12 @@ class ProductService implements ProductServiceInterface
                         ->get();
         
         return $products;
+    }
+
+    public function addReviewProduct($params)
+    {
+        $review = Review::create($params);
+
+        return $review;
     }
 }

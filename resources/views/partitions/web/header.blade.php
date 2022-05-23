@@ -6,11 +6,13 @@
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
-                        <li><a href="#"><i class="icon fa fa-user"></i>Tài khoản</a></li>
                         <li><a href="#"><i class="icon fa fa-heart"></i>Yêu thích</a></li>
                         <li><a href="{{route('cart.view')}}"><i class="icon fa fa-shopping-cart"></i>Giỏ hàng</a></li>
-                        <li><a href="{{ route('user.login') }}"><i class="icon fa fa-lock"></i>Đăng nhập</a></li>
-                        <li><a href="{{ route('user.logout') }}"><i class="icon fa fa-lock"></i>Đăng xuất</a></li>
+                        @if (Auth::check())
+                            <li><a href="{{ route('user.home') }}"><i class="icon fa fa-user"></i>Tài khoản</a></li>
+                        @else
+                            <li><a href="{{ route('user.login') }}"><i class="icon fa fa-lock"></i>Đăng nhập</a></li>
+                        @endif
                     </ul>
                 </div>
                 <!-- /.cnt-account -->

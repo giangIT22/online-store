@@ -17,9 +17,8 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->bigInteger('product_id');
             $table->bigInteger('user_id');
-            $table->string('name');
             $table->text('comment');
-            $table->string('summary');                  
+            $table->tinyInteger('rating')->nullable();                  
             $table->string('status')->default(0);
             $table->timestamps();
             $table->softDeletes();

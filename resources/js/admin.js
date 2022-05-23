@@ -11,12 +11,16 @@ import SubCategory from '../js/admin/components/category/SubCategory.vue';
 import ListProduct from '../js/admin/components/product/ListProduct.vue';
 import ListSlider from '../js/admin/components/slider/ListSlider.vue';
 import ListBlog from '../js/admin/components/blog/ListBlog.vue';
+import PendingReview from '../js/admin/components/review/PendingReview.vue';
+import PublishReview from '../js/admin/components/review/PublishReview.vue';
 
 Vue.component('ListCategory', ListCategory);
 Vue.component('SubCategory', SubCategory);
 Vue.component('ListProduct', ListProduct);
 Vue.component('ListSlider', ListSlider);
 Vue.component('ListBlog', ListBlog);
+Vue.component('PendingReview', PendingReview);
+Vue.component('PublishReview', PublishReview);
 
 const app = new Vue({
     el: '#admin',

@@ -6,7 +6,7 @@
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
                     <li><a href="{{ route('index') }}">Trang chủ</a></li>/
-                    <li class='active'>Handbags</li>
+                    <li class='active'>Kết quả tìm kiếm với từ khóa "{{ request('search') }}"</li>
                 </ul>
             </div>
             <!-- /.breadcrumb-inner -->
@@ -42,13 +42,26 @@
                                             <div class="fld inline">
                                                 <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
                                                     <button data-toggle="dropdown" type="button"
-                                                        class="btn dropdown-toggle">Lựa chọn<span
+                                                        class="btn dropdown-toggle">Tùy chọn<span
                                                             class="caret"></span> </button>
-                                                    <ul role="menu" class="dropdown-menu">
-                                                        <li role="presentation"><a href="#">Price:Lowest first</a></li>
-                                                        <li role="presentation"><a href="#">Price:HIghest first</a></li>
-                                                        <li role="presentation"><a href="#">Product Name:A to Z</a></li>
-                                                    </ul>
+                                                            <ul role="menu" class="dropdown-menu">
+                                                                <li role="presentation">
+                                                                  <a href="{{ route('search.view', array_merge(
+                                                                    request()->query(),
+                                                                    [
+                                                                      'sort' => 0
+                                                                    ]
+                                                                  )) }}">Giá: tăng dần</a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                  <a href="{{ route('search.view', array_merge(
+                                                                    request()->query(),
+                                                                    [
+                                                                      'sort' => 1
+                                                                    ]
+                                                                  )) }}">Giá: giảm dần</a>
+                                                                </li>
+                                                            </ul>
                                                 </div>
                                             </div>
                                             <!-- /.fld -->
@@ -84,7 +97,7 @@
                                                                 <h3 class="name"><a
                                                                         href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
                                                                 </h3>
-                                                                <div class="rating rateit-small"></div>
+                                                                @include('partitions.web.rating', ['productId' => $product->id])
                                                                 <div class="description"></div>
                                                                 <div class="product-price">
                                                                     @if ($product->sale_price)
@@ -230,13 +243,18 @@
                                     <div class="pagination-container">
                                         <ul class="list-inline list-unstyled">
                                             <li class="prev"><a
-                                                    href="?page={{ $currentPage == 1 ? $currentPage : $currentPage - 1 }} "><i
-                                                        class="fa fa-angle-left"></i></a></li>
+                                                    href="{{ route('search.view', array_merge(request()->query(),[
+                                                        'page' => $currentPage == 1 ? $currentPage : $currentPage - 1])) }}">
+                                                    <i class="fa fa-angle-left"></i></a></li>
                                             @for ($i = 1; $i <= $lastPage; $i++)
-                                                <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
-                                                        href="?page={{ $i }}">{{ $i }}</a></li>
+                                            <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
+                                              href="{{ route('search.view', array_merge(request()->query(),[
+                                                'page' => $i]))}}">{{ $i }}</a></li>
                                             @endfor
-                                            <li class="next"><a href="?page={{ $currentPage + 1 }} "><i
+                                            <li class="next"><a
+                                                    href="{{ route('search.view', array_merge(request()->query(),
+                                                    [ 
+                                                      'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1])) }} "><i
                                                         class="fa fa-angle-right"></i></a></li>
                                         </ul>
                                         <!-- /.list-inline -->

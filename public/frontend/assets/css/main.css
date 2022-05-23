@@ -7094,3 +7094,11 @@ header {
     display: flex;
     justify-content: center;
 }
+
+.star-checked {
+    color: #ffbe00;
+}
+
+.star-unchecked {
+    color: #d7d7d7;
+}
