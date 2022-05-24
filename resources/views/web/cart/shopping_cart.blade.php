@@ -5,7 +5,7 @@
         <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
-                    <li><a href="#">Trang chủ</a></li>/
+                    <li><a href="{{ route('index') }}">Trang chủ</a></li>/
                     <li class='active'>Giỏ hàng</li>
                 </ul>
             </div><!-- /.breadcrumb-inner -->
@@ -35,7 +35,7 @@
                                             <td colspan="7">
                                                 <div class="shopping-cart-btn">
                                                     <span class="">
-                                                        <a href="#" class="btn btn-upper btn-primary outer-left-xs">Tiếp tục
+                                                        <a href="{{ route('index') }}" class="btn btn-upper btn-primary outer-left-xs">Tiếp tục
                                                             mua hàng</a>
                                                         <a href="#"
                                                             class="btn btn-upper btn-primary pull-right outer-right-xs">Cập
@@ -94,7 +94,7 @@
                             </div>
                         </div><!-- /.shopping-cart-table -->
                         <div class="col-md-4 col-sm-12 estimate-ship-tax">
-                            <table class="table">
+                            {{-- <table class="table">
                                 <thead>
                                     <tr>
                                         <th>
@@ -140,11 +140,11 @@
                                         </td>
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table> --}}
                         </div><!-- /.estimate-ship-tax -->
 
                         <div class="col-md-4 col-sm-12 estimate-ship-tax">
-                            <table class="table">
+                            {{-- <table class="table">
                                 <thead>
                                     <tr>
                                         <th>
@@ -167,19 +167,27 @@
                                         </td>
                                     </tr>
                                 </tbody><!-- /tbody -->
-                            </table><!-- /table -->
+                            </table><!-- /table --> --}}
                         </div><!-- /.estimate-ship-tax -->
+                        
+                        @php
+                            $subTotal = 0;
 
+                            foreach($productsInCart as $product) {
+                                $subTotal += $product['product_price'] * $product['amount'];
+                            }
+
+                        @endphp
                         <div class="col-md-4 col-sm-12 cart-shopping-total">
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th>
                                             <div class="cart-sub-total">
-                                                Subtotal<span class="inner-left-md">$600.00</span>
+                                                Tạm tính<span class="inner-left-md">{{ number_format($subTotal)}} VND</span>
                                             </div>
                                             <div class="cart-grand-total">
-                                                Grand Total<span class="inner-left-md">$600.00</span>
+                                                Tổng cộng<span class="inner-left-md">{{ number_format($subTotal)}} VND</span>
                                             </div>
                                         </th>
                                     </tr>
@@ -188,9 +196,7 @@
                                     <tr>
                                         <td>
                                             <div class="cart-checkout-btn pull-right">
-                                                <button type="submit" class="btn btn-primary checkout-btn">PROCCED TO
-                                                    CHEKOUT</button>
-                                                <span class="">Checkout with multiples address!</span>
+                                                <a href="{{ route('checkout.create') }}" class="btn btn-primary checkout-btn">Thực hiện thanh toán</a>
                                             </div>
                                         </td>
                                     </tr>

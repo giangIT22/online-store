@@ -8,6 +8,8 @@ use App\Services\CartService;
 use App\Services\CartServiceInterface;
 use App\Services\CategoryService;
 use App\Services\CategoryServiceInterface;
+use App\Services\OrderService;
+use App\Services\OrderServiceInterface;
 use App\Services\ProductService;
 use App\Services\ProductServiceInterface;
 use App\Services\ReviewService;
@@ -25,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->singleton(OrderServiceInterface::class, OrderService::class);
         $this->app->singleton(ReviewServiceInterface::class, ReviewService::class);
         $this->app->singleton(UserServiceInterface::class, UserService::class);
         $this->app->singleton(CategoryServiceInterface::class, CategoryService::class);
