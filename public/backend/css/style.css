@@ -30230,5 +30230,92 @@ img.online {
     z-index: -1;
 }
 
+.gradient-custom {
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+}
+
+.fix-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login {
+    height: 100vh;
+}
+
+.login form {
+    width: 450px;
+    padding: 40px 60px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.login form h3 {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.login form .form-group {
+    margin-bottom: 20px;
+}
+
+.login form .form-group label {
+    text-align: left;
+    display: block;
+    margin-bottom: 15px;
+    font-size: 12px;
+}
+
+.login form button {
+    padding: 8px 16px;
+    outline: none;
+    width: 130px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background-color: #343a40;
+    color: #fff;
+}
+
+.login form .form-group .form-control {
+    border-radius: 5px;
+    background: #343a40;
+    border: 2px solid #fff;
+    padding: 10px 16px;
+    color: #fff;
+}
+
+.login form .form-group span {
+    display: block;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.login form a.forget-password {
+    display: block;
+    color: hsla(0, 0%, 100%, .5);
+    margin: 10px 0 20px 0;
+    transition: all .3s ease-in-out;
+}
+
+.login form a.forget-password:hover {
+    color: #fff;
+}
+
+.login form p {
+    text-align: center;
+    margin: 40px 0 0 0;
+}
+
+.login form p a {
+    transition: all .3s ease-in-out;
+    color: hsla(0, 0%, 100%, .5);
+}
+
+.login form p a:hover {
+    color: #fff;
+}
+
 
 /*# sourceMappingURL=style.css.map */

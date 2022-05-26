@@ -7095,6 +7095,12 @@ header {
     justify-content: center;
 }
 
+.fix-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .star-checked {
     color: #ffbe00;
 }
@@ -7135,4 +7141,9 @@ header {
     margin: 0 0 0 8px;
     color: #545454;
     font-weight: 600;
+}
+
+span.item-cart {
+    display: inline-block;
+    width: 150px;
 }

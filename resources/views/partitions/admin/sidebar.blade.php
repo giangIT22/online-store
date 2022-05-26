@@ -1,3 +1,9 @@
+@php
+$prefix = Request::route()->getPrefix();
+$route = Route::current()->getName();
+
+@endphp
+
 <aside class="main-sidebar">
     <!-- sidebar-->
     <section class="sidebar">
@@ -20,49 +26,55 @@
             <li>
                 <a href="index.html">
                     <i data-feather="pie-chart"></i>
-                    <span>Dashboard</span>
+                    <span>Trang chủ</span>
                 </a>
             </li>
 
-            <li class="treeview">
+            <li class="treeview {{ $prefix == '/category' ? 'active' : '' }}  ">
                 <a href="#">
-                    <i data-feather="message-circle"></i>
-                    <span>Categories</span>
+                    <i data-feather="mail"></i> <span>Quản lý danh mục </span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                <li><a href="{{ route('all.categories') }}"><i class="ti-more"></i>All categories</a></li>
-                <li><a href="{{ route('all.sub_categories') }}"><i class="ti-more"></i>All Subcategory</a></li>
+                    <li class="{{ $route == 'all.categories' ? 'active' : '' }}"><a
+                            href="{{ route('all.categories') }}"><i class="ti-more"></i>Danh sách danh mục</a>
+                    </li>
+                    <li class="{{ $route == 'all.sub_categories' ? 'active' : '' }}"><a
+                            href="{{ route('all.sub_categories') }}"><i class="ti-more"></i>Danh sách danh mục
+                            con</a>
+                    </li>
                 </ul>
             </li>
 
-            <li class="treeview">
+            <li class="treeview {{ $prefix == '/product' ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="mail"></i> <span>Product</span>
+                    <i data-feather="mail"></i> <span>Quản lý sản phẩm</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('all.products') }}"><i class="ti-more"></i>All products</a></li>
+                    <li class="{{ $route == 'all.products' ? 'active' : '' }} "><a href="{{ route('all.products') }}"><i
+                                class="ti-more"></i>Danh sách sản phẩm</a>
+                    </li>
                 </ul>
             </li>
 
-            <li class="treeview">
+            <li class="treeview {{ $prefix == '/slider' ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="mail"></i> <span>Slider</span>
+                    <i data-feather="mail"></i> <span>Quản lý sliders</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('all.sliders') }}"><i class="ti-more"></i>Manage sliders</a></li>
+                    <li class="{{ $route == 'all.sliders' ? 'active' : '' }}"><a href="{{ route('all.sliders') }}"><i class="ti-more"></i>Danh sách sliders</a></li>
                 </ul>
             </li>
 
-            <li class="treeview">
+            <li class="treeview {{ $prefix == '/slider' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="mail"></i> <span>Quản lý tin tức</span>
                     <span class="pull-right-container">
@@ -70,11 +82,11 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('all.blogs') }}"><i class="ti-more"></i>Quản lý tin tức</a></li>
+                    <li class="{{ $route == 'all.blogs' ? 'active' : '' }}"> <a href="{{ route('all.blogs') }}"><i class="ti-more"></i>Quản lý tin tức</a></li>
                 </ul>
             </li>
 
-            <li class="treeview">
+            <li class="treeview {{ $prefix == '/review' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="mail"></i> <span>Quản lý đánh giá</span>
                     <span class="pull-right-container">
@@ -82,8 +94,10 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('review.pending') }}"><i class="ti-more"></i>Đánh giá chưa công khai</a></li>
-                    <li><a href="{{ route('all.reviews') }}"><i class="ti-more"></i>Đánh giá công khai</a></li>
+                    <li class="{{ $route == 'review.pending' ? 'active' : '' }}"><a href="{{ route('review.pending') }}"><i class="ti-more"></i>Đánh giá chưa công
+                            khai</a></li>
+                    <li class="{{ $route == 'all.reviews' ? 'active' : '' }}"><a href="{{ route('all.reviews') }}"><i class="ti-more"></i>Đánh giá công khai</a>
+                    </li>
                 </ul>
             </li>
 
@@ -114,7 +128,7 @@
         <a href="mailbox_inbox.html" class="link" data-toggle="tooltip" title=""
             data-original-title="Email"><i class="ti-email"></i></a>
         <!-- item-->
-        <a href="javascript:void(0)" class="link" data-toggle="tooltip" title=""
+        <a href="{{ route('admin.logout') }}" class="link" data-toggle="tooltip" title=""
             data-original-title="Logout"><i class="ti-lock"></i></a>
     </div>
 </aside>

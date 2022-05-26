@@ -73,3 +73,6 @@ Route::get('/search', [ShopController::class, 'viewSearch'])->name('search.view'
 
 //====================Checkout===================================
 Route::get('/checkout', [CheckoutController::class, 'create'])->name('checkout.create');
+Route::post('/checkout/store', [CheckoutController::class, 'storeOrder'])->name('checkout.store');
+Route::get('/get-district/{province_id}', [CheckoutController::class, 'getDistrict'])->name('checkout.district');
+Route::get('/get-ward/{district_id}', [CheckoutController::class, 'getWard'])->name('checkout.ward');

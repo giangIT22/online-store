@@ -15,7 +15,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('user.login');
+            return config('fortify.guard') == 'admin' ?  route('admin.login') : route('user.login');
         }
     }
 }

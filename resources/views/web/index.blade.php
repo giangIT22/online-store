@@ -991,19 +991,19 @@
                                 <div class="item">
                                     <div class="blog-post">
                                         <div class="blog-post-image">
-                                            <div class="image"> <a href="detail.html"><img
+                                            <div class="image"> <a href="{{ route('blog.detail', ['blog_title' => $blog->slug])}}"><img
                                                         src="{{ asset($blog->post_image) }}" alt=""></a> </div>
                                         </div>
                                         <!-- /.blog-post-image -->
 
                                         <div class="blog-post-info text-left">
-                                            <h3 class="name"><a href="#">{{ $blog->title }}</a></h3>
+                                            <h3 class="name"><a href="{{ route('blog.detail', ['blog_title' => $blog->slug])}}">{{ $blog->title }}</a></h3>
                                             <span class="info">
                                                 <i class="fa fa-calendar" aria-hidden="true"></i>
                                                 {{ $blog->created_at->toDateTimeString()}}
                                             </span>
                                             <p class="text">{{ $blog->content }}</p>
-                                            <a href="#" class="lnk btn btn-primary">Read more</a>
+                                            <a href="{{ route('blog.detail', ['blog_title' => $blog->slug])}}" class="lnk btn btn-primary">Read more</a>
                                         </div>
                                         <!-- /.blog-post-info -->
 

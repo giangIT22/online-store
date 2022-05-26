@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
@@ -34,20 +34,18 @@ class LoginController extends Controller
      */
     public function __construct(StatefulGuard $guard)
     {
-        $this->guard = $guard;        
+        $this->guard = $guard;
     }
 
     public function index()
     {
-        $categories = Category::with('subcategories')->get();
-
-        return view('auth.web.login', compact('categories'));
+        return view('auth.admin.login');
     }
 
     public function store(LoginRequest $request)
     {
         return $this->loginPipeline($request)->then(function ($request) {
-            return redirect()->route('index');
+            return redirect()->route('admin.dashboard');
         });
     }
 
@@ -73,14 +71,14 @@ class LoginController extends Controller
         ]));
     }
 
-    public function logout(Request $request)
+    public function destroy(Request $request)
     {
-        Auth::logout();
+        $this->guard->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('index');
+        return redirect()->route('admin.login');
     }
 }

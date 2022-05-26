@@ -327,7 +327,39 @@ jQuery(document).ready(function() {
     /*===================================================================================*/
     jQuery("[data-toggle='tooltip']").tooltip();
 
+    //===================Choose district when change province and choose when change district=====================
+    $('.choose-province').change(function() {
+        $('.choose-district').html('');
+        $('.choose-ward').html('');
 
+        $.ajax({
+            url: `/get-district/${this.value}`,
+            success: function(response) {
+                if (response.status) {
+                    let districts = response.districts.map(function(district) {
+                        return `<option value=${district.id}>${district.name}</option>`
+                    });
 
+                    districts.unshift('<option selected>---</option>');
+                    $('.choose-district').html(districts.join(' '));
+                }
+            }
+        });
+    });
 
+    $('.choose-district').change(function() {
+        $.ajax({
+            url: `/get-ward/${this.value}`,
+            success: function(response) {
+                if (response.status) {
+                    let wards = response.wards.map(function(ward) {
+                        return `<option value=${ward.id}>${ward.name}</option>`
+                    });
+
+                    wards.unshift('<option selected>---</option>');
+                    $('.choose-ward').html(wards.join(' '));
+                }
+            }
+        });
+    });
 })
