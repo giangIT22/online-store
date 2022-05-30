@@ -7115,10 +7115,6 @@ header {
     margin-bottom: 20px;
 }
 
-.coupon-price .input-coupon {
-    width: 65%;
-}
-
 .order-product {
     display: flex;
     justify-content: space-between;
@@ -7146,4 +7142,13 @@ header {
 span.item-cart {
     display: inline-block;
     width: 150px;
+}
+
+.fee_charge {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 15px;
+    background: #fff;
+    border: 0.5px solid #d7d7d7;
+    border-radius: 5px;
 }

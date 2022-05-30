@@ -76,3 +76,5 @@ Route::get('/checkout', [CheckoutController::class, 'create'])->name('checkout.c
 Route::post('/checkout/store', [CheckoutController::class, 'storeOrder'])->name('checkout.store');
 Route::get('/get-district/{province_id}', [CheckoutController::class, 'getDistrict'])->name('checkout.district');
 Route::get('/get-ward/{district_id}', [CheckoutController::class, 'getWard'])->name('checkout.ward');
+Route::post('/checkout/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('checkout.apply_coupon');
+Route::get('/checkout/remove-coupon', [CheckoutController::class, 'removeCoupon'])->name('checkout.remove_coupon');

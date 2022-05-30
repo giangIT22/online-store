@@ -24,7 +24,8 @@
                                         <h4 class="mb-3">Thông tin nhận hàng</h4>
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="text" class="form-control" name="email" value="{{ Auth::user()->email }}">
+                                            <input type="text" class="form-control" name="email"
+                                                value="{{ Auth::user()->email }}">
                                         </div>
                                         <div class="form-group">
                                             <label>Họ và tên</label>
@@ -39,24 +40,26 @@
                                             <input type="text" class="form-control" name="address">
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputState">Tình thành</label>
-                                            <select id="inputState" class="form-control choose-province" name="province">
-                                                <option selected>---</option>
-                                                @foreach ($provinces as $province)
+                                            <label for="inputState">Tỉnh thành</label>
+                                            <input type="hidden" name="province" id="province_name">
+                                            <select id="inputState" class="form-control choose-province">
+                                                {{-- @foreach ($provinces as $province)
                                                     <option value="{{ $province->id }}">{{ $province->name }}</option>
-                                                @endforeach
+                                                @endforeach --}}
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="inputState">Quận huyện</label>
-                                            <select id="inputState" class="form-control choose-district" name="district">
-                                                <option selected>---</option>
+                                            <input type="hidden" name="district" id="district_name">
+                                            <select id="inputState" class="form-control choose-district">
+
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="inputState">Phường xã</label>
-                                            <select id="inputState" class="form-control choose-ward" name="ward">
-                                                <option selected>---</option>
+                                            <input type="hidden" name="ward" id="ward_name">
+                                            <select id="inputState" class="form-control choose-ward">
+
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -64,12 +67,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <h4 class="mb-3">Thanh toán</h4>
+                                        <h4 class="mb-3">Phí giao hàng</h4>
                                         <div class="transport">
                                             <div class="alert alert-info" role="alert">
                                                 Vui lóng nhập thông tin giao hàng
                                             </div>
                                         </div>
+                                        <h4 class="mb-3">Thanh toán</h4>
                                         <div class="payment">
                                             <div class="form-check pay-item">
                                                 <input class="form-check-input" type="radio" value="card" name="pay_method"
@@ -77,7 +81,8 @@
                                                 <label class="form-check-label" for="pay-card">
                                                     Thanh toán qua PayPal
                                                 </label>
-                                                <img src="{{ asset('frontend/assets/images/payments/1.png')}}" alt="" style="margin-left: 20px;">
+                                                <img src="{{ asset('frontend/assets/images/payments/1.png') }}" alt=""
+                                                    style="margin-left: 20px;">
                                             </div>
                                             <div class="form-check pay-item">
                                                 <input class="form-check-input" type="radio" value="cod" name="pay_method"
@@ -116,34 +121,31 @@
                                                 vnd</span>
                                         </li>
                                     @endforeach
-                                    <li class="list-group-item bg-light">
-                                        <div class="text-success fix-flex">
-                                            <h6 class="my-0">Mã giảm giá</h6>
-                                            <span>-40000</span>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item bg-light">
+                                    <li class="list-group-item bg-light fee-shipping">
                                         <div class="text-success fix-flex">
                                             <h6 class="my-0">Phí vận chuyển</h6>
-                                            <span>{{ number_format(40000) }}</span>
+                                            <span class="fee_charge_item">0</span>
                                         </div>
                                     </li>
                                     <li class="list-group-item fix-flex">
                                         <span>Tổng cộng</span>
-                                        <strong>{{ number_format($sum) }} vnd</strong>
+                                        <input type="hidden" value="{{ $sum }}" name="sum_price_item">
+                                        <strong class="sum_price_item">{{ number_format($sum) }} vnd</strong>
                                     </li>
                                 </ul>
 
 
                                 <div class="coupon-price">
-                                    <input type="text" class="form-control input-coupon" placeholder="Nhập mã giảm giá">
+                                    <div>
+                                        <input type="text" class="form-control input-coupon" placeholder="Nhập mã giảm giá">
+                                    </div>
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-primary apply-coupon">Áp dụng</button>
                                     </div>
                                 </div>
 
                                 <div class="order-product">
-                                    <a href="{{ route('cart.view') }}" class="col-md-8" style="padding: 0">
+                                    <a href="{{ route('cart.view') }}" style="padding: 0">
                                         < Quay về trang chủ</a>
                                             <button class="btn btn-primary btn-lg" type="submit">Đặt hàng</button>
                                 </div>
@@ -155,3 +157,7 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+    <script src="{{ asset('js/remove_coupon.js') }}"></script>
+@endpush

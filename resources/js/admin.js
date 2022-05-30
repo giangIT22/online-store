@@ -13,6 +13,7 @@ import ListSlider from '../js/admin/components/slider/ListSlider.vue';
 import ListBlog from '../js/admin/components/blog/ListBlog.vue';
 import PendingReview from '../js/admin/components/review/PendingReview.vue';
 import PublishReview from '../js/admin/components/review/PublishReview.vue';
+import ListCoupon from '../js/admin/components/coupon/ListCoupon.vue';
 
 Vue.component('ListCategory', ListCategory);
 Vue.component('SubCategory', SubCategory);
@@ -21,6 +22,7 @@ Vue.component('ListSlider', ListSlider);
 Vue.component('ListBlog', ListBlog);
 Vue.component('PendingReview', PendingReview);
 Vue.component('PublishReview', PublishReview);
+Vue.component('ListCoupon', ListCoupon);
 
 const app = new Vue({
     el: '#admin',

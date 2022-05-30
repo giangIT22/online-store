@@ -183,11 +183,8 @@
                                 <thead>
                                     <tr>
                                         <th>
-                                            <div class="cart-sub-total">
-                                                Tạm tính<span class="inner-left-md">{{ number_format($subTotal)}} VND</span>
-                                            </div>
                                             <div class="cart-grand-total">
-                                                Tổng cộng<span class="inner-left-md">{{ number_format($subTotal)}} VND</span>
+                                                Tổng tiền<span class="inner-left-md">{{ number_format($subTotal)}} VND</span>
                                             </div>
                                         </th>
                                     </tr>

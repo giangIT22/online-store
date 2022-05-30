@@ -327,37 +327,218 @@ jQuery(document).ready(function() {
     /*===================================================================================*/
     jQuery("[data-toggle='tooltip']").tooltip();
 
-    //===================Choose district when change province and choose when change district=====================
+
+    //==============================GET FEE-SHIPPING======================================
+    //===============Show list province==================================
+    $.ajax({
+        url: `https://online-gateway.ghn.vn/shiip/public-api/master-data/province`,
+        type: "GET",
+        dataType: "json",
+        headers: { "token": "84ee5499-de95-11ec-b912-56b1b0c59a25" },
+        success: function(response) {
+            let provinces = response.data.map(function(province) {
+                return `<option value=${province.ProvinceID}>${province.ProvinceName}</option>`
+            });
+
+            provinces.unshift('<option selected>---</option>');
+            $('.choose-province').html(provinces.join(' '));
+        }
+    });
+
+    //=========================Show list district when change province=======================
     $('.choose-province').change(function() {
         $('.choose-district').html('');
         $('.choose-ward').html('');
+        $('#province_name').val($('.choose-province option:selected').text());
 
-        $.ajax({
-            url: `/get-district/${this.value}`,
-            success: function(response) {
-                if (response.status) {
-                    let districts = response.districts.map(function(district) {
-                        return `<option value=${district.id}>${district.name}</option>`
+        if ($('.choose-province').val() == "---") {
+            $('.transport').html(`<div class="alert alert-info" role="alert">
+                    Vui lóng nhập thông tin giao hàng
+                </div>`)
+        } else {
+            $.ajax({
+                url: `https://online-gateway.ghn.vn/shiip/public-api/master-data/district`,
+                type: "get",
+                headers: { "token": "84ee5499-de95-11ec-b912-56b1b0c59a25" },
+                data: {
+                    province_id: $('.choose-province').val()
+                },
+                success: function(response) {
+                    let districts = response.data.map(function(district) {
+                        return `<option value=${district.DistrictID}>${district.DistrictName}</option>`
                     });
 
                     districts.unshift('<option selected>---</option>');
                     $('.choose-district').html(districts.join(' '));
                 }
+            });
+        }
+    });
+
+    //======================Show list ward when change district================================
+    $('.choose-district').change(function() {
+        $('#district_name').val($('.choose-district option:selected').text());
+
+        $.ajax({
+            url: `https://online-gateway.ghn.vn/shiip/public-api/master-data/ward`,
+            type: "get",
+            headers: { "token": "84ee5499-de95-11ec-b912-56b1b0c59a25" },
+            data: {
+                district_id: $('.choose-district').val()
+            },
+            success: function(response) {
+                let wards = response.data.map(function(ward) {
+                    return `<option value=${ward.WardCode}>${ward.WardName}</option>`
+                });
+
+                wards.unshift('<option selected>---</option>');
+                $('.choose-ward').html(wards.join(' '));
             }
         });
     });
 
-    $('.choose-district').change(function() {
+
+    //=============================final when change ward will execute call api to fee of charge=====================
+    $('.choose-ward').change(function() {
+        $('#ward_name').val($('.choose-ward option:selected').text());
+
+        let province = $('.choose-province').val();
+        let district = $('.choose-district').val();
+        let ward = $('.choose-ward').val();
+        let feeCharges = 0;
+
+        if (province != null && district != null && ward != null) {
+            let serviceId = 0;
+
+            $.ajax({
+                url: `https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/available-services`,
+                type: "get",
+                headers: { "token": "84ee5499-de95-11ec-b912-56b1b0c59a25" },
+                data: {
+                    shop_id: 2977543,
+                    from_district: 1542,
+                    to_district: district
+                },
+                success: function(response) {
+                    serviceId = response.data[0].service_id;
+                    console.log(serviceId);
+                    if (serviceId) {
+                        $.ajax({
+                            url: `https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee`,
+                            type: "get",
+                            headers: {
+                                "token": "84ee5499-de95-11ec-b912-56b1b0c59a25",
+                                "shop_id": 2977543
+                            },
+                            data: {
+                                "service_id": serviceId,
+                                "insurance_value": 0,
+                                "coupon": null,
+                                "from_district_id": 1542,
+                                "to_district_id": district,
+                                "to_ward_code": ward,
+                                "height": 8,
+                                "length": 30,
+                                "weight": 1000,
+                                "width": 8
+                            },
+                            success: function(response) {
+                                feeCharges = response.data.total;
+                                $('.transport').html(`<input 
+                                    type"text" 
+                                    class="fee_charge" 
+                                    disabled="true" 
+                                    value=${feeCharges.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' })}>
+                                    <input type="hidden" name="fee_charge" value=${feeCharges}>`)
+                                $('.fee_charge_item').html(feeCharges.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+
+                                let sumPrice = parseInt($('input[name="sum_price_item"]').val()) + feeCharges;
+
+                                $('input[name="sum_price_item"]').val(sumPrice);
+                                $('.sum_price_item').html(sumPrice.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
+
+    //============================Apply coupon====================================
+
+    if ($('.input-coupon').val() == '') {
+        $('.apply-coupon').prop('disabled', true);
+    }
+
+    $('.input-coupon').on('input', function() {
+        $('.apply-coupon').prop('disabled', false);
+    });
+
+    $('.input-coupon').on('blur', function() {
+        if ($('.input-coupon').val() == '') {
+            $('.apply-coupon').prop('disabled', true);
+
+            if ($('.input-coupon + span')) {
+                $('.input-coupon + span').remove();
+            }
+        }
+    });
+
+
+    $('.apply-coupon').click(function(e) {
+        e.preventDefault();
+        let couponName = $('.input-coupon').val();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $.ajax({
-            url: `/get-ward/${this.value}`,
+            type: "post",
+            url: "/checkout/apply-coupon",
+            data: {
+                'coupon_name': couponName
+            },
             success: function(response) {
                 if (response.status) {
-                    let wards = response.wards.map(function(ward) {
-                        return `<option value=${ward.id}>${ward.name}</option>`
-                    });
+                    let sumPriceBegin = response.total_price;
+                    let feeCharge = parseInt($('input[name="fee_charge"]').val());
+                    let discountAmount = ((sumPriceBegin * response.coupon_discount) / 100);
+                    let sumPriceAfterApplyCoupon = sumPriceBegin - discountAmount;
+                    let sumPriceFinal = 0;
 
-                    wards.unshift('<option selected>---</option>');
-                    $('.choose-ward').html(wards.join(' '));
+                    if (feeCharge) {
+                        sumPriceFinal = sumPriceAfterApplyCoupon + feeCharge;
+                    } else {
+                        sumPriceFinal = sumPriceAfterApplyCoupon
+                    }
+
+                    $('.fee-shipping').after(`<li class="list-group-item bg-light">
+                        <div class="text-success fix-flex">
+                            <h6 class="my-0">Mã giảm giá (${couponName})</h6>
+                            <div>
+                                <span>- ${discountAmount.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' })}</span>
+                                <span id="remove-coupon" style="cursor:pointer;" onclick="removeCoupon()"><i class="fa fa-times" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                    </li>`);
+
+                    if ($('.input-coupon + span')) {
+                        $('.input-coupon + span').remove();
+                    }
+
+                    $('.apply-coupon').prop('disabled', true);
+                    $('input[name="sum_price_item"]').val(sumPriceFinal);
+                    $('.sum_price_item').html(sumPriceFinal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                } else {
+                    if ($('.input-coupon + span')) {
+                        $('.input-coupon + span').remove();
+                        $('.input-coupon').after(`<span class="text-danger">Mã khuyến mại không hợp lệ</span>`);
+                    } else {
+                        $('.input-coupon').after(`<span class="text-danger">Mã khuyến mại không hợp lệ</span>`);
+                    }
                 }
             }
         });

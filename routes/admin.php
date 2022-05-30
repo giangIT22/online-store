@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RegisterController;
@@ -79,5 +80,15 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/pending-review', [ReviewController::class, 'viewPending'])->name('review.pending');
         Route::get('/update/{review_id}', [ReviewController::class, 'update'])->name('review.update');
         Route::get('/delete/{review_id}', [ReviewController::class, 'delete'])->name('review.delete');
+    });
+
+    // all route coupon admin 
+    Route::prefix('/coupon')->group(function () {
+        Route::get('/view', [CouponController::class, 'index'])->name('all.coupons');
+        Route::get('/create', [CouponController::class, 'create'])->name('coupon.create');
+        Route::post('/store', [CouponController::class, 'store'])->name('coupon.store');
+        Route::post('/update/{coupon_id}', [CouponController::class, 'update'])->name('coupon.update');
+        Route::get('/edit/{coupon_id}', [CouponController::class, 'edit'])->name('coupon.edit');
+        Route::get('/delete/{coupon_id}', [CouponController::class, 'delete'])->name('coupon.delete');
     });
 });

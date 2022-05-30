@@ -101,6 +101,18 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
+            <li class="treeview {{ $prefix == '/coupon' ? 'active' : '' }}">
+                <a href="#">
+                    <i data-feather="mail"></i> <span>Quản lý Coupon</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'all.coupons' ? 'active' : '' }}"> <a href="{{ route('all.coupons') }}"><i class="ti-more"></i>Danh sách coupon</a></li>
+                </ul>
+            </li>
+
             <li class="treeview">
                 <a href="#">
                     <i data-feather="file"></i>
