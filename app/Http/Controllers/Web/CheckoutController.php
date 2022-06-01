@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderRequest;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Coupon;
@@ -28,13 +29,17 @@ class CheckoutController extends Controller
 
         if (Auth::check()) {
             $cart = Cart::where('user_id', Auth::id())->first();
-            $products = DB::table('product_cart')
+            if ($cart) {
+                $products = DB::table('product_cart')
                 ->join('products', 'product_cart.product_id', 'products.id')
                 ->select('products.id', 'products.name', 'products.image', 'amount', 'price')
                 ->where('cart_id', $cart->id)
                 ->get();
 
-            return view('web.checkout.checkout_view', compact('categories', 'products'));
+                return view('web.checkout.checkout_view', compact('categories', 'products'));
+            } else {
+                return redirect()->route('cart.view');
+            }
         } else {
             $notification = [
                 'message' => 'Bạn cần phải đăng nhập',
@@ -45,9 +50,16 @@ class CheckoutController extends Controller
         }
     }
 
-    public function storeOrder(Request $request)
-    {
-        dd($request->all());
+    public function storeOrder(OrderRequest $request)
+    {        
+        $this->orderService->storeOrder($request->all());
+
+        $notification = [
+            'message' => 'Đặt hàng thành công',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('index')->with($notification);
     }
 
     public function applyCoupon(Request $request)

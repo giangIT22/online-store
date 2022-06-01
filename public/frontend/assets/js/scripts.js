@@ -452,9 +452,9 @@ jQuery(document).ready(function() {
                                     <input type="hidden" name="fee_charge" value=${feeCharges}>`)
                                 $('.fee_charge_item').html(feeCharges.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
 
-                                let sumPrice = parseInt($('input[name="sum_price_item"]').val()) + feeCharges;
+                                let sumPrice = parseInt($('input[name="sum_price"]').val()) + feeCharges;
 
-                                $('input[name="sum_price_item"]').val(sumPrice);
+                                $('input[name="sum_price"]').val(sumPrice);
                                 $('.sum_price_item').html(sumPrice.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
                             }
                         });
@@ -530,7 +530,7 @@ jQuery(document).ready(function() {
                     }
 
                     $('.apply-coupon').prop('disabled', true);
-                    $('input[name="sum_price_item"]').val(sumPriceFinal);
+                    $('input[name="sum_price"]').val(sumPriceFinal);
                     $('.sum_price_item').html(sumPriceFinal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
                 } else {
                     if ($('.input-coupon + span')) {

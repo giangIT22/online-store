@@ -9,9 +9,9 @@
 
         <a href="{{ route('user.change.password') }}" class="{{ Route::current()->uri == 'user/change/password' ? 'active ' : ''}}btn btn-primary btn-sm btn-block">Thay đổi mật khẩu</a>
 
-        {{-- <a href="{{ route('my.orders') }}" class="btn btn-primary btn-sm btn-block">My Orders</a>
+        <a href="{{ route('user.orders') }}" class="{{ Route::current()->uri == 'user/orders' ? 'active ' : ''}} btn btn-primary btn-sm btn-block">Đơn hàng</a>
 
-        <a href="{{ route('return.order.list') }}" class="btn btn-primary btn-sm btn-block">Return Orders</a>
+        {{-- <a href="{{ route('return.order.list') }}" class="btn btn-primary btn-sm btn-block">Return Orders</a>
 
         <a href="{{ route('cancel.orders') }}" class="btn btn-primary btn-sm btn-block">Cancel Orders</a> --}}
 

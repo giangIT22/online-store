@@ -73,9 +73,9 @@ class LoginController extends Controller
         ]));
     }
 
-    public function logout(Request $request)
+    public function destroy(Request $request)
     {
-        Auth::logout();
+        $this->guard->logout();
 
         $request->session()->invalidate();
 

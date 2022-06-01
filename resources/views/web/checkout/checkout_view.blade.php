@@ -26,18 +26,33 @@
                                             <label>Email</label>
                                             <input type="text" class="form-control" name="email"
                                                 value="{{ Auth::user()->email }}">
+                                            @error('email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <label>Họ và tên</label>
-                                            <input type="text" class="form-control" name="full_name">
+                                            <input type="text" class="form-control" name="name"
+                                                value="{{ old('name') }}">
+                                            @error('name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <label>Số diện thoại</label>
-                                            <input type="text" class="form-control" name="phone_number">
+                                            <input type="text" class="form-control" name="phone"
+                                                value="{{ old('phone') }}">
+                                            @error('phone')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <label>Địa chỉ</label>
-                                            <input type="text" class="form-control" name="address">
+                                            <input type="text" class="form-control" name="address"
+                                                value="{{ old('address') }}">
+                                            @error('address')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <label for="inputState">Tỉnh thành</label>
@@ -47,6 +62,9 @@
                                                     <option value="{{ $province->id }}">{{ $province->name }}</option>
                                                 @endforeach --}}
                                             </select>
+                                            @error('province')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <label for="inputState">Quận huyện</label>
@@ -54,6 +72,9 @@
                                             <select id="inputState" class="form-control choose-district">
 
                                             </select>
+                                            @error('district')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <label for="inputState">Phường xã</label>
@@ -61,6 +82,9 @@
                                             <select id="inputState" class="form-control choose-ward">
 
                                             </select>
+                                            @error('ward')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <textarea class="form-control" placeholder="Ghi chú (tùy chọn)" rows="3" name="notes"></textarea>
@@ -74,10 +98,15 @@
                                             </div>
                                         </div>
                                         <h4 class="mb-3">Thanh toán</h4>
+                                        @error('payment_type')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                         <div class="payment">
                                             <div class="form-check pay-item">
-                                                <input class="form-check-input" type="radio" value="card" name="pay_method"
-                                                    id="pay-card">
+                                                <input class="form-check-input" type="radio" value="PayPal"
+                                                    name="payment_type" id="pay-card">
                                                 <label class="form-check-label" for="pay-card">
                                                     Thanh toán qua PayPal
                                                 </label>
@@ -85,12 +114,14 @@
                                                     style="margin-left: 20px;">
                                             </div>
                                             <div class="form-check pay-item">
-                                                <input class="form-check-input" type="radio" value="cod" name="pay_method"
+                                                <input class="form-check-input" type="radio" value="COD" name="payment_type"
                                                     id="pay-transport">
                                                 <label class="form-check-label" for="pay-transport">
                                                     Thanh toán khi giao hàng
                                                 </label>
                                             </div>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +160,7 @@
                                     </li>
                                     <li class="list-group-item fix-flex">
                                         <span>Tổng cộng</span>
-                                        <input type="hidden" value="{{ $sum }}" name="sum_price_item">
+                                        <input type="hidden" value="{{ $sum }}" name="sum_price">
                                         <strong class="sum_price_item">{{ number_format($sum) }} vnd</strong>
                                     </li>
                                 </ul>
@@ -137,7 +168,8 @@
 
                                 <div class="coupon-price">
                                     <div>
-                                        <input type="text" class="form-control input-coupon" placeholder="Nhập mã giảm giá">
+                                        <input type="text" class="form-control input-coupon" name="coupon_code"
+                                            placeholder="Nhập mã giảm giá">
                                     </div>
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-primary apply-coupon">Áp dụng</button>

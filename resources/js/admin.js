@@ -14,6 +14,7 @@ import ListBlog from '../js/admin/components/blog/ListBlog.vue';
 import PendingReview from '../js/admin/components/review/PendingReview.vue';
 import PublishReview from '../js/admin/components/review/PublishReview.vue';
 import ListCoupon from '../js/admin/components/coupon/ListCoupon.vue';
+import ListOrder from '../js/admin/components/order/ListOrder.vue';
 
 Vue.component('ListCategory', ListCategory);
 Vue.component('SubCategory', SubCategory);
@@ -23,6 +24,7 @@ Vue.component('ListBlog', ListBlog);
 Vue.component('PendingReview', PendingReview);
 Vue.component('PublishReview', PublishReview);
 Vue.component('ListCoupon', ListCoupon);
+Vue.component('ListOrder', ListOrder);
 
 const app = new Vue({
     el: '#admin',

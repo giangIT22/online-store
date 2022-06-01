@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RegisterController;
 use App\Http\Controllers\Admin\SliderController;
@@ -11,7 +12,7 @@ use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Web\ReviewController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['guest:' . config('fortify.guard')])->group(function () {
+Route::middleware(['guest:admin'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('admin.login');
     Route::post('/login', [LoginController::class, 'store'])->name('admin.login.store');
     Route::get('/register', [RegisterController::class, 'index'])->name('admin.register');
@@ -20,7 +21,7 @@ Route::middleware(['guest:' . config('fortify.guard')])->group(function () {
 
 Route::get('/logout', [LoginController::class, 'destroy'])->name('admin.logout');
 
-Route::middleware('auth:admin')->group(function () {
+Route::middleware(['auth:admin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
@@ -90,5 +91,16 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/update/{coupon_id}', [CouponController::class, 'update'])->name('coupon.update');
         Route::get('/edit/{coupon_id}', [CouponController::class, 'edit'])->name('coupon.edit');
         Route::get('/delete/{coupon_id}', [CouponController::class, 'delete'])->name('coupon.delete');
+    });
+
+    // all route orders admin 
+    Route::prefix('/orders')->group(function () {
+        Route::get('/view', [OrderController::class, 'index'])->name('all.orders');
+        Route::get('/detail/{order_code}', [OrderController::class, 'detail'])->name('order.detail');
+        Route::get('/confirm-order/{order_code}', [OrderController::class, 'confirmOrder'])->name('order.confirm');
+        Route::get('/shipping-order/{order_code}', [OrderController::class, 'shippingOrder'])->name('order.shipping');
+        Route::get('/delivered-order/{order_code}', [OrderController::class, 'deliveredOrder'])->name('order.delivered');
+        Route::get('/cancel-order/{order_code}', [OrderController::class, 'cancelOrder'])->name('order.cancel');
+        Route::get('/dowload/{order_code}', [OrderController::class, 'dowloadOrderPdf'])->name('order.dowload');
     });
 });

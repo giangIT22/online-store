@@ -22,10 +22,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', [LoginController::class, 'index'])->name('user.login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-Route::get('/register', [RegisterController::class, 'index'])->name('user.register')->middleware('guest');;
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::middleware('guest:web')->group(function () {
+    Route::get('/login', [LoginController::class, 'index'])->name('user.login');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+    Route::get('/register', [RegisterController::class, 'index'])->name('user.register');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+});
+
+Route::get('/user/logout', [LoginController::class, 'destroy'])->name('user.logout');
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/not-found', function () {
@@ -33,8 +37,7 @@ Route::get('/not-found', function () {
 })->name('error');
 
 //=============Profile user===========================
-Route::middleware('auth')->group(function () {
-    Route::get('/user/logout', [LoginController::class, 'logout'])->name('user.logout');
+Route::middleware('auth:web')->group(function () {
 
     Route::get('/user', [UserController::class, 'home'])->name('user.home');
 
@@ -45,6 +48,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/change/password', [UserController::class, 'userChangePassword'])->name('user.change.password');
 
     Route::post('/user/password/update', [UserController::class, 'userPasswordUpdate'])->name('user.password.update');
+
+    Route::get('user/orders', [UserController::class, 'getListOrder'])->name('user.orders');
+
+    Route::get('user/orders/{order_code}', [UserController::class, 'getOrderDetail'])->name('user.order_detail');
+
+    Route::post('user/cancel-order/{order_code}', [UserController::class, 'cancelOrder'])->name('user.order.cancel');
+
 });
 
 //=============Product detail=========================
