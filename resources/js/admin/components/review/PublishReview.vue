@@ -38,7 +38,7 @@
                           :href="`/admin/review/delete/${item.id}`"
                           class="btn btn-danger"
                         >
-                          Xóa
+                          <i class="fa fa-trash"></i>
                         </a>
                       </td>
                     </tr>

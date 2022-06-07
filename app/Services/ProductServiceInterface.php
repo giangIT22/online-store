@@ -8,4 +8,5 @@ interface ProductServiceInterface
     public function getProductsByCategory($categorySlug);
     public function getRelatedProducts($productId);
     public function addReviewProduct($params);
+    public function getBestSellProducts();
 }

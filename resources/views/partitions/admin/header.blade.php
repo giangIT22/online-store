@@ -29,21 +29,25 @@
                 </li>
                 <!-- User Account-->
                 <li class="dropdown user user-menu">
-                    <a href="#" class="waves-effect waves-light rounded dropdown-toggle p-0" data-toggle="dropdown"
-                        title="User">
-                        <img src=""
-                            alt="">
+                    @php
+                        $admin = Auth::guard('admin')->user();
+                    @endphp
+                    <a href="#" class="waves-effect waves-light rounded dropdown-toggle p-0"
+                        title="{{ Auth::guard('admin')->user()->name }}">
+                        <img src="{{ $admin->profile_photo_path ? asset($admin->profile_photo_path) : asset('backend/images/no-image.jpg') }}" alt="">
                     </a>
-                    <ul class="dropdown-menu animated flipInX">
+                    <ul class="dropdown-menu animated flipInX show-menu">
                         <li class="user-body">
-                            <a class="dropdown-item" href=""><i
+                            <a class="dropdown-item" href="{{ route('admin.profile') }}"><i
                                     class="ti-user text-muted mr-2"></i> Thông tin</a>
-                            <a class="dropdown-item" href=""><i
-                                    class="ti-wallet text-muted mr-2"></i>Change password</a>
+                            <a class="dropdown-item" href="{{ route('admin.profile.edit') }}"><i
+                                    class="ti-wallet text-muted mr-2"></i>Thay đổi thông tin</a>
+                            <a class="dropdown-item" href="{{ route('admin.change.password') }}"><i
+                                    class="ti-wallet text-muted mr-2"></i>Thay đổi mật khẩu</a>
                             <a class="dropdown-item" href="#"><i class="ti-settings text-muted mr-2"></i> Settings</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href=""><i
-                                    class="ti-lock text-muted mr-2"></i> Logout</a>
+                            <a class="dropdown-item" href="{{ route('admin.logout') }}"><i
+                                    class="ti-lock text-muted mr-2"></i>Đăng xuất</a>
                         </li>
                     </ul>
                 </li>

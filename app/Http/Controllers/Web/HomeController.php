@@ -38,6 +38,7 @@ class HomeController extends Controller
         $specialDealsProducts = Product::where('special_deals', true)->orderBy('id', 'desc')->limit(9)->get();
         $productTags = ProductTag::select('name')->limit(8)->groupBy('name')->get();
         $blogs = $this->blogService->getListBlog(Blog::BLOG_SLIDER)['listBlogs'];
+        $bestSellProducts = $this->productService->getBestSellProducts();
 
         return view('web.index', compact(
             'categories',
@@ -48,7 +49,8 @@ class HomeController extends Controller
             'specialDealsProducts',
             'hotDealProducts',
             'productTags',
-            'blogs'
+            'blogs',
+            'bestSellProducts'
         ));
     }
 

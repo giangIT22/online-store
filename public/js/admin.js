@@ -40887,11 +40887,7 @@ var render = function () {
                                     href: "/admin/review/delete/" + item.id,
                                   },
                                 },
-                                [
-                                  _vm._v(
-                                    "\n                        Xóa\n                      "
-                                  ),
-                                ]
+                                [_c("i", { staticClass: "fa fa-trash" })]
                               ),
                             ]),
                           ])

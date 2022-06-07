@@ -35,7 +35,7 @@
                         @elseif ($order->status == 3)
                             <b class="status_cancelled text-danger">Đơn hàng đã giao thành công</b>
                         @elseif ($order->status == 4)
-                            <b class="status_cancelled text-danger">Đơn hàng đang yêu cầu hủy/b>
+                            <b class="status_cancelled text-danger">Đơn hàng đang yêu cầu hủy</b>
                             @elseif ($order->status == 5)
                                 <b class="status_cancelled text-danger">Đơn hàng đã hủy</b>
                         @endif

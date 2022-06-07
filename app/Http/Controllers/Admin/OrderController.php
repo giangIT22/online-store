@@ -84,13 +84,8 @@ class OrderController extends Controller
 
     public function cancelOrder($orderCode)
     {
-        $order = Order::where('order_code', $orderCode)->first();
-
-        $order->update([
-            'cancel_date' => now(),
-            'status' => Order::CANCELED
-        ]);
-
+        $this->orderService->cancelOrder($orderCode);
+        
         return redirect()->route('all.orders');
     }
 }

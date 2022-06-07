@@ -8,4 +8,5 @@ interface OrderServiceInterface
     public function getOrdersOfUser($userId);
     public function getOrderDetail($orderCode);
     public function getOrders();
+    public function cancelOrder($orderCode);
 }

@@ -85,4 +85,23 @@ class OrderService implements OrderServiceInterface
             'lastPage' => $data->lastPage(),
         ];
     }
+
+    public function cancelOrder($orderCode)
+    {
+        $order = Order::where('order_code', $orderCode)->first();
+
+        $order->update([
+            'cancel_date' => now(),
+            'status' => Order::CANCELED
+        ]);
+
+        $products = DB::table('order_item')->where('order_id', $order->id)->get();
+
+            foreach ($products as $item) {
+                //caculate amount of product after cancel order
+                $product = Product::findOrFail($item->product_id);
+                $product->product_qty = $product->product_qty + $item->amount;
+                $product->save();
+            }
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
@@ -21,12 +22,24 @@ Route::middleware(['guest:admin'])->group(function () {
 
 Route::get('/logout', [LoginController::class, 'destroy'])->name('admin.logout');
 
+//================================Tabs of Admin Page==============================================================================
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 
-    //====All route category==========
+    //===== Admin progile =====
+    Route::get('/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
+
+    Route::get('/profile/edit', [AdminController::class, 'adminProfileEdit'])->name('admin.profile.edit');
+
+    Route::post('/profile/store', [AdminController::class, 'adminProfileStore'])->name('admin.profile.store');
+
+    Route::get('/change/password', [AdminController::class, 'adminChangePassword'])->name('admin.change.password');
+
+    Route::post('/update/change/password', [AdminController::class, 'adminUpdatePassword'])->name('admin.update.password');
+
+    //===== All route category =====
     Route::prefix('/category')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('all.categories');
         Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
@@ -35,7 +48,7 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/edit/{category_id}', [CategoryController::class, 'update'])->name('category.edit');
         Route::get('/delete/{category_id}', [CategoryController::class, 'delete'])->name('category.delete');
 
-        //All route subcategory admin
+        //===== All route subcategory admin =====
         Route::get('/sub/view', [SubCategoryController::class, 'index'])->name('all.sub_categories');
         Route::get('/sub/create', [SubCategoryController::class, 'create'])->name('sub_category.create');
         Route::post('/sub/store', [SubCategoryController::class, 'store'])->name('sub_category.store');
@@ -45,7 +58,7 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/sub/{sub_category_id}', [SubCategoryController::class, 'getSubcategories']);
     });
 
-    //====All route product==========
+    //===== All route product =====
     Route::prefix('/product')->group(function () {
         Route::get('/view', [ProductController::class, 'index'])->name('all.products');
         Route::get('/create', [ProductController::class, 'create'])->name('product.create');
@@ -55,7 +68,7 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/delete/{product_id}', [ProductController::class, 'delete'])->name('product.delete');
     });
 
-    //All route slider admin
+    //===== All route slider admin =====
     Route::prefix('/slider')->group(function () {
         Route::get('/view', [SliderController::class, 'index'])->name('all.sliders');
         Route::get('/create', [SliderController::class, 'create'])->name('slider.create');
@@ -65,7 +78,7 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/delete/{slider_id}', [SliderController::class, 'delete'])->name('slider.delete');
     });
 
-    // all route blog admin 
+    //===== all route blog admin =====
     Route::prefix('/blog')->group(function () {
         Route::get('/view', [BlogController::class, 'index'])->name('all.blogs');
         Route::get('/create', [BlogController::class, 'create'])->name('blog.create');
@@ -75,7 +88,7 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/delete/{blog_id}', [BlogController::class, 'delete'])->name('blog.delete');
     });
 
-    // all route review admin 
+    //===== all route review admin =====
     Route::prefix('/review')->group(function () {
         Route::get('/view', [ReviewController::class, 'view'])->name('all.reviews');
         Route::get('/pending-review', [ReviewController::class, 'viewPending'])->name('review.pending');
@@ -83,7 +96,7 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/delete/{review_id}', [ReviewController::class, 'delete'])->name('review.delete');
     });
 
-    // all route coupon admin 
+    //===== all route coupon admin =====
     Route::prefix('/coupon')->group(function () {
         Route::get('/view', [CouponController::class, 'index'])->name('all.coupons');
         Route::get('/create', [CouponController::class, 'create'])->name('coupon.create');
@@ -93,7 +106,7 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/delete/{coupon_id}', [CouponController::class, 'delete'])->name('coupon.delete');
     });
 
-    // all route orders admin 
+    //===== all route orders admin =====
     Route::prefix('/orders')->group(function () {
         Route::get('/view', [OrderController::class, 'index'])->name('all.orders');
         Route::get('/detail/{order_code}', [OrderController::class, 'detail'])->name('order.detail');

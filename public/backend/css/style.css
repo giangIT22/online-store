@@ -30317,5 +30317,14 @@ img.online {
     color: #fff;
 }
 
+.user-body a.dropdown-item {
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.user-body a.dropdown-item:hover {
+    color: #fff;
+}
+
 
 /*# sourceMappingURL=style.css.map */
