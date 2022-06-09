@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('backend/images/favicon.ico') }}">
 
-    <title>{{ $titlePage ?? 'Flipmart' }}</title>
+    <title>{{ $titlePage ?? 'Fowler Shoes' }}</title>
 
     <!-- Vendors Style-->
     <link rel="stylesheet" href="{{ asset('backend/css/vendors_css.css') }}">

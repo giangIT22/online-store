@@ -45,7 +45,7 @@ class LoginController extends Controller
     public function store(LoginRequest $request)
     {
         return $this->loginPipeline($request)->then(function ($request) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('invoice.monthy');
         });
     }
 

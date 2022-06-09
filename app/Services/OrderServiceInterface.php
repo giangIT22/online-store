@@ -9,4 +9,6 @@ interface OrderServiceInterface
     public function getOrderDetail($orderCode);
     public function getOrders();
     public function cancelOrder($orderCode);
+    public function getInvoiceMonthy();
+    public function getInvoiceYearLy();
 }

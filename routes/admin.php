@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
@@ -24,9 +25,8 @@ Route::get('/logout', [LoginController::class, 'destroy'])->name('admin.logout')
 
 //================================Tabs of Admin Page==============================================================================
 Route::middleware(['auth:admin'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/invocie-monthy', [InvoiceController::class, 'getInvoiceMonthy'])->name('invoice.monthy');
+    Route::get('/invocie-yearly', [InvoiceController::class, 'getInvoiceYearLy'])->name('invoice.yearly');
 
     //===== Admin progile =====
     Route::get('/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');

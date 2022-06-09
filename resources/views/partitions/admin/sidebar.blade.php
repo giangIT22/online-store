@@ -14,7 +14,7 @@ $route = Route::current()->getName();
                     <!-- logo for regular state and mobile devices -->
                     <div class="d-flex align-items-center justify-content-center">
                         <img src="{{ asset('backend/images/logo-dark.png') }}" alt="">
-                        <h3><b>Flipmart</b></h3>
+                        <h3><b>Fowler Shoes</b></h3>
                     </div>
                 </a>
             </div>
@@ -23,8 +23,8 @@ $route = Route::current()->getName();
         <!-- sidebar menu-->
         <ul class="sidebar-menu" data-widget="tree">
 
-            <li>
-                <a href="index.html">
+            <li class="{{ $route == 'invoice.monthy' ? 'active' : '' }}">
+                <a href="{{ route('invoice.monthy') }}">
                     <i data-feather="pie-chart"></i>
                     <span>Trang chủ</span>
                 </a>
