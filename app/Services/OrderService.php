@@ -6,8 +6,10 @@ use App\Models\Cart;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class OrderService implements OrderServiceInterface
 {
@@ -109,7 +111,32 @@ class OrderService implements OrderServiceInterface
      * Get invoice monthy
      */
     public function getInvoiceMonthy()
-    {
+    {   
+        $invoiceTimeEarliest = Order::orderBy('created_at')->first()->created_at;
+        $invoiceTimeLatest = Order::orderBy('created_at', 'desc')->first()->created_at;
+        $maximumDate = request('maximum_date') ? Carbon::parse(request('maximum_date')) : $invoiceTimeLatest;
+        $invoices = Order::where('created_at', '<=', $maximumDate)->get();
+
+        if (($maximumDate->year > $invoiceTimeLatest->year) || ($maximumDate->year < $invoiceTimeEarliest->year)) {
+            abort(404);
+        }
+        
+        $invoices = $invoices->groupBy(function($invoice) {
+            return $invoice->created_at->year;
+        })->transform(function($invoice) {
+            return $invoice->mapToGroups(function($item) {
+                return [$item['created_at']->month => $item['sum_price']];
+            })->transform(function($item) {
+                return $item->sum();
+            });
+        });
+
+        return [
+            'invoices' => $invoices,
+            'min_year' => $invoiceTimeEarliest->year,
+            'max_year' => $invoiceTimeLatest->year,
+            'maximum_date' => $maximumDate->year
+        ];
     }
 
     /**
@@ -118,5 +145,26 @@ class OrderService implements OrderServiceInterface
      */
     public function getInvoiceYearLy()
     {
+        $invoiceTimeEarliest = Order::orderBy('created_at')->first()->created_at;
+        $invoiceTimeLatest = Order::orderBy('created_at', 'desc')->first()->created_at;
+        $maximumDate = request('maximum_date') ? Carbon::parse(request('maximum_date')) : $invoiceTimeLatest;
+        $invoices = Order::where('created_at', '<=', $maximumDate)->get();
+
+        if ($maximumDate->year > $invoiceTimeLatest->year) {
+            abort(404);
+        }
+
+        $invoices = $invoices->mapToGroups(function ($invoice) {
+            return [$invoice['created_at']->year => $invoice['sum_price']];
+        })->transform(function($item) {
+            return $item->sum();
+        });
+
+        return [
+            'invoices' => $invoices,
+            'min_year' => $invoiceTimeEarliest->year,
+            'max_year' => $invoiceTimeLatest->year,
+            'maximum_date' => $maximumDate->year
+        ];
     }
 }

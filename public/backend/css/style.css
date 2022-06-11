@@ -30326,5 +30326,16 @@ img.online {
     color: #fff;
 }
 
+.tab-item-invoice {
+    width: 50%;
+    text-align: center;
+}
+
+.tab-item-invoice a.nav-link {
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
 
 /*# sourceMappingURL=style.css.map */

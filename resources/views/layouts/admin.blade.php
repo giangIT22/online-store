@@ -20,15 +20,15 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 </head>
 
-<body class="hold-transition dark-skin sidebar-mini theme-primary fixed" >
+<body class="hold-transition dark-skin sidebar-mini theme-primary fixed">
 
     <div id="admin">
         <div class="wrapper">
             @include('partitions.admin.header')
-    
+
             <!-- Left side column. contains the logo and sidebar -->
             @include('partitions.admin.sidebar')
-    
+
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 @yield('content')
@@ -54,30 +54,33 @@
     <script>
         @if (Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}"
-            switch(type){
-            case 'info':
-            toastr.info(" {{ Session::get('message') }} ");
-            break;
-        
-            case 'success':
-            toastr.success(" {{ Session::get('message') }} ");
-            break;
-        
-            case 'warning':
-            toastr.warning(" {{ Session::get('message') }} ");
-            break;
-        
-            case 'error':
-            toastr.error(" {{ Session::get('message') }} ");
-            break;
+            switch (type) {
+                case 'info':
+                    toastr.info(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'success':
+                    toastr.success(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'warning':
+                    toastr.warning(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'error':
+                    toastr.error(" {{ Session::get('message') }} ");
+                    break;
             }
         @endif
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
+        integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('js/alertdelete.js') }}"></script>
     <script src="{{ asset('js/admin.js') }}"></script>
-    <script src="{{ asset('backend/js/script.js')}}"></script>
+    <script src="{{ asset('backend/js/script.js') }}"></script>
     @stack('scrypt')
 </body>
 

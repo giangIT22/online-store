@@ -16,12 +16,12 @@ class InvoiceController extends Controller
     }
 
     public function getInvoiceMonthy()
-    {
-        return view('admin.dashboard.invoice');
+    {   
+        return view('admin.dashboard.invoice', $this->orderService->getInvoiceMonthy());
     }
 
     public function getInvoiceYearLy()
     {
-
+        return view('admin.dashboard.invoice', $this->orderService->getInvoiceYearLy());
     }
 }

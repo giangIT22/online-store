@@ -15,7 +15,6 @@ import PendingReview from '../js/admin/components/review/PendingReview.vue';
 import PublishReview from '../js/admin/components/review/PublishReview.vue';
 import ListCoupon from '../js/admin/components/coupon/ListCoupon.vue';
 import ListOrder from '../js/admin/components/order/ListOrder.vue';
-import InvoiceMonth from '../js/admin/components/invoice/InvoiceMonth.vue';
 
 Vue.component('ListCategory', ListCategory);
 Vue.component('SubCategory', SubCategory);
@@ -26,7 +25,6 @@ Vue.component('PendingReview', PendingReview);
 Vue.component('PublishReview', PublishReview);
 Vue.component('ListCoupon', ListCoupon);
 Vue.component('ListOrder', ListOrder);
-Vue.component('InvoiceMonth', InvoiceMonth);
 
 const app = new Vue({
     el: '#admin',

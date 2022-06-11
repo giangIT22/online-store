@@ -25,8 +25,8 @@ Route::get('/logout', [LoginController::class, 'destroy'])->name('admin.logout')
 
 //================================Tabs of Admin Page==============================================================================
 Route::middleware(['auth:admin'])->group(function () {
-    Route::get('/invocie-monthy', [InvoiceController::class, 'getInvoiceMonthy'])->name('invoice.monthy');
-    Route::get('/invocie-yearly', [InvoiceController::class, 'getInvoiceYearLy'])->name('invoice.yearly');
+    Route::get('/invoice-monthy', [InvoiceController::class, 'getInvoiceMonthy'])->name('invoice.monthy');
+    Route::get('/invoice-yearly', [InvoiceController::class, 'getInvoiceYearLy'])->name('invoice.yearly');
 
     //===== Admin progile =====
     Route::get('/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
