@@ -45,15 +45,14 @@ class ShopController extends Controller
     public function viewSearch()
     {
         $categories = Category::with('subCategories')->get();
-        $dataSearch = Product::search(request('search'))->orderBy('product_price')->paginate(Product::PER_PAGE);
+        $dataSearch = Product::search(request('search'))->paginate(Product::PER_PAGE);
         $products = collect([]);
 
         array_map(function($item) use ($products){
             $products[] = $item;
         }, $dataSearch->items());
         
-        $products = $products->sortBy('product_price');
-        
+        $products = $products->sortBy('product_price')->sortBy('sale_price');
         $currentPage = $dataSearch->currentPage();
         $lastPage = $dataSearch->lastPage();
 

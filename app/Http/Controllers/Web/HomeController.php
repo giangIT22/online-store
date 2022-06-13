@@ -31,14 +31,16 @@ class HomeController extends Controller
         $categories = Category::with('subCategories')->get();
         $products = Product::orderBy('id', 'desc')->limit(6)->get();
         $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
-        $featuredProducts = Product::where('featured', true)->orderBy('id', 'desc')->limit(6)->get();
+        $featuredProducts = Product::where('featured', true)->orderBy('id', 'desc')->get();
         $hotDealProducts = Product::where('hot_deals', true)->where('sale_price', '!=', null)
-            ->orderBy('id', 'desc')->limit(3)->get();
+            ->orderBy('id', 'desc')->get();
         $specialOfferProducts = Product::where('special_offer', true)->orderBy('id', 'desc')->limit(9)->get();
         $specialDealsProducts = Product::where('special_deals', true)->orderBy('id', 'desc')->limit(9)->get();
         $productTags = ProductTag::select('name')->limit(8)->groupBy('name')->get();
         $blogs = $this->blogService->getListBlog(Blog::BLOG_SLIDER)['listBlogs'];
         $bestSellProducts = $this->productService->getBestSellProducts();
+        $converse = Product::where('category_id', 1)->get();
+        $vans = Product::where('category_id', 2)->get();
 
         return view('web.index', compact(
             'categories',
@@ -50,7 +52,9 @@ class HomeController extends Controller
             'hotDealProducts',
             'productTags',
             'blogs',
-            'bestSellProducts'
+            'bestSellProducts',
+            'converse',
+            'vans'
         ));
     }
 

@@ -2,6 +2,7 @@
     <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Danh mục sản phẩm</div>
     <nav class="yamm megamenu-horizontal">
         <ul class="nav">
+            <li class="dropdown menu-item"> <a href="{{ route('category.all.products') }}" >Tất cả sản phẩm</a></li>
             @foreach ($categories as $category)
                 <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $category->name }}</a>
                     <ul class="dropdown-menu mega-menu">
@@ -27,7 +28,7 @@
                 </li>
                 <!-- /.menu-item -->
             @endforeach
-            <li class="dropdown menu-item"> <a href="{{ route('blog.view') }}" >Tin tức</a>
+            <li class="dropdown menu-item"> <a href="{{ route('blog.view') }}" >Tin tức</a></li>
         </ul>
         <!-- /.nav -->
     </nav>

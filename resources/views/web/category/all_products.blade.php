@@ -10,7 +10,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
                     <li><a href="{{ route('index') }}">Trang chủ </a></li>/
-                    <li class='active'>{{ request()->category_slug }}</li>
+                    <li class='active'>Tất cả sản phẩm</li>
                 </ul>
             </div>
             <!-- /.breadcrumb-inner -->
@@ -106,9 +106,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                     <li role="presentation">
                                                         <a
                                                             href="{{ route(
-                                                                'category.index',
+                                                                'category.all.products',
                                                                 array_merge(request()->query(), [
-                                                                    'category_slug' => request('category_slug'),
                                                                     'sort' => 0,
                                                                 ]),
                                                             ) }}">Giá:
@@ -117,9 +116,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                     <li role="presentation">
                                                         <a
                                                             href="{{ route(
-                                                                'category.index',
+                                                                'category.all.products',
                                                                 array_merge(request()->query(), [
-                                                                    'category_slug' => request('category_slug'),
                                                                     'sort' => 1,
                                                                 ]),
                                                             ) }}">Giá:
@@ -140,9 +138,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                         <ul class="list-inline list-unstyled">
                                             <li class="prev"><a
                                                     href="{{ route(
-                                                        'category.index',
+                                                        'category.all.products',
                                                         array_merge(request()->query(), [
-                                                            'category_slug' => request()->category_slug,
                                                             'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
                                                         ]),
                                                     ) }}">
@@ -150,9 +147,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                             @for ($i = 1; $i <= $lastPage; $i++)
                                                 <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
                                                         href="{{ route(
-                                                            'category.index',
+                                                            'category.all.products',
                                                             array_merge(request()->query(), [
-                                                                'category_slug' => request()->category_slug,
                                                                 'page' => $i,
                                                             ]),
                                                         ) }}">{{ $i }}</a>
@@ -160,9 +156,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                             @endfor
                                             <li class="next"><a
                                                     href="{{ route(
-                                                        'category.index',
+                                                        'category.all.products',
                                                         array_merge(request()->query(), [
-                                                            'category_slug' => request()->category_slug,
                                                             'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1,
                                                         ]),
                                                     ) }} "><i
@@ -330,9 +325,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                         <ul class="list-inline list-unstyled">
                                             <li class="prev"><a
                                                     href="{{ route(
-                                                        'category.index',
+                                                        'category.all.products',
                                                         array_merge(request()->query(), [
-                                                            'category_slug' => request()->category_slug,
                                                             'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
                                                         ]),
                                                     ) }}">
@@ -340,18 +334,16 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                             @for ($i = 1; $i <= $lastPage; $i++)
                                                 <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
                                                         href="{{ route(
-                                                            'category.index',
+                                                            'category.all.products',
                                                             array_merge(request()->query(), [
-                                                                'category_slug' => request()->category_slug,
                                                                 'page' => $i,
                                                             ]),
                                                         ) }}">{{ $i }}</a>
                                             @endfor
                                             <li class="next"><a
                                                     href="{{ route(
-                                                        'category.index',
+                                                        'category.all.products',
                                                         array_merge(request()->query(), [
-                                                            'category_slug' => request()->category_slug,
                                                             'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1,
                                                         ]),
                                                     ) }} "><i

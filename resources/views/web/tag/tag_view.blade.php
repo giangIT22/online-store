@@ -216,22 +216,26 @@
                                                                 @endIf
                                                             </div>
                                                         </div>
-                                                        <div class="cart clearfix animate-effect">
+                                                        <div class="cart clearfix animate-effect fix-style">
                                                             <div class="action">
                                                                 <ul class="list-unstyled">
                                                                     <li class="add-cart-button btn-group">
-                                                                        <button class="btn btn-primary icon"
-                                                                            data-toggle="dropdown" type="button"> <i
-                                                                                class="fa fa-shopping-cart"></i> </button>
-                                                                        <button class="btn btn-primary cart-btn"
-                                                                            type="button">Add to cart</button>
+                                                                        <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
+                                                                            data-toggle="tooltip"
+                                                                            class="btn btn-primary icon"
+                                                                            type="button" data-original-title=""
+                                                                            title=""> <i
+                                                                                class="fa fa-shopping-cart"></i>
+                                                                            Tùy
+                                                                            chọn</a>
                                                                     </li>
-                                                                    <li class="lnk wishlist"> <a class="add-to-cart"
-                                                                            href="detail.html" title="Wishlist"> <i
-                                                                                class="icon fa fa-heart"></i> </a> </li>
-                                                                    <li class="lnk"> <a class="add-to-cart"
-                                                                            href="detail.html" title="Compare"> <i
-                                                                                class="fa fa-signal"></i> </a> </li>
+                                                                    <li class="lnk"> <a
+                                                                            data-toggle="tooltip"
+                                                                            class="add-to-cart preview-product"
+                                                                            id="11" data-original-title="" title="">
+                                                                            <i class="fa fa-eye"
+                                                                                aria-hidden="true"></i>
+                                                                        </a> </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -283,23 +287,22 @@
                                                                     <div class="action">
                                                                         <ul class="list-unstyled">
                                                                             <li class="add-cart-button btn-group">
-                                                                                <button class="btn btn-primary icon"
-                                                                                    data-toggle="dropdown" type="button"> <i
+                                                                                <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
+                                                                                    data-toggle="tooltip"
+                                                                                    class="btn btn-primary icon"
+                                                                                    type="button" data-original-title=""
+                                                                                    title=""> <i
                                                                                         class="fa fa-shopping-cart"></i>
-                                                                                </button>
-                                                                                <button class="btn btn-primary cart-btn"
-                                                                                    type="button">Add to cart</button>
-                                                                            </li>
-                                                                            <li class="lnk wishlist"> <a
-                                                                                    class="add-to-cart"
-                                                                                    href="detail.html" title="Wishlist"> <i
-                                                                                        class="icon fa fa-heart"></i> </a>
+                                                                                    Tùy
+                                                                                    chọn</a>
                                                                             </li>
                                                                             <li class="lnk"> <a
-                                                                                    class="add-to-cart"
-                                                                                    href="detail.html" title="Compare"> <i
-                                                                                        class="fa fa-signal"></i> </a>
-                                                                            </li>
+                                                                                    data-toggle="tooltip"
+                                                                                    class="add-to-cart preview-product"
+                                                                                    id="11" data-original-title="" title="">
+                                                                                    <i class="fa fa-eye"
+                                                                                        aria-hidden="true"></i>
+                                                                                </a> </li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>

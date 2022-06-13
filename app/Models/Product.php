@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory, Searchable;
 
-    const PER_PAGE = 10;
+    const PER_PAGE = 9;
     const RELATED_PRODUCT = 6;
 
     protected $guarded = [];

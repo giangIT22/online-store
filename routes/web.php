@@ -66,7 +66,9 @@ Route::prefix('/product')->group(function () {
     ROute::post('/add-review', [HomeController::class, 'storeReview'])->name('review.store');
 });
 
+//============Shopping===============================
 Route::get('/category/{category_slug}', [CategoryController::class, 'index'])->name('category.index');
+Route::get('/all-product', [CategoryController::class, 'allProducts'])->name('category.all.products');
 
 //=======================cart=====================
 
