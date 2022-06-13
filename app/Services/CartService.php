@@ -52,6 +52,8 @@ class CartService implements CartServiceInterface
         foreach ($products as $item) {
             $product = DB::table('products')->where('id', $item->product_id)->first();
             $productsInCart->push([
+                'product_id' => $product->id,
+                'product_slug' => $product->product_slug,
                 'product_image' => $product->image,
                 'product_name' => $product->name,
                 'product_price' => $item->price,
@@ -80,6 +82,8 @@ class CartService implements CartServiceInterface
             foreach ($products as $item) {
                 $product = DB::table('products')->where('id', $item->product_id)->first();
                 $productsInCart->push([
+                    'product_id' => $product->id,
+                    'product_slug' => $product->product_slug,
                     'product_image' => $product->image,
                     'product_name' => $product->name,
                     'product_price' => $item->price,
@@ -94,7 +98,7 @@ class CartService implements CartServiceInterface
             $cart->delete();
             $flag = true;
         }
-            
+
         return [true, $flag, $productsInCart];
     }
 
@@ -120,12 +124,13 @@ class CartService implements CartServiceInterface
 
         $sumTotal = 0;
         $products = DB::table('product_cart')->where('cart_id', $cart->id)->get();
+        $count = $products->sum('amount');
 
         foreach ($products as $product) {
             $sum = $product->amount * $product->price;
             $sumTotal += $sum;
         }
 
-        return [$product, $sumTotal];
+        return [$product, $sumTotal, $count];
     }
 }

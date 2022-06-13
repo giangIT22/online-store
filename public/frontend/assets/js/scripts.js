@@ -568,6 +568,9 @@ jQuery(document).ready(function() {
                     let sumPrice = response.product.amount * response.product.price;
                     $(`#sum-${productId}`).text(sumPrice.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
                     $('.cart-grand-total span').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                    $('.sum-price-product').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                    $('.total-price-basket .value').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                    $('.basket-item-count').text(response.count);
                 }
             });
         });
@@ -601,6 +604,9 @@ jQuery(document).ready(function() {
                     let sumPrice = response.product.amount * response.product.price;
                     $(`#sum-${productId}`).text(sumPrice.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
                     $('.cart-grand-total span').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                    $('.sum-price-product').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                    $('.total-price-basket .value').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                    $('.basket-item-count').text(response.count);
                 }
             });
         });
@@ -627,12 +633,37 @@ jQuery(document).ready(function() {
                 'product_id': productId,
             },
             success: function(response) {
-                console.log(response)
                 let count = 0;
                 let sumPrice = 0;
                 if (response.status) {
                     console.log($(`#${productId}`).parent().parent());
                     $(`#cancel-${productId}`).parent().parent().remove();
+
+                    //update box-cart
+                    if (response.products.length > 0) {
+                        let listProducts = response.products.map((product) => {
+                            let priceProduct = product.product_price.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' });
+                            return `<div class="row" style="margin-bottom: 10px;">
+                            <div class="col-xs-4">
+                                <div class="image"> <a
+                                        href="/product/detail/${product.product_id}/${product.product_slug}"><img
+                                            src="${product.product_image}"
+                                            alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-xs-7">
+                                <h3 class="name"><a
+                                        href="/product/detail/${product.product_id}/${product.product_slug}">${product.product_name}</a>
+                                </h3>
+                                <div class="price">
+                                    ${priceProduct}
+                                </div>
+                            </div>
+                        </div>`
+                        });
+
+                        $('.list-item-cart').html(listProducts.join(' '));
+                    }
 
                     if (response.products.length > 0) {
                         for (let product of response.products) {
@@ -644,9 +675,10 @@ jQuery(document).ready(function() {
                             style: 'currency',
                             currency: 'vnd'
                         });
-
+                        document.querySelector('.basket-item-count').innerHTML = count;
                         document.querySelector('.basket-item-count').innerHTML = count;
                         document.querySelector('.total-price-basket .value').innerHTML = sumPrice;
+                        $('.sum-price-product').text(sumPrice);
                     } else {
                         document.querySelector('.basket-item-count').innerHTML = count;
                         document.querySelector('.total-price-basket .value').innerHTML = sumPrice;
@@ -654,11 +686,15 @@ jQuery(document).ready(function() {
                 }
 
                 if (response.flag) {
-                    $('.shopping-cart').hide();
+                    $('.box-cart').remove();
+                    $('.show-list-item-cart').after(`<div class="dropdown-menu not-product">
+                            Không có sản phẩm nào trong giỏ hàng
+                        </div>`);
+                    $('.shopping-cart').remove();
                     $('.cart').html(`<div class="not-cart">
                                     <h1>Giỏ hàng</h2>
                                     <h4>Không có sản phẩm nào trong giỏ hàng. Quay lại cửa hàng để tiếp tục mua sắm.</p>
-                                    </div>`)
+                                    </div>`);
                 }
             }
         });

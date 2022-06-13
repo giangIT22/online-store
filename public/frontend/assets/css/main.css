@@ -7225,3 +7225,21 @@ span.item-cart {
     opacity: 1;
     visibility: visible;
 }
+
+.box-cart {
+    width: 280px !important;
+}
+
+.list-item-cart {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.price-before-discount {
+    text-decoration: line-through;
+    color: #d3d3d3;
+    font-weight: 400;
+    line-height: 30px;
+    font-size: 14px;
+}

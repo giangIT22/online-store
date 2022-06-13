@@ -7,7 +7,7 @@
                 <div class="cnt-account">
                     <ul class="list-unstyled">
                         <li><a href="#"><i class="icon fa fa-heart"></i>Yêu thích</a></li>
-                        <li><a href="{{route('cart.view')}}"><i class="icon fa fa-shopping-cart"></i>Giỏ hàng</a></li>
+                        <li><a href="{{ route('cart.view') }}"><i class="icon fa fa-shopping-cart"></i>Giỏ hàng</a></li>
                         @if (Auth::check())
                             <li><a href="{{ route('user.home') }}"><i class="icon fa fa-user"></i>Tài khoản</a></li>
                         @else
@@ -56,9 +56,10 @@
                     <!-- /.contact-row -->
                     <!-- ============================================================= SEARCH AREA ============================================================= -->
                     <div class="search-area">
-                        <form method="get" action="{{ route('search.view')}}">
+                        <form method="get" action="{{ route('search.view') }}">
                             <div class="control-group">
-                                <input class="search-field" placeholder="Bạn đang tìm sản phẩm nào ..." name="search" />
+                                <input class="search-field" placeholder="Bạn đang tìm sản phẩm nào ..."
+                                    name="search" />
                                 <button class="search-button" href="#"></button>
                             </div>
                         </form>
@@ -72,7 +73,7 @@
                     <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
 
                     <div class="dropdown dropdown-cart">
-                        <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
+                        <a href="#" class="dropdown-toggle lnk-cart show-list-item-cart" data-toggle="dropdown">
                             <div class="items-cart-inner">
                                 <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i>
                                 </div>
@@ -81,16 +82,23 @@
                                     $productsInCart = collect([]);
                                     $count = 0;
                                     if (Auth::check()) {
-                                        $cart = DB::table('carts')
-                                            ->where('user_id', Auth::id())
-                                            ->first() ?? 0;
+                                        $cart =
+                                            DB::table('carts')
+                                                ->where('user_id', Auth::id())
+                                                ->first() ?? 0;
                                         if ($cart) {
-                                            $products = DB::table('product_cart')->select('product_id', 'amount', 'price')
-                                                            ->where('cart_id', $cart->id)->get();
-
+                                            $products = DB::table('product_cart')
+                                                ->select('product_id', 'amount', 'price')
+                                                ->where('cart_id', $cart->id)
+                                                ->get();
+                                    
                                             foreach ($products as $item) {
-                                                $product = DB::table('products')->where('id', $item->product_id)->first();
+                                                $product = DB::table('products')
+                                                    ->where('id', $item->product_id)
+                                                    ->first();
                                                 $productsInCart->push([
+                                                    'product_id' => $product->id,
+                                                    'product_slug' => $product->product_slug,
                                                     'product_image' => $product->image,
                                                     'product_name' => $product->name,
                                                     'product_price' => $item->price,
@@ -98,19 +106,19 @@
                                                 ]);
                                                 $count += $item->amount;
                                             }
-
+                                    
                                             if ($productsInCart) {
                                                 foreach ($productsInCart as $product) {
                                                     $sum += $product['amount'] * $product['product_price'];
-                                                }   
+                                                }
                                             }
                                         } else {
                                             $productsInCart = 0;
                                         }
                                     }
                                 @endphp
-                                <div class="basket-item-count"><span
-                                        class="count">{{ $count}}</span></div>
+                                <div class="basket-item-count"><span class="count">{{ $count }}</span>
+                                </div>
                                 <div class="total-price-basket"> <span class="lbl">giỏ hàng -</span>
                                     <span class="total-price"><span
                                             class="value">{{ $sum ? number_format($sum, 0, '', '.') . ' vnd' : 0 }}</span></span>
@@ -118,19 +126,21 @@
                             </div>
                         </a>
                         @if (Auth::check() && !empty($productsInCart))
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu box-cart">
                                 <li>
-                                    <div class="cart-item product-summary">
+                                    <div class="cart-item product-summary list-item-cart">
                                         @foreach ($productsInCart as $product)
                                             <div class="row" style="margin-bottom: 10px;">
                                                 <div class="col-xs-4">
-                                                    <div class="image"> <a href="#"><img
-                                                                src="{{ asset($product['product_image']) }}" alt=""></a>
+                                                    <div class="image"> <a
+                                                            href="{{ route('product.detail', ['product_id' => $product['product_id'], 'slug' => $product['product_slug']]) }}"><img
+                                                                src="{{ asset($product['product_image']) }}"
+                                                                alt=""></a>
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-7">
                                                     <h3 class="name"><a
-                                                            href="#">{{ $product['product_name'] }}</a>
+                                                            href="{{ route('product.detail', ['product_id' => $product['product_id'], 'slug' => $product['product_slug']]) }}">{{ $product['product_name'] }}</a>
                                                     </h3>
                                                     <div class="price">
                                                         {{ number_format($product['product_price'], 0, '', '.') . ' vnd' }}
@@ -148,12 +158,15 @@
                                     <div class="clearfix cart-total">
                                         <div class="pull-right"> <span class="text">Tổng tiền
                                                 :</span><span
-                                                class='price'>{{ $sum ? number_format($sum, 0, '', '.') . ' vnd' : 0 }}</span>
+                                                class="price sum-price-product">{{ $sum ? number_format($sum, 0, '', '.') . ' vnd' : 0 }}</span>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <a href="{{ route('checkout.create') }}" class="btn btn-upper btn-primary m-t-20 btn-block" style="font-size: 12px;">Tiến hành
+                                        <a href="{{ route('checkout.create') }}"
+                                            class="btn btn-upper btn-primary m-t-20 btn-block"
+                                            style="font-size: 12px;">Tiến hành
                                             thanh toán</a>
-                                        <a href="{{route('cart.view')}}" class="btn btn-upper btn-primary m-t-20 btn-block">Giỏ hàng</a>
+                                        <a href="{{ route('cart.view') }}"
+                                            class="btn btn-upper btn-primary m-t-20 btn-block">Giỏ hàng</a>
                                     </div>
                                     <!-- /.cart-total-->
 
@@ -203,7 +216,7 @@
                                     </li>
                                 @endforeach
                                 <li class="{{ Route::current()->uri == '/blog' ? 'active' : '' }}"> <a
-                                    href="{{ route('blog.view') }}">Tin tức</a> </li>
+                                        href="{{ route('blog.view') }}">Tin tức</a> </li>
                             </ul>
                             <!-- /.navbar-nav -->
                             <div class="clearfix"></div>
