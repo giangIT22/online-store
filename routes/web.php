@@ -55,7 +55,7 @@ Route::middleware('auth:web')->group(function () {
 
     Route::post('user/cancel-order/{order_code}', [UserController::class, 'cancelOrder'])->name('user.order.cancel');
 
-});
+}); 
 
 //=============Product detail=========================
 
