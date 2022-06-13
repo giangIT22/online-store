@@ -47,7 +47,9 @@
         <!-- ============================================================= FOOTER ============================================================= -->
         @include('partitions.web.footer')
         <!-- ============================================================= FOOTER : END============================================================= -->
-
+        <div class="alert alert-success show-notification" role="alert">
+            Sản phẩm đã được thêm vào giỏ hàng
+        </div>
     </div>
     <!-- For demo purposes – can be removed on production -->
 
@@ -72,22 +74,22 @@
     <script>
         @if (Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}"
-            switch(type){
-            case 'info':
-            toastr.info(" {{ Session::get('message') }} ");
-            break;
-        
-            case 'success':
-            toastr.success(" {{ Session::get('message') }} ");
-            break;
-        
-            case 'warning':
-            toastr.warning(" {{ Session::get('message') }} ");
-            break;
-        
-            case 'error':
-            toastr.error(" {{ Session::get('message') }} ");
-            break;
+            switch (type) {
+                case 'info':
+                    toastr.info(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'success':
+                    toastr.success(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'warning':
+                    toastr.warning(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'error':
+                    toastr.error(" {{ Session::get('message') }} ");
+                    break;
             }
         @endif
     </script>

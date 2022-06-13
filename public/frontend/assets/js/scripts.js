@@ -543,4 +543,124 @@ jQuery(document).ready(function() {
             }
         });
     });
+
+    //===================================Event for cart page ===============================
+    $('.qty-plus').each(function(i, obj) {
+        $(obj).click(function() {
+            $(obj).parent().next().val(parseInt($(obj).parent().next().val()) + 1);
+            let productId = $(obj).attr('id');
+            let amount = $(`#qty-input-${productId}`).val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                method: "POST",
+                url: '/cart/update',
+                data: {
+                    'product_id': productId,
+                    'amount': amount
+                },
+                success: function(response) {
+                    let sumPrice = response.product.amount * response.product.price;
+                    $(`#sum-${productId}`).text(sumPrice.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                    $('.cart-grand-total span').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                }
+            });
+        });
+    });
+
+    $('.qty-minus').each(function(i, obj) {
+        $(obj).click(function() {
+            $(obj).parent().next().val(parseInt($(obj).parent().next().val()) - 1);
+
+            if ($(obj).parent().next().val() == 0) {
+                $(obj).parent().next().val(1);
+            }
+
+            let productId = $(obj).attr('id');
+            let amount = $(`#qty-input-${productId}`).val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                method: "POST",
+                url: '/cart/update',
+                data: {
+                    'product_id': productId,
+                    'amount': amount
+                },
+                success: function(response) {
+                    let sumPrice = response.product.amount * response.product.price;
+                    $(`#sum-${productId}`).text(sumPrice.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                    $('.cart-grand-total span').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                }
+            });
+        });
+    });
+
+
+    //===============remove-cart=====================
+    $('.cart-cancel').click(function(e) {
+        e.preventDefault();
+
+        let start = $(this).attr('id').indexOf('-');
+        let productId = $(this).attr('id').slice(start + 1);
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            method: "POST",
+            url: '/delete-cart',
+            data: {
+                'product_id': productId,
+            },
+            success: function(response) {
+                console.log(response)
+                let count = 0;
+                let sumPrice = 0;
+                if (response.status) {
+                    console.log($(`#${productId}`).parent().parent());
+                    $(`#cancel-${productId}`).parent().parent().remove();
+
+                    if (response.products.length > 0) {
+                        for (let product of response.products) {
+                            count += product.amount;
+                            sumPrice += product.amount * product.product_price;
+                        }
+
+                        sumPrice = sumPrice.toLocaleString('it-IT', {
+                            style: 'currency',
+                            currency: 'vnd'
+                        });
+
+                        document.querySelector('.basket-item-count').innerHTML = count;
+                        document.querySelector('.total-price-basket .value').innerHTML = sumPrice;
+                    } else {
+                        document.querySelector('.basket-item-count').innerHTML = count;
+                        document.querySelector('.total-price-basket .value').innerHTML = sumPrice;
+                    }
+                }
+
+                if (response.flag) {
+                    $('.shopping-cart').hide();
+                    $('.cart').html(`<div class="not-cart">
+                                    <h1>Giỏ hàng</h2>
+                                    <h4>Không có sản phẩm nào trong giỏ hàng. Quay lại cửa hàng để tiếp tục mua sắm.</p>
+                                    </div>`)
+                }
+            }
+        });
+    });
 })

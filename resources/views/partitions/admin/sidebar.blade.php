@@ -10,7 +10,7 @@ $route = Route::current()->getName();
 
         <div class="user-profile">
             <div class="ulogo">
-                <a href="index.html">
+                <a href="{{ route('invoice.monthy') }}">
                     <!-- logo for regular state and mobile devices -->
                     <div class="d-flex align-items-center justify-content-center">
                         <img src="{{ asset('backend/images/logo-dark.png') }}" alt="">
@@ -25,14 +25,13 @@ $route = Route::current()->getName();
 
             <li class="{{ $route == 'invoice.monthy' ? 'active' : '' }}">
                 <a href="{{ route('invoice.monthy') }}">
-                    <i data-feather="pie-chart"></i>
                     <span>Trang chủ</span>
                 </a>
             </li>
 
             <li class="treeview {{ $prefix == '/category' ? 'active' : '' }}  ">
                 <a href="#">
-                    <i data-feather="mail"></i> <span>Quản lý danh mục </span>
+                    <span>Danh mục </span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
@@ -50,7 +49,7 @@ $route = Route::current()->getName();
 
             <li class="treeview {{ $prefix == '/product' ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="mail"></i> <span>Quản lý sản phẩm</span>
+                    <span>Sản phẩm</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
@@ -64,7 +63,7 @@ $route = Route::current()->getName();
 
             <li class="treeview {{ $prefix == '/slider' ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="mail"></i> <span>Quản lý sliders</span>
+                    <span>Sliders</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
@@ -76,19 +75,19 @@ $route = Route::current()->getName();
 
             <li class="treeview {{ $prefix == '/slider' ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="mail"></i> <span>Quản lý tin tức</span>
+                    <span>Tin tức</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ $route == 'all.blogs' ? 'active' : '' }}"> <a href="{{ route('all.blogs') }}"><i class="ti-more"></i>Quản lý tin tức</a></li>
+                    <li class="{{ $route == 'all.blogs' ? 'active' : '' }}"> <a href="{{ route('all.blogs') }}"><i class="ti-more"></i>Danh sách tin tức</a></li>
                 </ul>
             </li>
 
             <li class="treeview {{ $prefix == '/review' ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="mail"></i> <span>Quản lý đánh giá</span>
+                    <span>Đánh giá</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
@@ -103,7 +102,7 @@ $route = Route::current()->getName();
 
             <li class="treeview {{ $prefix == '/coupon' ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="mail"></i> <span>Quản lý Coupon</span>
+                    <span>Coupon</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
@@ -115,7 +114,7 @@ $route = Route::current()->getName();
 
             <li class="treeview {{ $prefix == '/orders' ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="mail"></i> <span>Quản lý đơn hàng</span>
+                    <span>Đơn hàng</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
@@ -125,20 +124,15 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
-            <li class="treeview">
+            <li class="treeview {{ $prefix == '/alluser' ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="file"></i>
-                    <span>Pages</span>
+                    <span>Người dùng</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="profile.html"><i class="ti-more"></i>Profile</a></li>
-                    <li><a href="invoice.html"><i class="ti-more"></i>Invoice</a></li>
-                    <li><a href="gallery.html"><i class="ti-more"></i>Gallery</a></li>
-                    <li><a href="faq.html"><i class="ti-more"></i>FAQs</a></li>
-                    <li><a href="timeline.html"><i class="ti-more"></i>Timeline</a></li>
+                    <li class="{{ $route == 'all.users' ? 'active' : '' }}"> <a href="{{ route('all.users') }}"><i class="ti-more"></i>Danh sách người dùng</a></li>
                 </ul>
             </li>
         </ul>

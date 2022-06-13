@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin', ['titlePage' => 'Trang chủ'])
 
 @php
 $route = Route::current()->getName();
@@ -36,7 +36,7 @@ $route = Route::current()->getName();
                                         class="fa fa-angle-left" aria-hidden="true"></i>
                                 </a>
                                 @if ($route == 'invoice.monthy')
-                                    <strong class="ml-20">Năm: {{ $maximum_date }}</strong>
+                                    <strong style="color: #bdc3c7;" class="ml-20">Năm: {{ $maximum_date }}</strong>
                                 @endif
                             </div>
                             <a href="?maximum_date={{ \Carbon\Carbon::create($maximum_date + 1, 12, 31)->toDateString() }}" class="btn btn-info mb-5"

@@ -7,6 +7,7 @@ use App\Http\Requests\AdminUpdatePasswordRequest;
 use App\Http\Requests\AdminUpdateProfileRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\Admin;
+use App\Models\User;
 use App\Traits\StoreImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -74,4 +75,14 @@ class AdminController extends Controller
 		return redirect()->route('admin.profile')->with($notification);
     }
 
+    public function allUsers()
+    {
+        $data = User::orderBy('created_at', 'desc')->paginate(10);
+
+        return view('admin.user.index', [
+            'listUsers' => $data->items(),
+            'total' => $data->total(),
+            'lastPage' => $data->lastPage()
+        ]);
+    }
 }

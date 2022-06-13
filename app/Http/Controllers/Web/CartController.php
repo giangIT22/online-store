@@ -78,4 +78,14 @@ class CartController extends Controller
             ]);
         }
     }
+    
+    public function updateCart(Request $request)
+    {
+        list($product, $sumTotal) = $this->cartService->updateCart($request->all());
+
+        return response()->json([
+            'product' => $product,
+            'sumTotal' => $sumTotal
+        ]);
+    }
 }

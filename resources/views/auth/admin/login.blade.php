@@ -37,7 +37,7 @@
                     </div>
                     <a href="" class="forget-password">Quên mật khẩu</a>
                     <button type="submit">Đăng nhập</button>
-                    <p>Bạn chưa có tài khoản? <a href="{{ route('admin.register') }}">Đăng ký</a> </p>
+                    {{-- <p>Bạn chưa có tài khoản? <a href="{{ route('admin.register') }}">Đăng ký</a> </p> --}}
                 </form>
             </div>
         </div>

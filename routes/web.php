@@ -72,6 +72,7 @@ Route::get('/category/{category_slug}', [CategoryController::class, 'index'])->n
 
 Route::post('/store-cart', [CartController::class, 'store'])->name('cart.store');
 Route::get('cart/shopping-cart', [CartController::class, 'view'])->name('cart.view');
+Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
 Route::post('/delete-cart', [CartController::class, 'deleteCart'])->name('cart.delete');
 
 //====================Blog========================

@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['titlePage' => 'sliders'])
+@extends('layouts.admin', ['titlePage' => 'Danh sách slider'])
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->

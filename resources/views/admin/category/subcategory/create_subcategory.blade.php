@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['titlePage' => 'Create Sub category'])
+@extends('layouts.admin', ['titlePage' => 'Thêm danh mục con'])
 
 @section('content')
     <div class="container-full">

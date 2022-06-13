@@ -58,7 +58,7 @@ function initChartMonthy(label) {
                 label: `Tổng giá trị hóa đơn theo ${label}`,
                 data: getDataForChart(label),
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    '#2980b9',
                 ],
 
             }]
@@ -66,11 +66,37 @@ function initChartMonthy(label) {
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
-                }
+                    ticks: {
+                        font: {
+                            size: 14
+                        },
+                        color: '#bdc3c7'
+                    },
+                    suggestedMin: 0,
+
+                },
+                x: {
+                    ticks: {
+                        font: {
+                            size: 14
+                        },
+                        color: '#bdc3c7'
+                    }
+                },
             },
             interaction: {
                 mode: 'index'
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        // This more specific font property overrides the global property
+                        font: {
+                            size: 14
+                        },
+                        color: '#bdc3c7'
+                    }
+                }
             }
         },
     });

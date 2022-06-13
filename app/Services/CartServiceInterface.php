@@ -6,4 +6,5 @@ interface CartServiceInterface
 {
     public function addProductToCart($params);
     public function deleteCart($productId);
+    public function updateCart($params);
 }

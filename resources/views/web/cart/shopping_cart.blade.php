@@ -35,11 +35,9 @@
                                             <td colspan="7">
                                                 <div class="shopping-cart-btn">
                                                     <span class="">
-                                                        <a href="{{ route('index') }}" class="btn btn-upper btn-primary outer-left-xs">Tiếp tục
+                                                        <a href="{{ route('index') }}"
+                                                            class="btn btn-upper btn-primary outer-left-xs">Tiếp tục
                                                             mua hàng</a>
-                                                        <a href="#"
-                                                            class="btn btn-upper btn-primary pull-right outer-right-xs">Cập
-                                                            nhật giỏ hàng</a>
                                                     </span>
                                                 </div><!-- /.shopping-cart-btn -->
                                             </td>
@@ -62,30 +60,28 @@
                                                     </div> --}}
                                                 </td>
                                                 <td class="cart-product-sub-total"><span
-                                                        class="cart-sub-total-price">{{ number_format($product['product_price']) }}
-                                                        VND</span>
+                                                        class="cart-sub-total-price">{{ number_format($product['product_price'], 0, '', '.') }}&nbsp;VND</span>
                                                 <td class="cart-product-quantity">
                                                     <div class="quant-input">
                                                         <div class="arrows">
                                                             <div class="arrow plus gradient qty-plus"
-                                                                id="plus-{{ $product['id'] }}"><span
-                                                                    class="ir"><i
+                                                                id="{{ $product['id'] }}"><span class="ir"><i
                                                                         class="icon fa fa-sort-asc"></i></span></div>
                                                             <div class="arrow minus gradient qty-minus"
-                                                                id="minus-{{ $product['id'] }}"><span
-                                                                    class="ir"><i
+                                                                id="{{ $product['id'] }}"><span class="ir"><i
                                                                         class="icon fa fa-sort-desc"></i></span></div>
+                                                            <input type="hidden" id="item-cart"
+                                                                value="{{ $product['id'] }}">
                                                         </div>
                                                         <input type="text" value="{{ $product['amount'] }}"
-                                                            class="qty-input">
+                                                            class="qty-input" id="qty-input-{{ $product['id'] }}">
                                                     </div>
                                                 </td>
-                                                <td class="cart-product-sub-total"><span
-                                                        class="cart-sub-total-price">{{ number_format($product['product_price'] * $product['amount']) }}
-                                                        VND</span>
+                                                <td class="cart-product-sub-total"><span class="cart-sub-total-price"
+                                                        id="sum-{{ $product['id'] }}">{{ number_format($product['product_price'] * $product['amount'], 0, '', '.') }}&nbsp;VND</span>
                                                 </td>
                                                 <td class="romove-item"><a href="#" title="cancel"
-                                                        id="{{ $product['id'] }}" class="icon cart-cancel"><i
+                                                        id="cancel-{{ $product['id'] }}" class="icon cart-cancel"><i
                                                             class="fa fa-trash-o"></i></a></td>
                                             </tr>
                                         @endforeach
@@ -169,14 +165,14 @@
                                 </tbody><!-- /tbody -->
                             </table><!-- /table --> --}}
                         </div><!-- /.estimate-ship-tax -->
-                        
+
                         @php
-                            $subTotal = 0;
-
-                            foreach($productsInCart as $product) {
-                                $subTotal += $product['product_price'] * $product['amount'];
+                            $sumTotal = 0;
+                            
+                            foreach ($productsInCart as $product) {
+                                $sumTotal += $product['product_price'] * $product['amount'];
                             }
-
+                            
                         @endphp
                         <div class="col-md-4 col-sm-12 cart-shopping-total">
                             <table class="table">
@@ -184,7 +180,7 @@
                                     <tr>
                                         <th>
                                             <div class="cart-grand-total">
-                                                Tổng tiền<span class="inner-left-md">{{ number_format($subTotal)}} VND</span>
+                                                Tổng tiền<span class="inner-left-md">{{ number_format($sumTotal, 0, '', '.') }}&nbsp;VND</span>
                                             </div>
                                         </th>
                                     </tr>
@@ -193,7 +189,8 @@
                                     <tr>
                                         <td>
                                             <div class="cart-checkout-btn pull-right">
-                                                <a href="{{ route('checkout.create') }}" class="btn btn-primary checkout-btn">Thực hiện thanh toán</a>
+                                                <a href="{{ route('checkout.create') }}"
+                                                    class="btn btn-primary checkout-btn">Thực hiện thanh toán</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -211,76 +208,3 @@
         </div><!-- /.container -->
     </div><!-- /.body-content -->
 @endsection
-
-@push('script')
-    <script>
-        $('.qty-plus').each(function(i, obj) {
-            $(obj).click(function() {
-                $(obj).parent().next().val(parseInt($(obj).parent().next().val()) + 1);
-            });
-        });
-
-        $('.qty-minus').each(function(i, obj) {
-            $(obj).click(function() {
-                $(obj).parent().next().val(parseInt($(obj).parent().next().val()) - 1);
-
-                if ($(obj).parent().next().val() == 0) {
-                    $(obj).parent().next().val(1);
-                }
-            });
-        });
-
-        $('.cart-cancel').click(function(e) {
-            e.preventDefault();
-
-            productId = $(this).attr('id');
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $.ajax({
-                method: "POST",
-                url: '/delete-cart',
-                data: {
-                    'product_id': productId,
-                },
-                success: function(respone) {
-                    count = 0;
-                    sumPrice = 0;
-                    if (respone.status) {
-                        $(`#${productId}`).parent().parent().remove();
-
-                        if (respone.products.length > 0) {
-                            for (product of respone.products) {
-                                count += product.amount;
-                                sumPrice += product.amount * product.product_price;
-                            }
-
-                            sumPrice = sumPrice.toLocaleString('it-IT', {
-                                style: 'currency',
-                                currency: 'vnd'
-                            });
-
-                            document.querySelector('.basket-item-count').innerHTML = count;
-                            document.querySelector('.total-price-basket .value').innerHTML = sumPrice;
-                        } else {
-                            document.querySelector('.basket-item-count').innerHTML = count;
-                            document.querySelector('.total-price-basket .value').innerHTML = sumPrice;
-                        }
-                    }
-
-                    if (respone.flag) {
-                        $('.shopping-cart').hide();
-                        $('.cart').html(`<div class="not-cart">
-                                        <h1>Giỏ hàng</h2>
-                                        <h4>Không có sản phẩm nào trong giỏ hàng. Quay lại cửa hàng để tiếp tục mua sắm.</p>
-                                        </div>`)
-                    }
-                }
-            });
-        });
-    </script>
-@endpush

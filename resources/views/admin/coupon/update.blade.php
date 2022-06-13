@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['titlePage' => 'Thêm coupon'])
+@extends('layouts.admin', ['titlePage' => 'Cập nhật coupon'])
 @section('content')
     <div class="container-full">
         <!-- Content Header (Page header) -->

@@ -136,9 +136,9 @@
                                                         {{ number_format($product['product_price'], 0, '', '.') . ' vnd' }}
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-1 action"> <a href="#"><i
+                                                {{-- <div class="col-xs-1 action"> <a href="#"><i
                                                             class="fa fa-trash"></i></a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         @endforeach
                                     </div>
@@ -151,7 +151,7 @@
                                                 class='price'>{{ $sum ? number_format($sum, 0, '', '.') . ' vnd' : 0 }}</span>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <a href="checkout.html" class="btn btn-upper btn-primary m-t-20 btn-block" style="font-size: 12px;">Tiến hành
+                                        <a href="{{ route('checkout.create') }}" class="btn btn-upper btn-primary m-t-20 btn-block" style="font-size: 12px;">Tiến hành
                                             thanh toán</a>
                                         <a href="{{route('cart.view')}}" class="btn btn-upper btn-primary m-t-20 btn-block">Giỏ hàng</a>
                                     </div>

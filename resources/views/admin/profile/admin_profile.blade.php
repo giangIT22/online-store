@@ -1,4 +1,4 @@
- @extends('layouts.admin')
+ @extends('layouts.admin', ['titlePage' => 'Thông tin tài khoản'])
 
  @section('content')
      <div class="container-full">

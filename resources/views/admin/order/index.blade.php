@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['titlePage' => 'Danh sách mã giảm giá'])
+@extends('layouts.admin', ['titlePage' => 'Danh sách đơn hàng'])
 @php
     $orders = collect([]);
 

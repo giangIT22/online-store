@@ -116,4 +116,9 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/cancel-order/{order_code}', [OrderController::class, 'cancelOrder'])->name('order.cancel');
         Route::get('/dowload/{order_code}', [OrderController::class, 'dowloadOrderPdf'])->name('order.dowload');
     });
+
+    // Admin Get All User Routes 
+    Route::prefix('alluser')->group(function () {
+        Route::get('/view', [AdminController::class, 'allUsers'])->name('all.users');
+    });
 });

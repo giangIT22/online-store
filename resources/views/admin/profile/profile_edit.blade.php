@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['titlePage' => 'Thay đổi thông tin'])
+@extends('layouts.admin', ['titlePage' => 'Cập nhật thông tin tài khoản'])
 @section('content')
     <div class="container-full">
         <!-- Content Header (Page header) -->

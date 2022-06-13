@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin', ['titlePage' => 'Cập nhật thông tin danh mục con'])
 
 @section('content')
     <div class="container-full">

@@ -22,7 +22,6 @@ $(document).ready(function() {
             success: function(respone) {
                 count = 0;
                 sumPrice = 0;
-                console.log(respone);
                 if (respone.status) {
                     for (product of respone.products) {
                         count += product.amount;
@@ -33,6 +32,12 @@ $(document).ready(function() {
 
                     document.querySelector('.basket-item-count').innerHTML = count;
                     document.querySelector('.total-price-basket .value').innerHTML = sumPrice;
+
+                    $('.show-notification').addClass('show-alert');
+
+                    setTimeout(function() {
+                        $('.show-notification').removeClass('show-alert');
+                    }, 1000)
                 } else {
                     window.location.href = '/login';
                 }

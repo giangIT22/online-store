@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['titlePage' => 'Add slider'])
+@extends('layouts.admin', ['titlePage' => 'Thêm slider'])
 @section('content')
     <div class="container-full">
         <!-- Content Header (Page header) -->

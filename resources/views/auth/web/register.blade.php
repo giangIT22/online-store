@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('layouts.guest', ['titlePage' => 'Dăng ký'])
 
 @section('content')
     <div class="breadcrumb">

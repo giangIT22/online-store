@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['titlePage' => 'Sub categories'])
+@extends('layouts.admin', ['titlePage' => 'Danh mục con'])
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->

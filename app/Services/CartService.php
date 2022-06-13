@@ -28,8 +28,8 @@ class CartService implements CartServiceInterface
             ]);
         } else {
             $productInCart = DB::table('product_cart')
-                        ->where('cart_id', $cart->id)
-                        ->where('product_id', $params['product_id'])->first();
+                ->where('cart_id', $cart->id)
+                ->where('product_id', $params['product_id'])->first();
 
             if ($productInCart) {
                 DB::table('product_cart')->where('product_id', $params['product_id'])->where('cart_id', $cart->id)->update([
@@ -94,7 +94,38 @@ class CartService implements CartServiceInterface
             $cart->delete();
             $flag = true;
         }
-        
+            
         return [true, $flag, $productsInCart];
+    }
+
+    public function updateCart($params)
+    {
+        $cart = Auth::user()->cart;
+        $query = DB::table('product_cart')->where('cart_id', $cart->id)->where('product_id', $params['product_id']);
+        $product = $query->first();
+
+        if ($params['amount'] > $product->amount) {
+            $amount = ++$product->amount;
+            $query->update([
+                'amount' => $amount
+            ]);
+        }
+
+        if ($params['amount'] < $product->amount) {
+            $amount = --$product->amount;
+            $query->update([
+                'amount' => $amount
+            ]);
+        }
+
+        $sumTotal = 0;
+        $products = DB::table('product_cart')->where('cart_id', $cart->id)->get();
+
+        foreach ($products as $product) {
+            $sum = $product->amount * $product->price;
+            $sumTotal += $sum;
+        }
+
+        return [$product, $sumTotal];
     }
 }
