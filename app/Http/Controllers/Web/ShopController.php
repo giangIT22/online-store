@@ -25,7 +25,7 @@ class ShopController extends Controller
         $categories = Category::with('subCategories')->get();
         $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $productTags = ProductTag::select('name')->limit(8)->groupBy('name')->get();
-        $products = $this->productService->getProductsByTag($tagName, $request->sort, $request->minPrice, $request->maxPrice);
+        $products = $this->productService->getProductsByTag($tagName, $request->sort);
         $currentPage = $products->currentPage();
         $lastPage = $products->lastPage();
 
@@ -38,7 +38,7 @@ class ShopController extends Controller
             abort(404);
         }
 
-        return view('web.tag.tag_view', compact('categories', 'sliders', 'products', 'productTags', 'lastPage', 'currentPage'));
+        return view('web.shop.tag_view', compact('categories', 'sliders', 'products', 'productTags', 'lastPage', 'currentPage'));
 
     }
 
@@ -73,6 +73,6 @@ class ShopController extends Controller
             return redirect()->route('index');
         }
     
-        return view('web.search.view', compact('categories', 'products', 'currentPage', 'lastPage'));
+        return view('web.shop.view', compact('categories', 'products', 'currentPage', 'lastPage'));
     }
 }

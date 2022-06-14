@@ -32,16 +32,55 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                             <!-- ============================================== PRICE SILDER============================================== -->
                             <div class="sidebar-widget wow fadeInUp">
                                 <div class="widget-header">
-                                    <h4 class="widget-title">Price Slider</h4>
+                                    <h4 class="widget-title">GIÁ SẢN PHẨM</h4>
                                 </div>
-                                <div class="sidebar-widget-body m-t-10">
-                                    <div class="price-range-holder"> <span class="min-max"> <span
-                                                class="pull-left">$200.00</span> <span
-                                                class="pull-right">$800.00</span> </span>
-                                        <input type="text" id="amount"
-                                            style="border:0; color:#666666; font-weight:bold;text-align:center;">
-                                        <input type="text" class="price-slider" value="">
-                                    </div>
+                                <div class="filter-price">
+                                    <ul class="list-value">
+                                        <li class="filter-item">
+                                            <span>
+                                                <label>
+                                                    <input type="checkbox" name="filter-value"  value="(<500000)">
+                                                    Giá dưới 500.000 vnd
+                                                </label>
+                                            </span>
+                                        </li>
+
+                                        <li class="filter-item">
+                                            <span>
+                                                <label>
+                                                    <input type="checkbox" name="filter-value" value="(<500000)">
+                                                    500.000 vnd - 1.000.000 vnd
+                                                </label>
+                                            </span>
+                                        </li>
+
+                                        <li class="filter-item">
+                                            <span>
+                                                <label>
+                                                    <input type="checkbox" name="filter-value" value="(<500000)">
+                                                        1.000.000 vnd - 2.000.000 vnd
+                                                </label>
+                                            </span>
+                                        </li>
+
+                                        <li class="filter-item">
+                                            <span>
+                                                <label>
+                                                    <input type="checkbox" name="filter-value" value="(<500000)">
+                                                    2.000.000 vnd - 3.000.000 vnd
+                                                </label>
+                                            </span>
+                                        </li>
+
+                                        <li class="filter-item">
+                                            <span>
+                                                <label>
+                                                    <input type="checkbox" name="filter-value"  value="(<500000)">
+                                                    Giá trên 3.000.000 vnd
+                                                </label>
+                                            </span>
+                                        </li>
+                                    </ul>
                                     <!-- /.price-range-holder -->
                                     <a href="#" class="lnk btn btn-primary">Show Now</a>
                                 </div>
@@ -51,7 +90,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                             <!-- ============================================== PRICE SILDER : END ============================================== -->
                             <!-- ============================================== PRODUCT TAGS ============================================== -->
                             <div class="sidebar-widget product-tag wow fadeInUp outer-top-vs">
-                                <h3 class="section-title">Product tags</h3>
+                                <h3 class="section-title">Tag sản phẩm</h3>
                                 <div class="sidebar-widget-body outer-top-xs">
                                     <div class="tag-list">
                                         @foreach ($productTags as $tag)
@@ -218,17 +257,15 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                     <li class="add-cart-button btn-group">
                                                                         <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
                                                                             data-toggle="tooltip"
-                                                                            class="btn btn-primary icon"
-                                                                            type="button" data-original-title=""
-                                                                            title=""> <i
+                                                                            class="btn btn-primary icon" type="button"
+                                                                            data-original-title="" title=""> <i
                                                                                 class="fa fa-shopping-cart"></i>
                                                                             Tùy
                                                                             chọn</a>
                                                                     </li>
-                                                                    <li class="lnk"> <a
-                                                                            data-toggle="tooltip"
-                                                                            class="add-to-cart preview-product"
-                                                                            id="11" data-original-title="" title="">
+                                                                    <li class="lnk"> <a data-toggle="tooltip"
+                                                                            class="add-to-cart preview-product" id="11"
+                                                                            data-original-title="" title="">
                                                                             <i class="fa fa-eye"
                                                                                 aria-hidden="true"></i>
                                                                         </a> </li>

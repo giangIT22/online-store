@@ -7243,3 +7243,16 @@ span.item-cart {
     line-height: 30px;
     font-size: 14px;
 }
+
+.filter-price {
+    padding: 0 0 20px 0;
+}
+
+.filter-price .list-value {
+    padding: 10px 0;
+}
+
+.filter-price .list-value li label {
+    margin: 5px 0;
+    font-weight: normal;
+}
