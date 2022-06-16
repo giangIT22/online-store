@@ -127,7 +127,7 @@
                                                     <h5>Product Amount <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_qty" class="form-control"
-                                                            value="{{ $product->product_qty }}">
+                                                            value="{{ $product->product_qty }}" disabled>
                                                         @error('product_qty')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -221,12 +221,13 @@
                                                     <div class="controls">
                                                         <fieldset>
                                                             <input type="checkbox" id="checkbox_2" name="hot_deals"
-                                                                value="1" {{ $product->hot_deals == 1 ? 'checked' : ''}}>
+                                                                value="1"
+                                                                {{ $product->hot_deals == 1 ? 'checked' : '' }}>
                                                             <label for="checkbox_2">Hot Deals</label>
                                                         </fieldset>
                                                         <fieldset>
-                                                            <input type="checkbox" id="checkbox_3" name="featured"
-                                                                value="1" {{ $product->featured == 1 ? 'checked' : ''}}>
+                                                            <input type="checkbox" id="checkbox_3" name="featured" value="1"
+                                                                {{ $product->featured == 1 ? 'checked' : '' }}>
                                                             <label for="checkbox_3">Featured</label>
                                                         </fieldset>
                                                     </div>
@@ -241,18 +242,56 @@
                                                     <div class="controls">
                                                         <fieldset>
                                                             <input type="checkbox" id="checkbox_4" name="special_offer"
-                                                                value="1" {{ $product->special_offer == 1 ? 'checked' : ''}}>
+                                                                value="1"
+                                                                {{ $product->special_offer == 1 ? 'checked' : '' }}>
                                                             <label for="checkbox_4">Special Offer</label>
                                                         </fieldset>
                                                         <fieldset>
                                                             <input type="checkbox" id="checkbox_5" name="special_deals"
-                                                                value="1" {{ $product->special_deals == 1 ? 'checked' : ''}}>
+                                                                value="1"
+                                                                {{ $product->special_deals == 1 ? 'checked' : '' }}>
                                                             <label for="checkbox_5">Special Deals</label>
                                                         </fieldset>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {{-- CHOOSE SIZE --}}
+                                        <div class="row choose-size">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <h5>Kích thước <span class="text-danger">*</span></h5>
+                                                    <div class="controls">
+                                                        <select class="form-control" id="list-size">
+                                                            <option value="">Chọn kích thước</option>
+                                                            @foreach ($sizes as $size)
+                                                                <option value="{{ $size->id }}">
+                                                                    {{ $size->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @foreach ($sizeInfos as $item)
+                                            <div class="row">
+                                                <div class="col-md-3">
+
+                                                    <div class="form-group">
+                                                        <input type="hidden" name="sizes[]" value="{{ $item->id }}" class="size-item-{{$item->id}}">
+                                                        <h5>{{ $item->name }}<span class="text-danger">*</span></h5>
+                                                        <div class="controls">
+                                                            <input type="text" name="amounts[]" class="form-control"
+                                                                placeholder="Vui lòng nhập số lượng sản phẩm"
+                                                                value="{{ $item->amount }}">
+                                                        </div>
+                                                    </div>
+
+                                                </div> <!-- end col md 4 -->
+                                            </div>
+                                        @endforeach
+
                                         <hr>
 
                                         <div class="text-xs-right">

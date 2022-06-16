@@ -110,7 +110,8 @@
 
                                             </div> <!-- end col md 4 -->
                                         </div> <!-- end 3RD row  -->
-
+                                        
+                                        {{-- 
                                         <div class="row">
                                             <div class="col-md-8">
 
@@ -125,7 +126,7 @@
                                                 </div>
 
                                             </div> <!-- end col md 4 -->
-                                        </div>
+                                        </div> --}}
 
                                         <div class="row">
                                             <div class="col-md-8">
@@ -151,6 +152,7 @@
                                             </div> <!-- end col md 4 -->
 
                                         </div> <!-- end 5th row  -->
+
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
@@ -229,11 +231,30 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <hr>
 
-                                    <div class="text-xs-right">
-                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add">
-                                    </div>
+                                        {{-- CHOOSE SIZE --}}
+                                        <div class="row choose-size">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <h5>Kích thước <span class="text-danger">*</span></h5>
+                                                    <div class="controls">
+                                                        <select class="form-control" id="list-size">
+                                                            <option value="">Chọn kích thước</option>
+                                                            @foreach ($sizes as $size)
+                                                                <option value="{{ $size->id }}">
+                                                                    {{ $size->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="text-xs-right">
+                                            <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add">
+                                        </div>
                             </form>
 
                         </div>

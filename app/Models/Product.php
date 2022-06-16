@@ -61,4 +61,9 @@ class Product extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class, 'product_size', 'product_id', 'size_id')->withPivot ('amount');
+    }
 }

@@ -110,12 +110,12 @@
                                                 <label class="form-check-label" for="pay-card">
                                                     Thanh toán qua PayPal
                                                 </label>
-                                                <img src="{{ asset('frontend/assets/images/payments/1.png') }}" alt=""
-                                                    style="margin-left: 20px;">
+                                                <img src="{{ asset('frontend/assets/images/payments/1.png') }}"
+                                                    alt="" style="margin-left: 20px;">
                                             </div>
                                             <div class="form-check pay-item">
-                                                <input class="form-check-input" type="radio" value="COD" name="payment_type"
-                                                    id="pay-transport">
+                                                <input class="form-check-input" type="radio" value="COD"
+                                                    name="payment_type" id="pay-transport">
                                                 <label class="form-check-label" for="pay-transport">
                                                     Thanh toán khi giao hàng
                                                 </label>
@@ -139,11 +139,15 @@
                                         }
                                     @endphp
                                     @foreach ($products as $product)
-                                        <li class="list-group-item fix-flex lh-condensed">
+                                        <li class="list-group-item fix-flex lh-condensed pd-10">
                                             <div>
-                                                <div class="info-cart-item">
-                                                    <img src="{{ asset($product->image) }} " width="50px" alt="">
-                                                    <span class="my-0 item-cart">{{ $product->name }}</span>
+                                                <div class="info-cart-item fix-flex">
+                                                    <img src="{{ asset($product->image) }} " width="50px" style="margin-right: 10px;"
+                                                        alt="">
+                                                    <div class="product-info-detail">
+                                                        <span class="my-0 item-cart">{{ $product->name }}</span>
+                                                        <span class="size-item-cart">{{ $product->size_name }} </span>
+                                                    </div>
                                                 </div>
                                                 <small class="text-muted">Số lượng: {{ $product->amount }}</small>
                                             </div>

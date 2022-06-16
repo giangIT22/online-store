@@ -8,8 +8,10 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductTag;
+use App\Models\Size;
 use App\Traits\StoreImageTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -32,15 +34,17 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $sizes = Size::all();
 
-        return view('admin.product.create', compact('categories'));
+        return view('admin.product.create', compact('categories', 'sizes'));
     }
     
     public function store(StoreProduct $request)
     {
-        $data = $request->except(['image_path', 'tags']);
+        $data = $request->except(['image_path', 'tags', 'sizes', 'amounts']);
         $productImage = $this->uploadImage($request, 'image', 'product');
         $data['image'] = $productImage['file_path'];
+        $data['product_qty'] = array_sum($request->amounts);
         $product = Product::create($data);
         
         if ($request->has('image_path')) {
@@ -60,6 +64,11 @@ class ProductController extends Controller
                     'product_id' => $product->id
                 ]);
             }
+        }
+
+        //Create product_size
+        foreach ($request->sizes as $key => $size) {
+            $product->sizes()->attach($size, ['amount' => $request->amounts[$key]]);            
         }
 
         $notification = [
@@ -92,14 +101,22 @@ class ProductController extends Controller
         $product = Product::findOrFail($productId);
         $categories = Category::all();
         $subcategories = Category::findOrFail($product->category_id)->subCategories;
+        $sizes = Size::all();
 
-        return view('admin.product.update', compact('product', 'categories', 'subcategories'));
+        $sizeInfos = DB::table('product_size')
+            ->join('sizes', 'product_size.size_id', 'sizes.id')
+            ->select('sizes.name', 'sizes.id', 'product_size.amount')
+            ->where('product_id', $product->id)
+            ->get();
+
+        return view('admin.product.update', compact('product', 'categories', 'subcategories', 'sizes', 'sizeInfos'));
     }
 
     public function update(StoreProduct $request, $productId)
     {
-        $data = $request->except(['image_path', 'tags']);
+        $data = $request->except(['image_path', 'tags', 'sizes', 'amounts']);
         $product = Product::findOrFail($productId);
+        $data['product_qty'] = array_sum($request->amounts);
 
         if ($request->image) {
             $productImage = $this->uploadImage($request, 'image', 'product');
@@ -146,6 +163,16 @@ class ProductController extends Controller
             }
         } else {
             ProductTag::where('product_id', $productId)->delete();
+        }
+
+
+         //Update product_size
+        foreach ($request->sizes as $key => $size) {
+            DB::table('product_size')
+                ->updateOrInsert([
+                'product_id' => $product->id,
+                'size_id' => $size,
+                ], ['amount' => $request->amounts[$key]]);
         }
 
         $notification = [

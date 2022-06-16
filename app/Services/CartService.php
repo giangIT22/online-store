@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Size;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,30 +25,37 @@ class CartService implements CartServiceInterface
                 'cart_id' => $cart->id,
                 'product_id' => $params['product_id'],
                 'amount' => $params['amount'],
-                'price' => $product->sale_price ?? $product->product_price
+                'price' => $product->sale_price ?? $product->product_price,
+                'size_id' => $params['size_id']
             ]);
         } else {
             $productInCart = DB::table('product_cart')
                 ->where('cart_id', $cart->id)
+                ->where('size_id', $params['size_id'])
                 ->where('product_id', $params['product_id'])->first();
 
             if ($productInCart) {
-                DB::table('product_cart')->where('product_id', $params['product_id'])->where('cart_id', $cart->id)->update([
-                    'amount' => $params['amount'] + $productInCart->amount,
-                    'price' => $product->sale_price ?? $product->product_price
-                ]);
+                DB::table('product_cart')
+                    ->where('product_id', $params['product_id'])
+                    ->where('cart_id', $cart->id)
+                    ->where('size_id', $params['size_id'])
+                    ->update([
+                        'amount' => $params['amount'] + $productInCart->amount,
+                        'price' => $product->sale_price ?? $product->product_price
+                    ]);
             } else {
                 DB::table('product_cart')->insert([
                     'cart_id' => $cart->id,
                     'product_id' => $params['product_id'],
                     'amount' => $params['amount'],
-                    'price' => $product->sale_price ?? $product->product_price
+                    'price' => $product->sale_price ?? $product->product_price,
+                    'size_id' => $params['size_id']
                 ]);
             }
         }
         $productsInCart = collect([]);
 
-        $products = DB::table('product_cart')->select('product_id', 'amount', 'price')->where('cart_id', $cart->id)->get();
+        $products = DB::table('product_cart')->select('product_id', 'amount', 'price', 'size_id')->where('cart_id', $cart->id)->get();
 
         foreach ($products as $item) {
             $product = DB::table('products')->where('id', $item->product_id)->first();
@@ -64,14 +72,17 @@ class CartService implements CartServiceInterface
         return $productsInCart;
     }
 
-    public function deleteCart($productId)
+    public function deleteCart($params)
     {
         $cart = Auth::user()->cart;
         $flag = false;
-        $product = DB::table('product_cart')->where('cart_id', $cart->id)->where('product_id', $productId)->first();
+        $query = DB::table('product_cart')->where('cart_id', $cart->id)
+            ->where('product_id', $params['product_id'])
+            ->where('size_id', $params['size_id']);
+        $product = $query->first();
 
         if ($product) {
-            DB::table('product_cart')->where('cart_id', $cart->id)->where('product_id', $productId)->delete();
+            $query->delete();
         }
 
         $productsInCart = collect([]);
@@ -105,7 +116,9 @@ class CartService implements CartServiceInterface
     public function updateCart($params)
     {
         $cart = Auth::user()->cart;
-        $query = DB::table('product_cart')->where('cart_id', $cart->id)->where('product_id', $params['product_id']);
+        $query = DB::table('product_cart')->where('cart_id', $cart->id)
+            ->where('product_id', $params['product_id'])
+            ->where('size_id', $params['size_id']);
         $product = $query->first();
 
         if ($params['amount'] > $product->amount) {
@@ -131,6 +144,6 @@ class CartService implements CartServiceInterface
             $sumTotal += $sum;
         }
 
-        return [$product, $sumTotal, $count];
+        return [$query->first(), $sumTotal, $count];
     }
 }

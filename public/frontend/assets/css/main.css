@@ -7140,8 +7140,14 @@ header {
 }
 
 span.item-cart {
-    display: inline-block;
+    display: block;
     width: 150px;
+}
+
+span.size-item-cart {
+    display: block;
+    font-size: 12px;
+    color: #84b943;
 }
 
 .fee_charge {
@@ -7255,4 +7261,29 @@ span.item-cart {
 .filter-price .list-value li label {
     margin: 5px 0;
     font-weight: normal;
+}
+
+.product-size {
+    margin-top: 20px;
+}
+
+.product-size .title-size {
+    font-size: 16px;
+    color: #636363;
+    margin-right: 20px;
+    font-weight: 400;
+    font-family: "Open+Sans", "HelveticaNeue", "Helvetica Neue", sans-serif;
+}
+
+.product-size .list-size-product {
+    padding: 10px 10px;
+    outline: none;
+    border: 0.5px solid #e1e1e1;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.pd-10 {
+    padding: 10px 10px;
 }

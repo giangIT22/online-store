@@ -619,24 +619,15 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
 
                                         </div>
                                         <!-- /.product-info -->
-                                        <div class="cart clearfix animate-effect">
+                                        <div class="cart clearfix animate-effect fix-style">
                                             <div class="action">
                                                 <ul class="list-unstyled">
                                                     <li class="add-cart-button btn-group">
-                                                        <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
-                                                            data-toggle="tooltip" class="btn btn-primary icon"
-                                                            type="button" title="Chọn sản phẩm"> <i
-                                                                class="fa fa-shopping-cart"></i> </a>
-                                                        <button class="btn btn-primary cart-btn" type="button">Add to
-                                                            cart</button>
+                                                        <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}" data-toggle="tooltip" class="btn btn-primary icon" type="button" data-original-title="" title=""> <i class="fa fa-shopping-cart"></i> Tùy
+                                                            chọn</a>
+                                                        <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                                     </li>
-                                                    <li class="lnk wishlist"> <a data-toggle="tooltip"
-                                                            class="add-to-cart" href="detail.html" title="Yêu thích"> <i
-                                                                class="icon fa fa-heart"></i>
-                                                        </a> </li>
-                                                    <li class="lnk"> <a data-toggle="tooltip"
-                                                            class="add-to-cart preview-product" href="" title="Xem nhanh">
-                                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart preview-product" id="11" data-original-title="" title=""> <i class="fa fa-eye" aria-hidden="true"></i>
                                                         </a> </li>
                                                 </ul>
                                             </div>
@@ -700,23 +691,15 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
 
                                     </div>
                                     <!-- /.product-info -->
-                                    <div class="cart clearfix animate-effect">
+                                    <div class="cart clearfix animate-effect fix-style">
                                         <div class="action">
                                             <ul class="list-unstyled">
                                                 <li class="add-cart-button btn-group">
-                                                    <a href="{{ route('product.detail', ['product_id' => $product->product_id, 'slug' => $product->product_slug]) }}"
-                                                        data-toggle="tooltip" class="btn btn-primary icon" type="button"
-                                                        title="Chọn sản phẩm"> <i class="fa fa-shopping-cart"></i> </a>
-                                                    <button class="btn btn-primary cart-btn" type="button">Add to
-                                                        cart</button>
+                                                    <a href="{{ route('product.detail', ['product_id' => $product->product_id, 'slug' => $product->product_slug]) }}" data-toggle="tooltip" class="btn btn-primary icon" type="button" data-original-title="" title=""> <i class="fa fa-shopping-cart"></i> Tùy
+                                                        chọn</a>
+                                                    <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                                 </li>
-                                                <li class="lnk wishlist"> <a data-toggle="tooltip"
-                                                        class="add-to-cart" href="detail.html" title="Yêu thích"> <i
-                                                            class="icon fa fa-heart"></i>
-                                                    </a> </li>
-                                                <li class="lnk"> <a data-toggle="tooltip"
-                                                        class="add-to-cart preview-product" href="" title="Xem nhanh">
-                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                                <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart preview-product" id="11" data-original-title="" title=""> <i class="fa fa-eye" aria-hidden="true"></i>
                                                     </a> </li>
                                             </ul>
                                         </div>
@@ -776,22 +759,15 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
 
                                 </div>
                                 <!-- /.product-info -->
-                                <div class="cart clearfix animate-effect">
+                                <div class="cart clearfix animate-effect fix-style">
                                     <div class="action">
                                         <ul class="list-unstyled">
                                             <li class="add-cart-button btn-group">
-                                                <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
-                                                    data-toggle="tooltip" class="btn btn-primary icon" type="button"
-                                                    title="Chọn sản phẩm"> <i class="fa fa-shopping-cart"></i> </a>
-                                                <button class="btn btn-primary cart-btn" type="button">Add to
-                                                    cart</button>
+                                                <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}" data-toggle="tooltip" class="btn btn-primary icon" type="button" data-original-title="" title=""> <i class="fa fa-shopping-cart"></i> Tùy
+                                                    chọn</a>
+                                                <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                             </li>
-                                            <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart"
-                                                    href="detail.html" title="Yêu thích"> <i class="icon fa fa-heart"></i>
-                                                </a> </li>
-                                            <li class="lnk"> <a data-toggle="tooltip"
-                                                    class="add-to-cart preview-product" href="" title="Xem nhanh">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                            <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart preview-product" id="11" data-original-title="" title=""> <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a> </li>
                                         </ul>
                                     </div>
@@ -851,22 +827,15 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
 
                             </div>
                             <!-- /.product-info -->
-                            <div class="cart clearfix animate-effect">
+                            <div class="cart clearfix animate-effect fix-style">
                                 <div class="action">
                                     <ul class="list-unstyled">
                                         <li class="add-cart-button btn-group">
-                                            <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
-                                                data-toggle="tooltip" class="btn btn-primary icon" type="button"
-                                                title="Chọn sản phẩm"> <i class="fa fa-shopping-cart"></i> </a>
-                                            <button class="btn btn-primary cart-btn" type="button">Add to
-                                                cart</button>
+                                            <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}" data-toggle="tooltip" class="btn btn-primary icon" type="button" data-original-title="" title=""> <i class="fa fa-shopping-cart"></i> Tùy
+                                                chọn</a>
+                                            <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                         </li>
-                                        <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart"
-                                                href="detail.html" title="Yêu thích"> <i class="icon fa fa-heart"></i>
-                                            </a> </li>
-                                        <li class="lnk"> <a data-toggle="tooltip"
-                                                class="add-to-cart preview-product" href="" title="Xem nhanh">
-                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                        <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart preview-product" id="11" data-original-title="" title=""> <i class="fa fa-eye" aria-hidden="true"></i>
                                             </a> </li>
                                     </ul>
                                 </div>

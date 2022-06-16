@@ -17,7 +17,8 @@ $(document).ready(function() {
             url: '/store-cart',
             data: {
                 'product_id': productId,
-                'amount': amount
+                'amount': amount,
+                'size_id': $('.list-size-product').val()
             },
             success: function(response) {
                 count = 0;

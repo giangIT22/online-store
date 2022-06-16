@@ -63,7 +63,8 @@ Route::prefix('/product')->group(function () {
     Route::get('/detail/{product_id}/{slug}', [HomeController::class, 'productDetail'])->name('product.detail');
     Route::get('/tag/{tag_name}', [ShopController::class, 'index'])->name('product.tag');
     Route::get('/preview-product/{product_id}', [HomeController::class, 'previewProduct'])->name('preview.product');
-    ROute::post('/add-review', [HomeController::class, 'storeReview'])->name('review.store');
+    Route::post('/add-review', [HomeController::class, 'storeReview'])->name('review.store');
+    Route::post('/check-exist', [HomeController::class, 'checkExistProduct']);
 });
 
 //============Shopping===============================
@@ -73,7 +74,7 @@ Route::get('/all-product', [CategoryController::class, 'allProducts'])->name('ca
 //=======================cart=====================
 
 Route::post('/store-cart', [CartController::class, 'store'])->name('cart.store');
-Route::get('cart/shopping-cart', [CartController::class, 'view'])->name('cart.view');
+Route::get('/cart/shopping-cart', [CartController::class, 'view'])->name('cart.view');
 Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
 Route::post('/delete-cart', [CartController::class, 'deleteCart'])->name('cart.delete');
 
@@ -91,3 +92,4 @@ Route::get('/get-district/{province_id}', [CheckoutController::class, 'getDistri
 Route::get('/get-ward/{district_id}', [CheckoutController::class, 'getWard'])->name('checkout.ward');
 Route::post('/checkout/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('checkout.apply_coupon');
 Route::get('/checkout/remove-coupon', [CheckoutController::class, 'removeCoupon'])->name('checkout.remove_coupon');
+// Route::post('/checkout/momo-payment', [CheckoutController::class, 'paymentByMomo'])->name('checkout.momo');

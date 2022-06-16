@@ -53,11 +53,12 @@
                                                 </td>
                                                 <td class="cart-product-name-info">
                                                     <h4 class='cart-product-description'>
-                                                        <a href="detail.html">{{ $product['product_name'] }}</a>
+                                                        <a href="{{ route('product.detail', ['product_id' => $product['id'], 'slug' => $product['product_slug']]) }}">{{ $product['product_name'] }}</a>
                                                     </h4>
-                                                    {{-- <div class="cart-product-info">
-                                                            <span class="product-color">COLOR:<span>Blue</span></span>
-                                                    </div> --}}
+                                                    
+                                                    <div class="cart-product-info">
+                                                            <span class="product-size">Size:<span>{{ $product['product_size'] }}</span></span>
+                                                    </div>
                                                 </td>
                                                 <td class="cart-product-sub-total"><span
                                                         class="cart-sub-total-price">{{ number_format($product['product_price'], 0, '', '.') }}&nbsp;VND</span>
@@ -65,23 +66,23 @@
                                                     <div class="quant-input">
                                                         <div class="arrows">
                                                             <div class="arrow plus gradient qty-plus"
-                                                                id="{{ $product['id'] }}"><span class="ir"><i
+                                                                id="{{ $product['id'] . '-'. $product['size_id'] }}"><span class="ir"><i
                                                                         class="icon fa fa-sort-asc"></i></span></div>
                                                             <div class="arrow minus gradient qty-minus"
-                                                                id="{{ $product['id'] }}"><span class="ir"><i
+                                                                id="{{ $product['id'] . '-'. $product['size_id'] }}"><span class="ir"><i
                                                                         class="icon fa fa-sort-desc"></i></span></div>
                                                             <input type="hidden" id="item-cart"
                                                                 value="{{ $product['id'] }}">
                                                         </div>
                                                         <input type="text" value="{{ $product['amount'] }}"
-                                                            class="qty-input" id="qty-input-{{ $product['id'] }}">
+                                                            class="qty-input" id="qty-input-{{ $product['id'] .'-'. $product['size_id']}}">
                                                     </div>
                                                 </td>
                                                 <td class="cart-product-sub-total"><span class="cart-sub-total-price"
-                                                        id="sum-{{ $product['id'] }}">{{ number_format($product['product_price'] * $product['amount'], 0, '', '.') }}&nbsp;VND</span>
+                                                        id="sum-{{ $product['id'] . '-' . $product['size_id'] }}">{{ number_format($product['product_price'] * $product['amount'], 0, '', '.') }}&nbsp;VND</span>
                                                 </td>
                                                 <td class="romove-item"><a href="#" title="cancel"
-                                                        id="cancel-{{ $product['id'] }}" class="icon cart-cancel"><i
+                                                        id="cancel-{{ $product['id'] . '-'. $product['size_id'] }}" class="icon cart-cancel"><i
                                                             class="fa fa-trash-o"></i></a></td>
                                             </tr>
                                         @endforeach

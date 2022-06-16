@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductTag;
 use App\Models\Review;
+use App\Models\Size;
 use App\Models\SubCategory;
 use Illuminate\Support\Facades\DB;
 
@@ -100,5 +101,18 @@ class ProductService implements ProductServiceInterface
             ->get();
 
         return $products;
+    }
+
+    public function checkExistProduct($params)
+    {
+        $status = true;
+        $productSize = DB::table('product_size')->where('size_id', $params['size_id'])
+            ->where('product_id', $params['product_id'])->first();
+
+        if (empty($productSize) || $productSize->amount == 0) {
+            return $status = false;
+        }
+
+        return $status;
     }
 }

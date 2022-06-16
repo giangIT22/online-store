@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Size;
 use App\Services\CartServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,7 @@ class CartController extends Controller
     {
         if (Auth::check()) {
             $products = $this->cartService->addProductToCart($request->all());
-            
+
             return response()->json(
                 [
                     'status' => true,
@@ -37,22 +38,27 @@ class CartController extends Controller
 
     public function view()
     {
-        $categories = Category::with('subCategories')->get();        
+        $categories = Category::with('subCategories')->get();
         $cart = Cart::where('user_id', Auth::id())->first() ?? 0;
-        
+
         if ($cart) {
             $productsInCart = collect([]);
 
-            $products = DB::table('product_cart')->select('product_id', 'amount', 'price')->where('cart_id', $cart->id)->get();
+            $products = DB::table('product_cart')->select('product_id', 'amount', 'price', 'size_id')
+                ->where('cart_id', $cart->id)->get();
 
             foreach ($products as $item) {
                 $product = DB::table('products')->where('id', $item->product_id)->first();
+                $size = Size::findOrFail($item->size_id);
                 $productsInCart->push([
                     'id' => $item->product_id,
+                    'product_slug' => $product->product_slug,
                     'product_image' => $product->image,
                     'product_name' => $product->name,
                     'product_price' => $item->price,
                     'amount' => $item->amount,
+                    'product_size' => $size->name,
+                    'size_id' => $size->id
                 ]);
             }
         } else {
@@ -64,7 +70,7 @@ class CartController extends Controller
 
     public function deleteCart(Request $request)
     {
-        list($status, $flag, $products) = $this->cartService->deleteCart($request->product_id);
+        list($status, $flag, $products) = $this->cartService->deleteCart($request->all());
 
         if ($status) {
             return response()->json([
@@ -78,7 +84,7 @@ class CartController extends Controller
             ]);
         }
     }
-    
+
     public function updateCart(Request $request)
     {
         list($product, $sumTotal, $count) = $this->cartService->updateCart($request->all());

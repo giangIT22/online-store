@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductTag;
 use App\Models\Review;
+use App\Models\Size;
 use App\Models\Slider;
 use App\Services\BlogServiceInterface;
 use App\Services\ProductServiceInterface;
@@ -70,9 +71,10 @@ class HomeController extends Controller
                     ->where('status', 1)
                     ->orderBy('created_at', 'desc')
                     ->get();
+        $sizes = Size::all();
 
         return view('web.product.product_detail', compact('productDetail', 'categories', 'multiImages',
-            'hotDealProducts', 'relatedProducts', 'reviews'));
+            'hotDealProducts', 'relatedProducts', 'reviews', 'sizes'));
     }
 
     public function previewProduct($productId)
@@ -105,6 +107,15 @@ class HomeController extends Controller
         
         return response()->json([
             'status' => true
+        ]);
+    }
+
+    public function checkExistProduct(Request $request)
+    {
+        $status = $this->productService->checkExistProduct($request->all());
+
+        return response()->json([
+            'status' => $status
         ]);
     }
 }

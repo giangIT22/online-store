@@ -548,8 +548,10 @@ jQuery(document).ready(function() {
     $('.qty-plus').each(function(i, obj) {
         $(obj).click(function() {
             $(obj).parent().next().val(parseInt($(obj).parent().next().val()) + 1);
-            let productId = $(obj).attr('id');
-            let amount = $(`#qty-input-${productId}`).val();
+            let index = $(obj).attr('id').indexOf('-');
+            let productId = $(obj).attr('id').slice(0, index);
+            let sizeId = $(obj).attr('id').slice(index + 1);
+            let amount = $(`#qty-input-${productId}-${sizeId}`).val();
 
             $.ajaxSetup({
                 headers: {
@@ -562,11 +564,12 @@ jQuery(document).ready(function() {
                 url: '/cart/update',
                 data: {
                     'product_id': productId,
-                    'amount': amount
+                    'amount': amount,
+                    'size_id': sizeId
                 },
                 success: function(response) {
                     let sumPrice = response.product.amount * response.product.price;
-                    $(`#sum-${productId}`).text(sumPrice.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                    $(`#sum-${productId}-${sizeId}`).text(sumPrice.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
                     $('.cart-grand-total span').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
                     $('.sum-price-product').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
                     $('.total-price-basket .value').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
@@ -584,9 +587,11 @@ jQuery(document).ready(function() {
                 $(obj).parent().next().val(1);
             }
 
-            let productId = $(obj).attr('id');
-            let amount = $(`#qty-input-${productId}`).val();
-
+            let index = $(obj).attr('id').indexOf('-');
+            let productId = $(obj).attr('id').slice(0, index);
+            let sizeId = $(obj).attr('id').slice(index + 1);
+            let amount = $(`#qty-input-${productId}-${sizeId}`).val();
+            console.log(productId, sizeId, amount);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -598,11 +603,12 @@ jQuery(document).ready(function() {
                 url: '/cart/update',
                 data: {
                     'product_id': productId,
-                    'amount': amount
+                    'amount': amount,
+                    'size_id': sizeId
                 },
                 success: function(response) {
                     let sumPrice = response.product.amount * response.product.price;
-                    $(`#sum-${productId}`).text(sumPrice.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                    $(`#sum-${productId}-${sizeId}`).text(sumPrice.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
                     $('.cart-grand-total span').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
                     $('.sum-price-product').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
                     $('.total-price-basket .value').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
@@ -618,7 +624,9 @@ jQuery(document).ready(function() {
         e.preventDefault();
 
         let start = $(this).attr('id').indexOf('-');
-        let productId = $(this).attr('id').slice(start + 1);
+        let finish = $(this).attr('id').lastIndexOf('-');
+        let productId = $(this).attr('id').slice(start + 1, finish);
+        let sizeId = $(this).attr('id').slice(finish + 1);
 
         $.ajaxSetup({
             headers: {
@@ -631,13 +639,13 @@ jQuery(document).ready(function() {
             url: '/delete-cart',
             data: {
                 'product_id': productId,
+                'size_id': sizeId
             },
             success: function(response) {
                 let count = 0;
                 let sumPrice = 0;
                 if (response.status) {
-                    console.log($(`#${productId}`).parent().parent());
-                    $(`#cancel-${productId}`).parent().parent().remove();
+                    $(`#cancel-${productId}-${sizeId}`).parent().parent().remove();
 
                     //update box-cart
                     if (response.products.length > 0) {
@@ -698,5 +706,38 @@ jQuery(document).ready(function() {
                 }
             }
         });
+    });
+
+    //=================Check exist product=======================================
+    $('.list-size-product').on('change', function() {
+        let productId = $('.product_id').val();
+
+        if ($(this).val() != 'Chọn kích thước') {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                method: "POST",
+                url: '/product/check-exist',
+                data: {
+                    product_id: productId,
+                    size_id: $(this).val(),
+                },
+                success: function(response) {
+                    if (response.status) {
+                        $('.add-cart-product').prop('disabled', false);
+                        $('.stock-box span.value').text('Còn hàng');
+                    } else {
+                        $('.add-cart-product').prop('disabled', true);
+                        $('.stock-box span.value').text('Hết hàng');
+                    }
+                }
+            });
+        } else {
+            $('.add-cart-product').prop('disabled', true);
+        }
     });
 })

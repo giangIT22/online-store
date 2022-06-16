@@ -33,6 +33,7 @@ class OrderService implements OrderServiceInterface
                     'product_id' => $item->product_id,
                     'amount' => $item->amount,
                     'product_price' => $item->price,
+                    'size_id' => $item->size_id,
                     'created_at' => now()
                 ]);
 
@@ -41,7 +42,17 @@ class OrderService implements OrderServiceInterface
                 $product->product_qty = $product->product_qty - $item->amount;
                 $product->save();
 
+                $query = DB::table('product_size')
+                    ->where('product_id', $item->product_id)
+                    ->where('size_id', $item->size_id);
+                $productSize = $query->first();
+
+                $query->update([
+                    'amount' => $productSize->amount - $item->amount
+                ]);
+
                 DB::table('product_cart')->where('cart_id', $cart->id)->delete();
+
                 $cart->delete();
             }
         }
@@ -68,8 +79,10 @@ class OrderService implements OrderServiceInterface
             }
 
             $orderItem = DB::table('order_item')
-                ->select('products.name', 'products.product_code', 'order_item.amount', 'order_item.product_price', 'products.image')
-                ->join('products', 'order_item.product_id', 'products.id',)
+                ->select('products.name', 'products.product_code', 'order_item.amount',
+                    'order_item.product_price', 'products.image', 'sizes.name as size_name')
+                ->join('products', 'order_item.product_id', 'products.id')
+                ->join('sizes', 'order_item.size_id', 'sizes.id')
                 ->where('order_id', $order->id)
                 ->get();
         }
@@ -104,6 +117,15 @@ class OrderService implements OrderServiceInterface
             $product = Product::findOrFail($item->product_id);
             $product->product_qty = $product->product_qty + $item->amount;
             $product->save();
+
+            $query = DB::table('product_size')
+                ->where('product_id', $item->product_id)
+                ->where('size_id', $item->size_id);
+            $productSize = $query->first();
+
+            $query->update([
+                'amount' => $productSize->amount + $item->amount
+            ]);
         }
     }
 
@@ -111,7 +133,7 @@ class OrderService implements OrderServiceInterface
      * Get invoice monthy
      */
     public function getInvoiceMonthy()
-    {   
+    {
         $invoiceTimeEarliest = Order::orderBy('created_at')->first()->created_at;
         $invoiceTimeLatest = Order::orderBy('created_at', 'desc')->first()->created_at;
         $maximumDate = request('maximum_date') ? Carbon::parse(request('maximum_date')) : $invoiceTimeLatest;
@@ -120,13 +142,13 @@ class OrderService implements OrderServiceInterface
         if (($maximumDate->year > $invoiceTimeLatest->year) || ($maximumDate->year < $invoiceTimeEarliest->year)) {
             abort(404);
         }
-        
-        $invoices = $invoices->groupBy(function($invoice) {
+
+        $invoices = $invoices->groupBy(function ($invoice) {
             return $invoice->created_at->year;
-        })->transform(function($invoice) {
-            return $invoice->mapToGroups(function($item) {
+        })->transform(function ($invoice) {
+            return $invoice->mapToGroups(function ($item) {
                 return [$item['created_at']->month => $item['sum_price']];
-            })->transform(function($item) {
+            })->transform(function ($item) {
                 return $item->sum();
             });
         });
@@ -156,7 +178,7 @@ class OrderService implements OrderServiceInterface
 
         $invoices = $invoices->mapToGroups(function ($invoice) {
             return [$invoice['created_at']->year => $invoice['sum_price']];
-        })->transform(function($item) {
+        })->transform(function ($item) {
             return $item->sum();
         });
 

@@ -9,4 +9,5 @@ interface ProductServiceInterface
     public function getRelatedProducts($productId);
     public function addReviewProduct($params);
     public function getBestSellProducts();
+    public function checkExistProduct($params);
 }

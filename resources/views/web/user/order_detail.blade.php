@@ -84,7 +84,7 @@
 
                         @foreach ($orderItem as $item)
                             <tr>
-                                <th colspan="4">{{ $item->name }}</th>
+                                <th colspan="4">{{ $item->name . ' ' . '(' .$item->size_name .')' }}</th>
                                 <td>{{ $item->product_code }}</td>
                                 <td>{{ number_format($item->product_price) }} vnd</td>
                                 <td>{{ $item->amount }}</td>

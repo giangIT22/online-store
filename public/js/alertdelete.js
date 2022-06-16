@@ -18,7 +18,6 @@ function actionDelete(event) {
                 success: function(data) {
                     Swal.fire(
                         'Xóa thành công',
-                        'Bài viết đã bị xóa',
                         'success'
                     ).then(function(isConfirm) {
                         if (isConfirm) {

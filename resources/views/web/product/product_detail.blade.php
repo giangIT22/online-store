@@ -29,36 +29,10 @@
                                                 <div class="image">
                                                     <img src="{{ asset($product->image) }}" alt="">
                                                 </div>
-                                                <div class="sale-offer-tag"><span>35%<br>off</span></div>
-                                                <div class="timing-wrapper">
-                                                    <div class="box-wrapper">
-                                                        <div class="date box">
-                                                            <span class="key">120</span>
-                                                            <span class="value">Days</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="box-wrapper">
-                                                        <div class="hour box">
-                                                            <span class="key">20</span>
-                                                            <span class="value">HRS</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="box-wrapper">
-                                                        <div class="minutes box">
-                                                            <span class="key">36</span>
-                                                            <span class="value">MINS</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="box-wrapper hidden-md">
-                                                        <div class="seconds box">
-                                                            <span class="key">60</span>
-                                                            <span class="value">SEC</span>
-                                                        </div>
-                                                    </div>
+                                                <div class="sale-offer-tag">
+                                                    <span>{{ round(100 - ($product->sale_price / $product->product_price) * 100) }}%<br>off</span>
                                                 </div>
+
                                             </div><!-- /.hot-deal-wrapper -->
 
                                             <div class="product-info text-left m-t-20">
@@ -68,7 +42,9 @@
                                                         {{ $product->name }}
                                                     </a>
                                                 </h3>
-                                                @include('partitions.web.rating', ['productId' => $product->id])
+                                                @include('partitions.web.rating', [
+                                                    'productId' => $product->id,
+                                                ])
 
                                                 <div class="product-price">
                                                     @if ($product->sale_price)
@@ -78,28 +54,12 @@
                                                             class="price-before-discount">{{ number_format($product->product_price) }}
                                                             đ</span>
                                                     @else
-                                                        <span
-                                                            class="price">{{ number_format($product->product_price) }}
+                                                        <span class="price">{{ number_format($product->product_price) }}
                                                             đ</span>
                                                     @endIf
 
                                                 </div>
                                             </div>
-
-                                            <div class="cart clearfix animate-effect">
-                                                <div class="action">
-                                                    <div class="add-cart-button btn-group">
-                                                        <button class="btn btn-primary icon" data-toggle="dropdown"
-                                                            type="button">
-                                                            <i class="fa fa-shopping-cart"></i>
-                                                        </button>
-                                                        <button class="btn btn-primary cart-btn" type="button">Add to
-                                                            cart</button>
-
-                                                    </div>
-
-                                                </div><!-- /.action -->
-                                            </div><!-- /.cart -->
                                         </div>
                                     </div>
                                 @endforeach
@@ -197,7 +157,9 @@
                                     <div class="rating-reviews m-t-20">
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                @include('partitions.web.rating', ['productId' => $productDetail->id])
+                                                @include('partitions.web.rating', [
+                                                    'productId' => $productDetail->id,
+                                                ])
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="reviews">
@@ -213,12 +175,13 @@
                                         <div class="row">
                                             <div class="col-sm-2">
                                                 <div class="stock-box">
-                                                    <span class="label">Availability :</span>
+                                                    <span class="label">Tình trạng :</span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-9">
                                                 <div class="stock-box">
-                                                    <span class="value">In Stock</span>
+                                                    <span
+                                                        class="value">{{ $productDetail->product_qty > 0 ? 'Còn hàng' : 'Hết hàng' }}</span>
                                                 </div>
                                             </div>
                                         </div><!-- /.row -->
@@ -227,7 +190,16 @@
                                     <div class="description-container m-t-20">
                                         {{ $productDetail->description }}
                                     </div><!-- /.description-container -->
-
+                                    {{-- choose size product --}}
+                                    <div class="product-size">
+                                        <label class="title-size">Size</label>
+                                        <select class="list-size-product" name="size_id">
+                                            <option>Chọn kích thước</option>
+                                            @foreach ($sizes as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     <div class="price-container info-container m-t-20">
                                         <div class="row">
                                             <div class="col-sm-6">
@@ -250,8 +222,7 @@
 
                                     <div class="quantity-container info-container">
                                         <div class="row">
-                                            <input type="hidden" value="{{ $productDetail->id }}"
-                                                class="product_id">
+                                            <input type="hidden" value="{{ $productDetail->id }}" class="product_id">
                                             <div class="col-sm-2">
                                                 <span class="label">Qty :</span>
                                             </div>
@@ -260,11 +231,9 @@
                                                 <div class="cart-quantity">
                                                     <div class="quant-input">
                                                         <div class="arrows">
-                                                            <div class="arrow plus gradient"><span
-                                                                    class="ir"><i
+                                                            <div class="arrow plus gradient"><span class="ir"><i
                                                                         class="icon fa fa-sort-asc"></i></span></div>
-                                                            <div class="arrow minus gradient"><span
-                                                                    class="ir"><i
+                                                            <div class="arrow minus gradient"><span class="ir"><i
                                                                         class="icon fa fa-sort-desc"></i></span></div>
                                                         </div>
                                                         <input type="text" value="1" id="qty_product">
@@ -273,8 +242,9 @@
                                             </div>
 
                                             <div class="col-sm-7">
-                                                <button class="btn btn-primary add-cart-product" style="outline: none">
-                                                    <i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART
+                                                <button class="btn btn-primary add-cart-product" style="outline: none"
+                                                    disabled>
+                                                    <i class="fa fa-shopping-cart inner-right-vs"></i> Thêm vào giỏ hàng
                                                 </button>
                                             </div>
                                         </div><!-- /.row -->
@@ -368,8 +338,7 @@
 
 
 
-                                                                <div class="review-title"><span
-                                                                        class="date"><i
+                                                                <div class="review-title"><span class="date"><i
                                                                             class="fa fa-calendar"></i><span>
                                                                             {{ $review->created_at->toDateTimeString() }}
                                                                         </span></span></div>
@@ -392,7 +361,8 @@
                                                 <div class="review-form">
                                                     @guest
                                                         <p> <b>Để thêm đánh giá sản phẩm bạn cần phải :<a
-                                                                    href="{{ route('user.login') }}"> Đăng nhập</a> </b> </p>
+                                                                    href="{{ route('user.login') }}"> Đăng nhập</a> </b>
+                                                        </p>
                                                     @else
                                                         <div class="form-container">
 
@@ -490,20 +460,20 @@
                                                 <h3 class="name"><a
                                                         href="{{ route('product.detail', ['product_id' => $item->id, 'slug' => $item->product_slug]) }}">{{ $item->name }}</a>
                                                 </h3>
-                                                @include('partitions.web.rating', ['productId' => $item->id])
+                                                @include('partitions.web.rating', [
+                                                    'productId' => $item->id,
+                                                ])
                                                 <div class="description"></div>
 
                                                 <div class="product-price">
                                                     @if ($item->sale_price)
-                                                        <span
-                                                            class="price">{{ number_format($item->sale_price) }}
+                                                        <span class="price">{{ number_format($item->sale_price) }}
                                                             VND</span>
                                                         <span
                                                             class="price-before-discount">{{ number_format($item->product_price) }}
                                                             VND</span>
                                                     @else
-                                                        <span
-                                                            class="price">{{ number_format($item->product_price) }}
+                                                        <span class="price">{{ number_format($item->product_price) }}
                                                             VND</span>
                                                     @endIf
 
@@ -561,7 +531,6 @@
             -webkit-box-orient: vertical;
             display: -webkit-box;
         }
-
     </style>
 @endpush
 
