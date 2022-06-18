@@ -30,12 +30,13 @@
                                 <div class="widget-header">
                                     <h4 class="widget-title">GIÁ SẢN PHẨM</h4>
                                 </div>
-                                <div class="filter-price">
+                                <form action="{{ route('product.tag', ['tag_name' => request('tag_name')]) }}" class="filter-price" method="get">
                                     <ul class="list-value">
                                         <li class="filter-item">
                                             <span>
                                                 <label>
-                                                    <input type="checkbox" name="filter-value"  value="(<500000)">
+                                                    <input type="radio" name="filter_value" value="<500000"
+                                                        {{ request('filter_value') == '<500000' ? 'checked' : '' }}>
                                                     Giá dưới 500.000 vnd
                                                 </label>
                                             </span>
@@ -44,7 +45,8 @@
                                         <li class="filter-item">
                                             <span>
                                                 <label>
-                                                    <input type="checkbox" name="filter-value" value="(<500000)">
+                                                    <input type="radio" name="filter_value" value="500000-1000000"
+                                                        {{ request('filter_value') == '500000-1000000' ? 'checked' : '' }}>
                                                     500.000 vnd - 1.000.000 vnd
                                                 </label>
                                             </span>
@@ -53,8 +55,9 @@
                                         <li class="filter-item">
                                             <span>
                                                 <label>
-                                                    <input type="checkbox" name="filter-value" value="(<500000)">
-                                                        1.000.000 vnd - 2.000.000 vnd
+                                                    <input type="radio" name="filter_value" value="1000000-2000000"
+                                                        {{ request('filter_value') == '1000000-2000000' ? 'checked' : '' }}>
+                                                    1.000.000 vnd - 2.000.000 vnd
                                                 </label>
                                             </span>
                                         </li>
@@ -62,7 +65,8 @@
                                         <li class="filter-item">
                                             <span>
                                                 <label>
-                                                    <input type="checkbox" name="filter-value" value="(<500000)">
+                                                    <input type="radio" name="filter_value" value="2000000-3000000"
+                                                        {{ request('filter_value') == '2000000-3000000' ? 'checked' : '' }}>
                                                     2.000.000 vnd - 3.000.000 vnd
                                                 </label>
                                             </span>
@@ -71,15 +75,16 @@
                                         <li class="filter-item">
                                             <span>
                                                 <label>
-                                                    <input type="checkbox" name="filter-value"  value="(<500000)">
+                                                    <input type="radio" name="filter_value" value=">3000000"
+                                                        {{ request('filter_value') == '>3000000' ? 'checked' : '' }}>
                                                     Giá trên 3.000.000 vnd
                                                 </label>
                                             </span>
                                         </li>
                                     </ul>
                                     <!-- /.price-range-holder -->
-                                    <a href="/product/tag/apparel" class="lnk btn btn-primary">Show Now</a>
-                                </div>
+                                    <button class="lnk btn btn-primary">Show Now</button>
+                                </form>
                                 <!-- /.sidebar-widget-body -->
                             </div>
                             <!-- /.sidebar-widget -->
@@ -140,22 +145,26 @@
                                                     Tùy chọn <span class="caret"></span> </button>
                                                 <ul role="menu" class="dropdown-menu">
                                                     <li role="presentation">
-                                                      <a href="{{ route('product.tag', array_merge(
-                                                        request()->query(),
-                                                        [
-                                                          'tag_name' => request('tag_name'),
-                                                          'sort' => 0
-                                                        ]
-                                                      )) }}">Giá: tăng dần</a>
+                                                        <a
+                                                            href="{{ route(
+                                                                'product.tag',
+                                                                array_merge(request()->query(), [
+                                                                    'tag_name' => request('tag_name'),
+                                                                    'sort' => 0,
+                                                                ]),
+                                                            ) }}">Giá:
+                                                            tăng dần</a>
                                                     </li>
                                                     <li role="presentation">
-                                                      <a href="{{ route('product.tag', array_merge(
-                                                        request()->query(),
-                                                        [
-                                                          'tag_name' => request('tag_name'),
-                                                          'sort' => 1
-                                                        ]
-                                                      )) }}">Giá: giảm dần</a>
+                                                        <a
+                                                            href="{{ route(
+                                                                'product.tag',
+                                                                array_merge(request()->query(), [
+                                                                    'tag_name' => request('tag_name'),
+                                                                    'sort' => 1,
+                                                                ]),
+                                                            ) }}">Giá:
+                                                            giảm dần</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -195,21 +204,33 @@
                                 <div class="pagination-container">
                                     <ul class="list-inline list-unstyled">
                                         <li class="prev"><a
-                                                href="{{ route('product.tag', array_merge(request()->query(),[
-                                                    'tag_name' => request()->tag_name,
-                                                    'page' => $currentPage == 1 ? $currentPage : $currentPage - 1])) }}">
+                                                href="{{ route(
+                                                    'product.tag',
+                                                    array_merge(request()->query(), [
+                                                        'tag_name' => request()->tag_name,
+                                                        'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
+                                                    ]),
+                                                ) }}">
                                                 <i class="fa fa-angle-left"></i></a></li>
                                         @for ($i = 1; $i <= $lastPage; $i++)
                                             <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
-                                                    href="{{ route('product.tag', array_merge(request()->query(),[
-                                                      'tag_name' => request()->tag_name,
-                                                      'page' => $i]))}}">{{ $i }}</a></li>
+                                                    href="{{ route(
+                                                        'product.tag',
+                                                        array_merge(request()->query(), [
+                                                            'tag_name' => request()->tag_name,
+                                                            'page' => $i,
+                                                        ]),
+                                                    ) }}">{{ $i }}</a>
+                                            </li>
                                         @endfor
                                         <li class="next"><a
-                                                href="{{ route('product.tag', array_merge(request()->query(),
-                                                [
-                                                  'tag_name' => request()->tag_name, 
-                                                  'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1])) }} "><i
+                                                href="{{ route(
+                                                    'product.tag',
+                                                    array_merge(request()->query(), [
+                                                        'tag_name' => request()->tag_name,
+                                                        'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1,
+                                                    ]),
+                                                ) }} "><i
                                                     class="fa fa-angle-right"></i></a></li>
                                     </ul>
                                 </div>
@@ -232,19 +253,23 @@
                                                             <div class="image">
                                                                 <a
                                                                     href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
-                                                                    <img src="{{ asset($product->image) }}" alt=""></a>
+                                                                    <img src="{{ asset($product->image) }}"
+                                                                        alt=""></a>
                                                             </div>
                                                             <div class="tag new"><span>new</span></div>
                                                         </div>
                                                         <div class="product-info text-left">
                                                             <h3 class="name"><a
                                                                     href="detail.html">{{ $product->name }}</a></h3>
-                                                                    @include('partitions.web.rating', ['productId' => $product->id])
+                                                            @include('partitions.web.rating', [
+                                                                'productId' => $product->id,
+                                                            ])
                                                             <div class="description"></div>
                                                             <div class="product-price">
                                                                 @if ($product->sale_price)
                                                                     <span class="price">
-                                                                        {{ number_format($product->sale_price) }} đ</span>
+                                                                        {{ number_format($product->sale_price) }}
+                                                                        đ</span>
                                                                     <span
                                                                         class="price-before-discount">{{ number_format($product->product_price) }}
                                                                         đ</span>
@@ -261,19 +286,17 @@
                                                                     <li class="add-cart-button btn-group">
                                                                         <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
                                                                             data-toggle="tooltip"
-                                                                            class="btn btn-primary icon"
-                                                                            type="button" data-original-title=""
-                                                                            title=""> <i
+                                                                            class="btn btn-primary icon" type="button"
+                                                                            data-original-title="" title=""> <i
                                                                                 class="fa fa-shopping-cart"></i>
                                                                             Tùy
                                                                             chọn</a>
                                                                     </li>
-                                                                    <li class="lnk"> <a
-                                                                            data-toggle="tooltip"
+                                                                    <li class="lnk"> <a data-toggle="tooltip"
                                                                             class="add-to-cart preview-product"
-                                                                            id="11" data-original-title="" title="">
-                                                                            <i class="fa fa-eye"
-                                                                                aria-hidden="true"></i>
+                                                                            id="11" data-original-title=""
+                                                                            title="">
+                                                                            <i class="fa fa-eye" aria-hidden="true"></i>
                                                                         </a> </li>
                                                                 </ul>
                                                             </div>
@@ -296,7 +319,8 @@
                                                         <div class="col col-sm-4 col-lg-4">
                                                             <div class="product-image">
                                                                 <div class="image"> <img
-                                                                        src="{{ asset($product->image) }}" alt=""> </div>
+                                                                        src="{{ asset($product->image) }}"
+                                                                        alt=""> </div>
                                                             </div>
                                                             <!-- /.product-image -->
                                                         </div>
@@ -305,7 +329,9 @@
                                                             <div class="product-info">
                                                                 <h3 class="name"><a
                                                                         href="detail.html">{{ $product->name }}</a></h3>
-                                                                        @include('partitions.web.rating', ['productId' => $product->id])
+                                                                @include('partitions.web.rating', [
+                                                                    'productId' => $product->id,
+                                                                ])
                                                                 <div class="product-price">
                                                                     @if ($product->sale_price)
                                                                         <span class="price">
@@ -335,10 +361,10 @@
                                                                                     Tùy
                                                                                     chọn</a>
                                                                             </li>
-                                                                            <li class="lnk"> <a
-                                                                                    data-toggle="tooltip"
+                                                                            <li class="lnk"> <a data-toggle="tooltip"
                                                                                     class="add-to-cart preview-product"
-                                                                                    id="11" data-original-title="" title="">
+                                                                                    id="11" data-original-title=""
+                                                                                    title="">
                                                                                     <i class="fa fa-eye"
                                                                                         aria-hidden="true"></i>
                                                                                 </a> </li>
@@ -360,25 +386,37 @@
                         <div class="clearfix filters-container">
                             <div class="text-right">
                                 <div class="pagination-container">
-                                  <ul class="list-inline list-unstyled">
-                                    <li class="prev"><a
-                                            href="{{ route('product.tag', array_merge(request()->query(),[
-                                                'tag_name' => request()->tag_name,
-                                                'page' => $currentPage == 1 ? $currentPage : $currentPage - 1])) }}">
-                                            <i class="fa fa-angle-left"></i></a></li>
-                                    @for ($i = 1; $i <= $lastPage; $i++)
-                                    <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
-                                      href="{{ route('product.tag', array_merge(request()->query(),[
-                                        'tag_name' => request()->tag_name,
-                                        'page' => $i]))}}">{{ $i }}</a></li>
-                                    @endfor
-                                    <li class="next"><a
-                                            href="{{ route('product.tag', array_merge(request()->query(),
-                                            [
-                                              'tag_name' => request()->tag_name, 
-                                              'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1])) }} "><i
-                                                class="fa fa-angle-right"></i></a></li>
-                                </ul>
+                                    <ul class="list-inline list-unstyled">
+                                        <li class="prev"><a
+                                                href="{{ route(
+                                                    'product.tag',
+                                                    array_merge(request()->query(), [
+                                                        'tag_name' => request()->tag_name,
+                                                        'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
+                                                    ]),
+                                                ) }}">
+                                                <i class="fa fa-angle-left"></i></a></li>
+                                        @for ($i = 1; $i <= $lastPage; $i++)
+                                            <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
+                                                    href="{{ route(
+                                                        'product.tag',
+                                                        array_merge(request()->query(), [
+                                                            'tag_name' => request()->tag_name,
+                                                            'page' => $i,
+                                                        ]),
+                                                    ) }}">{{ $i }}</a>
+                                            </li>
+                                        @endfor
+                                        <li class="next"><a
+                                                href="{{ route(
+                                                    'product.tag',
+                                                    array_merge(request()->query(), [
+                                                        'tag_name' => request()->tag_name,
+                                                        'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1,
+                                                    ]),
+                                                ) }} "><i
+                                                    class="fa fa-angle-right"></i></a></li>
+                                    </ul>
                                 </div>
                                 <!-- /.pagination-container -->
                             </div>

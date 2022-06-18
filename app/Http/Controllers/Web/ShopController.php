@@ -25,13 +25,11 @@ class ShopController extends Controller
         $categories = Category::with('subCategories')->get();
         $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $productTags = ProductTag::select('name')->limit(8)->groupBy('name')->get();
-        $products = $this->productService->getProductsByTag($tagName, $request->sort);
-        $currentPage = $products->currentPage();
-        $lastPage = $products->lastPage();
+        list($products, $currentPage, $lastPage) = $this->productService->getProductsByTag($tagName, $request->all());
 
         $validator = Validator::make($request->all(), [
             'sort' => 'in:0,1',
-            'page' => 'integer|between:1,' . $products->lastPage()
+            'page' => 'integer|between:1,' . $lastPage
         ]);
 
         if ($validator->fails()) {

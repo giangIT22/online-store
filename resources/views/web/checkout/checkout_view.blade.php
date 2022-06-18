@@ -106,7 +106,7 @@
                                         <div class="payment">
                                             <div class="form-check pay-item">
                                                 <input class="form-check-input" type="radio" value="PayPal"
-                                                    name="payment_type" id="pay-card">
+                                                    name="payment_type" id="pay-card" disabled>
                                                 <label class="form-check-label" for="pay-card">
                                                     Thanh toán qua PayPal
                                                 </label>
@@ -142,8 +142,8 @@
                                         <li class="list-group-item fix-flex lh-condensed pd-10">
                                             <div>
                                                 <div class="info-cart-item fix-flex">
-                                                    <img src="{{ asset($product->image) }} " width="50px" style="margin-right: 10px;"
-                                                        alt="">
+                                                    <img src="{{ asset($product->image) }} " width="50px"
+                                                        style="margin-right: 10px;" alt="">
                                                     <div class="product-info-detail">
                                                         <span class="my-0 item-cart">{{ $product->name }}</span>
                                                         <span class="size-item-cart">{{ $product->size_name }} </span>

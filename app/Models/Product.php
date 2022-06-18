@@ -13,6 +13,15 @@ class Product extends Model
     const PER_PAGE = 9;
     const RELATED_PRODUCT = 6;
 
+    //filter values
+    const FILTER_VALUES = [
+        '<500000',
+        '500000-1000000',
+        '1000000-2000000',
+        '2000000-3000000',
+        '>3000000'
+    ];
+
     protected $guarded = [];
 
     public function category()

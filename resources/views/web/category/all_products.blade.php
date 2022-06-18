@@ -34,12 +34,13 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                 <div class="widget-header">
                                     <h4 class="widget-title">GIÁ SẢN PHẨM</h4>
                                 </div>
-                                <div class="filter-price">
+                                <form action="{{ route('category.all.products') }}" class="filter-price" method="get">
                                     <ul class="list-value">
                                         <li class="filter-item">
                                             <span>
                                                 <label>
-                                                    <input type="checkbox" name="filter-value"  value="(<500000)">
+                                                    <input type="radio" name="filter_value" value="<500000"
+                                                        {{ request('filter_value') == '<500000' ? 'checked' : '' }}>
                                                     Giá dưới 500.000 vnd
                                                 </label>
                                             </span>
@@ -48,7 +49,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                         <li class="filter-item">
                                             <span>
                                                 <label>
-                                                    <input type="checkbox" name="filter-value" value="(<500000)">
+                                                    <input type="radio" name="filter_value" value="500000-1000000"
+                                                        {{ request('filter_value') == '500000-1000000' ? 'checked' : '' }}>
                                                     500.000 vnd - 1.000.000 vnd
                                                 </label>
                                             </span>
@@ -57,8 +59,9 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                         <li class="filter-item">
                                             <span>
                                                 <label>
-                                                    <input type="checkbox" name="filter-value" value="(<500000)">
-                                                        1.000.000 vnd - 2.000.000 vnd
+                                                    <input type="radio" name="filter_value" value="1000000-2000000"
+                                                        {{ request('filter_value') == '1000000-2000000' ? 'checked' : '' }}>
+                                                    1.000.000 vnd - 2.000.000 vnd
                                                 </label>
                                             </span>
                                         </li>
@@ -66,7 +69,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                         <li class="filter-item">
                                             <span>
                                                 <label>
-                                                    <input type="checkbox" name="filter-value" value="(<500000)">
+                                                    <input type="radio" name="filter_value" value="2000000-3000000"
+                                                        {{ request('filter_value') == '2000000-3000000' ? 'checked' : '' }}>
                                                     2.000.000 vnd - 3.000.000 vnd
                                                 </label>
                                             </span>
@@ -75,15 +79,16 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                         <li class="filter-item">
                                             <span>
                                                 <label>
-                                                    <input type="checkbox" name="filter-value"  value="(<500000)">
+                                                    <input type="radio" name="filter_value" value=">3000000"
+                                                        {{ request('filter_value') == '>3000000' ? 'checked' : '' }}>
                                                     Giá trên 3.000.000 vnd
                                                 </label>
                                             </span>
                                         </li>
                                     </ul>
                                     <!-- /.price-range-holder -->
-                                    <a href="#" class="lnk btn btn-primary">Show Now</a>
-                                </div>
+                                    <button class="lnk btn btn-primary">Show Now</button>
+                                </form>
                                 <!-- /.sidebar-widget-body -->
                             </div>
                             <!-- /.sidebar-widget -->
@@ -223,7 +228,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                             <div class="image">
                                                                 <a
                                                                     href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
-                                                                    <img src="{{ asset($product->image) }}" alt=""></a>
+                                                                    <img src="{{ asset($product->image) }}"
+                                                                        alt=""></a>
                                                             </div>
                                                             @if ($product->created_at > $minDate && $product->created_at < now())
                                                                 <div class="tag new"><span>new</span></div>
@@ -264,10 +270,10 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                             chọn</a>
                                                                     </li>
                                                                     <li class="lnk"> <a data-toggle="tooltip"
-                                                                            class="add-to-cart preview-product" id="11"
-                                                                            data-original-title="" title="">
-                                                                            <i class="fa fa-eye"
-                                                                                aria-hidden="true"></i>
+                                                                            class="add-to-cart preview-product"
+                                                                            id="11" data-original-title=""
+                                                                            title="">
+                                                                            <i class="fa fa-eye" aria-hidden="true"></i>
                                                                         </a> </li>
                                                                 </ul>
                                                             </div>
@@ -290,7 +296,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                         <div class="col col-sm-4 col-lg-4">
                                                             <div class="product-image">
                                                                 <div class="image"> <img
-                                                                        src="{{ asset($product->image) }}" alt=""> </div>
+                                                                        src="{{ asset($product->image) }}"
+                                                                        alt=""> </div>
                                                             </div>
                                                             <!-- /.product-image -->
                                                         </div>
@@ -331,10 +338,10 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                                     Tùy
                                                                                     chọn</a>
                                                                             </li>
-                                                                            <li class="lnk"> <a
-                                                                                    data-toggle="tooltip"
+                                                                            <li class="lnk"> <a data-toggle="tooltip"
                                                                                     class="add-to-cart preview-product"
-                                                                                    id="11" data-original-title="" title="">
+                                                                                    id="11" data-original-title=""
+                                                                                    title="">
                                                                                     <i class="fa fa-eye"
                                                                                         aria-hidden="true"></i>
                                                                                 </a> </li>

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductService implements ProductServiceInterface
 {
-    public function getProductsByTag($tagName, $sort = 0)
+    public function getProductsByTag($tagName, $params)
     {
         $tag = ProductTag::where('name', $tagName)->first();
 
@@ -22,33 +22,26 @@ class ProductService implements ProductServiceInterface
         }
 
         $productIds = ProductTag::where('name', $tagName)->pluck('product_id')->toArray();
-        $products = Product::whereIn('id', array_unique($productIds))
-            ->orderBy('product_price')
-            ->paginate(Product::PER_PAGE);
+        $query = Product::whereIn('id', array_unique($productIds))
+            ->orderBy('product_price');
 
-        if ($sort == 1) {
-            $products = Product::whereIn('id', array_unique($productIds))
-                ->orderBy('product_price', 'desc')
-                ->paginate(Product::PER_PAGE);
-        }
-
-        return $products;
+        return $this->getData($params, $query);
     }
 
-    public function getProductsByCategory($categorySlug)
+    public function getProductsByCategory($params, $categorySlug)
     {
         $subCategory = SubCategory::where('sub_category_slug', $categorySlug)->first();
         $category = Category::where('slug', $categorySlug)->first();
 
         if ($subCategory) {
-            $products = Product::where('subcategory_id', $subCategory->id)->orderBy('product_price')->paginate(Product::PER_PAGE);
+            $query = Product::where('subcategory_id', $subCategory->id)->orderBy('product_price');
         } elseif ($category) {
-            $products = Product::where('category_id', $category->id)->orderBy('product_price')->paginate(Product::PER_PAGE);
+            $query = Product::where('category_id', $category->id)->orderBy('product_price');
         } else {
             abort(404);
         }
 
-        return $products;
+        return $this->getData($params, $query);;
     }
 
     public function getRelatedProducts($productId)
@@ -114,5 +107,47 @@ class ProductService implements ProductServiceInterface
         }
 
         return $status;
+    }
+
+    public function getAllProduct($params)
+    {
+        $query = Product::orderBy('product_price');
+
+        return $this->getData($params, $query);
+        
+    }
+
+    public function getData($params, $query)
+    {
+        $data = $query->paginate(Product::PER_PAGE);
+        
+        if (!empty($params['filter_value']) && in_array($params['filter_value'], Product::FILTER_VALUES)) {
+            if ($params['filter_value'] == '<500000') {
+                $data = $query->where('product_price', '<', 500000)->paginate(Product::PER_PAGE);
+            } else if ($params['filter_value'] === '500000-1000000') {
+                $data = $query->where('product_price', '>=', 500000)
+                    ->where('product_price', '<=', 1000000)
+                    ->paginate(Product::PER_PAGE);
+            } else if ($params['filter_value'] == '1000000-2000000') {
+                $data = $query->where('product_price', '>=', 1000000)
+                    ->where('product_price', '<=', 2000000)
+                    ->paginate(Product::PER_PAGE);
+            } else if ($params['filter_value'] == '2000000-3000000') {
+                $data = $query->where('product_price', '>=', 2000000)
+                    ->where('product_price', '<=', 3000000)
+                    ->paginate(Product::PER_PAGE);
+            } else if ($params['filter_value'] == '>3000000') {
+                $data = $query->where('product_price', '>', 3000000)->paginate(Product::PER_PAGE);
+            }
+        }
+
+        if (!empty($params['sort']) && $params['sort'] == 1) {
+            $products = array_reverse($data->items());
+        }
+
+        $currentPage = $data ? $data->currentPage() : 0;
+        $lastPage = $data ? $data->lastPage() : 0;
+
+        return [$products ?? $data->items(), $currentPage, $lastPage];
     }
 }
