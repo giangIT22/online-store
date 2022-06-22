@@ -7,8 +7,10 @@
             <!-- Basic Forms -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Thêm coupon</h4>
-
+                    <div class="d-flex justify-content-between">
+                        <h3 class="box-title">Thêm coupon</h3>
+                        <a href="{{ route('all.coupons') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay lại</a>
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -22,7 +24,7 @@
                                             <div class="col-md-12">
 
                                                 <div class="form-group mb-30">
-                                                    <h5>Coupon Name<span class="text-danger">*</span></h5>
+                                                    <h5>Mã Coupon<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="coupon_name" class="form-control">
                                                         @error('coupon_name')
@@ -40,7 +42,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group mb-30">
-                                                    <h5>Coupon Validity<span class="text-danger">*</span></h5>
+                                                    <h5>Thời hạn mã giảm giá <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input class="form-control" type="date" name="coupon_validity">
                                                         @error('coupon_validity')

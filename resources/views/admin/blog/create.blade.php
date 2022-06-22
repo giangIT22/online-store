@@ -8,8 +8,10 @@
             <!-- Basic Forms -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Thêm bài viết</h4>
-
+                    <div class="d-flex justify-content-between">
+                        <h3 class="box-title">Thêm bài viết</h3>
+                        <a href="{{ route('all.blogs') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay lại</a>
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

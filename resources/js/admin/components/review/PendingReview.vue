@@ -19,8 +19,8 @@
                       <th>Sản phẩm</th>
                       <th>Nội dung đánh giá</th>
                       <th>Người đánh giá</th>
-                      <th>Tình trạng</th>
-                      <th>Hành động</th>
+                      <th>Trạng thái</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>

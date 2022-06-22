@@ -5,15 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminUpdatePasswordRequest;
 use App\Http\Requests\AdminUpdateProfileRequest;
-use App\Http\Requests\UserUpdateRequest;
 use App\Models\Admin;
 use App\Models\User;
 use App\Traits\StoreImageTrait;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class AdminController extends Controller
+class AdminProfileController extends Controller
 {
     use StoreImageTrait;
 

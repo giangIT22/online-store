@@ -26,7 +26,7 @@
                       <th>Tên bài viết</th>
                       <th>Slug</th>
                       <th>Nội dung</th>
-                      <th>Sửa/Xóa</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>

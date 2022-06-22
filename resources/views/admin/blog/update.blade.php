@@ -8,8 +8,10 @@
             <!-- Basic Forms -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Chỉnh sửa bài viết</h4>
-
+                    <div class="d-flex justify-content-between">
+                        <h3 class="box-title">Chỉnh sửa bài viết</h3>
+                        <a href="{{ route('all.blogs') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay lại</a>
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -55,7 +57,7 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group"> 
-                                                    <h5>ẢNh bài viết<span class="text-danger">*</span></h5>
+                                                    <h5>Ảnh bài viết<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="file" name="post_image" class="form-control"
                                                             id="image">

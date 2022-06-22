@@ -45,7 +45,7 @@
 
     <script src="{{ asset('backend/js/vendors.min.js') }}"></script>
     <script src="{{ asset('../assets/icons/feather-icons/feather.min.js') }}"></script>
-
+    <script src="{{ asset('../assets/vendor_components/select2/dist/js/select2.full.js') }}"></script>
     <script src="{{ asset('backend/js/template.js') }}"></script>
     {{-- <script src="{{ asset('backend/js/pages/dashboard.js') }}"></script> --}}
 

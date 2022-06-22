@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\AdminService;
+use App\Services\AdminServiceInterface;
 use App\Services\BlogService;
 use App\Services\BlogServiceInterface;
 use App\Services\CartService;
@@ -28,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {
+    {   $this->app->singleton(AdminServiceInterface::class, AdminService::class);
         $this->app->singleton(CouponServiceInterface::class, CouponService::class);
         $this->app->singleton(OrderServiceInterface::class, OrderService::class);
         $this->app->singleton(ReviewServiceInterface::class, ReviewService::class);

@@ -3,13 +3,13 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-12">
 
                     <div class="box">
                         <div class="box-header with-border">
                             <div class="d-flex justify-content-between">
-                                <h3 class="box-title">Category List</h3>
-                                <a href="/admin/category/create" type="button" class="btn btn-rounded btn-primary mb-5">Add</a>
+                                <h3 class="box-title">Danh sách category</h3>
+                                <a href="/admin/category/create" type="button" class="btn btn-rounded btn-primary mb-5">Thêm</a>
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -18,15 +18,13 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Category Icon </th>
-                                            <th>Name</th>
+                                            <th>Tên</th>
                                             <th>Slug</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="item in categories" :key="item.id">
-                                            <td style="text-align:center;"> <span><i :class="`${item.category_icon}`"></i></span>  </td>
                                             <td>{{ item.name }}</td>
                                             <td>{{ item.slug }}</td>
                                             <td>

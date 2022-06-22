@@ -3,19 +3,22 @@
 @section('content')
     <div class="container-full">
         <section class="content">
-            <div class="row justify-content-center">
-                <div class="col-12">
+            <div class="row">
+                <div class="col-md-6">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Add Subcategory</h3>
+                            <div class="d-flex justify-content-between">
+                                <h3 class="box-title">Cập nhật danh mục con</h3>
+                                <a href="{{ route('all.sub_categories') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay lại</a>
+                            </div>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
                                 <form method="post" action="{{ route('sub_category.update', ['sub_category_id' => $subCategory->id]) }}">
                                     @csrf
-                                    <div class="form-group">
-                                        <h5>SubCategory Select <span class="text-danger">*</span></h5>
+                                    <div class="form-group mb-20">
+                                        <h5>Lựa chọn danh mục<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <select name="category_id" id="select" class="form-control">
                                                 <option value="">Select category</option>
@@ -28,8 +31,8 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <h5>Name<span class="text-danger">*</span></h5>
+                                    <div class="form-group mb-20">
+                                        <h5>Tên<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="sub_category_name" class="form-control" value="{{ $subCategory->sub_category_name}}">
                                             @error('sub_category_name')
@@ -38,7 +41,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group mb-20">
                                         <h5>Slug <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="sub_category_slug" class="form-control" value="{{ $subCategory->sub_category_slug}}">

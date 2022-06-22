@@ -8,8 +8,8 @@
                     <div class="box">
                         <div class="box-header with-border">
                             <div class="d-flex justify-content-between">
-                                <h3 class="box-title">Slider List</h3>
-                                <a href="/admin/slider/create" type="button" class="btn btn-rounded btn-primary mb-5">Add</a>
+                                <h3 class="box-title">Danh sách Slider</h3>
+                                <a href="/admin/slider/create" type="button" class="btn btn-rounded btn-primary mb-5">Thêm</a>
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -18,10 +18,10 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Slider image</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
-                                            <th>Status</th>
+                                            <th>Ảnh slider</th>
+                                            <th>Tiêu đề</th>
+                                            <th>Nội dung</th>
+                                            <th>Trạng thái</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>

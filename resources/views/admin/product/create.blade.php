@@ -8,8 +8,10 @@
             <!-- Basic Forms -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Add Product </h4>
-
+                    <div class="d-flex justify-content-between">
+                        <h3 class="box-title">Thêm sản phẩm</h3>
+                        <a href="{{ route('all.products') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay lại</a>
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -22,7 +24,7 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Category Select <span class="text-danger">*</span></h5>
+                                                    <h5>Chọn danh mục<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <select name="category_id" class="form-control"
                                                             id="list-category">
@@ -45,7 +47,7 @@
                                             <div class="col-md-4">
 
                                                 <div class="form-group">
-                                                    <h5>SubCategory Select <span class="text-danger">*</span></h5>
+                                                    <h5>Chọn danh mục con<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <select name="subcategory_id" class="form-control" id="list-sub">
 
@@ -67,7 +69,7 @@
                                             <div class="col-md-8">
 
                                                 <div class="form-group">
-                                                    <h5>Product Name<span class="text-danger">*</span></h5>
+                                                    <h5>Tên sản phẩm<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="name" class="form-control">
                                                         @error('name')
@@ -76,7 +78,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <h5>Description<span class="text-danger">*</span></h5>
+                                                    <h5>Mô tả<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="description" class="form-control">
                                                         @error('description')
@@ -85,7 +87,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <h5>Product Slug<span class="text-danger">*</span></h5>
+                                                    <h5>Slug<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_slug" class="form-control">
                                                     </div>
@@ -99,7 +101,7 @@
                                             <div class="col-md-8">
 
                                                 <div class="form-group">
-                                                    <h5>Product Code <span class="text-danger">*</span></h5>
+                                                    <h5>Mã sản phẩm<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_code" class="form-control">
                                                         @error('product_code')
@@ -131,7 +133,7 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <h5>Product Price <span class="text-danger">*</span></h5>
+                                                    <h5>Giá<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_price" class="form-control">
                                                         @error('product_price')
@@ -140,7 +142,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <h5>Product Sale Price <span class="text-danger">*</span></h5>
+                                                    <h5>Giá sale<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="sale_price" class="form-control">
                                                         @error('sale_price')
@@ -156,7 +158,7 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <h5>Product Image <span class="text-danger">*</span></h5>
+                                                    <h5>Ảnh sản phẩm<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="file" name="image" class="form-control" id="image">
                                                         @error('image')
@@ -175,7 +177,7 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <h5>Detail Image<span class="text-danger">*</span></h5>
+                                                    <h5>Ảnh chi tiết<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="file" name="image_path[]" class="form-control"
                                                             multiple>
@@ -186,8 +188,8 @@
 
                                         <div class="row">
                                             <div class="col-md-8">
-                                                <h5>Tags Product <span class="text-danger">*</span></h5>
-                                                <select placeholder="add tags" multiple data-role="tagsinput" name="tags[]"
+                                                <h5>Tags<span class="text-danger">*</span></h5>
+                                                <select placeholder="Thêm tags" multiple data-role="tagsinput" name="tags[]"
                                                     style="display: none;"></select>
                                             </div>
                                         </div>
@@ -253,7 +255,7 @@
                                         <hr>
 
                                         <div class="text-xs-right">
-                                            <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add">
+                                            <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Thêm">
                                         </div>
                             </form>
 

@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\OrderController;
@@ -29,15 +30,15 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/invoice-yearly', [InvoiceController::class, 'getInvoiceYearLy'])->name('invoice.yearly');
 
     //===== Admin progile =====
-    Route::get('/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
+    Route::get('/profile', [AdminProfileController::class, 'adminProfile'])->name('admin.profile');
 
-    Route::get('/profile/edit', [AdminController::class, 'adminProfileEdit'])->name('admin.profile.edit');
+    Route::get('/profile/edit', [AdminProfileController::class, 'adminProfileEdit'])->name('admin.profile.edit');
 
-    Route::post('/profile/store', [AdminController::class, 'adminProfileStore'])->name('admin.profile.store');
+    Route::post('/profile/store', [AdminProfileController::class, 'adminProfileStore'])->name('admin.profile.store');
 
-    Route::get('/change/password', [AdminController::class, 'adminChangePassword'])->name('admin.change.password');
+    Route::get('/change/password', [AdminProfileController::class, 'adminChangePassword'])->name('admin.change.password');
 
-    Route::post('/update/change/password', [AdminController::class, 'adminUpdatePassword'])->name('admin.update.password');
+    Route::post('/update/change/password', [AdminProfileController::class, 'adminUpdatePassword'])->name('admin.update.password');
 
     //===== All route category =====
     Route::prefix('/category')->group(function () {
@@ -119,6 +120,16 @@ Route::middleware(['auth:admin'])->group(function () {
 
     // Admin Get All User Routes 
     Route::prefix('alluser')->group(function () {
-        Route::get('/view', [AdminController::class, 'allUsers'])->name('all.users');
+        Route::get('/view', [AdminProfileController::class, 'allUsers'])->name('all.users');
     });
+
+    //===== all employee ==================
+    Route::prefix('/employee')->group(function() {
+        Route::get('/view', [EmployeeController::class, 'index'])->name('all.employees');
+        Route::get('/create', [EmployeeController::class, 'create'])->name('employee.create');
+        Route::post('/store', [EmployeeController::class, 'store'])->name('employee.store');
+        Route::post('/update/{employee_id}', [EmployeeController::class, 'update'])->name('employee.update');
+        Route::get('/edit/{employee_id}', [EmployeeController::class, 'edit'])->name('employee.edit');
+        Route::get('/delete/{employee_id}', [EmployeeController::class, 'delete'])->name('employee.delete');
+    });   
 });

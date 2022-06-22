@@ -8,8 +8,8 @@
                     <div class="box">
                         <div class="box-header with-border">
                             <div class="d-flex justify-content-between">
-                                <h3 class="box-title">Sub Category List</h3>
-                                <a href="/admin/category/sub/create" type="button" class="btn btn-rounded btn-primary mb-5">Add</a>
+                                <h3 class="box-title">Danh sách Subcategory</h3>
+                                <a href="/admin/category/sub/create" type="button" class="btn btn-rounded btn-primary mb-5">Thêm</a>
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -18,7 +18,7 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>Tên</th>
                                             <th>Slug</th>
                                             <th>Action</th>
                                         </tr>

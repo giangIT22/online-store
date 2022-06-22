@@ -8,8 +8,11 @@
             <!-- Basic Forms -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Edit Product </h4>
-
+                    <div class="d-flex justify-content-between">
+                        <h4 class="box-title">Cập nhạt thông tin sản phẩm</h4>
+                        <a href="{{ route('all.products') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay
+                            lại</a>
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -23,10 +26,9 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Category Select <span class="text-danger">*</span></h5>
+                                                    <h5>Chọn danh mục<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <select name="category_id" class="form-control"
-                                                            id="list-category">
+                                                        <select name="category_id" class="form-control" id="list-category">
                                                             @foreach ($categories as $category)
                                                                 <option value="{{ $category->id }}"
                                                                     {{ $category->id == $product->category_id ? 'selected' : '' }}>
@@ -44,7 +46,7 @@
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>SubCategory Select <span class="text-danger">*</span></h5>
+                                                    <h5>Chọn danh mục con<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <select name="subcategory_id" class="form-control" id="list-sub">
                                                             @foreach ($subcategories as $subCategory)
@@ -71,7 +73,7 @@
                                             <div class="col-md-8">
 
                                                 <div class="form-group">
-                                                    <h5>Product Name<span class="text-danger">*</span></h5>
+                                                    <h5>Tên sản phẩm<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="name" class="form-control"
                                                             value="{{ $product->name }}">
@@ -81,7 +83,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <h5>Description<span class="text-danger">*</span></h5>
+                                                    <h5>Mô tả<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="description" class="form-control"
                                                             value="{{ $product->description }}">
@@ -92,7 +94,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <h5>Product Slug<span class="text-danger">*</span></h5>
+                                                    <h5>Slug<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_slug" class="form-control"
                                                             value="{{ $product->product_slug }}">
@@ -107,7 +109,7 @@
                                             <div class="col-md-8">
 
                                                 <div class="form-group">
-                                                    <h5>Product Code <span class="text-danger">*</span></h5>
+                                                    <h5>Mã sản phẩm<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_code" class="form-control"
                                                             value="{{ $product->product_code }}">
@@ -124,7 +126,7 @@
                                             <div class="col-md-8">
 
                                                 <div class="form-group">
-                                                    <h5>Product Amount <span class="text-danger">*</span></h5>
+                                                    <h5>Số lượng<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_qty" class="form-control"
                                                             value="{{ $product->product_qty }}" disabled>
@@ -140,7 +142,7 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <h5>Product Price <span class="text-danger">*</span></h5>
+                                                    <h5>Giá<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_price" class="form-control"
                                                             value="{{ $product->product_price }}">
@@ -150,7 +152,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <h5>Product Sale Price <span class="text-danger">*</span></h5>
+                                                    <h5>Giá sale<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="sale_price" class="form-control">
                                                         @error('sale_price')
@@ -165,18 +167,19 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <h5>Product Image <span class="text-danger">*</span></h5>
+                                                    <h5>Ảnh sản phẩm<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="file" name="image" class="form-control" id="image"
-                                                            value="{{ $product->image }}">
+                                                        <input type="file" name="image" class="form-control"
+                                                            id="image" value="{{ $product->image }}">
                                                         @error('image')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
                                                 <div id="preview_img">
-                                                    <img width="150px" id="showImage" src="{{ asset($product->image) }}"
-                                                        alt="" style="margin-bottom:10px;">
+                                                    <img width="150px" id="showImage"
+                                                        src="{{ asset($product->image) }}" alt=""
+                                                        style="margin-bottom:10px;">
                                                 </div>
                                             </div> <!-- end col md 4 -->
 
@@ -185,7 +188,7 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <h5>Detail Image<span class="text-danger">*</span></h5>
+                                                    <h5>Ảnh chi tiết<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="file" name="image_path[]" class="form-control"
                                                             multiple>
@@ -204,9 +207,9 @@
 
                                         <div class="row">
                                             <div class="col-md-8">
-                                                <h5>Tags Product <span class="text-danger">*</span></h5>
-                                                <select placeholder="add tags" multiple data-role="tagsinput" name="tags[]"
-                                                    style="display: none;">
+                                                <h5>Tags<span class="text-danger">*</span></h5>
+                                                <select placeholder="Thêm tags" multiple data-role="tagsinput"
+                                                    name="tags[]" style="display: none;">
                                                     @foreach ($product->productTags as $tag)
                                                         <option value="{{ $tag->name }}">{{ $tag->name }}</option>
                                                     @endforeach
@@ -226,7 +229,8 @@
                                                             <label for="checkbox_2">Hot Deals</label>
                                                         </fieldset>
                                                         <fieldset>
-                                                            <input type="checkbox" id="checkbox_3" name="featured" value="1"
+                                                            <input type="checkbox" id="checkbox_3" name="featured"
+                                                                value="1"
                                                                 {{ $product->featured == 1 ? 'checked' : '' }}>
                                                             <label for="checkbox_3">Featured</label>
                                                         </fieldset>
@@ -279,7 +283,8 @@
                                                 <div class="col-md-3">
 
                                                     <div class="form-group">
-                                                        <input type="hidden" name="sizes[]" value="{{ $item->id }}" class="size-item-{{$item->id}}">
+                                                        <input type="hidden" name="sizes[]" value="{{ $item->id }}"
+                                                            class="size-item-{{ $item->id }}">
                                                         <h5>{{ $item->name }}<span class="text-danger">*</span></h5>
                                                         <div class="controls">
                                                             <input type="text" name="amounts[]" class="form-control"
@@ -295,7 +300,8 @@
                                         <hr>
 
                                         <div class="text-xs-right">
-                                            <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update">
+                                            <input type="submit" class="btn btn-rounded btn-primary mb-5"
+                                                value="Cập nhật">
                                         </div>
                             </form>
 

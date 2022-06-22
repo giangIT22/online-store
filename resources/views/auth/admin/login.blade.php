@@ -22,7 +22,7 @@
                     @csrf
                     <h3>Đăng nhập</h3>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
+                        <label for="exampleInputEmail1">Email</label>
                         <input type="text" class="form-control" placeholder="Nhập email ..." name="email">
                         @error('email')
                             <span class="text-danger">{{ $message }}</span>

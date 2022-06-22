@@ -31,4 +31,11 @@ class StoreProduct extends FormRequest
             'category_id' => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            ''
+        ];
+    }
 }

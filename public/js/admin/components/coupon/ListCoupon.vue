@@ -22,10 +22,10 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th>Coupon name</th>
+                      <th>Mã Coupon</th>
                       <th>Coupon discount</th>
-                      <th>Validity</th>
-                      <th>Status</th>
+                      <th>Thời hạn mã giảm giá</th>
+                      <th>Trạng thái</th>
                       <th>Action</th>
                     </tr>
                   </thead>

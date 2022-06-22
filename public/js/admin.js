@@ -2309,8 +2309,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -2508,6 +2506,90 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     coupons: Object,
+    total: Number,
+    lastPage: Number
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/admin/components/employee/ListEmployee.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/admin/components/employee/ListEmployee.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Paginate_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Paginate.vue */ "./resources/js/admin/components/Paginate.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    Paginate: _Paginate_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: {
+    employees: Array,
     total: Number,
     lastPage: Number
   }
@@ -2742,13 +2824,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     Paginate: _Paginate_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
-    products: Object,
+    products: Array,
     total: Number,
     lastPage: Number
   }
@@ -3113,12 +3226,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_admin_components_coupon_ListCoupon_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../js/admin/components/coupon/ListCoupon.vue */ "./resources/js/admin/components/coupon/ListCoupon.vue");
 /* harmony import */ var _js_admin_components_order_ListOrder_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../js/admin/components/order/ListOrder.vue */ "./resources/js/admin/components/order/ListOrder.vue");
 /* harmony import */ var _js_admin_components_user_ListUser_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../js/admin/components/user/ListUser.vue */ "./resources/js/admin/components/user/ListUser.vue");
+/* harmony import */ var _js_admin_components_employee_ListEmployee_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../js/admin/components/employee/ListEmployee.vue */ "./resources/js/admin/components/employee/ListEmployee.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]); //support vuex
 
 
 Vue.use(vuex__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
 
 
 
@@ -3139,6 +3254,7 @@ Vue.component('PublishReview', _js_admin_components_review_PublishReview_vue__WE
 Vue.component('ListCoupon', _js_admin_components_coupon_ListCoupon_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
 Vue.component('ListOrder', _js_admin_components_order_ListOrder_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
 Vue.component('ListUser', _js_admin_components_user_ListUser_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
+Vue.component('ListEmployee', _js_admin_components_employee_ListEmployee_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
 var app = new Vue({
   el: '#admin'
 });
@@ -39157,6 +39273,45 @@ component.options.__file = "resources/js/admin/components/coupon/ListCoupon.vue"
 
 /***/ }),
 
+/***/ "./resources/js/admin/components/employee/ListEmployee.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/admin/components/employee/ListEmployee.vue ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ListEmployee_vue_vue_type_template_id_c1bd4c5c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListEmployee.vue?vue&type=template&id=c1bd4c5c&scoped=true& */ "./resources/js/admin/components/employee/ListEmployee.vue?vue&type=template&id=c1bd4c5c&scoped=true&");
+/* harmony import */ var _ListEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListEmployee.vue?vue&type=script&lang=js& */ "./resources/js/admin/components/employee/ListEmployee.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ListEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ListEmployee_vue_vue_type_template_id_c1bd4c5c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ListEmployee_vue_vue_type_template_id_c1bd4c5c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "c1bd4c5c",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/admin/components/employee/ListEmployee.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/admin/components/order/ListOrder.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/admin/components/order/ListOrder.vue ***!
@@ -39473,6 +39628,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/admin/components/employee/ListEmployee.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/admin/components/employee/ListEmployee.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ListEmployee.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/admin/components/employee/ListEmployee.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/admin/components/order/ListOrder.vue?vue&type=script&lang=js&":
 /*!************************************************************************************!*\
   !*** ./resources/js/admin/components/order/ListOrder.vue?vue&type=script&lang=js& ***!
@@ -39676,6 +39847,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListCoupon_vue_vue_type_template_id_c4708ddc_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListCoupon_vue_vue_type_template_id_c4708ddc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ListCoupon.vue?vue&type=template&id=c4708ddc&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/admin/components/coupon/ListCoupon.vue?vue&type=template&id=c4708ddc&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/employee/ListEmployee.vue?vue&type=template&id=c1bd4c5c&scoped=true&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/admin/components/employee/ListEmployee.vue?vue&type=template&id=c1bd4c5c&scoped=true& ***!
+  \************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListEmployee_vue_vue_type_template_id_c1bd4c5c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListEmployee_vue_vue_type_template_id_c1bd4c5c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListEmployee_vue_vue_type_template_id_c1bd4c5c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ListEmployee.vue?vue&type=template&id=c1bd4c5c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/admin/components/employee/ListEmployee.vue?vue&type=template&id=c1bd4c5c&scoped=true&");
 
 
 /***/ }),
@@ -39976,7 +40164,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Nội dung")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Sửa/Xóa")]),
+        _c("th", [_vm._v("Action")]),
       ]),
     ])
   },
@@ -40006,7 +40194,7 @@ var render = function () {
   return _c("div", { staticClass: "container-full" }, [
     _c("section", { staticClass: "content" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "box" }, [
             _vm._m(0),
             _vm._v(" "),
@@ -40028,16 +40216,6 @@ var render = function () {
                         "tbody",
                         _vm._l(_vm.categories, function (item) {
                           return _c("tr", { key: item.id }, [
-                            _c(
-                              "td",
-                              { staticStyle: { "text-align": "center" } },
-                              [
-                                _c("span", [
-                                  _c("i", { class: "" + item.category_icon }),
-                                ]),
-                              ]
-                            ),
-                            _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(item.name))]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(item.slug))]),
@@ -40095,7 +40273,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-header with-border" }, [
       _c("div", { staticClass: "d-flex justify-content-between" }, [
-        _c("h3", { staticClass: "box-title" }, [_vm._v("Category List")]),
+        _c("h3", { staticClass: "box-title" }, [_vm._v("Danh sách category")]),
         _vm._v(" "),
         _c(
           "a",
@@ -40103,7 +40281,7 @@ var staticRenderFns = [
             staticClass: "btn btn-rounded btn-primary mb-5",
             attrs: { href: "/admin/category/create", type: "button" },
           },
-          [_vm._v("Add")]
+          [_vm._v("Thêm")]
         ),
       ]),
     ])
@@ -40114,9 +40292,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Category Icon ")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Name")]),
+        _c("th", [_vm._v("Tên")]),
         _vm._v(" "),
         _c("th", [_vm._v("Slug")]),
         _vm._v(" "),
@@ -40229,7 +40405,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-header with-border" }, [
       _c("div", { staticClass: "d-flex justify-content-between" }, [
-        _c("h3", { staticClass: "box-title" }, [_vm._v("Sub Category List")]),
+        _c("h3", { staticClass: "box-title" }, [
+          _vm._v("Danh sách Subcategory"),
+        ]),
         _vm._v(" "),
         _c(
           "a",
@@ -40237,7 +40415,7 @@ var staticRenderFns = [
             staticClass: "btn btn-rounded btn-primary mb-5",
             attrs: { href: "/admin/category/sub/create", type: "button" },
           },
-          [_vm._v("Add")]
+          [_vm._v("Thêm")]
         ),
       ]),
     ])
@@ -40248,7 +40426,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Name")]),
+        _c("th", [_vm._v("Tên")]),
         _vm._v(" "),
         _c("th", [_vm._v("Slug")]),
         _vm._v(" "),
@@ -40406,13 +40584,157 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Coupon name")]),
+        _c("th", [_vm._v("Mã Coupon")]),
         _vm._v(" "),
         _c("th", [_vm._v("Coupon discount")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Validity")]),
+        _c("th", [_vm._v("Thời hạn mã giảm giá")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Status")]),
+        _c("th", [_vm._v("Trạng thái")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Action")]),
+      ]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/admin/components/employee/ListEmployee.vue?vue&type=template&id=c1bd4c5c&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/admin/components/employee/ListEmployee.vue?vue&type=template&id=c1bd4c5c&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container-full" }, [
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-12" }, [
+          _c("div", { staticClass: "box" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "box-body" }, [
+              _c(
+                "div",
+                { staticClass: "table-responsive" },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-striped",
+                      attrs: { id: "example1" },
+                    },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.employees, function (item) {
+                          return _c("tr", { key: item.id }, [
+                            _c("td", [
+                              _c("img", {
+                                attrs: {
+                                  src: item.profile_photo_path,
+                                  alt: "",
+                                  width: "50px",
+                                },
+                              }),
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.email))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-info",
+                                  attrs: {
+                                    href: "/admin/employee/edit/" + item.id,
+                                    title: "Edit Data",
+                                  },
+                                },
+                                [_c("i", { staticClass: "fa fa-pencil" })]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-danger action-delete",
+                                  attrs: {
+                                    href: "",
+                                    "data-url":
+                                      "/admin/employee/delete/" + item.id,
+                                    title: "Delete Data",
+                                    id: "delete",
+                                  },
+                                },
+                                [_c("i", { staticClass: "fa fa-trash" })]
+                              ),
+                            ]),
+                          ])
+                        }),
+                        0
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("paginate", { attrs: { "page-count": _vm.lastPage } }),
+                ],
+                1
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header with-border" }, [
+      _c("div", { staticClass: "d-flex justify-content-between" }, [
+        _c("h3", { staticClass: "box-title" }, [_vm._v("Danh sách nhân viên")]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-rounded btn-primary mb-5",
+            attrs: { href: "/admin/employee/create", type: "button" },
+          },
+          [_vm._v("Thêm")]
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Ảnh nhân viên")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tên")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Email")]),
         _vm._v(" "),
         _c("th", [_vm._v("Action")]),
       ]),
@@ -40740,12 +41062,40 @@ var render = function () {
                               _c("td", [_vm._v(_vm._s(item.product_slug))]),
                               _vm._v(" "),
                               _c("td", [
-                                _vm._v(_vm._s(item.product_price) + " $"),
+                                _vm._v(
+                                  "\n                      " +
+                                    _vm._s(
+                                      item.product_price.toLocaleString(
+                                        "it-IT",
+                                        {
+                                          style: "currency",
+                                          currency: "vnd",
+                                        }
+                                      )
+                                    ) +
+                                    "\n                    "
+                                ),
                               ]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(item.product_qty))]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(item.sale_price))]),
+                              _c("td", [
+                                _vm._v(
+                                  "\n                      " +
+                                    _vm._s(
+                                      item.sale_price
+                                        ? item.sale_price.toLocaleString(
+                                            "it-IT",
+                                            {
+                                              style: "currency",
+                                              currency: "vnd",
+                                            }
+                                          )
+                                        : ""
+                                    ) +
+                                    "\n                    "
+                                ),
+                              ]),
                               _vm._v(" "),
                               _c("td", [
                                 _c(
@@ -40801,7 +41151,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-header with-border" }, [
       _c("div", { staticClass: "d-flex justify-content-between" }, [
-        _c("h3", { staticClass: "box-title" }, [_vm._v("Product List")]),
+        _c("h3", { staticClass: "box-title" }, [_vm._v("Danh sách sản phẩm")]),
         _vm._v(" "),
         _c(
           "a",
@@ -40809,7 +41159,7 @@ var staticRenderFns = [
             staticClass: "btn btn-rounded btn-primary mb-5",
             attrs: { href: "/admin/product/create", type: "button" },
           },
-          [_vm._v("Add")]
+          [_vm._v("Thêm")]
         ),
       ]),
     ])
@@ -40820,19 +41170,19 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Image")]),
+        _c("th", [_vm._v("Ảnh sản phẩm")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Name")]),
+        _c("th", [_vm._v("Tên")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Description")]),
+        _c("th", [_vm._v("Mô tả")]),
         _vm._v(" "),
         _c("th", [_vm._v("Slug")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Price")]),
+        _c("th", [_vm._v("Giá sản phẩm")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Amount")]),
+        _c("th", [_vm._v("Số lượng")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Sale price")]),
+        _c("th", [_vm._v("Giá sale")]),
         _vm._v(" "),
         _c("th", [_vm._v("Action")]),
       ]),
@@ -40960,9 +41310,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Người đánh giá")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Tình trạng")]),
+        _c("th", [_vm._v("Trạng thái")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Hành động")]),
+        _c("th", [_vm._v("Action")]),
       ]),
     ])
   },
@@ -41088,9 +41438,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Người đánh giá")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Tình trạng")]),
+        _c("th", [_vm._v("Trạng thái")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Hành động")]),
+        _c("th", [_vm._v("Action")]),
       ]),
     ])
   },
@@ -41233,7 +41583,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-header with-border" }, [
       _c("div", { staticClass: "d-flex justify-content-between" }, [
-        _c("h3", { staticClass: "box-title" }, [_vm._v("Slider List")]),
+        _c("h3", { staticClass: "box-title" }, [_vm._v("Danh sách Slider")]),
         _vm._v(" "),
         _c(
           "a",
@@ -41241,7 +41591,7 @@ var staticRenderFns = [
             staticClass: "btn btn-rounded btn-primary mb-5",
             attrs: { href: "/admin/slider/create", type: "button" },
           },
-          [_vm._v("Add")]
+          [_vm._v("Thêm")]
         ),
       ]),
     ])
@@ -41252,13 +41602,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Slider image")]),
+        _c("th", [_vm._v("Ảnh slider")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Title")]),
+        _c("th", [_vm._v("Tiêu đề")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Description")]),
+        _c("th", [_vm._v("Nội dung")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Status")]),
+        _c("th", [_vm._v("Trạng thái")]),
         _vm._v(" "),
         _c("th", [_vm._v("Action")]),
       ]),
