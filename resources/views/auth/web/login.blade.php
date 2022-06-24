@@ -22,19 +22,22 @@
                         <p class="">Nếu bạn đã có tài khoản, đăng nhập tại đây.</p>
                         <div class="social-sign-in outer-top-xs">
                             <a href="#" class="facebook-sign-in"><i class="fa fa-facebook"></i> Sign In with Facebook</a>
-                            <a href="#" class="twitter-sign-in"><i class="fa fa-twitter"></i> Sign In with Twitter</a>
                         </div>
                         <form class="register-form outer-top-xs" role="form" method="post" action="{{route('login.store')}}">
                             @csrf
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail1">Email<span>*</span></label>
-                                <input type="text" class="form-control unicase-form-control text-input"
-                                    id="exampleInputEmail1" name="email">
+                                <label class="info-title">Email<span>*</span></label>
+                                <input type="text" class="form-control unicase-form-control text-input" name="email">
+                                @error('email')
+                                    <span>{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputPassword1">Mật khẩu<span>*</span></label>
-                                <input type="password" class="form-control unicase-form-control text-input"
-                                    id="exampleInputPassword1" name="password">
+                                <label class="info-title">Mật khẩu<span>*</span></label>
+                                <input type="password" class="form-control unicase-form-control text-input" name="password">
+                                @error('password')
+                                    <span>{{$message}}</span>
+                                @enderror
                             </div>
                             {{-- <div class="radio outer-xs">
                                 <label>
@@ -44,6 +47,7 @@
                                 <a href="#" class="forgot-password pull-right">Forgot your Password?</a>
                             </div> --}}
                             <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Đăng nhập</button>
+                            <a href="{{route('user.register')}}" class="btn" style="display:inline-block; color:rgb(54, 144, 228)">Đăng ký</a>
                         </form>
                     </div>
                     <!-- Sign-in -->

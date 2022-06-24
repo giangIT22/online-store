@@ -119,8 +119,9 @@ Route::middleware(['auth:admin'])->group(function () {
     });
 
     // Admin Get All User Routes 
-    Route::prefix('alluser')->group(function () {
+    Route::prefix('user')->group(function () {
         Route::get('/view', [AdminProfileController::class, 'allUsers'])->name('all.users');
+        Route::get('/delete/{user_id}', [AdminProfileController::class, 'deleteUser'])->name('user.delete');
     });
 
     //===== all employee ==================

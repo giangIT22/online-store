@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_name' => 'required|string',
+            'name' => 'required|string',
             'email' => [
                 'required',
                 'string',
@@ -44,7 +44,7 @@ class RegisterRequest extends FormRequest
         return [
             'email.string' => 'Email phải là một chuỗi kí tự',
             'email.required' => 'Vui lòng nhập email',
-            'user_name.required' => 'Vui lòng nhập tên',
+            'name.required' => 'Vui lòng nhập tên',
             'password.required' => 'Vui lòng nhập mật khẩu',
             'user_name.string' => 'Tên phải là một chuỗi kí tự',
             'email.email' => 'Mail không đúng định dạng',

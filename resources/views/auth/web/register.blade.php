@@ -31,8 +31,8 @@
                             </div>
                             <div class="form-group">
                                 <label class="info-title">Tên <span>*</span></label>
-                                <input type="text" class="form-control unicase-form-control text-input" name="user_name">
-                                @error('user_name')
+                                <input type="text" class="form-control unicase-form-control text-input" name="name">
+                                @error('name')
                                     <span>{{$message}}</span>
                                 @enderror
                             </div>

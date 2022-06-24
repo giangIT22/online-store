@@ -83,4 +83,21 @@ class AdminProfileController extends Controller
             'lastPage' => $data->lastPage()
         ]);
     }
+
+    public function deleteUser($userId)
+    {
+        try {
+            User::findOrFail($userId)->delete();
+            return response()->json([
+                'code' => 200,
+                'status' => true,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'code' => 200,
+                'status' => true,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 }
