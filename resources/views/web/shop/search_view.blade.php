@@ -42,26 +42,30 @@
                                             <div class="fld inline">
                                                 <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
                                                     <button data-toggle="dropdown" type="button"
-                                                        class="btn dropdown-toggle">Tùy chọn<span
-                                                            class="caret"></span> </button>
-                                                            <ul role="menu" class="dropdown-menu">
-                                                                <li role="presentation">
-                                                                  <a href="{{ route('search.view', array_merge(
-                                                                    request()->query(),
-                                                                    [
-                                                                      'sort' => 0
-                                                                    ]
-                                                                  )) }}">Giá: tăng dần</a>
-                                                                </li>
-                                                                <li role="presentation">
-                                                                  <a href="{{ route('search.view', array_merge(
-                                                                    request()->query(),
-                                                                    [
-                                                                      'sort' => 1
-                                                                    ]
-                                                                  )) }}">Giá: giảm dần</a>
-                                                                </li>
-                                                            </ul>
+                                                        class="btn dropdown-toggle">Tùy chọn<span class="caret"></span>
+                                                    </button>
+                                                    <ul role="menu" class="dropdown-menu">
+                                                        <li role="presentation">
+                                                            <a
+                                                                href="{{ route(
+                                                                    'search.view',
+                                                                    array_merge(request()->query(), [
+                                                                        'sort' => 0,
+                                                                    ]),
+                                                                ) }}">Giá:
+                                                                tăng dần</a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a
+                                                                href="{{ route(
+                                                                    'search.view',
+                                                                    array_merge(request()->query(), [
+                                                                        'sort' => 1,
+                                                                    ]),
+                                                                ) }}">Giá:
+                                                                giảm dần</a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                             <!-- /.fld -->
@@ -85,11 +89,14 @@
                                                             <div class="product-image">
                                                                 <div class="image"> <a
                                                                         href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"><img
-                                                                            src="{{ asset($product->image) }}" alt=""></a>
+                                                                            height="249px;"
+                                                                            src="{{ asset($product->image) }}"
+                                                                            alt=""></a>
                                                                 </div>
                                                                 <!-- /.image -->
-
-                                                                <div class="tag new"><span>new</span></div>
+                                                                @if ($product->sale_price)
+                                                                    <div class="tag new"><span>new</span></div>
+                                                                @endif
                                                             </div>
                                                             <!-- /.product-image -->
 
@@ -97,7 +104,9 @@
                                                                 <h3 class="name"><a
                                                                         href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
                                                                 </h3>
-                                                                @include('partitions.web.rating', ['productId' => $product->id])
+                                                                @include('partitions.web.rating', [
+                                                                    'productId' => $product->id,
+                                                                ])
                                                                 <div class="description"></div>
                                                                 <div class="product-price">
                                                                     @if ($product->sale_price)
@@ -164,8 +173,9 @@
                                                         <div class="row product-list-row">
                                                             <div class="col col-sm-4 col-lg-4">
                                                                 <div class="product-image">
-                                                                    <div class="image"> <img
-                                                                            src="{{ asset($product->image) }}" alt="">
+                                                                    <div class="image"> <img height="249px;"
+                                                                            src="{{ asset($product->image) }}"
+                                                                            alt="">
                                                                     </div>
                                                                 </div>
                                                                 <!-- /.product-image -->
@@ -243,18 +253,30 @@
                                     <div class="pagination-container">
                                         <ul class="list-inline list-unstyled">
                                             <li class="prev"><a
-                                                    href="{{ route('search.view', array_merge(request()->query(),[
-                                                        'page' => $currentPage == 1 ? $currentPage : $currentPage - 1])) }}">
+                                                    href="{{ route(
+                                                        'search.view',
+                                                        array_merge(request()->query(), [
+                                                            'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
+                                                        ]),
+                                                    ) }}">
                                                     <i class="fa fa-angle-left"></i></a></li>
                                             @for ($i = 1; $i <= $lastPage; $i++)
-                                            <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
-                                              href="{{ route('search.view', array_merge(request()->query(),[
-                                                'page' => $i]))}}">{{ $i }}</a></li>
+                                                <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
+                                                        href="{{ route(
+                                                            'search.view',
+                                                            array_merge(request()->query(), [
+                                                                'page' => $i,
+                                                            ]),
+                                                        ) }}">{{ $i }}</a>
+                                                </li>
                                             @endfor
                                             <li class="next"><a
-                                                    href="{{ route('search.view', array_merge(request()->query(),
-                                                    [ 
-                                                      'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1])) }} "><i
+                                                    href="{{ route(
+                                                        'search.view',
+                                                        array_merge(request()->query(), [
+                                                            'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1,
+                                                        ]),
+                                                    ) }} "><i
                                                         class="fa fa-angle-right"></i></a></li>
                                         </ul>
                                         <!-- /.list-inline -->

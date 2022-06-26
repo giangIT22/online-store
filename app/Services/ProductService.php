@@ -28,10 +28,10 @@ class ProductService implements ProductServiceInterface
         return $this->getData($params, $query);
     }
 
-    public function getProductsByCategory($params, $categorySlug)
+    public function getProductsByCategory($params,$categorySlug, $categoryId)
     {
-        $subCategory = SubCategory::where('sub_category_slug', $categorySlug)->first();
-        $category = Category::where('slug', $categorySlug)->first();
+        $subCategory = SubCategory::where('sub_category_slug', $categorySlug)->where('id', $categoryId)->first();
+        $category = Category::where('slug', $categorySlug)->where('id', $categoryId)->first();
 
         if ($subCategory) {
             $query = Product::where('subcategory_id', $subCategory->id)->orderBy('product_price');

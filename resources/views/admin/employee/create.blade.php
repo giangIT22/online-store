@@ -81,7 +81,7 @@
                                         <div class="row">
                                             <div class="col-md-3 col-12">
                                                 <div class="form-group">
-                                                    <label>Chọn vai trò</label>
+                                                    <h5>Chọn vài trò<span class="text-danger">*</span></h5>
                                                     <select class="form-control select2 select2-hidden-accessible"
                                                         multiple="" style="width: 100%;" data-placeholder="Chọn vai trò">
                                                         

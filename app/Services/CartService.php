@@ -55,7 +55,9 @@ class CartService implements CartServiceInterface
         }
         $productsInCart = collect([]);
 
-        $products = DB::table('product_cart')->select('product_id', 'amount', 'price', 'size_id')->where('cart_id', $cart->id)->get();
+        $products = DB::table('product_cart')
+            ->select('product_id', 'amount', 'price', 'size_id')
+            ->where('cart_id', $cart->id)->get();
 
         foreach ($products as $item) {
             $product = DB::table('products')->where('id', $item->product_id)->first();
@@ -87,7 +89,9 @@ class CartService implements CartServiceInterface
 
         $productsInCart = collect([]);
 
-        $products = DB::table('product_cart')->select('product_id', 'amount', 'price')->where('cart_id', $cart->id)->get();
+        $products = DB::table('product_cart')
+            ->select('product_id', 'amount', 'price')
+            ->where('cart_id', $cart->id)->get();
 
         if ($products) {
             foreach ($products as $item) {
@@ -103,14 +107,20 @@ class CartService implements CartServiceInterface
             }
         }
 
-        $carts = DB::table('product_cart')->where('cart_id', $cart->id)->first();
+        $carts = DB::table('product_cart')->where('cart_id', $cart->id)->get();
+        $sumTotal = 0;
 
-        if (empty($carts)) {
+        if (empty($carts->all())) {
             $cart->delete();
             $flag = true;
+        } else {
+            foreach ($carts as $cart) {
+                $sum = $cart->amount * $cart->price;
+                $sumTotal += $sum;
+            }
         }
 
-        return [true, $flag, $productsInCart];
+        return [true, $flag, $productsInCart, $sumTotal];
     }
 
     public function updateCart($params)

@@ -212,7 +212,7 @@
                                     <li
                                         class=" {{ $category->slug == request()->category_slug ? 'active' : '' }} dropdown hidden-sm">
                                         <a
-                                            href="{{ route('category.index', ['category_slug' => $category->slug]) }}">{{ $category->name }}</a>
+                                            href="{{ route('category.index', ['category_slug' => $category->slug, 'category_id' => $category->id]) }}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
                                 <li class="{{ Route::current()->uri == '/blog' ? 'active' : '' }}"> <a

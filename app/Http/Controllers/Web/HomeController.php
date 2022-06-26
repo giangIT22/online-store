@@ -12,6 +12,7 @@ use App\Models\Size;
 use App\Models\Slider;
 use App\Services\BlogServiceInterface;
 use App\Services\ProductServiceInterface;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -30,13 +31,16 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $categories = Category::with('subCategories')->get();
-        $products = Product::orderBy('id', 'desc')->limit(6)->get();
+        $products = Product::orderBy('id', 'desc')
+            ->where('created_at', '>', Carbon::now()->subDays(15))
+            ->where('created_at', '<=', Carbon::now())
+            ->limit(6)->get();
         $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $featuredProducts = Product::where('featured', true)->orderBy('id', 'desc')->get();
         $hotDealProducts = Product::where('hot_deals', true)->where('sale_price', '!=', null)
             ->orderBy('id', 'desc')->get();
-        $specialOfferProducts = Product::where('special_offer', true)->orderBy('id', 'desc')->limit(9)->get();
-        $specialDealsProducts = Product::where('special_deals', true)->orderBy('id', 'desc')->limit(9)->get();
+        $specialOfferProducts = Product::where('special_offer', true)->orderBy('id', 'desc')->limit(6)->get();
+        $specialDealsProducts = Product::where('special_deals', true)->orderBy('id', 'desc')->limit(6)->get();
         $productTags = ProductTag::select('name')->limit(8)->groupBy('name')->get();
         $blogs = $this->blogService->getListBlog(Blog::BLOG_SLIDER)['listBlogs'];
         $bestSellProducts = $this->productService->getBestSellProducts();

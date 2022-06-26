@@ -24,8 +24,8 @@ class SubCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'sub_category_name' => ['required', 'string', 'unique:sub_categories,sub_category_name,' . $this->sub_category_id],
-            'sub_category_slug' => ['required', 'string', 'unique:sub_categories,sub_category_slug,' . $this->sub_category_id],
+            'sub_category_name' => ['required', 'string'],
+            'sub_category_slug' => ['required', 'string'],
             'category_id' => 'required'
         ];
     }

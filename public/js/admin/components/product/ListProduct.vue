@@ -39,11 +39,11 @@
                       :key="item.id"
                     >
                       <td><img :src="item.image" alt="" width="50px" /></td>
-                      <td>{{ item.name }}</td>
+                      <td style="width:200px;">{{ item.name }}</td>
                       <td class="w-200">
                         <span>{{ item.description }}</span>
                       </td>
-                      <td>{{ item.product_slug }}</td>
+                      <td style="width:200px;">{{ item.product_slug }}</td>
                       <td>
                         {{
                           item.product_price.toLocaleString("it-IT", {

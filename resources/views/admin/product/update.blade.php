@@ -9,7 +9,7 @@
             <div class="box">
                 <div class="box-header with-border">
                     <div class="d-flex justify-content-between">
-                        <h4 class="box-title">Cập nhạt thông tin sản phẩm</h4>
+                        <h4 class="box-title">Cập nhật thông tin sản phẩm</h4>
                         <a href="{{ route('all.products') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay
                             lại</a>
                     </div>
@@ -51,7 +51,7 @@
                                                         <select name="subcategory_id" class="form-control" id="list-sub">
                                                             @foreach ($subcategories as $subCategory)
                                                                 <option value="{{ $subCategory->id }}"
-                                                                    {{ $subCategory->id == $product->subCategory_id ? 'selected' : '' }}>
+                                                                    {{ $subCategory->id == $product->subcategory_id ? 'selected' : '' }}>
                                                                     {{ $subCategory->sub_category_name }}
                                                                 </option>
                                                             @endforeach
@@ -154,7 +154,7 @@
                                                 <div class="form-group">
                                                     <h5>Giá sale<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="sale_price" class="form-control">
+                                                        <input type="text" name="sale_price" class="form-control" value="{{ $product->sale_price ?? ''}}">
                                                         @error('sale_price')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror

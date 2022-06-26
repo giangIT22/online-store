@@ -34,7 +34,9 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                 <div class="widget-header">
                                     <h4 class="widget-title">GIÁ SẢN PHẨM</h4>
                                 </div>
-                                <form action="{{ route('category.index', ['category_slug' => request()->category_slug]) }}" class="filter-price" method="get">
+                                <form
+                                    action="{{ route('category.index', ['category_slug' => request()->category_slug, 'category_id' => request('category_id')]) }}"
+                                    class="filter-price" method="get">
                                     <ul class="list-value">
                                         <li class="filter-item">
                                             <span>
@@ -95,7 +97,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                             <!-- ============================================== PRICE SILDER : END ============================================== -->
                             <!-- ============================================== PRODUCT TAGS ============================================== -->
                             <div class="sidebar-widget product-tag wow fadeInUp outer-top-vs">
-                                <h3 class="section-title">Product tags</h3>
+                                <h3 class="section-title">Tag sản phẩm</h3>
                                 <div class="sidebar-widget-body outer-top-xs">
                                     <div class="tag-list">
                                         @foreach ($productTags as $tag)
@@ -153,6 +155,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                 'category.index',
                                                                 array_merge(request()->query(), [
                                                                     'category_slug' => request('category_slug'),
+                                                                    'category_id' => request('category_id'),
                                                                     'sort' => 0,
                                                                 ]),
                                                             ) }}">Giá:
@@ -164,6 +167,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                 'category.index',
                                                                 array_merge(request()->query(), [
                                                                     'category_slug' => request('category_slug'),
+                                                                    'category_id' => request('category_id'),
                                                                     'sort' => 1,
                                                                 ]),
                                                             ) }}">Giá:
@@ -187,6 +191,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                         'category.index',
                                                         array_merge(request()->query(), [
                                                             'category_slug' => request()->category_slug,
+                                                            'category_id' => request('category_id'),
                                                             'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
                                                         ]),
                                                     ) }}">
@@ -197,6 +202,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                             'category.index',
                                                             array_merge(request()->query(), [
                                                                 'category_slug' => request()->category_slug,
+                                                                'category_id' => request('category_id'),
                                                                 'page' => $i,
                                                             ]),
                                                         ) }}">{{ $i }}</a>
@@ -207,6 +213,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                         'category.index',
                                                         array_merge(request()->query(), [
                                                             'category_slug' => request()->category_slug,
+                                                            'category_id' => request('category_id'),
                                                             'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1,
                                                         ]),
                                                     ) }} "><i
@@ -233,7 +240,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                             <div class="image">
                                                                 <a
                                                                     href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
-                                                                    <img src="{{ asset($product->image) }}"
+                                                                    <img height="249px;" src="{{ asset($product->image) }}"
                                                                         alt=""></a>
                                                             </div>
                                                             @if ($product->created_at > $minDate && $product->created_at < now())
@@ -242,7 +249,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                         </div>
                                                         <div class="product-info text-left">
                                                             <h3 class="name"><a
-                                                                    href="detail.html">{{ $product->name }}</a></h3>
+                                                                    href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a></h3>
                                                             @include('partitions.web.rating', [
                                                                 'productId' => $product->id,
                                                             ])
@@ -300,7 +307,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                     <div class="row product-list-row">
                                                         <div class="col col-sm-4 col-lg-4">
                                                             <div class="product-image">
-                                                                <div class="image"> <img
+                                                                <div class="image"> <img height="249px;"
                                                                         src="{{ asset($product->image) }}"
                                                                         alt=""> </div>
                                                             </div>
@@ -310,7 +317,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                         <div class="col col-sm-8 col-lg-8">
                                                             <div class="product-info">
                                                                 <h3 class="name"><a
-                                                                        href="detail.html">{{ $product->name }}</a></h3>
+                                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a></h3>
                                                                 @include('partitions.web.rating', [
                                                                     'productId' => $product->id,
                                                                 ])
@@ -377,6 +384,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                         'category.index',
                                                         array_merge(request()->query(), [
                                                             'category_slug' => request()->category_slug,
+                                                            'category_id' => request('category_id'),
                                                             'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
                                                         ]),
                                                     ) }}">
@@ -387,6 +395,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                             'category.index',
                                                             array_merge(request()->query(), [
                                                                 'category_slug' => request()->category_slug,
+                                                                'category_id' => request('category_id'),
                                                                 'page' => $i,
                                                             ]),
                                                         ) }}">{{ $i }}</a>
@@ -396,6 +405,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                         'category.index',
                                                         array_merge(request()->query(), [
                                                             'category_slug' => request()->category_slug,
+                                                            'category_id' => request('category_id'),
                                                             'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1,
                                                         ]),
                                                     ) }} "><i

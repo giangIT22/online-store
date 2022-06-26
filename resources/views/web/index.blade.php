@@ -58,7 +58,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                             <!-- /.hot-deal-wrapper -->
 
                                             <div class="product-info text-left m-t-20">
-                                                <h3 class="name"><a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
+                                                <h3 class="name"><a
+                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
                                                 </h3>
                                                 @include('partitions.web.rating', [
                                                     'productId' => $product->id,
@@ -71,8 +72,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                             class="price-before-discount">{{ number_format($product->product_price) }}
                                                             đ</span>
                                                     @else
-                                                        <span
-                                                            class="price">{{ number_format($product->product_price) }}
+                                                        <span class="price">{{ number_format($product->product_price) }}
                                                             đ</span>
                                                     @endIf
                                                 </div>
@@ -106,8 +106,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                 <div class="image">
                                                                     <a
                                                                         href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
-                                                                        <img src="{{ asset($product->image) }}" alt=""
-                                                                            style="height: ">
+                                                                        <img src="{{ asset($product->image) }}"
+                                                                            alt="" style="height: ">
                                                                     </a>
                                                                 </div>
                                                                 <!-- /.image -->
@@ -191,8 +191,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                 <div class="image">
                                                                     <a
                                                                         href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
-                                                                        <img src="{{ asset($product->image) }}" alt=""
-                                                                            height="98px">
+                                                                        <img src="{{ asset($product->image) }}"
+                                                                            alt="" height="98px">
                                                                     </a>
                                                                 </div>
                                                                 <!-- /.image -->
@@ -257,60 +257,13 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                         </div>
                         <!-- /.sidebar-widget-body -->
                     </div>
-                    <!-- /.sidebar-widget -->
-                    <!-- ============================================== NEWSLETTER: END ============================================== -->
-
-                    {{-- <!-- ============================================== Testimonials============================================== -->
-                    <div class="sidebar-widget  wow fadeInUp outer-top-vs ">
-                        <div id="advertisement" class="advertisement">
-                            <div class="item">
-                                <div class="avatar"><img src="assets/images/testimonials/member1.png" alt="Image">
-                                </div>
-                                <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port
-                                    mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                                <div class="clients_author">John Doe <span>Abc Company</span> </div>
-                                <!-- /.container-fluid -->
-                            </div>
-                            <!-- /.item -->
-
-                            <div class="item">
-                                <div class="avatar"><img src="assets/images/testimonials/member3.png" alt="Image">
-                                </div>
-                                <div class="testimonials"><em>"</em>Vtae sodales aliq uam morbi non sem lacus port
-                                    mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                                <div class="clients_author">Stephen Doe <span>Xperia Designs</span> </div>
-                            </div>
-                            <!-- /.item -->
-
-                            <div class="item">
-                                <div class="avatar"><img src="assets/images/testimonials/member2.png" alt="Image">
-                                </div>
-                                <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port
-                                    mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                                <div class="clients_author">Saraha Smith <span>Datsun &amp; Co</span> </div>
-                                <!-- /.container-fluid -->
-                            </div>
-                            <!-- /.item -->
-
-                        </div>
-                        <!-- /.owl-carousel -->
-                    </div> --}}
-
-                    <!-- ============================================== Testimonials: END ============================================== -->
-
                 </div>
-                <!-- /.sidemenu-holder -->
-                <!-- ============================================== SIDEBAR : END ============================================== -->
-
-                <!-- ============================================== CONTENT ============================================== -->
                 <div class="col-xs-12 col-sm-12 col-md-9 homebanner-holder">
-                    <!-- ========================================== SECTION – HERO ========================================= -->
 
                     <div id="hero">
                         <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
                             @foreach ($sliders as $slider)
-                                <div class="item"
-                                    style="background-image: url({{ asset($slider->slider_image) }});">
+                                <div class="item" style="background-image: url({{ asset($slider->slider_image) }});">
                                     <div class="container-fluid">
                                         <div class="caption bg-color vertical-center text-left">
                                             <div class="big-text fadeInDown-1"> {{ $slider->title }} </div>
@@ -410,12 +363,13 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                 <a
                                                                     href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
                                                                     <img style="max-height:189px;"
-                                                                        src="{{ asset($product->image) }}" alt="">
+                                                                        src="{{ asset($product->image) }}"
+                                                                        alt="">
                                                                 </a>
                                                             </div>
                                                             <!-- /.image -->
 
-                                                            @if ($product->created_at > $minDate && $product->created_at < now())
+                                                            @if ($product->created_at > $minDate && $product->created_at <= now())
                                                                 <div class="tag new"><span>new</span></div>
                                                             @endif
                                                         </div>
@@ -451,8 +405,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                     <li class="add-cart-button btn-group">
                                                                         <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
                                                                             data-toggle="tooltip"
-                                                                            class="btn btn-primary icon" type="button"> <i
-                                                                                class="fa fa-shopping-cart"></i> Tùy
+                                                                            class="btn btn-primary icon" type="button">
+                                                                            <i class="fa fa-shopping-cart"></i> Tùy
                                                                             chọn</a>
                                                                         <button class="btn btn-primary cart-btn"
                                                                             type="button">Add to cart</button>
@@ -460,8 +414,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                     <li class="lnk"> <a data-toggle="tooltip"
                                                                             class="add-to-cart preview-product"
                                                                             id="{{ $product->id }}"> <i
-                                                                                class="fa fa-eye"
-                                                                                aria-hidden="true"></i>
+                                                                                class="fa fa-eye" aria-hidden="true"></i>
                                                                         </a> </li>
                                                                 </ul>
                                                             </div>
@@ -529,23 +482,20 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                         <li class="add-cart-button btn-group">
                                                                             <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
                                                                                 data-toggle="tooltip"
-                                                                                class="btn btn-primary icon" type="button"
-                                                                                title="Chọn sản phẩm"> <i
+                                                                                class="btn btn-primary icon"
+                                                                                type="button" title="Chọn sản phẩm"> <i
                                                                                     class="fa fa-shopping-cart"></i> </a>
                                                                             <button class="btn btn-primary cart-btn"
                                                                                 type="button">Add to cart</button>
                                                                         </li>
-                                                                        <li class="lnk wishlist"> <a
-                                                                                data-toggle="tooltip"
+                                                                        <li class="lnk wishlist"> <a data-toggle="tooltip"
                                                                                 class="add-to-cart" href="detail.html"
                                                                                 title="Yêu thích"> <i
                                                                                     class="icon fa fa-heart"></i>
                                                                             </a> </li>
-                                                                        <li class="lnk"> <a
-                                                                                data-toggle="tooltip"
+                                                                        <li class="lnk"> <a data-toggle="tooltip"
                                                                                 class="add-to-cart" href="detail.html"
-                                                                                title="Xem nhanh"> <i
-                                                                                    class="fa fa-eye"
+                                                                                title="Xem nhanh"> <i class="fa fa-eye"
                                                                                     aria-hidden="true"></i>
                                                                             </a> </li>
                                                                     </ul>
@@ -575,8 +525,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                     </div>
                     <!-- /.scroll-tabs -->
                     <!-- ============================================== SCROLL TABS : END ============================================== -->
-                    
-                    
+
+
                     <!-- ============================================== FEATURED PRODUCTS ============================================== -->
                     <section class="section featured-product wow fadeInUp">
                         <h3 class="section-title">Sản phẩm nổi bật</h3>
@@ -588,7 +538,9 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                             <div class="product-image">
                                                 <div class="image"> <a
                                                         href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"><img
-                                                            src="{{ asset($product->image) }}" alt=""></a> </div>
+                                                            style="max-height: 189px;"
+                                                            src="{{ asset($product->image) }}" alt=""></a>
+                                                </div>
                                                 <!-- /.image -->
                                                 @if (!empty($product->sale_price))
                                                     <div class="tag sale"><span>sale</span></div>
@@ -623,11 +575,18 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                             <div class="action">
                                                 <ul class="list-unstyled">
                                                     <li class="add-cart-button btn-group">
-                                                        <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}" data-toggle="tooltip" class="btn btn-primary icon" type="button" data-original-title="" title=""> <i class="fa fa-shopping-cart"></i> Tùy
+                                                        <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
+                                                            data-toggle="tooltip" class="btn btn-primary icon"
+                                                            type="button" data-original-title="" title=""> <i
+                                                                class="fa fa-shopping-cart"></i> Tùy
                                                             chọn</a>
-                                                        <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                                        <button class="btn btn-primary cart-btn" type="button">Add to
+                                                            cart</button>
                                                     </li>
-                                                    <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart preview-product" id="11" data-original-title="" title=""> <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    <li class="lnk"> <a data-toggle="tooltip"
+                                                            class="add-to-cart preview-product" id="11"
+                                                            data-original-title="" title=""> <i class="fa fa-eye"
+                                                                aria-hidden="true"></i>
                                                         </a> </li>
                                                 </ul>
                                             </div>
@@ -695,11 +654,18 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                         <div class="action">
                                             <ul class="list-unstyled">
                                                 <li class="add-cart-button btn-group">
-                                                    <a href="{{ route('product.detail', ['product_id' => $product->product_id, 'slug' => $product->product_slug]) }}" data-toggle="tooltip" class="btn btn-primary icon" type="button" data-original-title="" title=""> <i class="fa fa-shopping-cart"></i> Tùy
+                                                    <a href="{{ route('product.detail', ['product_id' => $product->product_id, 'slug' => $product->product_slug]) }}"
+                                                        data-toggle="tooltip" class="btn btn-primary icon" type="button"
+                                                        data-original-title="" title=""> <i
+                                                            class="fa fa-shopping-cart"></i> Tùy
                                                         chọn</a>
-                                                    <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                                    <button class="btn btn-primary cart-btn" type="button">Add to
+                                                        cart</button>
                                                 </li>
-                                                <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart preview-product" id="11" data-original-title="" title=""> <i class="fa fa-eye" aria-hidden="true"></i>
+                                                <li class="lnk"> <a data-toggle="tooltip"
+                                                        class="add-to-cart preview-product" id="11"
+                                                        data-original-title="" title=""> <i class="fa fa-eye"
+                                                            aria-hidden="true"></i>
                                                     </a> </li>
                                             </ul>
                                         </div>
@@ -763,11 +729,18 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                     <div class="action">
                                         <ul class="list-unstyled">
                                             <li class="add-cart-button btn-group">
-                                                <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}" data-toggle="tooltip" class="btn btn-primary icon" type="button" data-original-title="" title=""> <i class="fa fa-shopping-cart"></i> Tùy
+                                                <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
+                                                    data-toggle="tooltip" class="btn btn-primary icon" type="button"
+                                                    data-original-title="" title=""> <i
+                                                        class="fa fa-shopping-cart"></i> Tùy
                                                     chọn</a>
-                                                <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                                <button class="btn btn-primary cart-btn" type="button">Add to
+                                                    cart</button>
                                             </li>
-                                            <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart preview-product" id="11" data-original-title="" title=""> <i class="fa fa-eye" aria-hidden="true"></i>
+                                            <li class="lnk"> <a data-toggle="tooltip"
+                                                    class="add-to-cart preview-product" id="11"
+                                                    data-original-title="" title=""> <i class="fa fa-eye"
+                                                        aria-hidden="true"></i>
                                                 </a> </li>
                                         </ul>
                                     </div>
@@ -831,11 +804,16 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                 <div class="action">
                                     <ul class="list-unstyled">
                                         <li class="add-cart-button btn-group">
-                                            <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}" data-toggle="tooltip" class="btn btn-primary icon" type="button" data-original-title="" title=""> <i class="fa fa-shopping-cart"></i> Tùy
+                                            <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
+                                                data-toggle="tooltip" class="btn btn-primary icon" type="button"
+                                                data-original-title="" title=""> <i
+                                                    class="fa fa-shopping-cart"></i> Tùy
                                                 chọn</a>
                                             <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                         </li>
-                                        <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart preview-product" id="11" data-original-title="" title=""> <i class="fa fa-eye" aria-hidden="true"></i>
+                                        <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart preview-product"
+                                                id="11" data-original-title="" title=""> <i
+                                                    class="fa fa-eye" aria-hidden="true"></i>
                                             </a> </li>
                                     </ul>
                                 </div>

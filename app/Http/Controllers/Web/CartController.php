@@ -70,13 +70,14 @@ class CartController extends Controller
 
     public function deleteCart(Request $request)
     {
-        list($status, $flag, $products) = $this->cartService->deleteCart($request->all());
+        list($status, $flag, $products, $sumTotal) = $this->cartService->deleteCart($request->all());
 
         if ($status) {
             return response()->json([
                 'status' => true,
                 'flag' => $flag,
-                'products' => $products
+                'products' => $products,
+                'sumTotal' => $sumTotal
             ]);
         } else {
             return response()->json([

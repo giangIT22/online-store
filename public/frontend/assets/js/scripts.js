@@ -646,6 +646,7 @@ jQuery(document).ready(function() {
                 let sumPrice = 0;
                 if (response.status) {
                     $(`#cancel-${productId}-${sizeId}`).parent().parent().remove();
+                    $('.cart-grand-total span').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
 
                     //update box-cart
                     if (response.products.length > 0) {
@@ -671,9 +672,7 @@ jQuery(document).ready(function() {
                         });
 
                         $('.list-item-cart').html(listProducts.join(' '));
-                    }
 
-                    if (response.products.length > 0) {
                         for (let product of response.products) {
                             count += product.amount;
                             sumPrice += product.amount * product.product_price;

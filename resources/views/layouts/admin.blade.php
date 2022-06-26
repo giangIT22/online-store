@@ -42,12 +42,13 @@
 
     <!-- Vendor JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
+        integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('backend/js/vendors.min.js') }}"></script>
     <script src="{{ asset('../assets/icons/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('../assets/vendor_components/select2/dist/js/select2.full.js') }}"></script>
     <script src="{{ asset('backend/js/template.js') }}"></script>
-    {{-- <script src="{{ asset('backend/js/pages/dashboard.js') }}"></script> --}}
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
@@ -64,20 +65,13 @@
                     break;
 
                 case 'warning':
-                    toastr.warning(" {{ Session::get('message') }} ");
-                    break;
-
-                case 'error':
-                    toastr.error(" {{ Session::get('message') }} ");
+                    toastr.warning(" {{ Session::get('messa    ') }} ");
                     break;
             }
         @endif
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
-        integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('js/alertdelete.js') }}"></script>
     <script src="{{ asset('js/admin.js') }}"></script>
     <script src="{{ asset('backend/js/script.js') }}"></script>

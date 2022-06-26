@@ -41053,13 +41053,17 @@ var render = function () {
                                 }),
                               ]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(item.name))]),
+                              _c("td", { staticStyle: { width: "200px" } }, [
+                                _vm._v(_vm._s(item.name)),
+                              ]),
                               _vm._v(" "),
                               _c("td", { staticClass: "w-200" }, [
                                 _c("span", [_vm._v(_vm._s(item.description))]),
                               ]),
                               _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(item.product_slug))]),
+                              _c("td", { staticStyle: { width: "200px" } }, [
+                                _vm._v(_vm._s(item.product_slug)),
+                              ]),
                               _vm._v(" "),
                               _c("td", [
                                 _vm._v(

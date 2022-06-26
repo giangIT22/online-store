@@ -65,11 +65,11 @@ $(document).ready(function() {
                                             class="price sum-price-product">{{ $sum ? number_format($sum, 0, '', '.') . ' vnd' : 0 }}</span>
                                     </div>
                                     <div class="clearfix"></div>
-                                    <a href="{{ route('checkout.create') }}"
+                                    <a href="/checkout"
                                         class="btn btn-upper btn-primary m-t-20 btn-block"
                                         style="font-size: 12px;">Tiến hành
                                         thanh toán</a>
-                                    <a href="{{ route('cart.view') }}"
+                                    <a href="/cart/shopping-cart"
                                         class="btn btn-upper btn-primary m-t-20 btn-block">Giỏ hàng</a>
                                 </div>
                                 <!-- /.cart-total-->

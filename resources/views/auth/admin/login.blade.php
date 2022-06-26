@@ -23,7 +23,7 @@
                     <h3>Đăng nhập</h3>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
-                        <input type="text" class="form-control" placeholder="Nhập email ..." name="email">
+                        <input type="text" class="form-control" placeholder="Nhập email ..." name="email" value="{{ old('email') }}">
                         @error('email')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror

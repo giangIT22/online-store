@@ -87,7 +87,7 @@
                             <li><a href="#" title="Blog">Blog</a></li>
                             <li><a href="#" title="Company">Company</a></li>
                             <li><a href="#" title="Investor Relations">Investor Relations</a></li>
-                            <li class=" last"><a href="contact-us.html" title="Suppliers">Contact Us</a>
+                            <li class=" last"><a href="#" title="Suppliers">Contact Us</a>
                             </li>
                         </ul>
                     </div>

@@ -72,7 +72,7 @@ class ProductController extends Controller
         }
 
         $notification = [
-            'message' => 'Create product successfully',
+            'message' => 'Thêm sản phẩm thành công',
             'alert-type' => 'success'
         ];
         
@@ -176,7 +176,7 @@ class ProductController extends Controller
         }
 
         $notification = [
-            'message' => 'Update product successfully',
+            'message' => 'Thông tin sản phẩm đã được cập nhật',
             'alert-type' => 'success'
         ];
         

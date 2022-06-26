@@ -68,7 +68,7 @@ Route::prefix('/product')->group(function () {
 });
 
 //============Shopping===============================
-Route::get('/category/{category_slug}', [CategoryController::class, 'index'])->name('category.index');
+Route::get('/category/{category_slug}/{category_id}', [CategoryController::class, 'index'])->name('category.index');
 Route::get('/all-product', [CategoryController::class, 'allProducts'])->name('category.all.products');
 
 //=======================cart=====================

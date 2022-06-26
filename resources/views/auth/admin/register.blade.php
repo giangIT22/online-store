@@ -33,7 +33,7 @@
 
                     <div class="form-group">
                         <label>Tên</label>
-                        <input type="text" class="form-control" placeholder="Nhập tên ..." name="user_name">
+                        <input type="text" class="form-control" placeholder="Nhập tên ..." name="name">
                         @error('user_name')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror

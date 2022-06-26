@@ -11,6 +11,7 @@ class Product extends Model
     use HasFactory, Searchable;
 
     const PER_PAGE = 9;
+    const SEARCH_PRODUCT = 8;
     const RELATED_PRODUCT = 6;
 
     //filter values

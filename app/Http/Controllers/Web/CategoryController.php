@@ -19,12 +19,12 @@ class CategoryController extends Controller
         $this->productService = $productService;
     }
 
-    public function index($categorySlug, Request $request)
+    public function index($categorySlug, $categoryId, Request $request)
     {
         $categories = Category::with('subCategories')->get();
         $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $productTags = ProductTag::select('name')->limit(8)->groupBy('name')->get();
-        list($products, $currentPage, $lastPage) = $this->productService->getProductsByCategory($request->all(), $categorySlug);
+        list($products, $currentPage, $lastPage) = $this->productService->getProductsByCategory($request->all(), $categorySlug, $categoryId);
 
         $validator = Validator::make($request->all(), [
             'sort' => 'in:0,1',

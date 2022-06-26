@@ -1,4 +1,4 @@
-@extends('layouts.guest', ['titlePage' => $product->name])
+@extends('layouts.guest', ['titlePage' => $productDetail->name])
 @section('content')
     <div class="breadcrumb">
         <div class="container">
@@ -6,7 +6,7 @@
                 <ul class="list-inline list-unstyled">
                     <li><a href="{{ route('index') }}">Home</a></li>/
                     <li><a
-                            href="{{ route('category.index', ['category_slug' => $productDetail->category->slug]) }}">{{ $productDetail->category->name }}</a>
+                            href="{{ route('category.index', ['category_slug' => $productDetail->category->slug, 'category_id' => $productDetail->category_id]) }}">{{ $productDetail->category->name }}</a>
                     </li>/
                     <li class='active'>{{ $productDetail->name }}</li>
                 </ul>
@@ -80,39 +80,6 @@
                                     </form>
                                 </div><!-- /.sidebar-widget-body -->
                         </div><!-- /.sidebar-widget -->
-                        <!-- ============================================== NEWSLETTER: END ============================================== -->
-
-                        {{-- <!-- ============================================== Testimonials============================================== -->
-                        <div class="sidebar-widget  wow fadeInUp outer-top-vs ">
-                            <div id="advertisement" class="advertisement">
-                                <div class="item">
-                                    <div class="avatar"><img src="assets/images/testimonials/member1.png"
-                                            alt="Image"></div>
-                                    <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus
-                                        port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                                    <div class="clients_author">John Doe <span>Abc Company</span> </div>
-                                    <!-- /.container-fluid -->
-                                </div><!-- /.item -->
-
-                                <div class="item">
-                                    <div class="avatar"><img src="assets/images/testimonials/member3.png"
-                                            alt="Image"></div>
-                                    <div class="testimonials"><em>"</em>Vtae sodales aliq uam morbi non sem lacus
-                                        port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                                    <div class="clients_author">Stephen Doe <span>Xperia Designs</span> </div>
-                                </div><!-- /.item -->
-
-                                <div class="item">
-                                    <div class="avatar"><img src="assets/images/testimonials/member2.png"
-                                            alt="Image"></div>
-                                    <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus
-                                        port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                                    <div class="clients_author">Saraha Smith <span>Datsun &amp; Co</span> </div>
-                                    <!-- /.container-fluid -->
-                                </div><!-- /.item -->
-
-                            </div><!-- /.owl-carousel -->
-                        </div> --}}
                     </div>
                 </div><!-- /.sidebar -->
                 <div class='col-md-9'>
@@ -270,7 +237,7 @@
 
                                     <div id="description" class="tab-pane in active">
                                         <div class="product-tab">
-                                            <p class="text">{{ $product->description }}</p>
+                                            <p class="text">{{ $productDetail->description }}</p>
                                         </div>
                                     </div><!-- /.tab-pane -->
 

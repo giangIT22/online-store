@@ -26,7 +26,6 @@ class CategoryService implements CategoryServiceInterface
         $category = Category::findOrFail($categoryId);
         $category->name = $params['name'];
         $category->slug = $params['slug'];
-        $category->category_icon = $params['category_icon'];
 
         $category->save();
 

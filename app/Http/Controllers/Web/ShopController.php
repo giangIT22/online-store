@@ -43,7 +43,7 @@ class ShopController extends Controller
     public function viewSearch()
     {
         $categories = Category::with('subCategories')->get();
-        $dataSearch = Product::search(request('search'))->paginate(Product::PER_PAGE);
+        $dataSearch = Product::search(request('search'))->paginate(Product::SEARCH_PRODUCT);
         $products = collect([]);
 
         array_map(function($item) use ($products){
@@ -71,6 +71,6 @@ class ShopController extends Controller
             return redirect()->route('index');
         }
     
-        return view('web.shop.view', compact('categories', 'products', 'currentPage', 'lastPage'));
+        return view('web.shop.search_view', compact('categories', 'products', 'currentPage', 'lastPage'));
     }
 }

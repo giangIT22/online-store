@@ -253,14 +253,14 @@
                                                             <div class="image">
                                                                 <a
                                                                     href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
-                                                                    <img src="{{ asset($product->image) }}"
+                                                                    <img height="249px;" src="{{ asset($product->image) }}"
                                                                         alt=""></a>
                                                             </div>
                                                             <div class="tag new"><span>new</span></div>
                                                         </div>
                                                         <div class="product-info text-left">
                                                             <h3 class="name"><a
-                                                                    href="detail.html">{{ $product->name }}</a></h3>
+                                                                    href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a></h3>
                                                             @include('partitions.web.rating', [
                                                                 'productId' => $product->id,
                                                             ])
@@ -318,7 +318,7 @@
                                                     <div class="row product-list-row">
                                                         <div class="col col-sm-4 col-lg-4">
                                                             <div class="product-image">
-                                                                <div class="image"> <img
+                                                                <div class="image"> <img height="249px;"
                                                                         src="{{ asset($product->image) }}"
                                                                         alt=""> </div>
                                                             </div>
@@ -328,7 +328,7 @@
                                                         <div class="col col-sm-8 col-lg-8">
                                                             <div class="product-info">
                                                                 <h3 class="name"><a
-                                                                        href="detail.html">{{ $product->name }}</a></h3>
+                                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a></h3>
                                                                 @include('partitions.web.rating', [
                                                                     'productId' => $product->id,
                                                                 ])
