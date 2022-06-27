@@ -7287,3 +7287,7 @@ span.size-item-cart {
 .pd-10 {
     padding: 10px 10px;
 }
+
+.fix-lh {
+    height: auto !important;
+}

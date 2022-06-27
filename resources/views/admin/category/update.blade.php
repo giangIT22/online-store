@@ -20,7 +20,7 @@
                                     <div class="form-group mb-20">
                                         <h5>Tên<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="name" class="form-control" value="{{ $category->name }}">
+                                            <input type="text" name="name" class="form-control" value="{{ old('name', $category->name) }}">
                                             @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -30,7 +30,7 @@
                                     <div class="form-group mb-20">
                                         <h5>Slug <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="slug" class="form-control" value="{{ $category->slug }}">
+                                            <input type="text" name="slug" class="form-control" value="{{ old('slug', $category->slug) }}">
                                             @error('slug')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror

@@ -38,6 +38,7 @@ class UserUpdateRequest extends FormRequest
         return [
             'name.required' => 'Vui lòng nhập tên',
             'email.required' => 'Vui lòng nhập email',
+            'email.email' => 'Email không đúng định dạng'
         ];
     }
 }

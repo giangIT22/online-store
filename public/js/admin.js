@@ -41669,7 +41669,9 @@ var render = function () {
                             _c("td", [
                               _c("img", {
                                 attrs: {
-                                  src: item.profile_photo_path,
+                                  src: item.profile_photo_path
+                                    ? item.profile_photo_path
+                                    : "/frontend/assets/images/no-image.jpg",
                                   alt: "",
                                   width: "50px",
                                 },

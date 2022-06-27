@@ -57,7 +57,7 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <h5>ẢNh bài viết<span class="text-danger">*</span></h5>
+                                                    <h5>Ảnh bài viết<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="file" name="post_image" class="form-control"
                                                             id="image">

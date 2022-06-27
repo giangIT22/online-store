@@ -29,4 +29,13 @@ class SubCategoryRequest extends FormRequest
             'category_id' => 'required'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'sub_category_name.required' => 'Vui lòng nhập trường này',
+            'sub_category_slug.required' => 'Vui lòng nhập trường này',
+            'category_id.required' => 'Vui lòng nhập trường này'
+        ];
+    }
 }

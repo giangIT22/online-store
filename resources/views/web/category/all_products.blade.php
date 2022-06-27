@@ -304,7 +304,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                         <!-- /.col -->
                                                         <div class="col col-sm-8 col-lg-8">
                                                             <div class="product-info">
-                                                                <h3 class="name"><a
+                                                                <h3 class="name fix-lh"><a
                                                                         href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a></h3>
                                                                 @include('partitions.web.rating', [
                                                                     'productId' => $product->id,

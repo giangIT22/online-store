@@ -30,9 +30,14 @@
                                                     <div class="controls">
                                                         <select name="category_id" class="form-control" id="list-category">
                                                             @foreach ($categories as $category)
-                                                                <option value="{{ $category->id }}"
-                                                                    {{ $category->id == $product->category_id ? 'selected' : '' }}>
-                                                                    {{ $category->name }}</option>
+                                                                @if (old('category_id', $product->category->id) == $category->id)
+                                                                    <option value="{{ $category->id }}" selected>
+                                                                        {{ $category->name }}</option>
+                                                                @else
+                                                                    <option value="{{ $category->id }}">
+                                                                        {{ $category->name }}
+                                                                    </option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                         @error('category_id')
@@ -50,10 +55,15 @@
                                                     <div class="controls">
                                                         <select name="subcategory_id" class="form-control" id="list-sub">
                                                             @foreach ($subcategories as $subCategory)
-                                                                <option value="{{ $subCategory->id }}"
-                                                                    {{ $subCategory->id == $product->subcategory_id ? 'selected' : '' }}>
-                                                                    {{ $subCategory->sub_category_name }}
-                                                                </option>
+                                                                @if (old('subcategory_id', $product->subcategory_id) == $subCategory->id)
+                                                                    <option value="{{ $subCategory->id }}" selected>
+                                                                        {{ $subCategory->sub_category_name }}
+                                                                    </option>
+                                                                @else
+                                                                    <option value="{{ $subCategory->id }}">
+                                                                        {{ $subCategory->sub_category_name }}
+                                                                    </option>
+                                                                @endif
                                                             @endforeach
 
                                                         </select>
@@ -76,7 +86,7 @@
                                                     <h5>Tên sản phẩm<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="name" class="form-control"
-                                                            value="{{ $product->name }}">
+                                                            value="{{ old('name', $product->name) }}">
                                                         @error('name')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -86,7 +96,7 @@
                                                     <h5>Mô tả<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="description" class="form-control"
-                                                            value="{{ $product->description }}">
+                                                            value="{{ old('description', $product->description) }}">
                                                         @error('description')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -97,7 +107,7 @@
                                                     <h5>Slug<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_slug" class="form-control"
-                                                            value="{{ $product->product_slug }}">
+                                                            value="{{ old('product_slug', $product->product_slug) }}">
                                                     </div>
                                                 </div>
 
@@ -112,7 +122,7 @@
                                                     <h5>Mã sản phẩm<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_code" class="form-control"
-                                                            value="{{ $product->product_code }}">
+                                                            value="{{ old('product_code', $product->product_code) }}">
                                                         @error('product_code')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -129,7 +139,7 @@
                                                     <h5>Số lượng<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_qty" class="form-control"
-                                                            value="{{ $product->product_qty }}" disabled>
+                                                            value="{{ old('product_qty', $product->product_qty) }}" disabled>
                                                         @error('product_qty')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -145,7 +155,7 @@
                                                     <h5>Giá<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_price" class="form-control"
-                                                            value="{{ $product->product_price }}">
+                                                            value="{{ old('product_price', $product->product_price) }}">
                                                         @error('product_price')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -154,7 +164,8 @@
                                                 <div class="form-group">
                                                     <h5>Giá sale<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="sale_price" class="form-control" value="{{ $product->sale_price ?? ''}}">
+                                                        <input type="text" name="sale_price" class="form-control"
+                                                            value="{{ old('sale_price', $product->sale_price ?? '') }}">
                                                         @error('sale_price')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror

@@ -30,37 +30,11 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $categories = Category::with('subCategories')->get();
-        $products = Product::orderBy('id', 'desc')
-            ->where('created_at', '>', Carbon::now()->subDays(15))
-            ->where('created_at', '<=', Carbon::now())
-            ->limit(6)->get();
-        $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
-        $featuredProducts = Product::where('featured', true)->orderBy('id', 'desc')->get();
-        $hotDealProducts = Product::where('hot_deals', true)->where('sale_price', '!=', null)
-            ->orderBy('id', 'desc')->get();
-        $specialOfferProducts = Product::where('special_offer', true)->orderBy('id', 'desc')->limit(6)->get();
-        $specialDealsProducts = Product::where('special_deals', true)->orderBy('id', 'desc')->limit(6)->get();
-        $productTags = ProductTag::select('name')->limit(8)->groupBy('name')->get();
-        $blogs = $this->blogService->getListBlog(Blog::BLOG_SLIDER)['listBlogs'];
-        $bestSellProducts = $this->productService->getBestSellProducts();
-        $converse = Product::where('category_id', 1)->get();
-        $vans = Product::where('category_id', 2)->get();
+        $data = $this->productService->getDataForHomePage();
+        $data['blogs'] = $this->blogService->getListBlog(Blog::BLOG_SLIDER)['listBlogs'];
+        $data['bestSellProducts'] = $this->productService->getBestSellProducts();
 
-        return view('web.index', compact(
-            'categories',
-            'sliders',
-            'products',
-            'featuredProducts',
-            'specialOfferProducts',
-            'specialDealsProducts',
-            'hotDealProducts',
-            'productTags',
-            'blogs',
-            'bestSellProducts',
-            'converse',
-            'vans'
-        ));
+        return view('web.index', $data);
     }
 
     public function productDetail($productId)
@@ -94,16 +68,6 @@ class HomeController extends Controller
 
     public function storeReview(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'comment' => 'required'
-        // ]);
-
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'status' => false
-        //     ]);
-        // }
-
         $data = $request->all();
         $data['product_id'] = $data['product_id'];
         $data['user_id'] = Auth::id();

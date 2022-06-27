@@ -8,6 +8,12 @@
 
              <!-- Basic Forms -->
              <div class="box">
+                <div class="box-header with-border">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="box-title">Thông tin người dùng</h4>
+                        <a href="{{ route('invoice.monthy') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay lại</a>
+                    </div>
+                </div>
                  <div class="box box-widget widget-user">
                      <!-- Add the bg color to the header using any of the bg-* classes -->
                      <div class="widget-user-header bg-black"

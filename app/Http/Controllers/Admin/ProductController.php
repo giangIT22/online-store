@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProduct;
+use App\Http\Requests\UpdateProduct;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -38,15 +39,15 @@ class ProductController extends Controller
 
         return view('admin.product.create', compact('categories', 'sizes'));
     }
-    
+
     public function store(StoreProduct $request)
     {
-        $data = $request->except(['image_path', 'tags', 'sizes', 'amounts']);
+        $data = $request->except(['image_path', 'tags', 'sizes', 'amounts', 'size_product']);
         $productImage = $this->uploadImage($request, 'image', 'product');
         $data['image'] = $productImage['file_path'];
         $data['product_qty'] = array_sum($request->amounts);
         $product = Product::create($data);
-        
+
         if ($request->has('image_path')) {
             foreach ($request->image_path as $path) {
                 $path = $this->uploadImageMultiple($path, 'product');
@@ -58,7 +59,7 @@ class ProductController extends Controller
         }
 
         if ($request->tags) {
-            foreach ($request->tags as $tag) {                
+            foreach ($request->tags as $tag) {
                 ProductTag::create([
                     'name' => $tag,
                     'product_id' => $product->id
@@ -67,15 +68,17 @@ class ProductController extends Controller
         }
 
         //Create product_size
-        foreach ($request->sizes as $key => $size) {
-            $product->sizes()->attach($size, ['amount' => $request->amounts[$key]]);            
+        if ($request->sizes) {
+            foreach ($request->sizes as $key => $size) {
+                $product->sizes()->attach($size, ['amount' => $request->amounts[$key]]);
+            }
         }
 
         $notification = [
             'message' => 'Thêm sản phẩm thành công',
             'alert-type' => 'success'
         ];
-        
+
         return redirect()->route('all.products')->with($notification);
     }
 
@@ -112,7 +115,7 @@ class ProductController extends Controller
         return view('admin.product.update', compact('product', 'categories', 'subcategories', 'sizes', 'sizeInfos'));
     }
 
-    public function update(StoreProduct $request, $productId)
+    public function update(UpdateProduct $request, $productId)
     {
         $data = $request->except(['image_path', 'tags', 'sizes', 'amounts']);
         $product = Product::findOrFail($productId);
@@ -140,7 +143,7 @@ class ProductController extends Controller
         if (!$request->featured) {
             $data['featured'] = 0;
         }
-        
+
         $product->update($data);
 
         if ($request->image_path) {
@@ -155,7 +158,7 @@ class ProductController extends Controller
 
         if ($request->tags) {
             ProductTag::where('product_id', $productId)->delete();
-            foreach ($request->tags as $tag) {                
+            foreach ($request->tags as $tag) {
                 ProductTag::create([
                     'name' => $tag,
                     'product_id' => $product->id
@@ -166,12 +169,12 @@ class ProductController extends Controller
         }
 
 
-         //Update product_size
+        //Update product_size
         foreach ($request->sizes as $key => $size) {
             DB::table('product_size')
                 ->updateOrInsert([
-                'product_id' => $product->id,
-                'size_id' => $size,
+                    'product_id' => $product->id,
+                    'size_id' => $size,
                 ], ['amount' => $request->amounts[$key]]);
         }
 
@@ -179,7 +182,7 @@ class ProductController extends Controller
             'message' => 'Thông tin sản phẩm đã được cập nhật',
             'alert-type' => 'success'
         ];
-        
+
         return redirect()->route('all.products')->with($notification);
     }
 }

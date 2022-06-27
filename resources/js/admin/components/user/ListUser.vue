@@ -25,7 +25,7 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="item in users" :key="item.id">
-                                            <td><img :src="item.profile_photo_path" alt="" width="50px"></td>
+                                            <td><img :src="item.profile_photo_path ? item.profile_photo_path : '/frontend/assets/images/no-image.jpg'" alt="" width="50px"></td>
                                             <td>{{ item.name }}</td>
                                             <td>{{ item.email }}</td>
                                             <td>

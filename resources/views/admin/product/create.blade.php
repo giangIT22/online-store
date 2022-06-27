@@ -10,7 +10,8 @@
                 <div class="box-header with-border">
                     <div class="d-flex justify-content-between">
                         <h3 class="box-title">Thêm sản phẩm</h3>
-                        <a href="{{ route('all.products') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay lại</a>
+                        <a href="{{ route('all.products') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay
+                            lại</a>
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -26,13 +27,17 @@
                                                 <div class="form-group">
                                                     <h5>Chọn danh mục<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <select name="category_id" class="form-control"
-                                                            id="list-category">
+                                                        <select name="category_id" class="form-control" id="list-category">
                                                             <option value="">Select Category
                                                             </option>
                                                             @foreach ($categories as $category)
-                                                                <option value="{{ $category->id }}">
-                                                                    {{ $category->name }}</option>
+                                                                @if (old('category_id') == $category->id)
+                                                                    <option value="{{ $category->id }}" selected>
+                                                                        {{ $category->name }}</option>
+                                                                @else
+                                                                    <option value="{{ $category->id }}">
+                                                                        {{ $category->name }}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                         @error('category_id')
@@ -71,7 +76,8 @@
                                                 <div class="form-group">
                                                     <h5>Tên sản phẩm<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="name" class="form-control">
+                                                        <input type="text" name="name" class="form-control"
+                                                            value="{{ old('name') }}">
                                                         @error('name')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -80,7 +86,8 @@
                                                 <div class="form-group">
                                                     <h5>Mô tả<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="description" class="form-control">
+                                                        <input type="text" name="description" class="form-control"
+                                                            value="{{ old('description') }}">
                                                         @error('description')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -89,7 +96,11 @@
                                                 <div class="form-group">
                                                     <h5>Slug<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_slug" class="form-control">
+                                                        <input type="text" name="product_slug" class="form-control"
+                                                            value="{{ old('product_slug') }}">
+                                                        @error('product_slug')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
 
@@ -103,7 +114,8 @@
                                                 <div class="form-group">
                                                     <h5>Mã sản phẩm<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_code" class="form-control">
+                                                        <input type="text" name="product_code" class="form-control"
+                                                            value="{{ old('product_code') }}">
                                                         @error('product_code')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -112,30 +124,14 @@
 
                                             </div> <!-- end col md 4 -->
                                         </div> <!-- end 3RD row  -->
-                                        
-                                        {{-- 
-                                        <div class="row">
-                                            <div class="col-md-8">
-
-                                                <div class="form-group">
-                                                    <h5>Product Amount <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="product_qty" class="form-control">
-                                                        @error('product_qty')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-
-                                            </div> <!-- end col md 4 -->
-                                        </div> --}}
 
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
                                                     <h5>Giá<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_price" class="form-control">
+                                                        <input type="text" name="product_price" class="form-control"
+                                                            value="{{ old('product_price') }}">
                                                         @error('product_price')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -144,7 +140,8 @@
                                                 <div class="form-group">
                                                     <h5>Giá sale<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="sale_price" class="form-control">
+                                                        <input type="text" name="sale_price" class="form-control"
+                                                            value="{{ old('sale_price') }}">
                                                         @error('sale_price')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -160,7 +157,8 @@
                                                 <div class="form-group">
                                                     <h5>Ảnh sản phẩm<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="file" name="image" class="form-control" id="image">
+                                                        <input type="file" name="image" class="form-control"
+                                                            id="image">
                                                         @error('image')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -181,6 +179,9 @@
                                                     <div class="controls">
                                                         <input type="file" name="image_path[]" class="form-control"
                                                             multiple>
+                                                        @error('image_path')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -189,8 +190,8 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <h5>Tags<span class="text-danger">*</span></h5>
-                                                <select placeholder="Thêm tags" multiple data-role="tagsinput" name="tags[]"
-                                                    style="display: none;"></select>
+                                                <select placeholder="Thêm tags" multiple data-role="tagsinput"
+                                                    name="tags[]" style="display: none;"></select>
                                             </div>
                                         </div>
 
@@ -240,13 +241,16 @@
                                                 <div class="form-group">
                                                     <h5>Kích thước <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <select class="form-control" id="list-size">
+                                                        <select class="form-control" id="list-size" name="size_product">
                                                             <option value="">Chọn kích thước</option>
                                                             @foreach ($sizes as $size)
                                                                 <option value="{{ $size->id }}">
                                                                     {{ $size->name }}</option>
                                                             @endforeach
                                                         </select>
+                                                        @error('size_product')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -255,7 +259,8 @@
                                         <hr>
 
                                         <div class="text-xs-right">
-                                            <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Thêm">
+                                            <input type="submit" class="btn btn-rounded btn-primary mb-5"
+                                                value="Thêm">
                                         </div>
                             </form>
 

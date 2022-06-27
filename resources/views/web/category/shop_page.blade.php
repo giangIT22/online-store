@@ -2,6 +2,16 @@
 
 @php
 $minDate = \Carbon\Carbon::now()->subDays(15);
+$subCategory = DB::table('sub_categories')
+    ->where('sub_category_slug', request('category_slug'))
+    ->where('id', request('category_id'))
+    ->first();
+
+if ($subCategory) {
+    $category = DB::table('categories')
+        ->where('id', $subCategory->category_id)
+        ->first();
+}
 @endphp
 
 @section('content')
@@ -10,6 +20,11 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
                     <li><a href="{{ route('index') }}">Trang chủ </a></li>/
+                    @if ($subCategory)
+                        <li><a
+                                href="{{ route('category.index', ['category_slug' => $category->slug, 'category_id' => $category->id]) }}">{{ $category->slug }}
+                            </a></li>/
+                    @endif
                     <li class='active'>{{ request()->category_slug }}</li>
                 </ul>
             </div>
@@ -240,7 +255,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                             <div class="image">
                                                                 <a
                                                                     href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
-                                                                    <img height="249px;" src="{{ asset($product->image) }}"
+                                                                    <img height="249px;"
+                                                                        src="{{ asset($product->image) }}"
                                                                         alt=""></a>
                                                             </div>
                                                             @if ($product->created_at > $minDate && $product->created_at < now())
@@ -249,7 +265,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                         </div>
                                                         <div class="product-info text-left">
                                                             <h3 class="name"><a
-                                                                    href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a></h3>
+                                                                    href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
+                                                            </h3>
                                                             @include('partitions.web.rating', [
                                                                 'productId' => $product->id,
                                                             ])
@@ -316,8 +333,9 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                         <!-- /.col -->
                                                         <div class="col col-sm-8 col-lg-8">
                                                             <div class="product-info">
-                                                                <h3 class="name"><a
-                                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a></h3>
+                                                                <h3 class="name fix-lh"><a
+                                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
+                                                                </h3>
                                                                 @include('partitions.web.rating', [
                                                                     'productId' => $product->id,
                                                                 ])

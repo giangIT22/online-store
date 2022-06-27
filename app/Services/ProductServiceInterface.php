@@ -11,4 +11,5 @@ interface ProductServiceInterface
     public function getBestSellProducts();
     public function checkExistProduct($params);
     public function getAllProduct($params);
+    public function getDataForHomePage();
 }

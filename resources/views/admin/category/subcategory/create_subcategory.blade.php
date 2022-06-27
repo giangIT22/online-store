@@ -9,7 +9,8 @@
                         <div class="box-header with-border">
                             <div class="d-flex justify-content-between">
                                 <h3 class="box-title">Thêm danh mục con</h3>
-                                <a href="{{ route('all.sub_categories') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay lại</a>
+                                <a href="{{ route('all.sub_categories') }}" type="button"
+                                    class="btn btn-rounded btn-primary mb-5">Quay lại</a>
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -21,9 +22,15 @@
                                         <h5>Lựa chọn danh mục<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <select name="category_id" id="select" class="form-control">
-                                                <option value="" >Select category</option>
+                                                <option value="">Select category</option>
                                                 @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    @if (old('category_id') == $category->id)
+                                                        <option value="{{ $category->id }}" selected>
+                                                            {{ $category->name }}</option>
+                                                    @else
+                                                        <option value="{{ $category->id }}">{{ $category->name }}
+                                                        </option>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                             @error('category_id')
@@ -34,7 +41,8 @@
                                     <div class="form-group mb-20">
                                         <h5>Tên danh mục con<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="sub_category_name" class="form-control">
+                                            <input type="text" name="sub_category_name" class="form-control"
+                                                value="{{ old('sub_category_name') }}">
                                             @error('sub_category_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -44,7 +52,8 @@
                                     <div class="form-group mb-20">
                                         <h5>Slug <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="sub_category_slug" class="form-control">
+                                            <input type="text" name="sub_category_slug" class="form-control"
+                                                value="{{ old('sub_category_slug') }}">
                                             @error('sub_category_slug')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -63,5 +72,4 @@
             </div>
         </section>
     </div>
-
 @endsection

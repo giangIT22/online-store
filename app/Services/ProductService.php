@@ -8,7 +8,9 @@ use App\Models\Product;
 use App\Models\ProductTag;
 use App\Models\Review;
 use App\Models\Size;
+use App\Models\Slider;
 use App\Models\SubCategory;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class ProductService implements ProductServiceInterface
@@ -149,5 +151,36 @@ class ProductService implements ProductServiceInterface
         $lastPage = $data ? $data->lastPage() : 0;
 
         return [$products ?? $data->items(), $currentPage, $lastPage];
+    }
+
+    public function getDataForHomePage()
+    {
+        $categories = Category::with('subCategories')->get();
+        $products = Product::orderBy('id', 'desc')
+            ->where('created_at', '>', Carbon::now()->subDays(15))
+            ->where('created_at', '<=', Carbon::now())
+            ->limit(6)->get();
+        $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
+        $featuredProducts = Product::where('featured', true)->orderBy('id', 'desc')->get();
+        $hotDealProducts = Product::where('hot_deals', true)->where('sale_price', '!=', null)
+            ->orderBy('id', 'desc')->get();
+        $specialOfferProducts = Product::where('special_offer', true)->orderBy('id', 'desc')->limit(6)->get();
+        $specialDealsProducts = Product::where('special_deals', true)->orderBy('id', 'desc')->limit(6)->get();
+        $productTags = ProductTag::select('name')->limit(8)->groupBy('name')->get();
+        $converse = Product::where('category_id', 1)->get();
+        $vans = Product::where('category_id', 2)->get();
+        $productByCategory = Category::with('products')->get();
+        
+        return compact(
+            'categories',
+            'sliders',
+            'products',
+            'featuredProducts',
+            'specialOfferProducts',
+            'specialDealsProducts',
+            'hotDealProducts',
+            'productTags',
+            'productByCategory'
+        );
     }
 }

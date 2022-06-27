@@ -26,7 +26,7 @@
                                                 <div class="form-group mb-30">
                                                     <h5>Mã Coupon<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="coupon_name" class="form-control">
+                                                        <input type="text" name="coupon_name" class="form-control" value="{{ old('coupon_name') }}">
                                                         @error('coupon_name')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -35,7 +35,7 @@
                                                 <div class="form-group mb-30">
                                                     <h5>Coupon Discount<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="coupon_discount" class="form-control">
+                                                        <input type="text" name="coupon_discount" class="form-control" value="{{ old('coupon_discount') }}">
                                                         @error('coupon_discount')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -44,7 +44,7 @@
                                                 <div class="form-group mb-30">
                                                     <h5>Thời hạn mã giảm giá <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input class="form-control" type="date" name="coupon_validity">
+                                                        <input class="form-control" type="date" name="coupon_validity" value="{{ old('coupon_validity') }}">
                                                         @error('coupon_validity')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror

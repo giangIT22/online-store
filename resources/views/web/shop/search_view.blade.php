@@ -1,5 +1,9 @@
 @extends('layouts.guest')
 
+@php
+$minDate = \Carbon\Carbon::now()->subDays(15);
+@endphp
+
 @section('content')
     <div class="breadcrumb">
         <div class="container">
@@ -18,7 +22,7 @@
         <div class='container'>
             <div class='row'>
                 @if (!empty($products))
-                    <div class='col-md-12' style="margin: 30px 0 50px;">
+                    <div class='col-md-12' style="margin: 30px 0 150px;">
                         <h3 class="result-search">
                             Có {{ count($products) }} kết quả tìm kiếm phù hợp
                         </h3>
@@ -94,7 +98,7 @@
                                                                             alt=""></a>
                                                                 </div>
                                                                 <!-- /.image -->
-                                                                @if ($product->sale_price)
+                                                                @if ($product->created_at > $minDate && $product->created_at < now())
                                                                     <div class="tag new"><span>new</span></div>
                                                                 @endif
                                                             </div>
@@ -183,7 +187,7 @@
                                                             <!-- /.col -->
                                                             <div class="col col-sm-8 col-lg-8">
                                                                 <div class="product-info">
-                                                                    <h3 class="name"><a
+                                                                    <h3 class="name fix-lh"><a
                                                                             href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
                                                                     </h3>
                                                                     <div class="rating rateit-small"></div>

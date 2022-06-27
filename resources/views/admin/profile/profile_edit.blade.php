@@ -8,7 +8,10 @@
             <!-- Basic Forms -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Cập nhật thông tin</h4>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="box-title">Cập nhật thông tin</h4>
+                        <a href="{{ route('invoice.monthy') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay lại</a>
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -24,7 +27,7 @@
                                                 <div class="form-group">
                                                     <h5>Tên<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="name" class="form-control" value="{{ $admin->name }}">
+                                                        <input type="text" name="name" class="form-control" value="{{ old('name', $admin->name) }}">
                                                         @error('name')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -33,7 +36,7 @@
                                                 <div class="form-group">
                                                     <h5>Email<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="email" class="form-control" value="{{ $admin->email }}">
+                                                        <input type="text" name="email" class="form-control" value="{{ old('email', $admin->email) }}">
                                                         @error('email')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror

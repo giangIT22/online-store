@@ -1,11 +1,16 @@
 @extends('layouts.guest')
 
+@php
+$minDate = \Carbon\Carbon::now()->subDays(15);
+@endphp
+
 @section('content')
     <div class="breadcrumb">
         <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
                     <li><a href="#">Home</a></li>/
+                    <li><a href="#">Tag</a></li>/
                     <li class='active'>{{ request()->tag_name }}</li>
                 </ul>
             </div>
@@ -30,7 +35,8 @@
                                 <div class="widget-header">
                                     <h4 class="widget-title">GIÁ SẢN PHẨM</h4>
                                 </div>
-                                <form action="{{ route('product.tag', ['tag_name' => request('tag_name')]) }}" class="filter-price" method="get">
+                                <form action="{{ route('product.tag', ['tag_name' => request('tag_name')]) }}"
+                                    class="filter-price" method="get">
                                     <ul class="list-value">
                                         <li class="filter-item">
                                             <span>
@@ -253,14 +259,18 @@
                                                             <div class="image">
                                                                 <a
                                                                     href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
-                                                                    <img height="249px;" src="{{ asset($product->image) }}"
+                                                                    <img height="249px;"
+                                                                        src="{{ asset($product->image) }}"
                                                                         alt=""></a>
                                                             </div>
-                                                            <div class="tag new"><span>new</span></div>
+                                                            @if ($product->created_at > $minDate && $product->created_at < now())
+                                                                <div class="tag new"><span>new</span></div>
+                                                            @endif
                                                         </div>
                                                         <div class="product-info text-left">
                                                             <h3 class="name"><a
-                                                                    href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a></h3>
+                                                                    href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
+                                                            </h3>
                                                             @include('partitions.web.rating', [
                                                                 'productId' => $product->id,
                                                             ])
@@ -327,8 +337,9 @@
                                                         <!-- /.col -->
                                                         <div class="col col-sm-8 col-lg-8">
                                                             <div class="product-info">
-                                                                <h3 class="name"><a
-                                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a></h3>
+                                                                <h3 class="name fix-lh"><a
+                                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
+                                                                </h3>
                                                                 @include('partitions.web.rating', [
                                                                     'productId' => $product->id,
                                                                 ])
@@ -374,7 +385,9 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="tag new"><span>new</span></div>
+                                                    @if ($product->created_at > $minDate && $product->created_at < now())
+                                                        <div class="tag new"><span>new</span></div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         @endforeach

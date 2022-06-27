@@ -22,7 +22,7 @@
 
                                 <div class="form-group">
                                     <label class="info-title">Tên<span> </span></label>
-                                    <input type="text" name="name" class="form-control" value="{{ $user->name }}">
+                                    <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}">
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -30,7 +30,7 @@
 
                                 <div class="form-group">
                                     <label class="info-title">Email <span> </span></label>
-                                    <input type="email" name="email" class="form-control" value="{{ $user->email }}">
+                                    <input type="text" name="email" class="form-control" value="{{ old('email', $user->email) }}">
                                     @error('email')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

@@ -8,7 +8,10 @@
             <!-- Basic Forms -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Thay đổi mật khẩu</h4>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="box-title">Thay đổi mật khẩu</h4>
+                        <a href="{{ route('invoice.monthy') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay lại</a>
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

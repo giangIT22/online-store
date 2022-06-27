@@ -118,7 +118,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                         <!-- /.col -->
                                                         <div class="col col-xs-7">
                                                             <div class="product-info">
-                                                                <h3 class="name"><a
+                                                                <h3 class="name fix-lh"><a
                                                                         href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
                                                                 </h3>
                                                                 @include('partitions.web.rating', [
@@ -203,8 +203,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                         <!-- /.col -->
                                                         <div class="col col-xs-7">
                                                             <div class="product-info">
-                                                                <h3 class="name"><a
-                                                                        href="#">{{ $product->name }}</a>
+                                                                <h3 class="name fix-lh"><a
+                                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
                                                                 </h3>
                                                                 @include('partitions.web.rating', [
                                                                     'productId' => $product->id,
@@ -607,7 +607,6 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                 <!-- /.section -->
                 <!-- ============================================== FEATURED PRODUCTS : END ============================================== -->
                 <!-- ============================================== BEST SELLER ============================================== -->
-
                 <section class="section featured-product wow fadeInUp">
                     <h3 class="section-title">Sản phẩm bán chạy</h3>
                     <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
@@ -618,7 +617,8 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                         <div class="product-image">
                                             <div class="image"> <a
                                                     href="{{ route('product.detail', ['product_id' => $product->product_id, 'slug' => $product->product_slug]) }}"><img
-                                                        src="{{ asset($product->image) }}" alt=""></a> </div>
+                                                        style="max-height: 189px;" src="{{ asset($product->image) }}"
+                                                        alt=""></a> </div>
                                             <!-- /.image -->
 
                                             @if (!empty($product->sale_price))
@@ -669,218 +669,142 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                     </a> </li>
                                             </ul>
                                         </div>
-                                        <!-- /.action -->
                                     </div>
                                     <!-- /.cart -->
                                 </div>
                                 <!-- /.product -->
-
                             </div>
                             <!-- /.products -->
                     </div>
                     @endforeach
                     <!-- /.item -->
-            </div>
-            <!-- /.home-owl-carousel -->
-            </section>
-            <section class="section featured-product wow fadeInUp">
-                <h3 class="section-title">Converse</h3>
-                <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
-                    @foreach ($converse as $product)
-                        <div class="item item-carousel">
-                            <div class="products">
-                                <div class="product">
-                                    <div class="product-image">
-                                        <div class="image"> <a
-                                                href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"><img
-                                                    src="{{ asset($product->image) }}" alt=""></a> </div>
-                                        <!-- /.image -->
+                </section>
+                <!-- ============================================== BEST SELLER :END ============================================== -->
 
-                                        @if (!empty($product->sale_price))
-                                            <div class="tag sale"><span>sale</span></div>
-                                        @endif
+                <!-- ============================================== PRODUCTS BY CATEGORY ============================================== -->
+                @foreach ($productByCategory as $category)
+                    <section class="section featured-product wow fadeInUp">
+                        <h3 class="section-title">{{ $category->name }}</h3>
+                        <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
+                            @foreach ($category->products as $product)
+                                <div class="item item-carousel">
+                                    <div class="products">
+                                        <div class="product">
+                                            <div class="product-image">
+                                                <div class="image"> <a
+                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"><img
+                                                            style="max-height: 189px;"
+                                                            src="{{ asset($product->image) }}" alt=""></a>
+                                                </div>
+                                                <!-- /.image -->
+
+                                                @if (!empty($product->sale_price))
+                                                    <div class="tag sale"><span>sale</span></div>
+                                                @endif
+                                            </div>
+                                            <!-- /.product-image -->
+
+                                            <div class="product-info text-left">
+                                                <h3 class="name"><a
+                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
+                                                        {{ $product->name }}</a>
+                                                </h3>
+                                                @include('partitions.web.rating', [
+                                                    'productId' => $product->product_id,
+                                                ])
+                                                <div class="description"></div>
+                                                @if (!$product->sale_price)
+                                                    <div class="product-price"> <span class="price">
+                                                            {{ number_format($product->product_price) }}đ </span>
+                                                    @else
+                                                        <div class="product-price"> <span class="price">
+                                                                {{ number_format($product->sale_price) }}đ </span>
+                                                            <span
+                                                                class="price-before-discount">${{ $product->product_price }}đ</span>
+                                                @endif
+                                            </div>
+                                            <!-- /.product-price -->
+
+                                        </div>
+                                        <!-- /.product-info -->
+                                        <div class="cart clearfix animate-effect fix-style">
+                                            <div class="action">
+                                                <ul class="list-unstyled">
+                                                    <li class="add-cart-button btn-group">
+                                                        <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
+                                                            data-toggle="tooltip" class="btn btn-primary icon"
+                                                            type="button" data-original-title="" title=""> <i
+                                                                class="fa fa-shopping-cart"></i> Tùy
+                                                            chọn</a>
+                                                        <button class="btn btn-primary cart-btn" type="button">Add to
+                                                            cart</button>
+                                                    </li>
+                                                    <li class="lnk"> <a data-toggle="tooltip"
+                                                            class="add-to-cart preview-product" id="11"
+                                                            data-original-title="" title=""> <i class="fa fa-eye"
+                                                                aria-hidden="true"></i>
+                                                        </a> </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- /.cart -->
                                     </div>
-                                    <!-- /.product-image -->
-
-                                    <div class="product-info text-left">
-                                        <h3 class="name"><a
-                                                href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
-                                                {{ $product->name }}</a>
-                                        </h3>
-                                        @include('partitions.web.rating', [
-                                            'productId' => $product->id,
-                                        ])
-                                        <div class="description"></div>
-                                        @if (!$product->sale_price)
-                                            <div class="product-price"> <span class="price">
-                                                    {{ number_format($product->product_price) }}đ </span>
-                                            @else
-                                                <div class="product-price"> <span class="price">
-                                                        {{ number_format($product->sale_price) }}đ </span>
-                                                    <span
-                                                        class="price-before-discount">${{ $product->product_price }}đ</span>
-                                        @endif
-                                    </div>
-                                    <!-- /.product-price -->
-
+                                    <!-- /.product -->
                                 </div>
-                                <!-- /.product-info -->
-                                <div class="cart clearfix animate-effect fix-style">
-                                    <div class="action">
-                                        <ul class="list-unstyled">
-                                            <li class="add-cart-button btn-group">
-                                                <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
-                                                    data-toggle="tooltip" class="btn btn-primary icon" type="button"
-                                                    data-original-title="" title=""> <i
-                                                        class="fa fa-shopping-cart"></i> Tùy
-                                                    chọn</a>
-                                                <button class="btn btn-primary cart-btn" type="button">Add to
-                                                    cart</button>
-                                            </li>
-                                            <li class="lnk"> <a data-toggle="tooltip"
-                                                    class="add-to-cart preview-product" id="11"
-                                                    data-original-title="" title=""> <i class="fa fa-eye"
-                                                        aria-hidden="true"></i>
-                                                </a> </li>
-                                        </ul>
-                                    </div>
-                                    <!-- /.action -->
-                                </div>
-                                <!-- /.cart -->
-                            </div>
-                            <!-- /.product -->
-
+                                <!-- /.products -->
                         </div>
-                        <!-- /.products -->
-                </div>
                 @endforeach
                 <!-- /.item -->
-        </div>
-        <!-- /.home-owl-carousel -->
-        </section>
-        <section class="section featured-product wow fadeInUp">
-            <h3 class="section-title">Vans</h3>
-            <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
-                @foreach ($vans as $product)
-                    <div class="item item-carousel">
-                        <div class="products">
-                            <div class="product">
-                                <div class="product-image">
-                                    <div class="image"> <a
-                                            href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"><img
-                                                src="{{ asset($product->image) }}" alt=""></a> </div>
-                                    <!-- /.image -->
-
-                                    @if (!empty($product->sale_price))
-                                        <div class="tag sale"><span>sale</span></div>
-                                    @endif
-                                </div>
-                                <!-- /.product-image -->
-
-                                <div class="product-info text-left">
-                                    <h3 class="name"><a
-                                            href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
-                                            {{ $product->name }}</a>
-                                    </h3>
-                                    @include('partitions.web.rating', [
-                                        'productId' => $product->id,
-                                    ])
-                                    <div class="description"></div>
-                                    @if (!$product->sale_price)
-                                        <div class="product-price"> <span class="price">
-                                                {{ number_format($product->product_price) }}đ </span>
-                                        @else
-                                            <div class="product-price"> <span class="price">
-                                                    {{ number_format($product->sale_price) }}đ </span>
-                                                <span
-                                                    class="price-before-discount">${{ $product->product_price }}đ</span>
-                                    @endif
-                                </div>
-                                <!-- /.product-price -->
-
-                            </div>
-                            <!-- /.product-info -->
-                            <div class="cart clearfix animate-effect fix-style">
-                                <div class="action">
-                                    <ul class="list-unstyled">
-                                        <li class="add-cart-button btn-group">
-                                            <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
-                                                data-toggle="tooltip" class="btn btn-primary icon" type="button"
-                                                data-original-title="" title=""> <i
-                                                    class="fa fa-shopping-cart"></i> Tùy
-                                                chọn</a>
-                                            <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-                                        </li>
-                                        <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart preview-product"
-                                                id="11" data-original-title="" title=""> <i
-                                                    class="fa fa-eye" aria-hidden="true"></i>
-                                            </a> </li>
-                                    </ul>
-                                </div>
-                                <!-- /.action -->
-                            </div>
-                            <!-- /.cart -->
-                        </div>
-                        <!-- /.product -->
-
-                    </div>
-                    <!-- /.products -->
-            </div>
-            @endforeach
-            <!-- /.item -->
-    </div>
-    <!-- /.home-owl-carousel -->
-    </section>
-    <!-- /.sidebar-widget -->
-    <!-- ============================================== BEST SELLER : END ============================================== -->
-
-    <!-- ============================================== BLOG SLIDER ============================================== -->
-    <section class="section latest-blog outer-bottom-vs wow fadeInUp">
-        <h3 class="section-title">Tin tức mới nhất</h3>
-        <div class="blog-slider-container outer-top-xs">
-            <div class="owl-carousel blog-slider custom-carousel">
-                @foreach ($blogs as $blog)
-                    <div class="item">
-                        <div class="blog-post">
-                            <div class="blog-post-image">
-                                <div class="image"> <a
-                                        href="{{ route('blog.detail', ['blog_title' => $blog->slug]) }}"><img
-                                            src="{{ asset($blog->post_image) }}" alt=""></a> </div>
-                            </div>
-                            <!-- /.blog-post-image -->
-
-                            <div class="blog-post-info text-left">
-                                <h3 class="name"><a
-                                        href="{{ route('blog.detail', ['blog_title' => $blog->slug]) }}">{{ $blog->title }}</a>
-                                </h3>
-                                <span class="info">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    {{ $blog->created_at->toDateTimeString() }}
-                                </span>
-                                <p class="text">{{ $blog->content }}</p>
-                                <a href="{{ route('blog.detail', ['blog_title' => $blog->slug]) }}"
-                                    class="lnk btn btn-primary">Read more</a>
-                            </div>
-                            <!-- /.blog-post-info -->
-
-                        </div>
-                        <!-- /.blog-post -->
-                    </div>
-                    <!-- /.item -->
+                </section>
                 @endforeach
+
+                <!-- ============================================== PRODUCTS BY CATEGORY :END ============================================== -->
+
+                <!-- ============================================== BLOG SLIDER ============================================== -->
+                <section class="section latest-blog outer-bottom-vs wow fadeInUp">
+                    <h3 class="section-title">Tin tức mới nhất</h3>
+                    <div class="blog-slider-container outer-top-xs">
+                        <div class="owl-carousel blog-slider custom-carousel">
+                            @foreach ($blogs as $blog)
+                                <div class="item">
+                                    <div class="blog-post">
+                                        <div class="blog-post-image">
+                                            <div class="image"> <a
+                                                    href="{{ route('blog.detail', ['blog_title' => $blog->slug]) }}"><img
+                                                        src="{{ asset($blog->post_image) }}" alt=""></a> </div>
+                                        </div>
+                                        <!-- /.blog-post-image -->
+
+                                        <div class="blog-post-info text-left">
+                                            <h3 class="name"><a
+                                                    href="{{ route('blog.detail', ['blog_title' => $blog->slug]) }}">{{ $blog->title }}</a>
+                                            </h3>
+                                            <span class="info">
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                {{ $blog->created_at->toDateTimeString() }}
+                                            </span>
+                                            <p class="text">{{ $blog->content }}</p>
+                                            <a href="{{ route('blog.detail', ['blog_title' => $blog->slug]) }}"
+                                                class="lnk btn btn-primary">Read more</a>
+                                        </div>
+                                        <!-- /.blog-post-info -->
+
+                                    </div>
+                                    <!-- /.blog-post -->
+                                </div>
+                                <!-- /.item -->
+                            @endforeach
+                        </div>
+                        <!-- /.owl-carousel -->
+                    </div>
+                    <!-- /.blog-slider-container -->
+                </section>
+                <!-- /.section -->
+                <!-- ============================================== BLOG SLIDER : END ============================================== -->
             </div>
-            <!-- /.owl-carousel -->
+            <!-- /.homebanner-holder -->
+            <!-- ============================================== CONTENT : END ============================================== -->
         </div>
-        <!-- /.blog-slider-container -->
-    </section>
-    <!-- /.section -->
-    <!-- ============================================== BLOG SLIDER : END ============================================== -->
-
-
-    </div>
-    <!-- /.homebanner-holder -->
-    <!-- ============================================== CONTENT : END ============================================== -->
-    </div>
     </div>
     <!-- /.container -->
     </div>
