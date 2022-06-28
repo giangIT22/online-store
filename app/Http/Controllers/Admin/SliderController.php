@@ -55,7 +55,7 @@ class SliderController extends Controller
         Slider::create($data);
 
         $notification = [
-            'message' => 'Create slider successfully',
+            'message' => 'Tạo slider thành công',
             'alert-type' => 'success'
         ];
         
@@ -108,7 +108,7 @@ class SliderController extends Controller
         $slider->update($data);
 
         $notification = [
-            'message' => 'Update slider successfully',
+            'message' => 'Cập nhật slider thành công',
             'alert-type' => 'success'
         ];
         

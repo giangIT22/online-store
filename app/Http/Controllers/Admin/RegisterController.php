@@ -18,7 +18,6 @@ class RegisterController extends Controller
     public function store(RegisterRequest $request)
     {
         $data = $request->all();
-        $data['name'] = $data['user_name'];
         $data['password'] = Hash::make($data['password']);
         $admin = Admin::create($data);
         return redirect()->route('admin.login');
