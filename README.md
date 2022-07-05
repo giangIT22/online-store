@@ -10,8 +10,8 @@
 
 # configuration permission
 
-chmod -R 777 storage
-chmod -R 775 bootstrap/cache
+1. chmod -R 777 storage
+2. chmod -R 775 bootstrap/cache
 
 ## install node_modules
 
