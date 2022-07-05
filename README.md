@@ -8,6 +8,11 @@
 6. php artisan key:generate
 7. php artisan migrate
 
+# configuration permission
+
+chmod -R 777 storage
+chmod -R 775 bootstrap/cache
+
 ## install node_modules
 
 1. yarn or npm install
