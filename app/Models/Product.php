@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory, Searchable, SoftDeletes;
 
     const PER_PAGE = 9;
     const SEARCH_PRODUCT = 8;
