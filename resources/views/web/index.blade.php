@@ -461,7 +461,9 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                 </div>
                                                                 <!-- /.image -->
 
-                                                                {{-- <div class="tag new"><span>new</span></div> --}}
+                                                                @if ($product->created_at > $minDate && $product->created_at <= now())
+                                                                    <div class="tag new"><span>new</span></div>
+                                                                @endif
                                                             </div>
                                                             <!-- /.product-image -->
 
@@ -471,8 +473,19 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                 </h3>
                                                                 <div class="rating rateit-small"></div>
                                                                 <div class="description"></div>
-                                                                <div class="product-price"> <span
-                                                                        class="price">${{ $product->product_price }}</span>
+                                                                <div class="product-price">
+                                                                    @if ($product->sale_price)
+                                                                        <span class="price">
+                                                                            {{ number_format($product->sale_price) }}
+                                                                            đ</span>
+                                                                        <span
+                                                                            class="price-before-discount">{{ number_format($product->product_price) }}
+                                                                            đ</span>
+                                                                    @else
+                                                                        <span
+                                                                            class="price">{{ number_format($product->product_price) }}
+                                                                            đ</span>
+                                                                    @endIf
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-info -->
@@ -483,19 +496,16 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                             <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
                                                                                 data-toggle="tooltip"
                                                                                 class="btn btn-primary icon"
-                                                                                type="button" title="Chọn sản phẩm"> <i
-                                                                                    class="fa fa-shopping-cart"></i> </a>
+                                                                                type="button">
+                                                                                <i class="fa fa-shopping-cart"></i> Tùy
+                                                                                chọn</a>
                                                                             <button class="btn btn-primary cart-btn"
                                                                                 type="button">Add to cart</button>
                                                                         </li>
-                                                                        <li class="lnk wishlist"> <a data-toggle="tooltip"
-                                                                                class="add-to-cart" href="detail.html"
-                                                                                title="Yêu thích"> <i
-                                                                                    class="icon fa fa-heart"></i>
-                                                                            </a> </li>
                                                                         <li class="lnk"> <a data-toggle="tooltip"
-                                                                                class="add-to-cart" href="detail.html"
-                                                                                title="Xem nhanh"> <i class="fa fa-eye"
+                                                                                class="add-to-cart preview-product"
+                                                                                id="{{ $product->id }}"> <i
+                                                                                    class="fa fa-eye"
                                                                                     aria-hidden="true"></i>
                                                                             </a> </li>
                                                                     </ul>
