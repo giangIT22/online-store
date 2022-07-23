@@ -12,14 +12,12 @@ $route = Route::current()->getName();
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item tab-item-invoice">
                     <a class="nav-link {{ $route == 'invoice.monthy' ? 'active' : '' }}"
-                        href="{{ route('invoice.monthy') }}"><span class="hidden-sm-up"><i
-                                class="ion-home"></i></span>
+                        href="{{ route('invoice.monthy') }}"><span class="hidden-sm-up"><i class="ion-home"></i></span>
                         <span class="hidden-xs-down">Tháng</span></a>
                 </li>
                 <li class="nav-item tab-item-invoice">
                     <a class="nav-link {{ $route == 'invoice.yearly' ? 'active' : '' }}"
-                        href="{{ route('invoice.yearly') }}"><span class="hidden-sm-up"><i
-                                class="ion-person"></i></span>
+                        href="{{ route('invoice.yearly') }}"><span class="hidden-sm-up"><i class="ion-person"></i></span>
                         <span class="hidden-xs-down">Năm</span></a>
                 </li>
             </ul>
@@ -32,14 +30,18 @@ $route = Route::current()->getName();
                             <div>
                                 <a href="?maximum_date={{ \Carbon\Carbon::create($maximum_date - 1, 12, 31)->toDateString() }}"
                                     class="btn btn-info mb-5"
-                                    @if ($maximum_date <= $min_year && $route == 'invoice.monthy') style="pointer-events:none;background:rgb(221, 220, 220);color:rgb(71, 71, 71);border:none" @endif><i
+                                    @if ($maximum_date <= $min_year && $route == 'invoice.monthy') style="pointer-events:none;background:rgb(221, 220, 220);color:rgb(71, 71, 71);border:none" 
+                                    @elseif($invoices->count() == 0 && $route == 'invoice.yearly')
+                                    style="pointer-events:none;background:rgb(221, 220, 220);color:rgb(71, 71, 71);border:none" 
+                                    @endif><i
                                         class="fa fa-angle-left" aria-hidden="true"></i>
                                 </a>
-                                @if ($route == 'invoice.monthy')
+                                @if ($route == 'invoice.monthy' && $invoices->count() != 0)
                                     <strong style="color: #bdc3c7;" class="ml-20">Năm: {{ $maximum_date }}</strong>
                                 @endif
                             </div>
-                            <a href="?maximum_date={{ \Carbon\Carbon::create($maximum_date + 1, 12, 31)->toDateString() }}" class="btn btn-info mb-5"
+                            <a href="?maximum_date={{ \Carbon\Carbon::create($maximum_date + 1, 12, 31)->toDateString() }}"
+                                class="btn btn-info mb-5"
                                 @if ($maximum_date >= $max_year) style="pointer-events:none;background:rgb(221, 220, 220);color:rgb(71, 71, 71);border:none" @endif><i
                                     class="fa fa-angle-right" aria-hidden="true"></i>
                             </a>

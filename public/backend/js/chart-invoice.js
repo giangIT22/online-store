@@ -1,6 +1,10 @@
 function getLabels(label) {
     let labels = [];
 
+    if (invoices.length == 0) {
+        return labels = 0;
+    }
+
     if (label == 'tháng') {
         for (let i = 1; i <= 12; i++) {
             labels.push(`Tháng ${i}`);
@@ -73,6 +77,7 @@ function initChartMonthy(label) {
                         color: '#bdc3c7'
                     },
                     suggestedMin: 0,
+                    display: invoices.length != 0 ? true : false
 
                 },
                 x: {
