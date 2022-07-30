@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\ReviewController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['guest:admin'])->group(function () {
+Route::middleware(['guest:admin', 'prevent-back-history'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('admin.login');
     Route::post('/login', [LoginController::class, 'store'])->name('admin.login.store');
     Route::get('/register', [RegisterController::class, 'index'])->name('admin.register');
@@ -25,7 +25,7 @@ Route::middleware(['guest:admin'])->group(function () {
 Route::get('/logout', [LoginController::class, 'destroy'])->name('admin.logout');
 
 //================================Tabs of Admin Page==============================================================================
-Route::middleware(['auth:admin'])->group(function () {
+Route::middleware(['auth:admin', 'prevent-back-history'])->group(function () {
     Route::get('/invoice-monthy', [InvoiceController::class, 'getInvoiceMonthy'])->name('invoice.monthy');
     Route::get('/invoice-yearly', [InvoiceController::class, 'getInvoiceYearLy'])->name('invoice.yearly');
 
