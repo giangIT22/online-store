@@ -16,10 +16,10 @@ class ShopController extends Controller
     protected $productService;
 
     public function __construct(ProductServiceInterface $productService)
-    {   
+    {
         $this->productService = $productService;
     }
-    
+
     public function index($tagName, Request $request)
     {
         $categories = Category::with('subCategories')->get();
@@ -36,8 +36,8 @@ class ShopController extends Controller
             abort(404);
         }
 
-        return view('web.shop.tag_view', compact('categories', 'sliders', 'products', 'productTags', 'lastPage', 'currentPage'));
-
+        return view('web.shop.tag_view', compact('categories', 'sliders', 'products', 'productTags',
+            'lastPage', 'currentPage'));
     }
 
     public function viewSearch()
@@ -46,10 +46,10 @@ class ShopController extends Controller
         $dataSearch = Product::search(request('search'))->paginate(Product::SEARCH_PRODUCT);
         $products = collect([]);
 
-        array_map(function($item) use ($products){
+        array_map(function ($item) use ($products) {
             $products[] = $item;
         }, $dataSearch->items());
-        
+
         $products = $products->sortBy('product_price')->sortBy('sale_price');
         $currentPage = $dataSearch->currentPage();
         $lastPage = $dataSearch->lastPage();
@@ -70,7 +70,7 @@ class ShopController extends Controller
         if (!request('search')) {
             return redirect()->route('index');
         }
-    
+
         return view('web.shop.search_view', compact('categories', 'products', 'currentPage', 'lastPage'));
     }
 }

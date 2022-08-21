@@ -115,8 +115,8 @@ class CartService implements CartServiceInterface
             $flag = true;
         } else {
             foreach ($carts as $cart) {
-                $sum = $cart->amount * $cart->price;
-                $sumTotal += $sum;
+                $price = $cart->amount * $cart->price;
+                $sumTotal += $price;
             }
         }
 
@@ -150,8 +150,8 @@ class CartService implements CartServiceInterface
         $count = $products->sum('amount');
 
         foreach ($products as $product) {
-            $sum = $product->amount * $product->price;
-            $sumTotal += $sum;
+            $price = $product->amount * $product->price;
+            $sumTotal += $price;
         }
 
         return [$query->first(), $sumTotal, $count];

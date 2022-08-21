@@ -20,6 +20,9 @@ class CartController extends Controller
         $this->cartService = $cartService;
     }
 
+    /**
+     * Add product to cart
+     */
     public function store(Request $request)
     {
         if (Auth::check()) {

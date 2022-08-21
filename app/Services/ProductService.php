@@ -43,7 +43,7 @@ class ProductService implements ProductServiceInterface
             abort(404);
         }
 
-        return $this->getData($params, $query);;
+        return $this->getData($params, $query);
     }
 
     public function getRelatedProducts($productId)
@@ -167,8 +167,6 @@ class ProductService implements ProductServiceInterface
         $specialOfferProducts = Product::where('special_offer', true)->orderBy('id', 'desc')->limit(6)->get();
         $specialDealsProducts = Product::where('special_deals', true)->orderBy('id', 'desc')->limit(6)->get();
         $productTags = ProductTag::select('name')->limit(8)->groupBy('name')->get();
-        $converse = Product::where('category_id', 1)->get();
-        $vans = Product::where('category_id', 2)->get();
         $productByCategory = Category::with('products')->get();
         
         return compact(
