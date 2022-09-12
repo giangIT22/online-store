@@ -22,12 +22,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('guest:web')->group(function () {
+Route::middleware(['guest:web', 'prevent-back-history'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('user.login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
     Route::get('/register', [RegisterController::class, 'index'])->name('user.register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 });
+
+Route::get('/register/verify/{code}', [RegisterController::class, 'verify'])->name('verify.email');
 
 Route::get('/user/logout', [LoginController::class, 'destroy'])->name('user.logout');
 
@@ -37,7 +39,7 @@ Route::get('/not-found', function () {
 })->name('error');
 
 //=============Profile user===========================
-Route::middleware('auth:web')->group(function () {
+Route::middleware(['auth:web', 'prevent-back-history'])->group(function () {
 
     Route::get('/user', [UserController::class, 'home'])->name('user.home');
 
