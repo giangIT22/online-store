@@ -7,6 +7,7 @@ use App\Http\Controllers\Web\CheckoutController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\LoginController;
 use App\Http\Controllers\Web\RegisterController;
+use App\Http\Controllers\Web\ResetPasswordController;
 use App\Http\Controllers\Web\ShopController;
 use App\Http\Controllers\Web\UserController;
 use Illuminate\Support\Facades\Route;
@@ -21,22 +22,26 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/not-found', function () {
+    return view('layouts.error');
+})->name('error');
 
+//==========================Auth user====================================
 Route::middleware(['guest:web', 'prevent-back-history'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('user.login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
     Route::get('/register', [RegisterController::class, 'index'])->name('user.register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+    Route::get('/forgot-password', [ResetPasswordController::class, 'forgetPassword'])->name('password.request');
+    Route::post('/forgot-password', [ResetPasswordController::class, 'store'])->name('password.email');
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'verify'])->name('password.reset');
+    Route::post('/reset-password/{user_id}', [ResetPasswordController::class, 'updatePassword'])->name('password.update');
 });
 
-Route::get('/register/verify/{code}', [RegisterController::class, 'verify'])->name('verify.email');
+Route::get('/register/verify/{code}', [RegisterController::class, 'verify'])->name('verify.email'); // xac thuc email khi dky user
 
 Route::get('/user/logout', [LoginController::class, 'destroy'])->name('user.logout');
-
-Route::get('/', [HomeController::class, 'index'])->name('index');
-Route::get('/not-found', function () {
-    return view('layouts.error');
-})->name('error');
 
 //=============Profile user===========================
 Route::middleware(['auth:web', 'prevent-back-history'])->group(function () {

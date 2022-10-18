@@ -20,9 +20,6 @@
                     <div class="col-md-8 col-sm-6 sign-in">
                         <h4 class="">ĐĂNG NHẬP TÀI KHOẢN</h4>
                         <p class="">Nếu bạn đã có tài khoản, đăng nhập tại đây.</p>
-                        <div class="social-sign-in outer-top-xs">
-                            <a href="#" class="facebook-sign-in"><i class="fa fa-facebook"></i> Sign In with Facebook</a>
-                        </div>
                         <form class="register-form outer-top-xs" role="form" method="post" action="{{route('login.store')}}">
                             @csrf
                             <div class="form-group">
@@ -48,6 +45,9 @@
                             </div> --}}
                             <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Đăng nhập</button>
                             <a href="{{route('user.register')}}" class="btn" style="display:inline-block; color:rgb(54, 144, 228)">Đăng ký</a>
+                            <p>
+                                <a href="{{route('password.request')}}" class="btn" style="display:inline-block; color:rgb(54, 144, 228)">Quên mật khẩu</a>
+                            </p>
                         </form>
                     </div>
                     <!-- Sign-in -->
