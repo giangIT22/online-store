@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminRoleTable extends Migration
+class CreateProductReceiptTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateAdminRoleTable extends Migration
      */
     public function up()
     {
-        Schema::create('admin_role', function (Blueprint $table) {
+        Schema::create('product_receipt', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('admin_id');
-            $table->bigInteger('role_id');
+            $table->integer('amonut');
+            $table->double('import_price');
+            $table->integer('product_id');
+            $table->integer('receipt_id');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateAdminRoleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin_role');
+        Schema::dropIfExists('product_receipt');
     }
 }

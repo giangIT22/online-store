@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->double('sell_price')->nullable();
             $table->integer('category_id');
             $table->integer('subcategory_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
