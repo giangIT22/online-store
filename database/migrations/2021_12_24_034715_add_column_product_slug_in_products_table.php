@@ -14,7 +14,7 @@ class AddColumnProductSlugInProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('product_slug')->nullable();
+            $table->string('product_slug')->after('description')->nullable();
         });
     }
 

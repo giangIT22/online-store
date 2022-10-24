@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->boolean('confirmed')->default(0);
             $table->string('confirmation_code')->nullable();
+            $table->string('profile_photo_path')->nullable();
             $table->timestamps();
         });
     }
