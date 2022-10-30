@@ -37,6 +37,20 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label class="info-title">Số điện thoại <span>*</span></label>
+                                <input type="text" class="form-control unicase-form-control text-input" name="phone">
+                                @error('phone')
+                                    <span>{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="info-title">Địa chỉ <span>*</span></label>
+                                <input type="text" class="form-control unicase-form-control text-input" name="address">
+                                @error('address')
+                                    <span>{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label class="info-title" >Mật khẩu <span>*</span></label>
                                 <input type="password" class="form-control unicase-form-control text-input" name="password">
                                 @error('password')

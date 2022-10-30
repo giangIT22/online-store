@@ -59,4 +59,14 @@ class CategoryService implements CategoryServiceInterface
 
         return $data;
     }
+
+    public function searchCategory($params)
+    {
+        $dataSearch = Category::search($params)->paginate(Category::PER_PAGE);
+
+        return [
+            'categories' => $dataSearch->items(),
+            'lastPage' => $dataSearch->lastPage()
+        ];
+    }
 }

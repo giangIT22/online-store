@@ -15,4 +15,6 @@ interface CategoryServiceInterface
     public function updateCategory($categoryId, $params);
 
     public function deleteCategory($categoryId);
+
+    public function searchCategory($params);
 }

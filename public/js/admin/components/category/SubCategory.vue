@@ -8,7 +8,7 @@
                     <div class="box">
                         <div class="box-header with-border">
                             <div class="d-flex justify-content-between">
-                                <h3 class="box-title">Danh sách Subcategory</h3>
+                                <h3 class="box-title">Danh mục phụ</h3>
                                 <a href="/admin/category/sub/create" type="button" class="btn btn-rounded btn-primary mb-5">Thêm</a>
                             </div>
                         </div>

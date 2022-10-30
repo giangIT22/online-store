@@ -34,11 +34,26 @@
                     <div class="form-group">
                         <label>Tên</label>
                         <input type="text" class="form-control" placeholder="Nhập tên ..." name="name">
-                        @error('user_name')
+                        @error('name')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="text" class="form-control" placeholder="Nhập số điện thoại ..." name="phone">
+                        @error('phone')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input type="text" class="form-control" placeholder="Nhập địa chỉ ..." name="address">
+                        @error('address')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Mật khẩu</label>
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">

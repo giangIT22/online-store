@@ -195,48 +195,9 @@
                                             </div>
                                         </div>
 
-                                        <div class="row mt-20">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-
-                                                    <div class="controls">
-                                                        <fieldset>
-                                                            <input type="checkbox" id="checkbox_2" name="hot_deals"
-                                                                value="1">
-                                                            <label for="checkbox_2">Hot Deals</label>
-                                                        </fieldset>
-                                                        <fieldset>
-                                                            <input type="checkbox" id="checkbox_3" name="featured"
-                                                                value="1">
-                                                            <label for="checkbox_3">Featured</label>
-                                                        </fieldset>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-
-                                                    <div class="controls">
-                                                        <fieldset>
-                                                            <input type="checkbox" id="checkbox_4" name="special_offer"
-                                                                value="1">
-                                                            <label for="checkbox_4">Special Offer</label>
-                                                        </fieldset>
-                                                        <fieldset>
-                                                            <input type="checkbox" id="checkbox_5" name="special_deals"
-                                                                value="1">
-                                                            <label for="checkbox_5">Special Deals</label>
-                                                        </fieldset>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         {{-- CHOOSE SIZE --}}
-                                        <div class="row choose-size">
+                                        <div class="row choose-size" style="margin-top: 30px;">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <h5>Kích thước <span class="text-danger">*</span></h5>

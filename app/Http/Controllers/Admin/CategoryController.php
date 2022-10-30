@@ -87,4 +87,28 @@ class CategoryController extends Controller
             ]);
         }
     }
+
+    public function searchCategory(Request $request)
+    {
+        try {
+            if ($request->search_key) {
+                $data = $this->categoryService->searchCategory($request->search_key);
+                return response()->json($data);
+            } else {
+                $data = $this->categoryService->getCategories();
+                $page = (int) $request->page ?? 1;
+                $categories = $data->forPage($page, 10);
+                $lastPage = ceil(count($data) / Category::PER_PAGE);
+                $data = [
+                    'categories' => $categories,
+                    'lastPage' => $lastPage
+                ];
+                return response()->json($data);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
 }

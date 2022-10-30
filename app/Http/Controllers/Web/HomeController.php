@@ -42,17 +42,21 @@ class HomeController extends Controller
         $productDetail = Product::findOrFail($productId);
         $categories = Category::with('subCategories')->get();
         $multiImages = $productDetail->images;
-        $hotDealProducts = Product::where('hot_deals', true)->where('sale_price', '!=', null)
-            ->orderBy('id', 'desc')->limit(3)->get();
         $relatedProducts = $this->productService->getRelatedProducts($productId);
         $reviews = Review::where('product_id', $productId)
-                    ->where('status', 1)
-                    ->orderBy('created_at', 'desc')
-                    ->get();
+            ->where('status', 1)
+            ->orderBy('created_at', 'desc')
+            ->get();
         $sizes = Size::all();
 
-        return view('web.product.product_detail', compact('productDetail', 'categories', 'multiImages',
-            'hotDealProducts', 'relatedProducts', 'reviews', 'sizes'));
+        return view('web.product.product_detail', compact(
+            'productDetail',
+            'categories',
+            'multiImages',
+            'relatedProducts',
+            'reviews',
+            'sizes'
+        ));
     }
 
     public function previewProduct($productId)
@@ -72,7 +76,7 @@ class HomeController extends Controller
         $data['product_id'] = $data['product_id'];
         $data['user_id'] = Auth::id();
         $review = $this->productService->addReviewProduct($data);
-        
+
         return response()->json([
             'status' => true
         ]);

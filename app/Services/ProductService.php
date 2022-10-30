@@ -161,22 +161,13 @@ class ProductService implements ProductServiceInterface
             ->where('created_at', '<=', Carbon::now())
             ->limit(6)->get();
         $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
-        $featuredProducts = Product::where('featured', true)->orderBy('id', 'desc')->get();
-        $hotDealProducts = Product::where('hot_deals', true)->where('sale_price', '!=', null)
-            ->orderBy('id', 'desc')->get();
-        $specialOfferProducts = Product::where('special_offer', true)->orderBy('id', 'desc')->limit(6)->get();
-        $specialDealsProducts = Product::where('special_deals', true)->orderBy('id', 'desc')->limit(6)->get();
         $productTags = ProductTag::select('name')->limit(8)->groupBy('name')->get();
         $productByCategory = Category::with('products')->get();
         
         return compact(
             'categories',
             'sliders',
-            'products',
-            'featuredProducts',
-            'specialOfferProducts',
-            'specialDealsProducts',
-            'hotDealProducts',
+            'products',            
             'productTags',
             'productByCategory'
         );

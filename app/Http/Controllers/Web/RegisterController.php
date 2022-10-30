@@ -18,7 +18,7 @@ class RegisterController extends Controller
         return view('auth.web.register', compact('categories'));
     }
 
-    public function store(RegisterRequest $request, User $creator)
+    public function store(RegisterRequest $request)
     {
         $confirmCode = time().uniqid(true);
         $data = $request->all();

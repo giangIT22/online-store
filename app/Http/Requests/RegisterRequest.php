@@ -35,7 +35,9 @@ class RegisterRequest extends FormRequest
                 'max:255',
                 config('fortify.guard') == 'admin' ? 'unique:admins,email' : 'unique:users,email',
             ],
-            'password' => 'required'
+            'password' => 'required',
+            'phone' => 'required',
+            'address' => 'required'
         ];
     }
 
@@ -48,7 +50,9 @@ class RegisterRequest extends FormRequest
             'password.required' => 'Vui lòng nhập mật khẩu',
             'user_name.string' => 'Tên phải là một chuỗi kí tự',
             'email.email' => 'Mail không đúng định dạng',
-            'email.unique' => 'Email này đã tồn tại'
+            'email.unique' => 'Email này đã tồn tại',
+            'phone.required' => 'Vui lòng nhập số điện thoại',
+            'address.required' => 'Vui lòng nhập địa chỉ',
         ];
     }
 }

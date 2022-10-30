@@ -48,6 +48,7 @@ Route::middleware(['auth:admin', 'prevent-back-history'])->group(function () {
         Route::post('/update/{category_id}', [CategoryController::class, 'updateCategory'])->name('category.update');
         Route::get('/edit/{category_id}', [CategoryController::class, 'update'])->name('category.edit');
         Route::get('/delete/{category_id}', [CategoryController::class, 'delete'])->name('category.delete');
+        Route::get('/search', [CategoryController::class, 'searchCategory'])->name('category.search');
 
         //===== All route subcategory admin =====
         Route::get('/sub/view', [SubCategoryController::class, 'index'])->name('all.sub_categories');

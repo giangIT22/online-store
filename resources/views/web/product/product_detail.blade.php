@@ -16,73 +16,7 @@
     <div class="body-content outer-top-xs">
         <div class='container'>
             <div class='row single-product'>
-                <div class='col-md-3 sidebar'>
-                    <div class="sidebar-module-container">
-                        <!-- ============================================== HOT DEALS ============================================== -->
-                        <div class="sidebar-widget hot-deals wow fadeInUp">
-                            <h3 class="section-title">hot deals</h3>
-                            <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-xs">
-                                @foreach ($hotDealProducts as $product)
-                                    <div class="item">
-                                        <div class="products">
-                                            <div class="hot-deal-wrapper">
-                                                <div class="image">
-                                                    <img src="{{ asset($product->image) }}" alt="">
-                                                </div>
-                                                <div class="sale-offer-tag">
-                                                    <span>{{ round(100 - ($product->sale_price / $product->product_price) * 100) }}%<br>off</span>
-                                                </div>
-
-                                            </div><!-- /.hot-deal-wrapper -->
-
-                                            <div class="product-info text-left m-t-20">
-                                                <h3 class="name">
-                                                    <a
-                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
-                                                        {{ $product->name }}
-                                                    </a>
-                                                </h3>
-                                                @include('partitions.web.rating', [
-                                                    'productId' => $product->id,
-                                                ])
-
-                                                <div class="product-price">
-                                                    @if ($product->sale_price)
-                                                        <span class="price">
-                                                            {{ number_format($product->sale_price) }} đ</span>
-                                                        <span
-                                                            class="price-before-discount">{{ number_format($product->product_price) }}
-                                                            đ</span>
-                                                    @else
-                                                        <span class="price">{{ number_format($product->product_price) }}
-                                                            đ</span>
-                                                    @endIf
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div><!-- /.sidebar-widget -->
-                        </div>
-                        <!-- ============================================== HOT DEALS: END ============================================== -->
-
-                        <!-- ============================================== NEWSLETTER ============================================== -->
-                        <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small outer-top-vs">
-                            <h4 class="section-title" style="font-size: 13px">ĐĂNG KÝ NHẬN TIN KHUYẾN MÃI
-                                </h3>
-                                <div class="sidebar-widget-body outer-top-xs">
-                                    <form>
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Nhập email của bạn">
-                                        </div>
-                                        <button class="btn btn-primary">Đăng ký</button>
-                                    </form>
-                                </div><!-- /.sidebar-widget-body -->
-                        </div><!-- /.sidebar-widget -->
-                    </div>
-                </div><!-- /.sidebar -->
-                <div class='col-md-9'>
+                <div class='col-md-12'>
                     <div class="detail-block">
                         <div class="row  wow fadeInUp">
                             <div class="col-xs-12 col-sm-6 col-md-5 gallery-holder">

@@ -1,17 +1,15 @@
 <template>
   <nav v-if="pageCount > 1" class="navigation text-center">
     <Paginate
-      first-last-button
-      hide-prev-next
       :page-range="pageRange"
       :page-count="pageCount"
-      container-class="pagination pagination-sm flex-center"
+      container-class="pagination w-100"
       page-class="page-item"
-      page-link-class="page-link font-20 p-0 mx-2 my-1"
-      prev-class="d-none"
-      prev-link-class="d-none"
-      next-class="d-none"
-      next-link-class="d-none"
+      page-link-class="page-link border-0"
+      prev-link-class="page-link border-0"
+      next-link-class="page-link border-0"
+      :prev-text="'<'"
+      :next-text="'>'"
       :click-handler="paginate"
       :value="pageQuery"
     ></Paginate>
@@ -67,3 +65,7 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  
+</style>

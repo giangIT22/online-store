@@ -142,7 +142,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
     color: #7792b1;
-    font-size: 1rem;
+    font-size: 15px;
     font-style: normal;
     font-weight: 400;
     font-family: "IBM Plex Sans", sans-serif;
@@ -15316,7 +15316,7 @@ body .main-header .navbar .nav>li.search-box>a:focus {
     left: 0;
     padding-top: 0px;
     min-height: 100%;
-    width: 280px;
+    width: 290px;
     z-index: 810;
     -webkit-transition: -webkit-transform .3s ease-in-out, width .3s ease-in-out;
     -moz-transition: -moz-transform .3s ease-in-out, width .3s ease-in-out;
@@ -16202,7 +16202,7 @@ body .main-header .navbar .nav>li.search-box>a:focus {
 .treeview-menu>li>a {
     padding: 8px 5px 8px 25px;
     display: block;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .treeview-menu>li>a>i {
@@ -29716,8 +29716,8 @@ button.btn.dropdown-toggle:after {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     display: inline-block;
-    min-width: 50px;
-    padding: 1rem;
+    min-width: 57px;
+    padding: 4px 0;
     margin: 0 3px;
     text-decoration: none;
     cursor: pointer;
