@@ -17,8 +17,10 @@ class CreateProductCartTable extends Migration
             $table->id();
             $table->bigInteger('cart_id');
             $table->bigInteger('product_id');
+            $table->integer('size_id')->nullable();
+            $table->integer('color_id')->nullable();
             $table->tinyInteger('amount');
-            $table->double('price');
+            $table->double('product_price');
             $table->timestamps();
         });
     }

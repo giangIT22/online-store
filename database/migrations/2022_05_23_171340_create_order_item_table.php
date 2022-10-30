@@ -17,6 +17,8 @@ class CreateOrderItemTable extends Migration
             $table->id();
             $table->bigInteger('order_id');
             $table->bigInteger('product_id');
+            $table->bigInteger('size_id')->nullable();
+            $table->bigInteger('color_id')->nullable();
             $table->tinyInteger('amount');
             $table->double('product_price');
             $table->timestamps();
