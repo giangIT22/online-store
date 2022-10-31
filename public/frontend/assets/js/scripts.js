@@ -708,10 +708,45 @@ jQuery(document).ready(function() {
     });
 
     //=================Check exist product=======================================
-    $('.list-size-product').on('change', function() {
-        let productId = $('.product_id').val();
+    // $('.list-size-product').on('change', function() {
+    //     let productId = $('.product_id').val();
 
-        if ($(this).val() != 'Chọn kích thước') {
+    //     if ($(this).val() != 'Chọn kích thước') {
+    //         $.ajaxSetup({
+    //             headers: {
+    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //             }
+    //         });
+
+    //         $.ajax({
+    //             method: "POST",
+    //             url: '/product/check-exist',
+    //             data: {
+    //                 product_id: productId,
+    //                 size_id: $(this).val(),
+    //             },
+    //             success: function(response) {
+    //                 if (response.status) {
+    //                     $('.add-cart-product').prop('disabled', false);
+    //                     $('.stock-box span.value').text('Còn hàng');
+    //                 } else {
+    //                     $('.add-cart-product').prop('disabled', true);
+    //                     $('.stock-box span.value').text('Hết hàng');
+    //                 }
+    //             }
+    //         });
+    //     } else {
+    //         $('.add-cart-product').prop('disabled', true);
+    //     }
+    // });
+
+    //================Get size product ======================
+    var listColors = $('.list-color-product').html();
+    var productId = $('.product_id').val();
+    var colorId = 0;
+    $('.list-color-product').on('change', function() {
+        colorId = $(this).val();
+        if (colorId != 'Chọn màu sắc') {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -720,13 +755,44 @@ jQuery(document).ready(function() {
 
             $.ajax({
                 method: "POST",
+                url: '/product/get-size',
+                data: {
+                    product_id: productId,
+                    color_id: colorId,
+                },
+                success: function(response) {
+                    if (response.sizes) {
+                        let sizes = response.sizes.map(function(size) {
+                            return `<option value="${size['id']}">${size['name']}</option>`
+                        });
+
+                        $('.list-size-product').prop('disabled', false);
+                        $('.list-size-product').html('<option>Chọn kích thước</option>' + sizes.join(' '))
+                    }
+                }
+            });
+        } else {
+            $('.list-size-product').prop('disabled', true);
+            $('.list-size-product').html('<option>Chọn kích thước</option>');
+            $('.add-cart-product').prop('disabled', true);
+        }
+    })
+
+
+    $('.list-size-product').on('change', function() {
+        let sizeId = $(this).val();
+        if (sizeId != 'Chọn kích thước') {
+            $.ajax({
+                method: "POST",
                 url: '/product/check-exist',
                 data: {
                     product_id: productId,
-                    size_id: $(this).val(),
+                    size_id: sizeId,
+                    color_id: colorId
                 },
-                success: function(response) {
-                    if (response.status) {
+                success: function(res) {
+                    console.log(productId);
+                    if (res.status) {
                         $('.add-cart-product').prop('disabled', false);
                         $('.stock-box span.value').text('Còn hàng');
                     } else {
@@ -736,6 +802,8 @@ jQuery(document).ready(function() {
                 }
             });
         } else {
+            $('.list-size-product').prop('disabled', true);
+            $('.list-color-product').html(listColors);
             $('.add-cart-product').prop('disabled', true);
         }
     });

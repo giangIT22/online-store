@@ -12,4 +12,5 @@ interface ProductServiceInterface
     public function checkExistProduct($params);
     public function getAllProduct($params);
     public function getDataForHomePage();
+    public function getSizeByColor($params);
 }

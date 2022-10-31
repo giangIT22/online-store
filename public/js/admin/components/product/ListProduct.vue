@@ -24,12 +24,12 @@
                     <tr>
                       <th>Ảnh sản phẩm</th>
                       <th>Tên</th>
-                      <th>Mô tả</th>
                       <th>Slug</th>
                       <th>Giá sản phẩm</th>
                       <th>Số lượng</th>
                       <th>Giá sale</th>
-                      <th>Action</th>
+                      <th>Trạng thái</th>
+                      <th>Thao tác</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -40,9 +40,6 @@
                     >
                       <td><img :src="item.image" alt="" width="50px" /></td>
                       <td style="width:200px;">{{ item.name }}</td>
-                      <td class="w-200">
-                        <span>{{ item.description }}</span>
-                      </td>
                       <td style="width:200px;">{{ item.product_slug }}</td>
                       <td>
                         {{
@@ -52,7 +49,7 @@
                           })
                         }}
                       </td>
-                      <td>{{ item.product_qty }}</td>
+                      <td>{{ item.amount }}</td>
                       <td>
                         {{item.sale_price ?
                           item.sale_price.toLocaleString("it-IT", {
@@ -60,6 +57,9 @@
                             currency: "vnd",
                           }) : ""
                         }}
+                      </td>
+                      <td>
+                        {{ item.status == 1 ? 'Tạm dừng' : 'Đang bán'}}
                       </td>
                       <td>
                         <a
@@ -109,9 +109,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.fix-font td {
-  font-size: 12px;
-}
 
 .fix-font td span {
   width: 100%;

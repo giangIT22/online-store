@@ -14,6 +14,13 @@ class Product extends Model
     const PER_PAGE = 9;
     const SEARCH_PRODUCT = 8;
     const RELATED_PRODUCT = 6;
+    const NO_PUBLIC = 1;
+    const PUBLIC = 2;
+
+    const status = [
+        self::NO_PUBLIC => 'Chưa bán',
+        self::PUBLIC => 'Đang bán'
+    ];
 
     //filter values
     const FILTER_VALUES = [
@@ -75,6 +82,11 @@ class Product extends Model
 
     public function sizes()
     {
-        return $this->belongsToMany(Size::class, 'product_size', 'product_id', 'size_id')->withPivot ('amount');
+        return $this->belongsToMany(Size::class, 'product_variant', 'product_id', 'size_id')->withPivot ('amount');
+    }
+
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class, 'product_variant', 'product_id', 'color_id')->withPivot ('amount');
     }
 }

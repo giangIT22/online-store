@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProduct;
 use App\Http\Requests\UpdateProduct;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductTag;
+use App\Models\ProductVariant;
 use App\Models\Size;
 use App\Traits\StoreImageTrait;
 use Illuminate\Http\Request;
@@ -36,50 +38,73 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $sizes = Size::all();
+        $colors = Color::all();
 
-        return view('admin.product.create', compact('categories', 'sizes'));
+        return view('admin.product.create', compact('categories', 'sizes', 'colors'));
     }
 
     public function store(StoreProduct $request)
     {
-        $data = $request->except(['image_path', 'tags', 'sizes', 'amounts', 'size_product']);
+     
+        $data = $request->except(['image_path', 'tags', 'sizes', 'colors', 'amounts']);
         $productImage = $this->uploadImage($request, 'image', 'product');
         $data['image'] = $productImage['file_path'];
-        $data['product_qty'] = array_sum($request->amounts);
-        $product = Product::create($data);
+        $data['amount'] = array_sum($request->amounts);
 
-        if ($request->has('image_path')) {
-            foreach ($request->image_path as $path) {
-                $path = $this->uploadImageMultiple($path, 'product');
-                ProductImage::create([
-                    'image_path' => $path['file_path'],
-                    'product_id' => $product->id
-                ]);
+        DB::beginTransaction();
+        try {
+            $product = Product::create($data);
+
+            if ($request->has('image_path')) {
+                foreach ($request->image_path as $path) {
+                    $path = $this->uploadImageMultiple($path, 'product');
+                    ProductImage::create([
+                        'image_path' => $path['file_path'],
+                        'product_id' => $product->id
+                    ]);
+                }
             }
-        }
 
-        if ($request->tags) {
-            foreach ($request->tags as $tag) {
-                ProductTag::create([
-                    'name' => $tag,
-                    'product_id' => $product->id
-                ]);
+            if ($request->tags) {
+                foreach ($request->tags as $tag) {
+                    ProductTag::create([
+                        'name' => $tag,
+                        'product_id' => $product->id
+                    ]);
+                }
             }
-        }
 
-        //Create product_size
-        if ($request->sizes) {
-            foreach ($request->sizes as $key => $size) {
-                $product->sizes()->attach($size, ['amount' => $request->amounts[$key]]);
+            //Create product_size
+            if ($request->sizes && $request->colors) {
+                foreach ($request->sizes as $key => $size) {
+                    $productVariant = ProductVariant::where('size_id', $size)
+                        ->where('color_id', $request->colors[$key])
+                        ->where('product_id', $product->id)
+                        ->first();
+                    
+                    if ($productVariant) {
+                        $productVariant->update(['amount' => $productVariant->amount + $request->amounts[$key]]);
+                    } else {
+                        ProductVariant::create([
+                            'amount' => $request->amounts[$key],
+                            'product_id' => $product->id,
+                            'color_id' => $request->colors[$key],
+                            'size_id' => $size,
+                        ]);
+                    }
+                }
             }
+            DB::commit();
+            $notification = [
+                'message' => 'Thêm sản phẩm thành công',
+                'alert-type' => 'success'
+            ];
+    
+            return redirect()->route('all.products')->with($notification);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            dd($e->getMessage());
         }
-
-        $notification = [
-            'message' => 'Thêm sản phẩm thành công',
-            'alert-type' => 'success'
-        ];
-
-        return redirect()->route('all.products')->with($notification);
     }
 
     public function delete($productId)

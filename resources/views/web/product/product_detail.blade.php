@@ -82,7 +82,7 @@
                                             <div class="col-sm-9">
                                                 <div class="stock-box">
                                                     <span
-                                                        class="value">{{ $productDetail->product_qty > 0 ? 'Còn hàng' : 'Hết hàng' }}</span>
+                                                        class="value">{{ $productDetail->amount > 0 ? 'Còn hàng' : 'Hết hàng' }}</span>
                                                 </div>
                                             </div>
                                         </div><!-- /.row -->
@@ -91,16 +91,29 @@
                                     <div class="description-container m-t-20">
                                         {{ $productDetail->description }}
                                     </div><!-- /.description-container -->
-                                    {{-- choose size product --}}
-                                    <div class="product-size">
-                                        <label class="title-size">Size</label>
-                                        <select class="list-size-product" name="size_id">
-                                            <option>Chọn kích thước</option>
-                                            @foreach ($sizes as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
+
+                                    {{-- choose option product --}}
+                                    <div class="product-options">
+                                        {{-- choose size product --}}
+                                        <div class="product-color">
+                                            <label class="title-color">Màu sắc</label>
+                                            <select class="list-color-product" name="color_id">
+                                                <option>Chọn màu sắc</option>
+                                                @foreach ($colors as $color)
+                                                    <option value="{{ $color['id'] }}">{{ $color['name'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        {{-- choose size product --}}
+                                        <div class="product-size">
+                                            <label class="title-size">Kích thước</label>
+                                            <select disabled="true" class="list-size-product" name="size_id">
+                                                <option>Chọn kích thước</option>
+                                            </select>
+                                        </div>
                                     </div>
+                                    {{-- choose option product --}}
+
                                     <div class="price-container info-container m-t-20">
                                         <div class="row">
                                             <div class="col-sm-6">
@@ -386,17 +399,15 @@
                                                     <ul class="list-unstyled">
                                                         <li class="add-cart-button btn-group">
                                                             <a href="{{ route('product.detail', ['product_id' => $item->id, 'slug' => $item->product_slug]) }}"
-                                                                data-toggle="tooltip"
-                                                                class="btn btn-primary icon" type="button"
-                                                                data-original-title="" title=""> <i
+                                                                data-toggle="tooltip" class="btn btn-primary icon"
+                                                                type="button" data-original-title="" title=""> <i
                                                                     class="fa fa-shopping-cart"></i>
                                                                 Tùy
                                                                 chọn</a>
                                                         </li>
                                                         <li class="lnk"> <a data-toggle="tooltip"
-                                                                class="add-to-cart preview-product"
-                                                                id="11" data-original-title=""
-                                                                title="">
+                                                                class="add-to-cart preview-product" id="11"
+                                                                data-original-title="" title="">
                                                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                                             </a> </li>
                                                     </ul>

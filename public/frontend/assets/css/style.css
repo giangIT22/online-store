@@ -1,0 +1,52 @@
+.rating-reviews span {
+    font-size: 20px;
+}
+
+.rating-reviews .reviews .lnk {
+    font-size: 20px;
+}
+
+.rating-reviews .row {
+    display: flex;
+    align-items: center;
+}
+
+.single-product .product-info .stock-container .stock-box .label,
+.single-product .product-info .stock-container .stock-box .value {
+    font-size: 16px;
+}
+
+.single-product .product-info .description-container {
+    font-size: 16px;
+    line-height: 27px;
+}
+
+.product-options {
+    display: flex;
+}
+
+.product-size .list-size-product,
+.product-color .list-color-product {
+    width: 250px;
+}
+
+.product-options .product-color .title-color {
+    font-size: 16px;
+    color: #636363;
+    margin-right: 20px;
+    font-weight: 400;
+    font-family: "Open+Sans", "HelveticaNeue", "Helvetica Neue", sans-serif;
+}
+
+.product-color {
+    margin-top: 20px;
+}
+
+.product-color .list-color-product {
+    padding: 10px 10px;
+    outline: none;
+    border: 0.5px solid #e1e1e1;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 500;
+}

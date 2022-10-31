@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductTag;
+use App\Models\ProductVariant;
 use App\Models\Review;
 use App\Models\Size;
 use App\Models\Slider;
@@ -98,19 +99,6 @@ class ProductService implements ProductServiceInterface
         return $products;
     }
 
-    public function checkExistProduct($params)
-    {
-        $status = true;
-        $productSize = DB::table('product_size')->where('size_id', $params['size_id'])
-            ->where('product_id', $params['product_id'])->first();
-
-        if (empty($productSize) || $productSize->amount == 0) {
-            return $status = false;
-        }
-
-        return $status;
-    }
-
     public function getAllProduct($params)
     {
         $query = Product::orderBy('product_price');
@@ -171,5 +159,29 @@ class ProductService implements ProductServiceInterface
             'productTags',
             'productByCategory'
         );
+    }
+
+    public function checkExistProduct($params)
+    {
+        $status = true;
+        $productVariant = ProductVariant::where('color_id', $params['color_id'])
+            ->where('size_id', $params['size_id'])
+            ->where('product_id', $params['product_id'])->first();
+
+        if (empty($productVariant) || $productVariant->amount == 0) {
+            return $status = false;
+        }
+
+        return $status;
+    }
+
+    public function getSizeByColor($params)
+    {
+        $data = ProductVariant::where('product_id', $params['product_id'])
+            ->where('color_id', $params['color_id'])
+            ->pluck('size_id')->all();
+
+        $sizes = Size::whereIn('id', $data)->get();
+        return $sizes;
     }
 }

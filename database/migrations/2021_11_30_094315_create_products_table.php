@@ -24,7 +24,7 @@ class CreateProductsTable extends Migration
             $table->double('product_price');
             $table->text('description');
             $table->double('sale_price')->nullable();
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(1);
             $table->integer('category_id');
             $table->integer('subcategory_id');
             $table->integer('receipt_id')->nullable();

@@ -18,7 +18,8 @@ $(document).ready(function() {
             data: {
                 'product_id': productId,
                 'amount': amount,
-                'size_id': $('.list-size-product').val()
+                'size_id': $('.list-size-product').val(),
+                'color_id': $('.list-color-product').val()
             },
             success: function(response) {
                 count = 0;

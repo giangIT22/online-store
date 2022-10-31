@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductTag;
 use App\Models\Review;
@@ -47,7 +48,13 @@ class HomeController extends Controller
             ->where('status', 1)
             ->orderBy('created_at', 'desc')
             ->get();
-        $sizes = Size::all();
+        $colors = $productDetail->colors->map(function($color) {
+            return collect([
+                'id' => $color->id,
+                'name' => $color->name
+            ]);
+        });
+        $colors = $colors->unique('id');
 
         return view('web.product.product_detail', compact(
             'productDetail',
@@ -55,7 +62,7 @@ class HomeController extends Controller
             'multiImages',
             'relatedProducts',
             'reviews',
-            'sizes'
+            'colors'
         ));
     }
 
@@ -88,6 +95,15 @@ class HomeController extends Controller
 
         return response()->json([
             'status' => $status
+        ]);
+    }
+
+    public function getSizeByColor(Request $request)
+    {
+        $sizes = $this->productService->getSizeByColor($request->all());
+
+        return response()->json([
+            'sizes' => $sizes
         ]);
     }
 }

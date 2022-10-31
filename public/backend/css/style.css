@@ -30339,3 +30339,11 @@ img.online {
 
 
 /*# sourceMappingURL=style.css.map */
+
+.add-option span,
+.close-option span {
+    display: inline-block;
+    margin-top: 22px;
+    font-size: 30px;
+    cursor: pointer;
+}

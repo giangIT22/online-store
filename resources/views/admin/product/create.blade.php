@@ -196,23 +196,50 @@
                                         </div>
 
 
-                                        {{-- CHOOSE SIZE --}}
-                                        <div class="row choose-size" style="margin-top: 30px;">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <h5>Kích thước <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <select class="form-control" id="list-size" name="size_product">
-                                                            <option value="">Chọn kích thước</option>
-                                                            @foreach ($sizes as $size)
-                                                                <option value="{{ $size->id }}">
-                                                                    {{ $size->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('size_product')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                        {{-- CHOOSE option --}}
+                                        <div class="row choose-option" style="margin-top: 30px;">
+                                            <div class="row col-md-9 option-item" id="row-1">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <h5>Màu sắc <span class="text-danger">*</span></h5>
+                                                        <div class="controls">
+                                                            <select class="form-control" id="list-color" name="colors[]">
+                                                                <option value="">Chọn màu sắc</option>
+                                                                @foreach ($colors as $color)
+                                                                    <option value="{{ $color->id }}" id="color-{{$color->id}}">
+                                                                        {{ $color->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <h5>Kích thước <span class="text-danger">*</span></h5>
+                                                        <div class="controls">
+                                                            <select class="form-control" id="list-size" name="sizes[]">
+                                                                <option value="">Chọn kích thước</option>
+                                                                @foreach ($sizes as $size)
+                                                                    <option value="{{ $size->id }}" id="size-{{$size->id}}">
+                                                                        {{ $size->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <h5>Số lượng<span class="text-danger">*</span></h5>
+                                                        <div class="controls">
+                                                            <input type="text" name="amounts[]" class="form-control" id="option-amount">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="add-option">
+                                                    <span><i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>

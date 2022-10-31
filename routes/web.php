@@ -72,6 +72,8 @@ Route::prefix('/product')->group(function () {
     Route::get('/preview-product/{product_id}', [HomeController::class, 'previewProduct'])->name('preview.product');
     Route::post('/add-review', [HomeController::class, 'storeReview'])->name('review.store');
     Route::post('/check-exist', [HomeController::class, 'checkExistProduct']);
+    //===========Get size compress with color of product ================
+    Route::post('/get-size', [HomeController::class, 'getSizeByColor'])->name('get-size');
 });
 
 //============Shopping===============================
