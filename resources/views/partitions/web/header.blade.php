@@ -88,7 +88,7 @@
                                                 ->first() ?? 0;
                                         if ($cart) {
                                             $products = DB::table('product_cart')
-                                                ->select('product_id', 'amount', 'price')
+                                                ->select('product_id', 'amount', 'product_price')
                                                 ->where('cart_id', $cart->id)
                                                 ->get();
                                     
@@ -101,7 +101,7 @@
                                                     'product_slug' => $product->product_slug,
                                                     'product_image' => $product->image,
                                                     'product_name' => $product->name,
-                                                    'product_price' => $item->price,
+                                                    'product_price' => $item->product_price,
                                                     'amount' => $item->amount,
                                                 ]);
                                                 $count += $item->amount;

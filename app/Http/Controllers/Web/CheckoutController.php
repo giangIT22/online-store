@@ -33,8 +33,10 @@ class CheckoutController extends Controller
                 $products = DB::table('product_cart')
                 ->join('products', 'product_cart.product_id', 'products.id')
                 ->join('sizes', 'product_cart.size_id', 'sizes.id')
+                ->join('colors', 'product_cart.color_id', 'colors.id')
                 ->select('products.id', 'products.name', 'products.image', 'product_cart.amount',
-                    'product_cart.price', 'product_cart.size_id', 'sizes.name as size_name')
+                    'product_cart.product_price', 'product_cart.size_id', 'product_cart.color_id',
+                    'sizes.name as size_name', 'colors.name as color_name')
                 ->where('cart_id', $cart->id)
                 ->get();
 

@@ -135,7 +135,7 @@
                                     @php
                                         $sum = 0;
                                         foreach ($products as $product) {
-                                            $sum += $product->amount * $product->price;
+                                            $sum += $product->amount * $product->product_price;
                                         }
                                     @endphp
                                     @foreach ($products as $product)
@@ -152,7 +152,7 @@
                                                 <small class="text-muted">Số lượng: {{ $product->amount }}</small>
                                             </div>
                                             <span
-                                                class="text-muted item-price">{{ number_format($product->amount * $product->price) }}
+                                                class="text-muted item-price">{{ number_format($product->amount * $product->product_price) }}
                                                 vnd</span>
                                         </li>
                                     @endforeach

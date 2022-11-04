@@ -51,7 +51,6 @@ $(document).ready(function() {
                     let element = document.querySelector('.not-product');
                     if (element !== null) {
                         $('.not-product').remove();
-                        console.log('aa');
                         $('.show-list-item-cart').after(`<ul class="dropdown-menu box-cart">
                             <li>
                                 <div class="cart-item product-summary list-item-cart">

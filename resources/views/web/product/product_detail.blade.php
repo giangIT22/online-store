@@ -173,9 +173,9 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
-                                    <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a>
+                                    <li class="active"><a data-toggle="tab" href="#description">Mô tả sản phẩm</a>
                                     </li>
-                                    <li><a data-toggle="tab" href="#review">REVIEW</a></li>
+                                    <li><a data-toggle="tab" href="#review">Đánh giá</a></li>
                                 </ul><!-- /.nav-tabs #product-tabs -->
                             </div>
                             <div class="col-sm-9">
