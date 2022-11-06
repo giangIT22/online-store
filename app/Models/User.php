@@ -25,6 +25,8 @@ class User extends Authenticatable implements CanResetPassword
         'name',
         'email',
         'password',
+        'address',
+        'phone',
         'profile_photo_path',
         'confirmed',
         'confirmation_code',

@@ -22,6 +22,7 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
+        'address', 'phone', 'cccd',
         'profile_photo_path'
     ];
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSlidersTable extends Migration
+class CreateReceiptDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateSlidersTable extends Migration
      */
     public function up()
     {
-        Schema::create('sliders', function (Blueprint $table) {
+        Schema::create('receipt_details', function (Blueprint $table) {
             $table->id();
-            $table->string('slider_image');
-            $table->string('title')->nullable();
-            $table->text('description')->nullable();
-            $table->integer('status')->default(1);
+            $table->bigInteger('product_detail_id');
+            $table->bigInteger('receipt_id');
+            $table->integer('import_amount');
+            $table->integer('import_price');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateSlidersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sliders');
+        Schema::dropIfExists('receipt_details');
     }
 }

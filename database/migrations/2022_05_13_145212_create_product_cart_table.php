@@ -16,9 +16,7 @@ class CreateProductCartTable extends Migration
         Schema::create('product_cart', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('cart_id');
-            $table->bigInteger('product_id');
-            $table->integer('size_id')->nullable();
-            $table->integer('color_id')->nullable();
+            $table->bigInteger('product_detail_id');
             $table->tinyInteger('amount');
             $table->double('product_price');
             $table->timestamps();

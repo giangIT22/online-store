@@ -43,19 +43,9 @@ class Product extends Model
         return $this->belongsTo(SubCategory::class);
     }
 
-    public function productTags()
-    {
-        return $this->hasMany(ProductTag::class);
-    }
-
     public function images()
     {
         return $this->hasMany(ProductImage::class);
-    }
-
-    public function carts()
-    {
-        return $this->belongsToMany(Cart::class);
     }
 
     /**
@@ -82,11 +72,11 @@ class Product extends Model
 
     public function sizes()
     {
-        return $this->belongsToMany(Size::class, 'product_variant', 'product_id', 'size_id')->withPivot ('amount');
+        return $this->belongsToMany(Size::class, 'product_details', 'product_id', 'size_id')->withPivot ('amount');
     }
 
     public function colors()
     {
-        return $this->belongsToMany(Color::class, 'product_variant', 'product_id', 'color_id')->withPivot ('amount');
+        return $this->belongsToMany(Color::class, 'product_details', 'product_id', 'color_id')->withPivot ('amount');
     }
 }

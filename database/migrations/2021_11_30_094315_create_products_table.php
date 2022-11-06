@@ -17,17 +17,14 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('product_code');
             $table->string('name');
-            $table->string('product_slug');
             $table->string('image');
             $table->integer('amount');
-            $table->double('import_price')->nullable();
             $table->double('product_price');
             $table->text('description');
             $table->double('sale_price')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->integer('category_id');
             $table->integer('subcategory_id');
-            $table->integer('receipt_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
