@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('product_code');
             $table->string('name');
             $table->string('image');
-            $table->integer('amount');
+            $table->integer('amount')->default(0);
             $table->double('product_price');
             $table->text('description');
             $table->double('sale_price')->nullable();

@@ -22,9 +22,9 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
+                      <th>Mã sản phẩm</th>
                       <th>Ảnh sản phẩm</th>
                       <th>Tên</th>
-                      <th>Slug</th>
                       <th>Giá sản phẩm</th>
                       <th>Số lượng</th>
                       <th>Giá sale</th>
@@ -38,9 +38,9 @@
                       v-for="item in products"
                       :key="item.id"
                     >
-                      <td><img :src="item.image" alt="" width="50px" /></td>
+                      <td style="width:200px;">{{ item.product_code }}</td>
+                      <td><img :src="item.image" alt="" width="100px" /></td>
                       <td style="width:200px;">{{ item.name }}</td>
-                      <td style="width:200px;">{{ item.product_slug }}</td>
                       <td>
                         {{
                           item.product_price.toLocaleString("it-IT", {

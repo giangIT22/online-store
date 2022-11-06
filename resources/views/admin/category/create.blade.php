@@ -4,7 +4,7 @@
     <div class="container-full">
         <section class="content">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="box">
                         <div class="box-header with-border">
                             <div class="d-flex justify-content-between">
@@ -14,9 +14,7 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <div class="table-responsive">
-
-
+                            <div class="col-md-6">
                                 <form method="post" action="{{ route('category.store') }}">
                                     @csrf
                                     <div class="form-group">
@@ -24,16 +22,6 @@
                                         <div class="controls">
                                             <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                                             @error('name')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <h5>Slug <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="slug" class="form-control" value="{{ old('slug') }}">
-                                            @error('slug')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>

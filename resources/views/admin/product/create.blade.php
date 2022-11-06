@@ -93,21 +93,11 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <h5>Slug<span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="product_slug" class="form-control"
-                                                            value="{{ old('product_slug') }}">
-                                                        @error('product_slug')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
 
                                             </div> <!-- end col md 4 -->
                                         </div> <!-- end 2nd row  -->
 
-                                        <div class="row">
+                                        {{-- <div class="row">
                                             <!-- start 3RD row  -->
                                             <div class="col-md-8">
 
@@ -123,7 +113,7 @@
                                                 </div>
 
                                             </div> <!-- end col md 4 -->
-                                        </div> <!-- end 3RD row  -->
+                                        </div> <!-- end 3RD row  --> --}}
 
                                         <div class="row">
                                             <div class="col-md-8">
@@ -138,7 +128,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <h5>Giá sale<span class="text-danger">*</span></h5>
+                                                    <h5>Giá sale</h5>
                                                     <div class="controls">
                                                         <input type="text" name="sale_price" class="form-control"
                                                             value="{{ old('sale_price') }}">
@@ -187,17 +177,9 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <h5>Tags<span class="text-danger">*</span></h5>
-                                                <select placeholder="Thêm tags" multiple data-role="tagsinput"
-                                                    name="tags[]" style="display: none;"></select>
-                                            </div>
-                                        </div>
-
 
                                         {{-- CHOOSE option --}}
-                                        <div class="row choose-option" style="margin-top: 30px;">
+                                        {{-- <div class="row choose-option" style="margin-top: 30px;">
                                             <div class="row col-md-9 option-item" id="row-1">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
@@ -227,14 +209,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <h5>Số lượng<span class="text-danger">*</span></h5>
-                                                        <div class="controls">
-                                                            <input type="text" name="amounts[]" class="form-control" id="option-amount">
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="add-option">
@@ -242,7 +216,7 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <hr>
 

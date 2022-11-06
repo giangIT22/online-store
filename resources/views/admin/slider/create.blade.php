@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['titlePage' => 'Thêm slider'])
+@extends('layouts.admin', ['titlePage' => 'Thêm Banner'])
 @section('content')
     <div class="container-full">
         <!-- Content Header (Page header) -->
@@ -9,7 +9,7 @@
             <div class="box">
                 <div class="box-header with-border">
                     <div class="d-flex justify-content-between">
-                        <h3 class="box-title">Thêm slider</h3>
+                        <h3 class="box-title">Thêm Banner</h3>
                         <a href="{{ route('all.sliders') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay lại</a>
                     </div>
                 </div>
@@ -69,16 +69,16 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <h5>Ảnh slider<span class="text-danger">*</span></h5>
+                                                    <h5>Ảnh banner<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="file" name="slider_image" class="form-control" id="image">
-                                                        @error('slider_image')
+                                                        <input type="file" name="image" class="form-control" id="image">
+                                                        @error('image')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
                                                 <div id="preview_img">
-                                                    <img width="150px" id="showImage" src="" alt="" style="margin-bottom:10px;">
+                                                    <img width="200px" id="showImage" src="" alt="" style="margin-bottom:10px;">
                                                 </div>
                                             </div> <!-- end col md 4 -->
 

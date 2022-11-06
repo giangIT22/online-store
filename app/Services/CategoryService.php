@@ -25,7 +25,6 @@ class CategoryService implements CategoryServiceInterface
     {
         $category = Category::findOrFail($categoryId);
         $category->name = $params['name'];
-        $category->slug = $params['slug'];
 
         $category->save();
 
@@ -43,7 +42,6 @@ class CategoryService implements CategoryServiceInterface
     {
         $validate = Validator::make($params, [
             'name' => ['required', 'string', 'unique:categories,name,' . $params['category_id']],
-            'slug' => ['required', 'string', 'unique:categories,slug,' . $params['category_id']],
         ]);
 
         if ($validate->fails()) {

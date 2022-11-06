@@ -36,7 +36,7 @@ class SubCategoryController extends Controller
         SubCategory::create($request->all());
 
         $notification = [
-            'message' => 'Create subcategory successfully',
+            'message' => 'Tạo danh mục thành công',
             'alert-type' => 'success'
         ];
 
@@ -55,13 +55,12 @@ class SubCategoryController extends Controller
     {
         $subCategory = SubCategory::findOrFail($subCategoryId);
         $subCategory->sub_category_name = $request->sub_category_name;
-        $subCategory->sub_category_slug = $request->sub_category_slug;
         $subCategory->category_id = $request->category_id;
 
         $subCategory->save();
 
         $notification = [
-            'message' => ' Subcategory have updated successfully',
+            'message' => 'Cập nhật danh mục thành công',
             'alert-type' => 'success'
         ];
 

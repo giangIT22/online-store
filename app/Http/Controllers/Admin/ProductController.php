@@ -8,9 +8,8 @@ use App\Http\Requests\UpdateProduct;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\ProductDetail;
 use App\Models\ProductImage;
-use App\Models\ProductTag;
-use App\Models\ProductVariant;
 use App\Models\Size;
 use App\Traits\StoreImageTrait;
 use Illuminate\Http\Request;
@@ -46,11 +45,10 @@ class ProductController extends Controller
     public function store(StoreProduct $request)
     {
      
-        $data = $request->except(['image_path', 'tags', 'sizes', 'colors', 'amounts']);
-        $productImage = $this->uploadImage($request, 'image', 'product');
+        $data = $request->except(['image_path']);
+        $data['product_code'] = 'SP' . rand();
+        $productImage = $this->uploadImage($request, 'image', 'product', $data['product_code']);
         $data['image'] = $productImage['file_path'];
-        $data['amount'] = array_sum($request->amounts);
-
         DB::beginTransaction();
         try {
             $product = Product::create($data);
@@ -65,35 +63,27 @@ class ProductController extends Controller
                 }
             }
 
-            if ($request->tags) {
-                foreach ($request->tags as $tag) {
-                    ProductTag::create([
-                        'name' => $tag,
-                        'product_id' => $product->id
-                    ]);
-                }
-            }
-
-            //Create product_size
-            if ($request->sizes && $request->colors) {
-                foreach ($request->sizes as $key => $size) {
-                    $productVariant = ProductVariant::where('size_id', $size)
-                        ->where('color_id', $request->colors[$key])
-                        ->where('product_id', $product->id)
-                        ->first();
+            //Create product_detail
+            // if ($request->sizes && $request->colors) {
+            //     foreach ($request->sizes as $key => $size) {
+            //         $productDetail = ProductDetail::where('size_id', $size)
+            //             ->where('color_id', $request->colors[$key])
+            //             ->where('product_id', $product->id)
+            //             ->first();
                     
-                    if ($productVariant) {
-                        $productVariant->update(['amount' => $productVariant->amount + $request->amounts[$key]]);
-                    } else {
-                        ProductVariant::create([
-                            'amount' => $request->amounts[$key],
-                            'product_id' => $product->id,
-                            'color_id' => $request->colors[$key],
-                            'size_id' => $size,
-                        ]);
-                    }
-                }
-            }
+            //         if ($productDetail) {
+            //             $productDetail->update(['amount' => $productDetail->amount + $request->amounts[$key]]);
+            //         } else {
+            //             ProductDetail::create([
+            //                 'amount' => $request->amounts[$key],
+            //                 'product_id' => $product->id,
+            //                 'color_id' => $request->colors[$key],
+            //                 'size_id' => $size,
+            //             ]);
+            //         }
+            //     }
+            // }
+            
             DB::commit();
             $notification = [
                 'message' => 'Thêm sản phẩm thành công',
@@ -130,14 +120,16 @@ class ProductController extends Controller
         $categories = Category::all();
         $subcategories = Category::findOrFail($product->category_id)->subCategories;
         $sizes = Size::all();
-
-        $sizeInfos = DB::table('product_size')
-            ->join('sizes', 'product_size.size_id', 'sizes.id')
-            ->select('sizes.name', 'sizes.id', 'product_size.amount')
+        $colors = Color::all();
+        $options = ProductDetail::join('sizes', 'product_details.size_id', 'sizes.id')
+            ->join('colors', 'product_details.color_id', 'colors.id')
+            ->select('colors.name as color_name', 'product_details.size_id', 'product_details.amount')
+            ->addSelect('sizes.name as size_name', 'product_details.color_id' )
             ->where('product_id', $product->id)
             ->get();
 
-        return view('admin.product.update', compact('product', 'categories', 'subcategories', 'sizes', 'sizeInfos'));
+        return view('admin.product.update', compact('product', 
+            'categories', 'subcategories', 'options', 'sizes', 'colors'));
     }
 
     public function update(UpdateProduct $request, $productId)
@@ -147,7 +139,7 @@ class ProductController extends Controller
         $data['product_qty'] = array_sum($request->amounts);
 
         if ($request->image) {
-            $productImage = $this->uploadImage($request, 'image', 'product');
+            $productImage = $this->uploadImage($request, 'image', 'product', $product->product_code);
             $data['image'] = $productImage['file_path'];
         } else {
             $data['image'] = $product->image;
@@ -163,19 +155,6 @@ class ProductController extends Controller
                 ]);
             }
         }
-
-        if ($request->tags) {
-            ProductTag::where('product_id', $productId)->delete();
-            foreach ($request->tags as $tag) {
-                ProductTag::create([
-                    'name' => $tag,
-                    'product_id' => $product->id
-                ]);
-            }
-        } else {
-            ProductTag::where('product_id', $productId)->delete();
-        }
-
 
         //Update product_size
         foreach ($request->sizes as $key => $size) {

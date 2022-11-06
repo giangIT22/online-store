@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Slider;
 use App\Traits\StoreImageTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class SliderController extends Controller
+class BannerController extends Controller
 {
     use StoreImageTrait;
 
@@ -19,9 +21,9 @@ class SliderController extends Controller
     public function index(Request $request)
     {
         $page = (int) $request->page ?? 1;
-        $data = Slider::all();
+        $data = Banner::all();
         $sliders = $data->forPage($page, 10);
-        $lastPage = ceil(count($data) / Slider::PER_PAGE);
+        $lastPage = ceil(count($data) / Banner::PER_PAGE);
 
         return view('admin.slider.index', [
             'sliders' => $sliders,
@@ -49,13 +51,13 @@ class SliderController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $sliderImage = $this->uploadImage($request, 'slider_image', 'slider');
-        $data['slider_image'] = $sliderImage['file_path'];
-
-        Slider::create($data);
+        $sliderImage = $this->uploadImage($request, 'image', 'slider');
+        $data['image'] = $sliderImage['file_path'];
+        $data['admin_id'] = Auth::user()->id;
+        Banner::create($data);
 
         $notification = [
-            'message' => 'Tạo slider thành công',
+            'message' => 'Thêm banner thành công',
             'alert-type' => 'success'
         ];
         
@@ -81,7 +83,7 @@ class SliderController extends Controller
      */
     public function edit($slider_id)
     {
-        $slider = Slider::findOrFail($slider_id);
+        $slider = Banner::findOrFail($slider_id);
 
         return view('admin.slider.update', compact('slider'));
     }
@@ -96,13 +98,13 @@ class SliderController extends Controller
     public function update(Request $request, $sliderId)
     {
         $data = $request->all();
-        $slider = Slider::findOrFail($sliderId);
+        $slider = Banner::findOrFail($sliderId);
 
         if ($request->slider_image) {
-            $sliderImage = $this->uploadImage($request, 'slider_image', 'slider');
-            $data['slider_image'] = $sliderImage['file_path'];
+            $sliderImage = $this->uploadImage($request, 'image', 'slider');
+            $data['image'] = $sliderImage['file_path'];
         } else {
-            $data['slider_image'] = $slider->slider_image;
+            $data['image'] = $slider->image;
         }
         
         $slider->update($data);
@@ -124,7 +126,7 @@ class SliderController extends Controller
     public function delete($slider_id)
     {
         try {
-            Slider::findOrFail($slider_id)->delete();
+            Banner::findOrFail($slider_id)->delete();
             return response()->json([
                 'code' => 200,
                 'status' => true,

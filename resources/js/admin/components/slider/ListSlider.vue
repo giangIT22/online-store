@@ -8,8 +8,8 @@
                     <div class="box">
                         <div class="box-header with-border">
                             <div class="d-flex justify-content-between">
-                                <h3 class="box-title">Danh sách Slider</h3>
-                                <a href="/admin/slider/create" type="button" class="btn btn-rounded btn-primary mb-5">Thêm</a>
+                                <h3 class="box-title">Danh sách Banner</h3>
+                                <a href="/admin/banner/create" type="button" class="btn btn-rounded btn-primary mb-5">Thêm</a>
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -18,16 +18,16 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Ảnh slider</th>
+                                            <th>Ảnh banner</th>
                                             <th>Tiêu đề</th>
                                             <th>Nội dung</th>
                                             <th>Trạng thái</th>
-                                            <th>Action</th>
+                                            <th>Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="item in sliders" :key="item.id">
-                                            <td><img :src="item.slider_image" alt="" width="50px"></td>
+                                            <td><img :src="item.image" alt="" width="200px"></td>
                                             <td>{{ item.title }}</td>
                                             <td>{{ item.description }}</td>
                                             <td>
@@ -35,11 +35,11 @@
                                                 <span v-if="item.status == 0" class="badge badge-pill badge-danger">Not Active </span>
                                             </td>
                                             <td>
-                                                <a :href="`/admin/slider/edit/${item.id}`"
+                                                <a :href="`/admin/banner/edit/${item.id}`"
                                                     class="btn btn-info" title="Edit Data"><i
                                                         class="fa fa-pencil"></i> </a>
                                                 <a href=""
-                                                    :data-url="`/admin/slider/delete/${item.id}`"
+                                                    :data-url="`/admin/banner/delete/${item.id}`"
                                                     class="btn btn-danger action-delete" title="Delete Data" id="delete">
                                                     <i class="fa fa-trash"></i></a>
                                             </td>

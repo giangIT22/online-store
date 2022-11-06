@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 trait StoreImageTrait
 {
-    public function uploadImage($request, $fieldName, $folderUpload)
+    public function uploadImage($request, $fieldName, $folderUpload, $productCode)
     {
         if ($request->hasFile($fieldName)) {
             $file = $request->$fieldName;//get info of file
-            $fileNameOrigin = date('YmdHi') . $file->getClientOriginalName();//get name file and create new fileName
+            $fileNameOrigin = $productCode . date('YmdHi') . $file->getClientOriginalName();//get name file and create new fileName
             $filePath = $request->file($fieldName)->storeAs('public/'. $folderUpload, $fileNameOrigin); //upload file
                                                                                             // and return where upload that file
             $data = [

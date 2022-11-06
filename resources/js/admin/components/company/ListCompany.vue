@@ -7,9 +7,9 @@
           <div class="box">
             <div class="box-header with-border">
               <div class="d-flex justify-content-between">
-                <h3 class="box-title">Danh mục phụ</h3>
+                <h3 class="box-title">Danh sách Nhà cung cấp</h3>
                 <a
-                  href="/admin/category/sub/create"
+                  href="/admin/company/create"
                   type="button"
                   class="btn btn-rounded btn-primary mb-5"
                   >Thêm</a
@@ -22,27 +22,29 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th>Mã danh mục</th>
-                      <th>Tên</th>
-                      <th>Ngày cập nhật</th>
+                      <th>Tên nhà cung cấp</th>
+                      <th>Email</th>
+                      <th>Số điện thoại</th>
+                      <th>Địa chỉ</th>
                       <th>Thao tác</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="item in subCategory" :key="item.id">
-                        <td>{{ item.id }}</td>
-                      <td>{{ item.sub_category_name }}</td>
-                      <td>{{ new Date(item.updated_at).toLocaleDateString() }}</td>
+                    <tr v-for="item in companies" :key="item.id">
+                      <td >{{ item.name }}</td>
+                      <td >{{ item.email }}</td>
+                      <td>{{ item.phone }}</td>
+                      <td>{{ item.address }}</td>
                       <td>
                         <a
-                          :href="`/admin/category/sub/edit/${item.id}`"
+                          :href="`/admin/company/edit/${item.id}`"
                           class="btn btn-info"
                           title="Edit Data"
                           ><i class="fa fa-pencil"></i>
                         </a>
                         <a
                           href=""
-                          :data-url="`/admin/category/sub/delete/${item.id}`"
+                          :data-url="`/admin/company/delete/${item.id}`"
                           class="btn btn-danger action-delete"
                           title="Delete Data"
                           id="delete"
@@ -73,7 +75,7 @@ import Paginate from "../Paginate.vue";
 export default {
   components: { Paginate },
   props: {
-    subCategory: Array,
+    companies: Object,
     total: Number,
     lastPage: Number,
   },
@@ -81,4 +83,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 </style>

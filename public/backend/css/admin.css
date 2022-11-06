@@ -1,0 +1,44 @@
+.receipt-data-title {
+    margin-bottom: 30px;
+}
+
+.table-receipt {
+    width: 100%;
+}
+
+.table-receipt th {
+    font-size: 17px;
+    font-weight: 500;
+    padding-bottom: 30px;
+}
+
+.receipt-action {
+    width: 100px;
+}
+
+.table-receipt th,
+.table-receipt td {
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center
+}
+
+.form-control {
+    padding: 8px 14px;
+    font-size: 17px;
+}
+
+.form-control::placeholder {
+    color: #8a99b5;
+}
+
+.add-option {
+    float: right;
+    margin: 20px 0;
+}
+
+.remove-option {
+    font-size: 22px;
+    display: inline-block;
+    margin-bottom: 15px;
+}

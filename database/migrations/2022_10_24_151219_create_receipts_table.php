@@ -17,7 +17,8 @@ class CreateReceiptsTable extends Migration
             $table->id();
             $table->integer('admin_id');
             $table->integer('supply_company_id');
-            $table->string('notes');
+            $table->string('receipt_code');
+            $table->string('notes')->nullable();
             $table->double('sum_price');
             $table->timestamps();
         });

@@ -15,9 +15,10 @@ class CreateSupplyCompaniesTable extends Migration
     {
         Schema::create('supply_companies', function (Blueprint $table) {
             $table->id();
-            $table->string('supply_company_name');
-            $table->string('supply_company_phone');
-            $table->string('supply_company_address');
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
             $table->timestamps();
         });
     }

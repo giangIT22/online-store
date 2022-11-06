@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['titlePage' => 'Cập nhật thông tin slider'])
+@extends('layouts.admin', ['titlePage' => 'Cập nhật banner'])
 @section('content')
     <div class="container-full">
         <!-- Content Header (Page header) -->
@@ -8,7 +8,7 @@
             <!-- Basic Forms -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Update Slider </h4>
+                    <h4 class="box-title">Cập nhật Banner </h4>
 
                 </div>
                 <!-- /.box-header -->
@@ -44,7 +44,7 @@
                                             <div class="col-md-8">
 
                                                 <div class="form-group">
-                                                    <h5>Title<span class="text-danger">*</span></h5>
+                                                    <h5>Tiêu dề<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="title" class="form-control" value="{{ $slider->title }}">
                                                         @error('title')
@@ -53,7 +53,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <h5>Description<span class="text-danger">*</span></h5>
+                                                    <h5>Nội dung<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <textarea name="description" class="form-control" cols="30" rows="4">{{ $slider->description }}</textarea>
                                                         @error('description')
@@ -67,7 +67,7 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <h5>Slider Image <span class="text-danger">*</span></h5>
+                                                    <h5>Ảnh banner <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="file" name="slider_image" class="form-control" id="image">
                                                         @error('slider_image')
@@ -76,7 +76,7 @@
                                                     </div>
                                                 </div>
                                                 <div id="preview_img">
-                                                    <img width="150px" id="showImage" src="{{ asset($slider->slider_image) }}" alt="" style="margin-bottom:10px;">
+                                                    <img width="200px" id="showImage" src="{{ asset($slider->image) }}" alt="" style="margin-bottom:10px;">
                                                 </div>
                                             </div> <!-- end col md 4 -->
 

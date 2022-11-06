@@ -25,7 +25,6 @@ class SubCategoryRequest extends FormRequest
     {
         return [
             'sub_category_name' => ['required', 'string'],
-            'sub_category_slug' => ['required', 'string'],
             'category_id' => 'required'
         ];
     }
@@ -34,7 +33,6 @@ class SubCategoryRequest extends FormRequest
     {
         return [
             'sub_category_name.required' => 'Vui lòng nhập trường này',
-            'sub_category_slug.required' => 'Vui lòng nhập trường này',
             'category_id.required' => 'Vui lòng nhập trường này'
         ];
     }

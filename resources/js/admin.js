@@ -17,6 +17,8 @@ import ListCoupon from '../js/admin/components/coupon/ListCoupon.vue';
 import ListOrder from '../js/admin/components/order/ListOrder.vue';
 import ListUser from '../js/admin/components/user/ListUser.vue';
 import ListEmployee from '../js/admin/components/employee/ListEmployee.vue';
+import ListCompany from '../js/admin/components/company/ListCompany.vue';
+import ListReceipt from '../js/admin/components/receipt/ListReceipt.vue';
 
 Vue.component('ListCategory', ListCategory);
 Vue.component('SubCategory', SubCategory);
@@ -29,6 +31,8 @@ Vue.component('ListCoupon', ListCoupon);
 Vue.component('ListOrder', ListOrder);
 Vue.component('ListUser', ListUser);
 Vue.component('ListEmployee', ListEmployee);
+Vue.component('ListCompany', ListCompany);
+Vue.component('ListReceipt', ListReceipt);
 
 const app = new Vue({
     el: '#admin',

@@ -25,17 +25,7 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    </div>
-
-                                    <div class="form-group mb-20">
-                                        <h5>Slug <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="slug" class="form-control" value="{{ old('slug', $category->slug) }}">
-                                            @error('slug')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
+                                    </div>                                    
 
                                     <div class="text-xs-right">
                                         <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update">

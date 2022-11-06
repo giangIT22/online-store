@@ -102,15 +102,6 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-
-                                                <div class="form-group">
-                                                    <h5>Slug<span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="product_slug" class="form-control"
-                                                            value="{{ old('product_slug', $product->product_slug) }}">
-                                                    </div>
-                                                </div>
-
                                             </div> <!-- end col md 4 -->
                                         </div> <!-- end 2nd row  -->
 
@@ -121,11 +112,8 @@
                                                 <div class="form-group">
                                                     <h5>Mã sản phẩm<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_code" class="form-control"
-                                                            value="{{ old('product_code', $product->product_code) }}">
-                                                        @error('product_code')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <input type="text" disabled="true" class="form-control"
+                                                            value="{{ $product->product_code }}">
                                                     </div>
                                                 </div>
 
@@ -138,11 +126,8 @@
                                                 <div class="form-group">
                                                     <h5>Số lượng<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_qty" class="form-control"
-                                                            value="{{ old('product_qty', $product->product_qty) }}" disabled>
-                                                        @error('product_qty')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $product->product_qty }}" disabled>
                                                     </div>
                                                 </div>
 
@@ -216,52 +201,56 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <h5>Tags<span class="text-danger">*</span></h5>
-                                                <select placeholder="Thêm tags" multiple data-role="tagsinput"
-                                                    name="tags[]" style="display: none;">
-                                                    @foreach ($product->productTags as $tag)
-                                                        <option value="{{ $tag->name }}">{{ $tag->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        {{-- CHOOSE SIZE --}}
-                                        <div class="row choose-size">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <h5>Kích thước <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <select class="form-control" id="list-size">
-                                                            <option value="">Chọn kích thước</option>
-                                                            @foreach ($sizes as $size)
-                                                                <option value="{{ $size->id }}">
-                                                                    {{ $size->name }}</option>
-                                                            @endforeach
-                                                        </select>
+                                        {{-- CHOOSE option --}}
+                                        {{-- <div class="row choose-option" style="margin-top: 30px;">
+                                            @foreach ($options as $item)    
+                                            <div class="row col-md-9 option-item" id="row-1">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <h5>Màu sắc <span class="text-danger">*</span></h5>
+                                                        <div class="controls">
+                                                            <select class="form-control" id="list-color" name="colors[]">
+                                                                <option value="">Chọn màu sắc</option>
+                                                                @foreach ($colors as $color)
+                                                                    <option value="{{ $color->id }}" id="color-{{$color->id}}">
+                                                                        {{ $color->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <h5>Kích thước <span class="text-danger">*</span></h5>
+                                                        <div class="controls">
+                                                            <select class="form-control" id="list-size" name="sizes[]">
+                                                                <option value="">Chọn kích thước</option>
+                                                                @foreach ($sizes as $size)
+                                                                    <option value="{{ $size->id }}" id="size-{{$size->id}}">
+                                                                        {{ $size->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <h5>Số lượng<span class="text-danger">*</span></h5>
+                                                        <div class="controls">
+                                                            <input type="text" name="amounts[]" class="form-control" id="option-amount">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        @foreach ($sizeInfos as $item)
-                                            <div class="row">
-                                                <div class="col-md-3">
-
-                                                    <div class="form-group">
-                                                        <input type="hidden" name="sizes[]" value="{{ $item->id }}"
-                                                            class="size-item-{{ $item->id }}">
-                                                        <h5>{{ $item->name }}<span class="text-danger">*</span></h5>
-                                                        <div class="controls">
-                                                            <input type="text" name="amounts[]" class="form-control"
-                                                                placeholder="Vui lòng nhập số lượng sản phẩm"
-                                                                value="{{ $item->amount }}">
-                                                        </div>
-                                                    </div>
-
-                                                </div> <!-- end col md 4 -->
+                                            <div class="col-md-2">
+                                                <div class="close-option">
+                                                    <span><i class="fa fa-times" aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
                                             </div>
-                                        @endforeach
+                                            @endforeach
+                                        </div> --}}
+                                        <button type="button" class="btn btn-success">Thêm tùy chọn</button>
 
                                         <hr>
 

@@ -16,8 +16,12 @@ use App\Services\OrderService;
 use App\Services\OrderServiceInterface;
 use App\Services\ProductService;
 use App\Services\ProductServiceInterface;
+use App\Services\ReceiptService;
+use App\Services\ReceiptServiceInterface;
 use App\Services\ReviewService;
 use App\Services\ReviewServiceInterface;
+use App\Services\SupplyCompanyService;
+use App\Services\SupplyCompanyServiceInterface;
 use App\Services\UserService;
 use App\Services\UserServiceInterface;
 use Illuminate\Support\ServiceProvider;
@@ -39,6 +43,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(ProductServiceInterface::class, ProductService::class);
         $this->app->singleton(CartServiceInterface::class, CartService::class);
         $this->app->singleton(BlogServiceInterface::class, BlogService::class);
+        $this->app->singleton(SupplyCompanyServiceInterface::class, SupplyCompanyService::class);
+        $this->app->singleton(ReceiptServiceInterface::class, ReceiptService::class);
     }
 
     /**

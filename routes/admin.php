@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
@@ -9,10 +10,11 @@ use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ReceiptController;
 use App\Http\Controllers\Admin\RegisterController;
-use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\SupplyCompanyController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest:admin', 'prevent-back-history'])->group(function () {
@@ -70,14 +72,34 @@ Route::middleware(['auth:admin', 'prevent-back-history'])->group(function () {
         Route::get('/delete/{product_id}', [ProductController::class, 'delete'])->name('product.delete');
     });
 
+    //===== All route receipt =====
+    Route::prefix('/receipt')->group(function () {
+        Route::get('/view', [ReceiptController::class, 'all'])->name('all.receipts');
+        Route::get('/create', [ReceiptController::class, 'create'])->name('receipt.create');
+        Route::post('/store', [ReceiptController::class, 'store'])->name('receipt.store');
+        Route::post('/update/{receipt_id}', [ReceiptController::class, 'update'])->name('receipt.update');
+        Route::get('/edit/{receipt_id}', [ReceiptController::class, 'edit'])->name('receipt.edit');
+        Route::get('/delete/{receipt_id}', [ReceiptController::class, 'delete'])->name('receipt.delete');
+    });
+
+     //===== All route supply company =====
+     Route::prefix('/company')->group(function () {
+        Route::get('/view', [SupplyCompanyController::class, 'index'])->name('all.companies');
+        Route::get('/create', [SupplyCompanyController::class, 'create'])->name('company.create');
+        Route::post('/store', [SupplyCompanyController::class, 'store'])->name('company.store');
+        Route::post('/update/{company_id}', [SupplyCompanyController::class, 'update'])->name('company.update');
+        Route::get('/edit/{company_id}', [SupplyCompanyController::class, 'edit'])->name('company.edit');
+        Route::get('/delete/{company_id}', [SupplyCompanyController::class, 'delete'])->name('company.delete');
+    });
+
     //===== All route slider admin =====
-    Route::prefix('/slider')->group(function () {
-        Route::get('/view', [SliderController::class, 'index'])->name('all.sliders');
-        Route::get('/create', [SliderController::class, 'create'])->name('slider.create');
-        Route::post('/store', [SliderController::class, 'store'])->name('slider.store');
-        Route::post('/update/{slider_id}', [SliderController::class, 'update'])->name('slider.update');
-        Route::get('/edit/{slider_id}', [SliderController::class, 'edit'])->name('slider.edit');
-        Route::get('/delete/{slider_id}', [SliderController::class, 'delete'])->name('slider.delete');
+    Route::prefix('/banner')->group(function () {
+        Route::get('/view', [BannerController::class, 'index'])->name('all.sliders');
+        Route::get('/create', [BannerController::class, 'create'])->name('slider.create');
+        Route::post('/store', [BannerController::class, 'store'])->name('slider.store');
+        Route::post('/update/{slider_id}', [BannerController::class, 'update'])->name('slider.update');
+        Route::get('/edit/{slider_id}', [BannerController::class, 'edit'])->name('slider.edit');
+        Route::get('/delete/{slider_id}', [BannerController::class, 'delete'])->name('slider.delete');
     });
 
     //===== all route blog admin =====

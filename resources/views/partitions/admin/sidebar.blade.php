@@ -34,6 +34,44 @@ $route = Route::current()->getName();
                     <span>Trang chủ</span>
                 </a>
             </li>
+            <li class="{{ $route == 'all.companies' ? 'active' : '' }}">
+                <a href="{{ route('all.companies') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-grid">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span>Nhà cung cấp</span>
+                </a>
+            </li>
+
+            <li class="treeview {{ $prefix == '/category' ? 'active' : '' }}  ">
+                <a href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-grid">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span>Quản lý nhập kho</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'all.receipts' ? 'active' : '' }}"><a
+                            href="{{ route('all.receipts') }}"><i class="ti-more"></i>Nhập hàng</a>
+                    </li>
+                    <li class="{{ $route == 'all.sub_categories' ? 'active' : '' }}"><a
+                            href="{{ route('all.sub_categories') }}"><i class="ti-more"></i>Sản phẩm đã nhập</a>
+                    </li>
+                </ul>
+            </li>
 
             <li class="treeview {{ $prefix == '/category' ? 'active' : '' }}  ">
                 <a href="#">
@@ -93,14 +131,14 @@ $route = Route::current()->getName();
                         <rect x="14" y="14" width="7" height="7"></rect>
                         <rect x="3" y="14" width="7" height="7"></rect>
                     </svg>
-                    <span>Sliders</span>
+                    <span>Banners</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ $route == 'all.sliders' ? 'active' : '' }}"><a
-                            href="{{ route('all.sliders') }}"><i class="ti-more"></i>Danh sách sliders</a></li>
+                            href="{{ route('all.sliders') }}"><i class="ti-more"></i>Danh sách banners</a></li>
                 </ul>
             </li>
 

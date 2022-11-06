@@ -46,15 +46,17 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th>Tên</th>
-                      <th>Slug</th>
-                      <th>Action</th>
+                      <th>Mã danh mục</th>
+                      <th>Tên</th>                      
+                      <th>Ngày cập nhật</th>
+                      <th>Thao tác</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="item in categories" :key="item.id">
-                      <td>{{ item.name }}</td>
-                      <td>{{ item.slug }}</td>
+                      <td>{{ item.id }}</td>
+                      <td>{{ item.name }}</td>                      
+                      <td>{{ new Date(item.updated_at).toLocaleDateString() }}</td>                      
                       <td>
                         <a
                           :href="`/admin/category/edit/${item.id}`"
