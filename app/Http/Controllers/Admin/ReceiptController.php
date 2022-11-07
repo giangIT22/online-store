@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\ReceiptServiceInterface;
+use Illuminate\Http\Request;
 
 class ReceiptController extends Controller
 {
@@ -22,5 +23,10 @@ class ReceiptController extends Controller
     public function create()
     {
         return view('admin.receipt.create', $this->receiptService->getData());
+    }
+
+    public function store(Request $request)
+    {
+        
     }
 }

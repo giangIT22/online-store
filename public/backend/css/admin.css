@@ -37,8 +37,14 @@
     margin: 20px 0;
 }
 
+.remove-first,
 .remove-option {
     font-size: 22px;
-    display: inline-block;
+    display: block;
     margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.final_price {
+    margin-right: 50px;
 }

@@ -68,11 +68,11 @@
                                                         <th class="w-250">Kích thước</th>
                                                         <th class="w-180">Số lượng</th>
                                                         <th>Giá nhập</th>
-                                                        <th>Tổng tiền</th>
+                                                        <th>Thành tiền</th>
                                                         <th class="receipt-action">Thao tác</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody class="choose-option">
                                                     <tr id="option-row-1">
                                                         <td>
                                                             <div class="form-group">
@@ -119,7 +119,8 @@
                                                         <td>
                                                             <div class="form-group">
                                                                 <div class="controls">
-                                                                    <input type="text" name="import_amounts[]"
+                                                                    <input type="text" name="import_amounts[]" id="import_amount_1"
+                                                                        oninput="getAmount(event)"
                                                                         class="form-control" placeholder="Nhập số lượng">
                                                                 </div>
                                                             </div>
@@ -127,29 +128,34 @@
                                                         <td>
                                                             <div class="form-group">
                                                                 <div class="controls">
-                                                                    <input type="text" name="import_prices[]" placeholder="Giá nhập"
-                                                                        class="form-control">
+                                                                    <input type="text" name="import_prices[]" placeholder="Giá nhập" id="import_price_1"
+                                                                        class="form-control" oninput="getPrice(event)"
+                                                                        >
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-group">
                                                                 <div class="controls">
-                                                                    <input type="text" name="sum_price" disabled
-                                                                        class="form-control">
+                                                                    <input type="text" disabled id="sum_price_1"
+                                                                        class="form-control sum_price">
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td>
-                                                            <a href="" class="remove-option remove-first">
+                                                        {{-- <td>
+                                                            <a href="#" class="remove-first">
                                                                 <i class="fa fa-trash"></i></a>
-                                                        </td>
+                                                        </td> --}}
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <button type="button" class="btn btn-success add-option"><i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                            Thêm sản phẩm</button>
+                                        <input type="hidden" name="sum_price" class="final_price">
+                                        <div class="row justify-content-end align-items-center mr-10 mt-30">
+                                            <h4 class="final_price">Tổng tiền: </h4>
+                                            <button type="button" class="btn btn-success add-option"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                                Thêm sản phẩm</button>
+                                        </div>
                                     </div>
                             </form>
 
