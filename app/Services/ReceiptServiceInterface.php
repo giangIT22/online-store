@@ -6,5 +6,5 @@ interface ReceiptServiceInterface
 {
     public function all();
     public function getData();
-    public function store($params);
+    public function storeReceipt($params);
 }

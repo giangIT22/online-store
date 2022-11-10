@@ -2,14 +2,17 @@
 
 @php
 $minDate = \Carbon\Carbon::now()->subDays(15);
-$subCategory = DB::table('sub_categories')
-    ->where('sub_category_slug', request('category_slug'))
-    ->where('id', request('category_id'))
-    ->first();
-
-if ($subCategory) {
+$routeName = Route::current()->getName();
+if ($routeName == 'sub_category.index') {
+    $subCategory = DB::table('sub_categories')
+        ->where('id', request('category_id'))
+        ->first();
     $category = DB::table('categories')
         ->where('id', $subCategory->category_id)
+        ->first();
+} else {
+    $category = DB::table('categories')
+        ->where('id', request('category_id'))
         ->first();
 }
 @endphp
@@ -20,12 +23,14 @@ if ($subCategory) {
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
                     <li><a href="{{ route('index') }}">Trang chủ </a></li>/
-                    @if ($subCategory)
+                    @if (isset($subCategory))
                         <li><a
-                                href="{{ route('category.index', ['category_slug' => $category->slug, 'category_id' => $category->id]) }}">{{ $category->slug }}
+                                href="{{ route('category.index', ['category_id' => $category->id]) }}">{{ $category->name }}
                             </a></li>/
+                        <li class='active'>{{ $subCategory->sub_category_name }}</li>
+                    @else
+                        <li class='active'>{{ $category->name }}</li>
                     @endif
-                    <li class='active'>{{ request()->category_slug }}</li>
                 </ul>
             </div>
             <!-- /.breadcrumb-inner -->
@@ -110,21 +115,6 @@ if ($subCategory) {
                             </div>
                             <!-- /.sidebar-widget -->
                             <!-- ============================================== PRICE SILDER : END ============================================== -->
-                            <!-- ============================================== PRODUCT TAGS ============================================== -->
-                            <div class="sidebar-widget product-tag wow fadeInUp outer-top-vs">
-                                <h3 class="section-title">Tag sản phẩm</h3>
-                                <div class="sidebar-widget-body outer-top-xs">
-                                    <div class="tag-list">
-                                        @foreach ($productTags as $tag)
-                                            <a class="item {{ $tag->name == request()->tag_name ? 'active' : '' }}"
-                                                href="{{ route('product.tag', ['tag_name' => $tag->name]) }}">
-                                                {{ $tag->name }}
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                    <!-- /.tag-list -->
-                                </div>
-                            </div>
                         </div>
                         <!-- /.sidebar-filter -->
                     </div>
@@ -133,11 +123,11 @@ if ($subCategory) {
                 <!-- /.sidebar -->
                 <div class='col-md-9'>
                     @php
-                        $slider = DB::table('sliders')->first();
+                        $slider = DB::table('banners')->first();
                     @endphp
                     <div id="category" class="category-carousel hidden-xs">
                         <div class="item">
-                            <div class="image"> <img src="{{ $slider->slider_image }}" alt=""
+                            <div class="image"> <img src="{{ $slider->image }}" alt=""
                                     class="img-responsive"> </div>
                         </div>
                     </div>

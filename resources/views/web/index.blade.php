@@ -34,7 +34,7 @@
                                                             <div class="product-image">
                                                                 <div class="image">
                                                                     <a
-                                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
+                                                                        href="{{ route('product.detail', ['product_id' => $product->id]) }}">
                                                                         <img src="{{ asset($product->image) }}"
                                                                             alt="" style="height: ">
                                                                     </a>
@@ -48,7 +48,7 @@
                                                         <div class="col col-xs-7">
                                                             <div class="product-info">
                                                                 <h3 class="name fix-lh"><a
-                                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
+                                                                        href="{{ route('product.detail', ['product_id' => $product->id]) }}">{{ $product->name }}</a>
                                                                 </h3>
                                                                 @include('partitions.web.rating', [
                                                                     'productId' => $product->id,
@@ -89,18 +89,6 @@
                     <!-- /.sidebar-widget -->
                     <!-- ============================================== SPECIAL OFFER : END ============================================== -->
                     <!-- ============================================== PRODUCT TAGS ============================================== -->
-                    <div class="sidebar-widget product-tag wow fadeInUp">
-                        <h3 class="section-title">Tag sản phẩm</h3>
-                        <div class="sidebar-widget-body outer-top-xs">
-                            <div class="tag-list">
-                                @foreach ($productTags as $tag)
-                                    <a class="item" title="Phone"
-                                        href="{{ route('product.tag', ['tag_name' => $tag->name]) }}">{{ $tag->name }}</a>
-                                @endforeach
-                            </div>
-                        </div>
-                        <!-- /.sidebar-widget-body -->
-                    </div>
                     <!-- /.sidebar-widget -->
                     <!-- ============================================== PRODUCT TAGS : END ============================================== -->
                     {{-- <!-- ============================================== NEWSLETTER ============================================== -->
@@ -123,13 +111,13 @@
 
                     <div id="hero">
                         <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
-                            @foreach ($sliders as $slider)
-                                <div class="item" style="background-image: url({{ asset($slider->slider_image) }});">
+                            @foreach ($banners as $banner)
+                                <div class="item" style="background-image: url({{ asset($banner->image) }});">
                                     <div class="container-fluid">
                                         <div class="caption bg-color vertical-center text-left">
-                                            <div class="big-text fadeInDown-1"> {{ $slider->title }} </div>
+                                            <div class="big-text fadeInDown-1"> {{ $banner->title }} </div>
                                             <div class="excerpt fadeInDown-2 hidden-xs">
-                                                <span>{{ $slider->description }}</span>
+                                                <span>{{ $banner->description }}</span>
                                             </div>
                                             <div class="button-holder fadeInDown-3"> <a
                                                     href="{{ route('category.all.products') }}"
@@ -222,7 +210,7 @@
                                                         <div class="product-image">
                                                             <div class="image">
                                                                 <a
-                                                                    href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
+                                                                    href="{{ route('product.detail', ['product_id' => $product->id]) }}">
                                                                     <img style="max-height:189px;"
                                                                         src="{{ asset($product->image) }}" alt="">
                                                                 </a>
@@ -237,7 +225,7 @@
 
                                                         <div class="product-info text-left">
                                                             <h3 class="name"><a
-                                                                    href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
+                                                                    href="{{ route('product.detail', ['product_id' => $product->id]) }}">{{ $product->name }}</a>
                                                             </h3>
                                                             @include('partitions.web.rating', [
                                                                 'productId' => $product->id,
@@ -263,7 +251,7 @@
                                                             <div class="action">
                                                                 <ul class="list-unstyled">
                                                                     <li class="add-cart-button btn-group">
-                                                                        <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
+                                                                        <a href="{{ route('product.detail', ['product_id' => $product->id]) }}"
                                                                             data-toggle="tooltip"
                                                                             class="btn btn-primary icon" type="button">
                                                                             <i class="fa fa-shopping-cart"></i> Tùy
@@ -314,7 +302,7 @@
                                                         <div class="product">
                                                             <div class="product-image">
                                                                 <div class="image"> <a
-                                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
+                                                                        href="{{ route('product.detail', ['product_id' => $product->id]) }}">
                                                                         <img style="max-height:189px;"
                                                                             src="{{ asset($product->image) }}"
                                                                             alt=""></a>
@@ -329,7 +317,7 @@
 
                                                             <div class="product-info text-left">
                                                                 <h3 class="name"><a
-                                                                        href=" {{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
+                                                                        href=" {{ route('product.detail', ['product_id' => $product->id]) }}">{{ $product->name }}</a>
                                                                 </h3>
                                                                 <div class="rating rateit-small"></div>
                                                                 <div class="description"></div>
@@ -353,7 +341,7 @@
                                                                 <div class="action">
                                                                     <ul class="list-unstyled">
                                                                         <li class="add-cart-button btn-group">
-                                                                            <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
+                                                                            <a href="{{ route('product.detail', ['product_id' => $product->id]) }}"
                                                                                 data-toggle="tooltip"
                                                                                 class="btn btn-primary icon"
                                                                                 type="button">
@@ -381,7 +369,7 @@
                                                 </div>
                                                 <!-- /.item -->
                                             @empty
-                                                <h5 class="text-danger">Not found product</h5>
+                                                <h5 class="text-danger">Không có sản phẩm nào</h5>
                                             @endforelse
                                         </div>
                                         <!-- /.home-owl-carousel -->
@@ -400,13 +388,13 @@
                     <section class="section featured-product wow fadeInUp">
                         <h3 class="section-title">Sản phẩm bán chạy</h3>
                         <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
-                            @foreach ($bestSellProducts as $product)
+                            {{-- @foreach ($bestSellProducts as $product)
                                 <div class="item item-carousel">
                                     <div class="products">
                                         <div class="product">
                                             <div class="product-image">
                                                 <div class="image"> <a
-                                                        href="{{ route('product.detail', ['product_id' => $product->product_id, 'slug' => $product->product_slug]) }}"><img
+                                                        href="{{ route('product.detail', ['product_id' => $product->product_id]) }}"><img
                                                             style="max-height: 189px;" src="{{ asset($product->image) }}"
                                                             alt=""></a> </div>
                                                 <!-- /.image -->
@@ -419,7 +407,7 @@
 
                                             <div class="product-info text-left">
                                                 <h3 class="name"><a
-                                                        href="{{ route('product.detail', ['product_id' => $product->product_id, 'slug' => $product->product_slug]) }}">
+                                                        href="{{ route('product.detail', ['product_id' => $product->product_id]) }}">
                                                         {{ $product->name }}</a>
                                                 </h3>
                                                 @include('partitions.web.rating', [
@@ -444,7 +432,7 @@
                                             <div class="action">
                                                 <ul class="list-unstyled">
                                                     <li class="add-cart-button btn-group">
-                                                        <a href="{{ route('product.detail', ['product_id' => $product->product_id, 'slug' => $product->product_slug]) }}"
+                                                        <a href="{{ route('product.detail', ['product_id' => $product->product_id]) }}"
                                                             data-toggle="tooltip" class="btn btn-primary icon"
                                                             type="button" data-original-title="" title=""> <i
                                                                 class="fa fa-shopping-cart"></i> Tùy
@@ -466,7 +454,7 @@
                                 </div>
                                 <!-- /.products -->
                         </div>
-                        @endforeach
+                        @endforeach --}}
                         <!-- /.item -->
                     </section>
                     <!-- ============================================== BEST SELLER :END ============================================== -->
@@ -482,7 +470,7 @@
                                             <div class="product">
                                                 <div class="product-image">
                                                     <div class="image"> <a
-                                                            href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"><img
+                                                            href="{{ route('product.detail', ['product_id' => $product->id]) }}"><img
                                                                 style="max-height: 189px;"
                                                                 src="{{ asset($product->image) }}" alt=""></a>
                                                     </div>
@@ -496,7 +484,7 @@
 
                                                 <div class="product-info text-left">
                                                     <h3 class="name"><a
-                                                            href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
+                                                            href="{{ route('product.detail', ['product_id' => $product->id]) }}">
                                                             {{ $product->name }}</a>
                                                     </h3>
                                                     @include('partitions.web.rating', [
@@ -521,7 +509,7 @@
                                                 <div class="action">
                                                     <ul class="list-unstyled">
                                                         <li class="add-cart-button btn-group">
-                                                            <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
+                                                            <a href="{{ route('product.detail', ['product_id' => $product->id]) }}"
                                                                 data-toggle="tooltip" class="btn btn-primary icon"
                                                                 type="button" data-original-title="" title=""> <i
                                                                     class="fa fa-shopping-cart"></i> Tùy

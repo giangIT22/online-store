@@ -93,21 +93,6 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                             </div>
                             <!-- /.sidebar-widget -->
                             <!-- ============================================== PRICE SILDER : END ============================================== -->
-                            <!-- ============================================== PRODUCT TAGS ============================================== -->
-                            <div class="sidebar-widget product-tag wow fadeInUp outer-top-vs">
-                                <h3 class="section-title">Tag sản phẩm</h3>
-                                <div class="sidebar-widget-body outer-top-xs">
-                                    <div class="tag-list">
-                                        @foreach ($productTags as $tag)
-                                            <a class="item {{ $tag->name == request()->tag_name ? 'active' : '' }}"
-                                                href="{{ route('product.tag', ['tag_name' => $tag->name]) }}">
-                                                {{ $tag->name }}
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                    <!-- /.tag-list -->
-                                </div>
-                            </div>
                         </div>
                         <!-- /.sidebar-filter -->
                     </div>
@@ -116,11 +101,11 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                 <!-- /.sidebar -->
                 <div class='col-md-9'>
                     @php
-                        $slider = DB::table('sliders')->first();
+                        $slider = DB::table('banners')->first();
                     @endphp
                     <div id="category" class="category-carousel hidden-xs">
                         <div class="item">
-                            <div class="image"> <img src="{{ $slider->slider_image }}" alt=""
+                            <div class="image"> <img src="{{ $slider->image }}" alt=""
                                     class="img-responsive"> </div>
                         </div>
                     </div>

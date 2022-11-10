@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
@@ -16,34 +17,17 @@ use Illuminate\Support\Facades\DB;
 
 class ProductService implements ProductServiceInterface
 {
-    public function getProductsByTag($tagName, $params)
+    public function getProductsByCategory($params, $categoryId)
     {
-        $tag = ProductTag::where('name', $tagName)->first();
-
-        if (!$tag) {
-            abort(404);
-        }
-
-        $productIds = ProductTag::where('name', $tagName)->pluck('product_id')->toArray();
-        $query = Product::whereIn('id', array_unique($productIds))
-            ->orderBy('product_price');
-
+        $category = Category::findOrFail($categoryId);
+        $query = Product::where('category_id', $category->id)->orderBy('product_price');
         return $this->getData($params, $query);
     }
 
-    public function getProductsByCategory($params,$categorySlug, $categoryId)
+    public function getProductsBySubCategory($params, $categoryId)
     {
-        $subCategory = SubCategory::where('sub_category_slug', $categorySlug)->where('id', $categoryId)->first();
-        $category = Category::where('slug', $categorySlug)->where('id', $categoryId)->first();
-
-        if ($subCategory) {
-            $query = Product::where('subcategory_id', $subCategory->id)->orderBy('product_price');
-        } elseif ($category) {
-            $query = Product::where('category_id', $category->id)->orderBy('product_price');
-        } else {
-            abort(404);
-        }
-
+        $category = SubCategory::findOrFail($categoryId);
+        $query = Product::where('subcategory_id', $category->id)->orderBy('product_price');
         return $this->getData($params, $query);
     }
 
@@ -51,12 +35,7 @@ class ProductService implements ProductServiceInterface
     {
         $product = Product::findOrFail($productId);
         $categoryId = $product->category->id;
-        $tags = ProductTag::where('product_id', $productId)->pluck('name')->toArray();
-        $productIds = ProductTag::whereIn('name', array_unique($tags))
-            ->where('product_id', '<>', $productId)
-            ->pluck('product_id')->toArray();
         $products = Product::where('category_id', $categoryId)
-            ->whereIn('id', array_unique($productIds))
             ->get();
 
         return $products;
@@ -71,32 +50,32 @@ class ProductService implements ProductServiceInterface
 
     public function getBestSellProducts()
     {
-        $products = DB::table('order_item')
-            ->join('products', 'order_item.product_id', 'products.id')
-            ->join('orders', 'order_item.order_id', 'orders.id')
-            ->select(
-                'order_item.product_id',
-                'products.name',
-                'products.product_slug',
-                'products.image',
-                'products.product_price',
-                'products.sale_price',
-                DB::raw('SUM(order_item.amount) as total_amount')
-            )
-            ->where('orders.status', Order::DELIVERED)
-            ->groupBy(
-                'order_item.product_id',
-                'products.name',
-                'products.product_slug',
-                'products.image',
-                'products.product_price',
-                'products.sale_price'
-            )
-            ->orderBy('total_amount', 'desc')
-            ->limit(8)
-            ->get();
+        // $products = DB::table('order_item')
+        //     ->join('products', 'order_item.product_id', 'products.id')
+        //     ->join('orders', 'order_item.order_id', 'orders.id')
+        //     ->select(
+        //         'order_item.product_id',
+        //         'products.name',
+        //         'products.product_slug',
+        //         'products.image',
+        //         'products.product_price',
+        //         'products.sale_price',
+        //         DB::raw('SUM(order_item.amount) as total_amount')
+        //     )
+        //     ->where('orders.status', Order::DELIVERED)
+        //     ->groupBy(
+        //         'order_item.product_id',
+        //         'products.name',
+        //         'products.product_slug',
+        //         'products.image',
+        //         'products.product_price',
+        //         'products.sale_price'
+        //     )
+        //     ->orderBy('total_amount', 'desc')
+        //     ->limit(8)
+        //     ->get();
 
-        return $products;
+        // return $products;
     }
 
     public function getAllProduct($params)
@@ -148,15 +127,13 @@ class ProductService implements ProductServiceInterface
             ->where('created_at', '>', Carbon::now()->subDays(15))
             ->where('created_at', '<=', Carbon::now())
             ->limit(6)->get();
-        $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
-        $productTags = ProductTag::select('name')->limit(8)->groupBy('name')->get();
+        $banners = Banner::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $productByCategory = Category::with('products')->get();
         
         return compact(
             'categories',
-            'sliders',
-            'products',            
-            'productTags',
+            'banners',
+            'products',
             'productByCategory'
         );
     }

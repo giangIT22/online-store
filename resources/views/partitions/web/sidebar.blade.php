@@ -12,7 +12,7 @@
                                     <ul class="links list-unstyled">
                                         @foreach ($category->subCategories as $item)
                                             <li>
-                                                <a href="{{ route('category.index', ['category_slug' => $item->sub_category_slug, 'category_id' => $item->id]) }}">
+                                                <a href="{{ route('sub_category.index', ['category_id' => $item->id]) }}">
                                                     {{ $item->sub_category_name }}
                                                 </a>
                                             </li>

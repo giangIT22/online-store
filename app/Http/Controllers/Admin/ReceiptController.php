@@ -27,6 +27,6 @@ class ReceiptController extends Controller
 
     public function store(Request $request)
     {
-        
+        $this->receiptService->storeReceipt($request->all());
     }
 }

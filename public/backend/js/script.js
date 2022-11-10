@@ -109,4 +109,5 @@ function finalPrice() {
     }
 
     $('.final_price').html(`Tông tiền: ${finalPrice.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' })}`);
+    $('.final_sum_price').val(finalPrice);
 }

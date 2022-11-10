@@ -8,7 +8,7 @@ class BlogService implements BlogServiceInterface
 {
     public function getListBlog($limit)
     {
-        $data = Blog::where('deleted_at', null)->orderBy('created_at', 'desc')->paginate($limit);
+        $data = Blog::orderBy('created_at', 'desc')->paginate($limit);
 
         return [
             'listBlogs' =>  $data->items(),

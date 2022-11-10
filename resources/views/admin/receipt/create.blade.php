@@ -9,7 +9,7 @@
                 <div class="box-header with-border">
                     <div class="d-flex justify-content-between">
                         <h3 class="box-title">Lập phiếu nhập kho</h3>
-                        <a href="{{ route('all.coupons') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay
+                        <a href="{{ route('all.receipts') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay
                             lại</a>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col">
-                            <form method="post" action="{{ route('coupon.store') }}">
+                            <form method="post" action="{{ route('receipt.store') }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
@@ -47,7 +47,7 @@
                                         <div class="form-group mb-30">
                                             <h5>Nhà cung cấp<span class="text-danger">*</span></h5>
                                             <div class="controls">
-                                                <select class="form-control" id="" name="">
+                                                <select class="form-control" id="" name="supply_company_id">
                                                     <option value="">Chọn nhà cung câp</option>
                                                     @foreach ($companies as $company)
                                                         <option value="{{ $company->id }}">{{ $company->name }}</option>
@@ -150,11 +150,17 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <input type="hidden" name="sum_price" class="final_price">
+                                        <input type="hidden" name="sum_price" class="final_sum_price">
                                         <div class="row justify-content-end align-items-center mr-10 mt-30">
                                             <h4 class="final_price">Tổng tiền: </h4>
                                             <button type="button" class="btn btn-success add-option"><i class="fa fa-plus-circle" aria-hidden="true"></i>
                                                 Thêm sản phẩm</button>
+                                        </div>
+                                        <br>
+                                        <hr>
+
+                                        <div class="text-xs-right">
+                                            <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Thêm phiếu nhập kho">
                                         </div>
                                     </div>
                             </form>

@@ -67,7 +67,7 @@ Route::middleware(['auth:web', 'prevent-back-history'])->group(function () {
 //=============Product detail=========================
 
 Route::prefix('/product')->group(function () {
-    Route::get('/detail/{product_id}/{slug}', [HomeController::class, 'productDetail'])->name('product.detail');
+    Route::get('/detail/{product_id}', [HomeController::class, 'productDetail'])->name('product.detail');
     Route::get('/tag/{tag_name}', [ShopController::class, 'index'])->name('product.tag');
     Route::get('/preview-product/{product_id}', [HomeController::class, 'previewProduct'])->name('preview.product');
     Route::post('/add-review', [HomeController::class, 'storeReview'])->name('review.store');
@@ -77,7 +77,8 @@ Route::prefix('/product')->group(function () {
 });
 
 //============Shopping===============================
-Route::get('/category/{category_slug}/{category_id}', [CategoryController::class, 'index'])->name('category.index');
+Route::get('/category/{category_id}', [CategoryController::class, 'index'])->name('category.index');
+Route::get('/sub-category/{category_id}', [CategoryController::class, 'getProductBySubCategory'])->name('sub_category.index');
 Route::get('/all-product', [CategoryController::class, 'allProducts'])->name('category.all.products');
 
 //=======================cart=====================

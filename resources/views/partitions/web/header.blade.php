@@ -6,7 +6,6 @@
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
-                        <li><a href="#"><i class="icon fa fa-heart"></i>Yêu thích</a></li>
                         <li><a href="{{ route('cart.view') }}"><i class="icon fa fa-shopping-cart"></i>Giỏ hàng</a></li>
                         @if (Auth::check())
                             <li><a href="{{ route('user.home') }}"><i class="icon fa fa-user"></i>Tài khoản</a></li>
@@ -17,19 +16,6 @@
                 </div>
                 <!-- /.cnt-account -->
 
-                <div class="cnt-block">
-                    <ul class="list-unstyled list-inline">
-                        <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown"
-                                data-toggle="dropdown"><span class="value">Ngôn ngữ
-                                </span><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">English</a></li>
-                                <li><a href="#">Vietnamese</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <!-- /.list-unstyled -->
-                </div>
                 <!-- /.cnt-cart -->
                 <div class="clearfix"></div>
             </div>
@@ -210,9 +196,9 @@
                                         href="{{ route('index') }}">Trang chủ</a> </li>
                                 @foreach ($categories as $category)
                                     <li
-                                        class=" {{ $category->slug == request()->category_slug ? 'active' : '' }} dropdown hidden-sm">
+                                        class=" {{ $category->id == request()->category_id ? 'active' : '' }} dropdown hidden-sm">
                                         <a
-                                            href="{{ route('category.index', ['category_slug' => $category->slug, 'category_id' => $category->id]) }}">{{ $category->name }}</a>
+                                            href="{{ route('category.index', ['category_id' => $category->id]) }}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
                                 <li class="{{ Route::current()->uri == '/blog' ? 'active' : '' }}"> <a

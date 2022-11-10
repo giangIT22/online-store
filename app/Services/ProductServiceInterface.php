@@ -3,9 +3,9 @@
 namespace App\Services;
 
 interface ProductServiceInterface
-{
-    public function getProductsByTag($tagName, $params);
-    public function getProductsByCategory($params, $categorySlug, $categoryId);
+{    
+    public function getProductsByCategory($params, $categoryId);
+    public function getProductsBySubCategory($params, $categoryId);
     public function getRelatedProducts($productId);
     public function addReviewProduct($params);
     public function getBestSellProducts();
