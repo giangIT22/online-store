@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductDetail extends Model
+class ProductCart extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
-    protected $table = 'product_details';
+    protected $table = 'product_cart';
 
-    public function product()
+    public function productDetail()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(ProductDetail::class, 'product_detail_id');
     }
 }

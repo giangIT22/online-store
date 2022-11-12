@@ -150,7 +150,7 @@
                                         </td>
 
                                         <td width="20%">
-                                            <label for=""> {{ $item->name . ' ' . '(' . $item->size_name . ')' }}</label>
+                                            <label for=""> {{ $item->name . ' ' . '(' . $item->size_name . ' - ' . $item->color_name .')' }}</label>
                                         </td>
 
 

@@ -6,6 +6,8 @@ use App\Models\Cart;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\ProductCart;
+use App\Models\ProductDetail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,35 +22,37 @@ class OrderService implements OrderServiceInterface
         if ($params['payment_type'] == 'COD') {
             //create oder
             $data['user_id'] = Auth::id();
-            $data['order_code'] = rand(1000000, 2000000);
+            do {
+                $data['order_code'] = 'Order' . rand(1000000, 2000000);
+                $order = Order::where('order_code', $data['order_code'])->first();
+            } while (isset($order));
+
             $order = Order::create($data);
 
             //create order_item
             $cart = Cart::where('user_id', Auth::id())->first();
-            $products = DB::table('product_cart')->where('cart_id', $cart->id)->get();
+            $products = ProductCart::where('cart_id', $cart->id)->get();
 
             foreach ($products as $item) {
                 DB::table('order_item')->insert([
                     'order_id' => $order->id,
-                    'product_id' => $item->product_id,
+                    'product_detail_id' => $item->product_detail_id,
                     'amount' => $item->amount,
-                    'product_price' => $item->price,
-                    'size_id' => $item->size_id,
+                    'product_price' => $item->product_price,
                     'created_at' => now()
                 ]);
 
                 //caculate amount of product
-                $product = Product::findOrFail($item->product_id);
-                $product->product_qty = $product->product_qty - $item->amount;
+                $product = ProductDetail::findOrFail($item->product_detail_id)->product;
+                $product->amount = $product->amount - $item->amount;
                 $product->save();
 
-                $query = DB::table('product_size')
-                    ->where('product_id', $item->product_id)
-                    ->where('size_id', $item->size_id);
-                $productSize = $query->first();
+                $query = DB::table('product_details')
+                    ->where('id', $item->product_detail_id);
+                $productDetail = $query->first();
 
                 $query->update([
-                    'amount' => $productSize->amount - $item->amount
+                    'amount' => $productDetail->amount - $item->amount
                 ]);
 
                 DB::table('product_cart')->where('cart_id', $cart->id)->delete();
@@ -85,10 +89,13 @@ class OrderService implements OrderServiceInterface
                     'order_item.amount',
                     'order_item.product_price',
                     'products.image',
-                    'sizes.name as size_name'
+                    'sizes.name as size_name',
+                    'colors.name as color_name'
                 )
-                ->join('products', 'order_item.product_id', 'products.id')
-                ->join('sizes', 'order_item.size_id', 'sizes.id')
+                ->join('product_details', 'order_item.product_detail_id', 'product_details.id')
+                ->join('products', 'product_details.product_id', 'products.id')
+                ->join('sizes', 'product_details.size_id', 'sizes.id')
+                ->join('colors', 'product_details.color_id', 'colors.id')
                 ->where('order_id', $order->id)
                 ->get();
         }
@@ -121,7 +128,7 @@ class OrderService implements OrderServiceInterface
         foreach ($products as $item) {
             //caculate amount of product after cancel order
             $product = Product::findOrFail($item->product_id);
-            $product->product_qty = $product->product_qty + $item->amount;
+            $product->amount = $product->amount + $item->amount;
             $product->save();
 
             $query = DB::table('product_size')

@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\ProductDetail;
 use App\Models\ProductTag;
 use App\Models\ProductVariant;
 use App\Models\Review;
@@ -126,6 +127,7 @@ class ProductService implements ProductServiceInterface
         $products = Product::orderBy('id', 'desc')
             ->where('created_at', '>', Carbon::now()->subDays(15))
             ->where('created_at', '<=', Carbon::now())
+            ->where('status', Product::PUBLIC)
             ->limit(6)->get();
         $banners = Banner::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $productByCategory = Category::with('products')->get();
@@ -141,7 +143,7 @@ class ProductService implements ProductServiceInterface
     public function checkExistProduct($params)
     {
         $status = true;
-        $productVariant = ProductVariant::where('color_id', $params['color_id'])
+        $productVariant = ProductDetail::where('color_id', $params['color_id'])
             ->where('size_id', $params['size_id'])
             ->where('product_id', $params['product_id'])->first();
 
@@ -154,7 +156,7 @@ class ProductService implements ProductServiceInterface
 
     public function getSizeByColor($params)
     {
-        $data = ProductVariant::where('product_id', $params['product_id'])
+        $data = ProductDetail::where('product_id', $params['product_id'])
             ->where('color_id', $params['color_id'])
             ->pluck('size_id')->all();
 

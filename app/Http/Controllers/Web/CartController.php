@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\ProductCart;
 use App\Models\Size;
 use App\Services\CartServiceInterface;
 use Illuminate\Http\Request;
@@ -47,17 +48,15 @@ class CartController extends Controller
 
         if ($cart) {
             $productsInCart = collect([]);
-
-            $products = DB::table('product_cart')->select('product_id', 'amount', 'product_price', 'size_id', 'color_id')
-                ->where('cart_id', $cart->id)->get();
-
+            $products = ProductCart::join('product_details', 'product_cart.product_detail_id', 'product_details.id')
+                            ->select('product_id', 'product_cart.amount', 'product_price', 'size_id', 'color_id')
+                            ->where('cart_id', $cart->id)->get();
             foreach ($products as $item) {
                 $product = DB::table('products')->where('id', $item->product_id)->first();
                 $size = Size::findOrFail($item->size_id);
                 $color = Color::findOrFail($item->color_id);
                 $productsInCart->push([
                     'id' => $item->product_id,
-                    'product_slug' => $product->product_slug,
                     'product_image' => $product->image,
                     'product_name' => $product->name,
                     'product_price' => $item->product_price,

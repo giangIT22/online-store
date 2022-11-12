@@ -7,6 +7,7 @@ use App\Http\Requests\OrderRequest;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Coupon;
+use App\Models\ProductCart;
 use App\Services\OrderServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,12 +31,12 @@ class CheckoutController extends Controller
         if (Auth::check()) {
             $cart = Cart::where('user_id', Auth::id())->first();
             if ($cart) {
-                $products = DB::table('product_cart')
-                ->join('products', 'product_cart.product_id', 'products.id')
-                ->join('sizes', 'product_cart.size_id', 'sizes.id')
-                ->join('colors', 'product_cart.color_id', 'colors.id')
+                $products = ProductCart::join('product_details', 'product_cart.product_detail_id', 'product_details.id')
+                ->join('sizes', 'product_details.size_id', 'sizes.id')
+                ->join('colors', 'product_details.color_id', 'colors.id')
+                ->join('products', 'product_details.product_id', 'products.id')
                 ->select('products.id', 'products.name', 'products.image', 'product_cart.amount',
-                    'product_cart.product_price', 'product_cart.size_id', 'product_cart.color_id',
+                    'product_cart.product_price', 'product_details.size_id', 'product_details.color_id',
                     'sizes.name as size_name', 'colors.name as color_name')
                 ->where('cart_id', $cart->id)
                 ->get();

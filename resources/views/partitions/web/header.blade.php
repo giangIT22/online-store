@@ -74,17 +74,17 @@
                                                 ->first() ?? 0;
                                         if ($cart) {
                                             $products = DB::table('product_cart')
-                                                ->select('product_id', 'amount', 'product_price')
+                                                ->select('product_detail_id', 'amount', 'product_price')
                                                 ->where('cart_id', $cart->id)
                                                 ->get();
                                     
                                             foreach ($products as $item) {
+                                                $productDetail = DB::table('product_details')->where('id', $item->product_detail_id)->first();
                                                 $product = DB::table('products')
-                                                    ->where('id', $item->product_id)
+                                                    ->where('id', $productDetail->product_id)
                                                     ->first();
                                                 $productsInCart->push([
                                                     'product_id' => $product->id,
-                                                    'product_slug' => $product->product_slug,
                                                     'product_image' => $product->image,
                                                     'product_name' => $product->name,
                                                     'product_price' => $item->product_price,
@@ -119,14 +119,14 @@
                                             <div class="row" style="margin-bottom: 10px;">
                                                 <div class="col-xs-4">
                                                     <div class="image"> <a
-                                                            href="{{ route('product.detail', ['product_id' => $product['product_id'], 'slug' => $product['product_slug']]) }}"><img
+                                                            href="{{ route('product.detail', ['product_id' => $product['product_id']]) }}"><img
                                                                 src="{{ asset($product['product_image']) }}"
                                                                 alt=""></a>
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-7">
                                                     <h3 class="name"><a
-                                                            href="{{ route('product.detail', ['product_id' => $product['product_id'], 'slug' => $product['product_slug']]) }}">{{ $product['product_name'] }}</a>
+                                                            href="{{ route('product.detail', ['product_id' => $product['product_id']]) }}">{{ $product['product_name'] }}</a>
                                                     </h3>
                                                     <div class="price">
                                                         {{ number_format($product['product_price'], 0, '', '.') . ' vnd' }}

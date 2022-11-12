@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 trait StoreImageTrait
 {
-    public function uploadImage($request, $fieldName, $folderUpload, $code)
+    public function uploadImage($request, $fieldName, $folderUpload, $code = '')
     {
         if ($request->hasFile($fieldName)) {
             $file = $request->$fieldName;//get info of file

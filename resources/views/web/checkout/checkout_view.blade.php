@@ -13,7 +13,7 @@
     </div><!-- /.breadcrumb -->
     <div class="body-content outer-top-xs">
         <div class="container">
-            <div class="row">
+            <div class="row checkout-form">
                 <div class="col-md-12 ">
                     <form action="{{ route('checkout.store') }}" method="post">
                         @csrf

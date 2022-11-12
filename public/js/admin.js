@@ -42489,7 +42489,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Trạng thái")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Action")]),
+        _c("th", [_vm._v("Thao tác")]),
       ]),
     ])
   },

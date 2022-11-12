@@ -22,7 +22,7 @@
                       <th>Giá trị đơn hàng</th>
                       <th>Phương thức thanh toán</th>
                       <th>Trạng thái</th>
-                      <th>Action</th>
+                      <th>Thao tác</th>
                     </tr>
                   </thead>
                   <tbody>

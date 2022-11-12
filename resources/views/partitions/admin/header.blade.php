@@ -21,12 +21,6 @@
 
         <div class="navbar-custom-menu r-side">
             <ul class="nav navbar-nav">
-                <!-- full Screen -->
-                <li class="search-bar">
-                    <div class="lookup lookup-circle lookup-right">
-                        <input type="text" name="s">
-                    </div>
-                </li>
                 <!-- User Account-->
                 <li class="dropdown user user-menu">
                     @php
@@ -51,12 +45,6 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#" data-toggle="control-sidebar" title="Setting" class="waves-effect waves-light">
-                        <i class="ti-settings"></i>
-                    </a>
-                </li>
-
             </ul>
         </div>
     </nav>

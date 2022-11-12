@@ -48,14 +48,14 @@
                                             <tr>
                                                 <td class="cart-image">
                                                     <a class="entry-thumbnail"
-                                                        href="{{ route('product.detail', ['product_id' => $product['id'], 'slug' => $product['product_slug']]) }}">
+                                                        href="{{ route('product.detail', ['product_id' => $product['id']]) }}">
                                                         <img src="{{ asset($product['product_image']) }}" alt="">
                                                     </a>
                                                 </td>
                                                 <td class="cart-product-name-info">
                                                     <h4 class='cart-product-description'>
                                                         <a
-                                                            href="{{ route('product.detail', ['product_id' => $product['id'], 'slug' => $product['product_slug']]) }}">{{ $product['product_name'] }}</a>
+                                                            href="{{ route('product.detail', ['product_id' => $product['id']]) }}">{{ $product['product_name'] }}</a>
                                                     </h4>
 
                                                     <div class="cart-product-info">

@@ -24,6 +24,7 @@ $(document).ready(function() {
             success: function(response) {
                 count = 0;
                 sumPrice = 0;
+                console.log(response)
                 if (response.status) {
                     //Update box-cart
 
@@ -32,14 +33,14 @@ $(document).ready(function() {
                         return `<div class="row" style="margin-bottom: 10px;">
                         <div class="col-xs-4">
                             <div class="image"> <a
-                                    href="/product/detail/${product.product_id}/${product.product_slug}"><img
+                                    href="/product/detail/${product.product_id}"><img
                                         src="${product.product_image}"
                                         alt=""></a>
                             </div>
                         </div>
                         <div class="col-xs-7">
                             <h3 class="name"><a
-                                    href="/product/detail/${product.product_id}/${product.product_slug}">${product.product_name}</a>
+                                    href="/product/detail/${product.product_id}">${product.product_name}</a>
                             </h3>
                             <div class="price">
                                 ${priceProduct}

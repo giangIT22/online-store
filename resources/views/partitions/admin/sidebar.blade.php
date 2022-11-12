@@ -67,9 +67,6 @@ $route = Route::current()->getName();
                     <li class="{{ $route == 'all.receipts' ? 'active' : '' }}"><a
                             href="{{ route('all.receipts') }}"><i class="ti-more"></i>Nhập hàng</a>
                     </li>
-                    <li class="{{ $route == 'all.sub_categories' ? 'active' : '' }}"><a
-                            href="{{ route('all.sub_categories') }}"><i class="ti-more"></i>Sản phẩm đã nhập</a>
-                    </li>
                 </ul>
             </li>
 
