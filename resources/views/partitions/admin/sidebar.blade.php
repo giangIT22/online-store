@@ -1,7 +1,7 @@
 @php
-$prefix = Request::route()->getPrefix();
-$route = Route::current()->getName();
-
+    $prefix = Request::route()->getPrefix();
+    $route = Route::current()->getName();
+    
 @endphp
 
 <aside class="main-sidebar">
@@ -34,40 +34,28 @@ $route = Route::current()->getName();
                     <span>Trang chủ</span>
                 </a>
             </li>
-            <li class="{{ $route == 'all.companies' ? 'active' : '' }}">
-                <a href="{{ route('all.companies') }}">
+            <li class="{{ $route == 'all.products' ? 'active' : '' }}">
+                <a href="{{ route('all.products') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-grid">
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
+                        stroke-linejoin="round" class="feather feather-pie-chart">
+                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                        <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                     </svg>
-                    <span>Nhà cung cấp</span>
+                    <span>Sản phẩm</span>
                 </a>
             </li>
 
-            <li class="treeview {{ $prefix == '/category' ? 'active' : '' }}  ">
-                <a href="#">
+            <li class="{{ $route == 'all.receipts' ? 'active' : '' }}">
+                <a href="{{ route('all.receipts') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-grid">
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
+                        stroke-linejoin="round" class="feather feather-pie-chart">
+                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                        <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                     </svg>
                     <span>Quản lý nhập kho</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
                 </a>
-                <ul class="treeview-menu">
-                    <li class="{{ $route == 'all.receipts' ? 'active' : '' }}"><a
-                            href="{{ route('all.receipts') }}"><i class="ti-more"></i>Nhập hàng</a>
-                    </li>
-                </ul>
             </li>
 
             <li class="treeview {{ $prefix == '/category' ? 'active' : '' }}  ">
@@ -80,83 +68,31 @@ $route = Route::current()->getName();
                         <rect x="14" y="14" width="7" height="7"></rect>
                         <rect x="3" y="14" width="7" height="7"></rect>
                     </svg>
-                    <span>Danh mục </span>
+                    <span>Quản lý danh mục </span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ $route == 'all.categories' ? 'active' : '' }}"><a
-                            href="{{ route('all.categories') }}"><i class="ti-more"></i>Danh sách danh mục</a>
+                            href="{{ route('all.categories') }}"><i class="ti-more"></i>Quản lý danh mục sản phẩm</a>
                     </li>
                     <li class="{{ $route == 'all.sub_categories' ? 'active' : '' }}"><a
                             href="{{ route('all.sub_categories') }}"><i class="ti-more"></i>Danh sách danh mục
                             con</a>
                     </li>
-                </ul>
-            </li>
-
-            <li class="treeview {{ $prefix == '/product' ? 'active' : '' }}">
-                <a href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-grid">
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
-                    </svg>
-                    <span>Sản phẩm</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{ $route == 'all.products' ? 'active' : '' }} "><a
-                            href="{{ route('all.products') }}"><i class="ti-more"></i>Danh sách sản phẩm</a>
+                    <li class="{{ $route == 'all.companies' ? 'active' : '' }}"><a
+                            href="{{ route('all.companies') }}"><i class="ti-more"></i>Quản lý nhà cung cấp</a>
                     </li>
-                </ul>
-            </li>
-
-            <li class="treeview {{ $prefix == '/slider' ? 'active' : '' }}">
-                <a href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-grid">
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
-                    </svg>
-                    <span>Banners</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
+                    <li class="{{ $route == 'all.coupons' ? 'active' : '' }}"><a
+                            href="{{ route('all.coupons') }}"><i class="ti-more"></i>Quản lý mã giảm giá</a>
+                    </li>
+                    <li class="{{ $route == 'all.blogs' ? 'active' : '' }}"><a
+                            href="{{ route('all.blogs') }}"><i class="ti-more"></i>Quản lý bài viết</a>
+                    </li>
                     <li class="{{ $route == 'all.sliders' ? 'active' : '' }}"><a
-                            href="{{ route('all.sliders') }}"><i class="ti-more"></i>Danh sách banners</a></li>
-                </ul>
-            </li>
-
-            <li class="treeview {{ $prefix == '/slider' ? 'active' : '' }}">
-                <a href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-grid">
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
-                    </svg>
-                    <span>Tin tức</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{ $route == 'all.blogs' ? 'active' : '' }}"> <a
-                            href="{{ route('all.blogs') }}"><i class="ti-more"></i>Danh sách tin tức</a></li>
+                            href="{{ route('all.sliders') }}"><i class="ti-more"></i>Quản lý banner</a>
+                    </li>
                 </ul>
             </li>
 
@@ -185,88 +121,40 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
-            <li class="treeview {{ $prefix == '/coupon' ? 'active' : '' }}">
-                <a href="#">
+            <li class="{{ $route == 'all.orders' ? 'active' : '' }}">
+                <a href="{{ route('all.orders') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-grid">
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
-                    </svg>
-                    <span>Coupon</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{ $route == 'all.coupons' ? 'active' : '' }}"> <a
-                            href="{{ route('all.coupons') }}"><i class="ti-more"></i>Danh sách coupon</a></li>
-                </ul>
-            </li>
-
-            <li class="treeview {{ $prefix == '/orders' ? 'active' : '' }}">
-                <a href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-grid">
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
+                        stroke-linejoin="round" class="feather feather-pie-chart">
+                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                        <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                     </svg>
                     <span>Đơn hàng</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
                 </a>
-                <ul class="treeview-menu">
-                    <li class="{{ $route == 'all.orders' ? 'active' : '' }}"> <a
-                            href="{{ route('all.orders') }}"><i class="ti-more"></i>Danh sách đơn hàng</a></li>
-                </ul>
             </li>
 
-            <li class="treeview {{ $prefix == '/alluser' ? 'active' : '' }}">
-                <a href="#">
+            <li class="{{ $route == 'all.users' ? 'active' : '' }}">
+                <a href="{{ route('all.users') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-grid">
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
+                        stroke-linejoin="round" class="feather feather-pie-chart">
+                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                        <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                     </svg>
                     <span>Người dùng</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
                 </a>
-                <ul class="treeview-menu">
-                    <li class="{{ $route == 'all.users' ? 'active' : '' }}"> <a
-                            href="{{ route('all.users') }}"><i class="ti-more"></i>Danh sách người dùng</a></li>
-                </ul>
             </li>
 
-            <li class="treeview {{ $prefix == '/employee' ? 'active' : '' }}">
-                <a href="#">
+            <li class="{{ $route == 'all.employees' ? 'active' : '' }}">
+                <a href="{{ route('all.employees') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-grid">
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
+                        stroke-linejoin="round" class="feather feather-pie-chart">
+                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                        <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                     </svg>
                     <span>Nhân viên</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
                 </a>
-                <ul class="treeview-menu">
-                    <li class="{{ $route == 'all.employees' ? 'active' : '' }}"> <a
-                            href="{{ route('all.employees') }}"><i class="ti-more"></i>Danh sách nhân viên</a></li>
-                </ul>
             </li>
         </ul>
     </section>

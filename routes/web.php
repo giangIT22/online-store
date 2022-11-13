@@ -68,7 +68,6 @@ Route::middleware(['auth:web', 'prevent-back-history'])->group(function () {
 
 Route::prefix('/product')->group(function () {
     Route::get('/detail/{product_id}', [HomeController::class, 'productDetail'])->name('product.detail');
-    Route::get('/tag/{tag_name}', [ShopController::class, 'index'])->name('product.tag');
     Route::get('/preview-product/{product_id}', [HomeController::class, 'previewProduct'])->name('preview.product');
     Route::post('/add-review', [HomeController::class, 'storeReview'])->name('review.store');
     Route::post('/check-exist', [HomeController::class, 'checkExistProduct']);
@@ -90,7 +89,7 @@ Route::post('/delete-cart', [CartController::class, 'deleteCart'])->name('cart.d
 
 //====================Blog========================
 Route::get('/tin-tuc', [BlogController::class, 'view'])->name('blog.view');
-Route::get('/tin-tuc/{blog_title}', [BlogController::class, 'detailBlog'])->name('blog.detail');
+Route::get('/tin-tuc/{blog_id}', [BlogController::class, 'detailBlog'])->name('blog.detail');
 
 //=====================Search============================
 Route::get('/search', [ShopController::class, 'viewSearch'])->name('search.view');

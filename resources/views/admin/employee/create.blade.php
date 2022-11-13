@@ -8,8 +8,10 @@
             <!-- Basic Forms -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Thêm nhân viên</h4>
-
+                    <div class="d-flex justify-content-between">
+                        <h3 class="box-title">Thêm nhân viên</h3>
+                        <a href="{{ route('all.employees') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay lại</a>
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -25,7 +27,7 @@
                                                 <div class="form-group">
                                                     <h5>Tên<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="name" class="form-control">
+                                                        <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                                                         @error('name')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -39,8 +41,8 @@
                                                 <div class="form-group">
                                                     <h5>Email<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="email" class="form-control">
-                                                        @error('title')
+                                                        <input type="text" name="email" class="form-control" value="{{ old('email') }}">
+                                                        @error('email')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
@@ -79,15 +81,60 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-3 col-12">
+                                            <div class="col-md-8">
+
                                                 <div class="form-group">
-                                                    <h5>Chọn vài trò<span class="text-danger">*</span></h5>
-                                                    <select class="form-control select2 select2-hidden-accessible"
-                                                        multiple="" style="width: 100%;" data-placeholder="Chọn vai trò">
-                                                        
-                                                    </select>
+                                                    <h5>Số điện thoại<span class="text-danger">*</span></h5>
+                                                    <div class="controls">
+                                                        <input type="text" name="phone" class="form-control" value="{{ old('phone') }}">
+                                                        @error('phone')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
-                                                <!-- /.form-group -->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+
+                                                <div class="form-group">
+                                                    <h5>Số căn cước<span class="text-danger">*</span></h5>
+                                                    <div class="controls">
+                                                        <input type="text" name="cccd" class="form-control" value="{{ old('cccd') }}">
+                                                        @error('cccd')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+
+                                                <div class="form-group">
+                                                    <h5>Địa chỉ<span class="text-danger">*</span></h5>
+                                                    <div class="controls">
+                                                        <input type="text" name="address" class="form-control" value="{{ old('address') }}">
+                                                        @error('address')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group mb-20">
+                                                    <h5>Lựa chọn vai trò<span class="text-danger">*</span></h5>
+                                                    <div class="controls">
+                                                        <select name="role_id" id="select" class="form-control">
+                                                            <option value="">Vai trò</option>
+                                                            @foreach ($roles as $item)
+                                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('role_id')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <hr>
@@ -110,10 +157,3 @@
         <!-- /.content -->
     </div>
 @endsection
-
-@push('scrypt')
-    <script src="{{ asset('../assets/vendor_components/select2/dist/js/select2.full.js') }}"></script>
-    <script>
-        $('.select2').select2();
-    </script>
-@endpush

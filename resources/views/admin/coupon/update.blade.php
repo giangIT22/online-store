@@ -3,12 +3,12 @@
     <div class="container-full">
         <!-- Content Header (Page header) -->
         <!-- Main content -->
-        <section class="content col-md-8" style="margin: 0">
+        <section class="content col-md-12" style="margin: 0">
             <!-- Basic Forms -->
             <div class="box">
                 <div class="box-header with-border">
                     <div class="d-flex justify-content-between">
-                        <h3 class="box-title">Cập nhật coupon</h3>
+                        <h3 class="box-title">Cập nhật mã giảm giá</h3>
                         <a href="{{ route('all.coupons') }}" type="button" class="btn btn-rounded btn-primary mb-5">Quay lại</a>
                     </div>
                 </div>
@@ -46,6 +46,15 @@
                                                     <div class="controls">
                                                         <input class="form-control" type="date" name="coupon_validity" value="{{ $coupon->coupon_validity}}">
                                                         @error('coupon_validity')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mb-30">
+                                                    <h5>Giá tối thiểu<span class="text-danger">*</span></h5>
+                                                    <div class="controls">
+                                                        <input type="text" name="minimum_price" class="form-control" value="{{ $coupon->minimum_price }}">
+                                                        @error('minimum_price')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>

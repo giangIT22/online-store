@@ -26,7 +26,8 @@ class CouponRequest extends FormRequest
         return [
             'coupon_name' => ['required', 'unique:coupons,coupon_name,' . $this->coupon_id],
             'coupon_discount' => 'required|numeric',
-            'coupon_validity' => 'required'
+            'coupon_validity' => 'required',
+            'minimum_price' => 'required'
         ];
     }
     
@@ -37,7 +38,8 @@ class CouponRequest extends FormRequest
             'coupon_discount.required' => 'Vui lòng nhập trường này',
             'coupon_validity.required' => 'Vui lòng nhập trường này',
             'coupon_discount.numeric' => 'Giá trị phải là số',
-            'coupon_name.unique' => 'Coupon đã tồn tại'
+            'coupon_name.unique' => 'Coupon đã tồn tại',
+            'minimum_price.required' => 'Vui lòng nhập trường này'
         ];
     }
 }

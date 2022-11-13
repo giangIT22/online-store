@@ -14,7 +14,6 @@ class ResetPasswordRequest extends FormRequest
     public function authorize()
     {
         return true;
-        return true;
     }
 
     /**
@@ -34,7 +33,7 @@ class ResetPasswordRequest extends FormRequest
     {
         return [
             'new_password.required' => 'Vui lòng nhập mật khẩu mới',
-            'confirm_password.same' => 'Mật khẩu xác nhận không chính xác'
+            'confirm_password.same' => 'Mật khẩu nhập lại không chính xác'
         ];
     }
 }

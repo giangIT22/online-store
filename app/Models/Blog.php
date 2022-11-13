@@ -14,4 +14,9 @@ class Blog extends Model
     const PER_PAGE = 10;
     const BLOG_SLIDER = 6;
     const BLOG_PAGE = 3;
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
 }

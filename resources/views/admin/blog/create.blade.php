@@ -34,15 +34,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <h5>Slug<span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="slug" class="form-control">
-                                                        @error('slug')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
                                                     <h5>Nội dung<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <textarea name="content" class="form-control" cols="30" rows="4"></textarea>

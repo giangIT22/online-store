@@ -44,4 +44,14 @@ class SupplyCompanyService implements SupplyCompanyServiceInterface
         $company = SupplyCompany::findOrFail($companyId);
         $company->delete();
     }
+
+    public function search($params)
+    {
+        $dataSearch = SupplyCompany::search($params)->paginate(SupplyCompany::PER_PAGE);
+
+        return [
+            'listCompanies' => $dataSearch->items(),
+            'lastPage' => $dataSearch->lastPage()
+        ];
+    }
 }

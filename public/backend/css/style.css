@@ -14284,7 +14284,7 @@ Height property
     -o-transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
     -webkit-transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
     transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
-    margin-left: 290px;
+    margin-left: 315px;
     z-index: 820;
 }
 
@@ -15316,7 +15316,7 @@ body .main-header .navbar .nav>li.search-box>a:focus {
     left: 0;
     padding-top: 0px;
     min-height: 100%;
-    width: 290px;
+    width: 315px;
     z-index: 810;
     -webkit-transition: -webkit-transform .3s ease-in-out, width .3s ease-in-out;
     -moz-transition: -moz-transform .3s ease-in-out, width .3s ease-in-out;
@@ -30346,4 +30346,9 @@ img.online {
     margin-top: 22px;
     font-size: 30px;
     cursor: pointer;
+}
+
+.status-employee {
+    margin-right: 20px;
+    font-size: 16px !important;
 }

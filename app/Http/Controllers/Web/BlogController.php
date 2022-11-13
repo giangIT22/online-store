@@ -27,7 +27,7 @@ class BlogController extends Controller
     public function detailBlog()
     {
         $categories = Category::with('subCategories')->get();
-        $blog = Blog::where('slug', request()->blog_title)->first();
+        $blog = Blog::where('id', request()->blog_id)->first();
 
         if (!$blog) {
             abort(404);

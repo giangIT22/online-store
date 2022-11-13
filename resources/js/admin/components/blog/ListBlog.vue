@@ -24,9 +24,9 @@
                     <tr>
                       <th>Ảnh bài viết</th>
                       <th>Tên bài viết</th>
-                      <th>Slug</th>
                       <th>Nội dung</th>
-                      <th>Action</th>
+                      <th>Người tạo</th>
+                      <th>Thao tác</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -35,10 +35,10 @@
                         <img :src="item.post_image" alt="" width="100px" />
                       </td>
                       <td class="blog-title">{{ item.title }}</td>
-                      <td class="blog-slug">{{ item.slug }}</td>
                       <td>
                         <p class="blog-content">{{ item.content }}</p>
                       </td>
+                      <td>{{ item.admin.name }}</td>
                       <td>
                         <a
                           :href="`/admin/blog/edit/${item.id}`"
@@ -102,7 +102,4 @@ p.blog-content {
   width: 300px;
 }
 
-.blog-slug {
-  width: 300px;
-}
 </style>

@@ -38,11 +38,11 @@ class CouponController extends Controller
         }
 
         $data['coupon_name'] = strtoupper($data['coupon_name']);
-        
+        $data['admin_id'] = auth('admin')->user()->id;
         $this->couponService->createCoupon($data);
 
         $notification = [
-            'message' => 'Tạo Coupon thành công',
+            'message' => 'Tạo mã giảm giá thành công',
             'alert-type' => 'success'
         ];
 
@@ -91,6 +91,23 @@ class CouponController extends Controller
                 'code' => 200,
                 'status' => true,
                 'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function search(Request $request)
+    {
+        try {
+            if ($request->search_key) {
+                $data = $this->couponService->search($request->search_key);
+                return response()->json($data);
+            } else {
+                $data = $this->couponService->getListCoupon();
+                return response()->json($data);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
             ]);
         }
     }

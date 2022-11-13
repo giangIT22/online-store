@@ -90,6 +90,7 @@ Route::middleware(['auth:admin', 'prevent-back-history'])->group(function () {
         Route::post('/update/{company_id}', [SupplyCompanyController::class, 'update'])->name('company.update');
         Route::get('/edit/{company_id}', [SupplyCompanyController::class, 'edit'])->name('company.edit');
         Route::get('/delete/{company_id}', [SupplyCompanyController::class, 'delete'])->name('company.delete');
+        Route::get('/search', [SupplyCompanyController::class, 'search'])->name('company.search');
     });
 
     //===== All route slider admin =====
@@ -123,11 +124,12 @@ Route::middleware(['auth:admin', 'prevent-back-history'])->group(function () {
     //===== all route coupon admin =====
     Route::prefix('/coupon')->group(function () {
         Route::get('/view', [CouponController::class, 'index'])->name('all.coupons');
-        Route::get('/create', [CouponController::class, 'create'])->name('coupon.create');
-        Route::post('/store', [CouponController::class, 'store'])->name('coupon.store');
-        Route::post('/update/{coupon_id}', [CouponController::class, 'update'])->name('coupon.update');
-        Route::get('/edit/{coupon_id}', [CouponController::class, 'edit'])->name('coupon.edit');
-        Route::get('/delete/{coupon_id}', [CouponController::class, 'delete'])->name('coupon.delete');
+        Route::get('/create', [CouponController::class, 'create'])->name('coupon.create')->middleware('role');
+        Route::post('/store', [CouponController::class, 'store'])->name('coupon.store')->middleware('role');
+        Route::post('/update/{coupon_id}', [CouponController::class, 'update'])->name('coupon.update')->middleware('role');
+        Route::get('/edit/{coupon_id}', [CouponController::class, 'edit'])->name('coupon.edit')->middleware('role');
+        Route::get('/delete/{coupon_id}', [CouponController::class, 'delete'])->name('coupon.delete')->middleware('role');
+        Route::get('/search', [CouponController::class, 'search'])->name('coupon.search');
     });
 
     //===== all route orders admin =====
@@ -136,7 +138,7 @@ Route::middleware(['auth:admin', 'prevent-back-history'])->group(function () {
         Route::get('/detail/{order_code}', [OrderController::class, 'detail'])->name('order.detail');
         Route::get('/confirm-order/{order_code}', [OrderController::class, 'confirmOrder'])->name('order.confirm');
         Route::get('/shipping-order/{order_code}', [OrderController::class, 'shippingOrder'])->name('order.shipping');
-        Route::get('/delivered-order/{order_code}', [OrderController::class, 'deliveredOrder'])->name('order.delivered');
+        Route::get('/delivered-order/{order_code}', [OrdePrimaryrController::class, 'deliveredOrder'])->name('order.delivered');
         Route::get('/cancel-order/{order_code}', [OrderController::class, 'cancelOrder'])->name('order.cancel');
         Route::get('/dowload/{order_code}', [OrderController::class, 'dowloadOrderPdf'])->name('order.dowload');
     });
@@ -155,5 +157,6 @@ Route::middleware(['auth:admin', 'prevent-back-history'])->group(function () {
         Route::post('/update/{employee_id}', [EmployeeController::class, 'update'])->name('employee.update');
         Route::get('/edit/{employee_id}', [EmployeeController::class, 'edit'])->name('employee.edit');
         Route::get('/delete/{employee_id}', [EmployeeController::class, 'delete'])->name('employee.delete');
+        Route::get('/search', [EmployeeController::class, 'search'])->name('employee.search');
     });   
 });

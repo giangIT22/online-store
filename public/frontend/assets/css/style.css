@@ -114,3 +114,19 @@ label {
 .checkout-form {
     margin-bottom: 60px;
 }
+
+.filter-price .list-value li label {
+    font-size: 14px !important;
+}
+
+.blog-page .blog-post p {
+    font-size: 16px;
+}
+
+.blog-page .blog-post span {
+    font-size: 15px;
+}
+
+.blog-page .blog-post {
+    margin-bottom: 50px;
+}

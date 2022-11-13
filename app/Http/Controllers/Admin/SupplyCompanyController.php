@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyRequest;
 use App\Services\SupplyCompanyServiceInterface;
+use Illuminate\Http\Request;
 
 class SupplyCompanyController extends Controller
 {
@@ -69,6 +70,23 @@ class SupplyCompanyController extends Controller
                 'code' => 200,
                 'status' => true,
                 'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function search(Request $request)
+    {
+        try {
+            if ($request->search_key) {
+                $data = $this->supllyCompanyService->search($request->search_key);
+                return response()->json($data);
+            } else {
+                $data = $this->supllyCompanyService->all();
+                return response()->json($data);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
             ]);
         }
     }

@@ -2544,7 +2544,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Paginate_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Paginate.vue */ "./resources/js/admin/components/Paginate.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Paginate_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Paginate.vue */ "./resources/js/admin/components/Paginate.vue");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2617,14 +2654,68 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
+
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    Paginate: _Paginate_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Paginate: _Paginate_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Loading: (vue_loading_overlay__WEBPACK_IMPORTED_MODULE_2___default())
   },
   props: {
-    companies: Object,
+    companies: Array,
     total: Number,
     lastPage: Number
+  },
+  data: function data() {
+    return {
+      listCompanies: [],
+      searchKey: "",
+      isLoading: false,
+      fullPage: true
+    };
+  },
+  created: function created() {
+    this.listCompanies = this.companies;
+  },
+  methods: {
+    searchCompany: function () {
+      var _searchCompany = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var _this = this;
+
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.isLoading = true;
+                _context.next = 3;
+                return axios.get("/admin/company/search?search_key=".concat(this.searchKey));
+
+              case 3:
+                response = _context.sent;
+                setTimeout(function () {
+                  _this.isLoading = false;
+                  _this.lastPage = response.data.lastPage;
+                  _this.listCompanies = response.data.listCompanies;
+                }, 500);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function searchCompany() {
+        return _searchCompany.apply(this, arguments);
+      }
+
+      return searchCompany;
+    }()
   }
 });
 
@@ -2641,7 +2732,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Paginate_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Paginate.vue */ "./resources/js/admin/components/Paginate.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Paginate_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Paginate.vue */ "./resources/js/admin/components/Paginate.vue");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2717,14 +2852,68 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
+
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    Paginate: _Paginate_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Paginate: _Paginate_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Loading: (vue_loading_overlay__WEBPACK_IMPORTED_MODULE_2___default())
   },
   props: {
-    coupons: Object,
+    coupons: Array,
     total: Number,
     lastPage: Number
+  },
+  data: function data() {
+    return {
+      listCoupons: [],
+      searchKey: "",
+      isLoading: false,
+      fullPage: true
+    };
+  },
+  created: function created() {
+    this.listCoupons = this.coupons;
+  },
+  methods: {
+    searchCoupon: function () {
+      var _searchCoupon = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var _this = this;
+
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.isLoading = true;
+                _context.next = 3;
+                return axios.get("/admin/coupon/search?search_key=".concat(this.searchKey));
+
+              case 3:
+                response = _context.sent;
+                setTimeout(function () {
+                  _this.isLoading = false;
+                  _this.lastPage = response.data.lastPage;
+                  _this.listCoupons = response.data.listCoupons;
+                }, 500);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function searchCoupon() {
+        return _searchCoupon.apply(this, arguments);
+      }
+
+      return searchCoupon;
+    }()
   }
 });
 
@@ -2741,7 +2930,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Paginate_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Paginate.vue */ "./resources/js/admin/components/Paginate.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Paginate_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Paginate.vue */ "./resources/js/admin/components/Paginate.vue");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2801,14 +3058,73 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
+
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    Paginate: _Paginate_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Paginate: _Paginate_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Loading: (vue_loading_overlay__WEBPACK_IMPORTED_MODULE_2___default())
   },
   props: {
     employees: Array,
     total: Number,
     lastPage: Number
+  },
+  data: function data() {
+    return {
+      listEmployees: [],
+      searchKey: "",
+      isLoading: false,
+      fullPage: true
+    };
+  },
+  created: function created() {
+    this.listEmployees = this.employees;
+  },
+  // watch: {
+  //   searchKey() {
+  //     this.searchEmployee();
+  //   }
+  // },
+  methods: {
+    searchEmployee: function () {
+      var _searchEmployee = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var _this = this;
+
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.isLoading = true;
+                _context.next = 3;
+                return axios.get("/admin/employee/search?search_key=".concat(this.searchKey));
+
+              case 3:
+                response = _context.sent;
+                setTimeout(function () {
+                  _this.isLoading = false;
+                  _this.lastPage = response.data.lastPage;
+                  _this.listEmployees = response.data.listEmployees;
+                }, 500);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function searchEmployee() {
+        return _searchEmployee.apply(this, arguments);
+      }
+
+      return searchEmployee;
+    }()
   }
 });
 
@@ -8008,7 +8324,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "p.blog-content[data-v-565c10d2] {\n  width: 400px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 2;\n  /* number of lines to show */\n  line-clamp: 2;\n  -webkit-box-orient: vertical;\n}\n.blog-title[data-v-565c10d2] {\n  width: 300px;\n}\n.blog-slug[data-v-565c10d2] {\n  width: 300px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "p.blog-content[data-v-565c10d2] {\n  width: 400px;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 2;\n  /* number of lines to show */\n  line-clamp: 2;\n  -webkit-box-orient: vertical;\n}\n.blog-title[data-v-565c10d2] {\n  width: 300px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41355,15 +41671,13 @@ var render = function () {
                               _vm._v(_vm._s(item.title)),
                             ]),
                             _vm._v(" "),
-                            _c("td", { staticClass: "blog-slug" }, [
-                              _vm._v(_vm._s(item.slug)),
-                            ]),
-                            _vm._v(" "),
                             _c("td", [
                               _c("p", { staticClass: "blog-content" }, [
                                 _vm._v(_vm._s(item.content)),
                               ]),
                             ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.admin.name))]),
                             _vm._v(" "),
                             _c("td", [
                               _c(
@@ -41440,11 +41754,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Tên bài viết")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Slug")]),
-        _vm._v(" "),
         _c("th", [_vm._v("Nội dung")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Action")]),
+        _c("th", [_vm._v("Người tạo")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Thao tác")]),
       ]),
     ])
   },
@@ -41816,84 +42130,143 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-full" }, [
-    _c("section", { staticClass: "content" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12" }, [
-          _c("div", { staticClass: "box" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "box-body" }, [
-              _c(
-                "div",
-                { staticClass: "table-responsive" },
-                [
-                  _c(
-                    "table",
-                    {
-                      staticClass: "table table-bordered table-striped",
-                      attrs: { id: "example1" },
-                    },
-                    [
-                      _vm._m(1),
+  return _c(
+    "div",
+    { staticClass: "container-full" },
+    [
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "box" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "box-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-12 col-md-4" }, [
+                    _c("div", { staticClass: "input-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.searchKey,
+                            expression: "searchKey",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        staticStyle: { "border-radius": "7px !important" },
+                        attrs: {
+                          type: "search",
+                          id: "search-data",
+                          name: "search_key",
+                        },
+                        domProps: { value: _vm.searchKey },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.searchKey = $event.target.value
+                          },
+                        },
+                      }),
                       _vm._v(" "),
                       _c(
-                        "tbody",
-                        _vm._l(_vm.companies, function (item) {
-                          return _c("tr", { key: item.id }, [
-                            _c("td", [_vm._v(_vm._s(item.name))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.email))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.phone))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.address))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-info",
-                                  attrs: {
-                                    href: "/admin/company/edit/" + item.id,
-                                    title: "Edit Data",
-                                  },
-                                },
-                                [_c("i", { staticClass: "fa fa-pencil" })]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-danger action-delete",
-                                  attrs: {
-                                    href: "",
-                                    "data-url":
-                                      "/admin/company/delete/" + item.id,
-                                    title: "Delete Data",
-                                    id: "delete",
-                                  },
-                                },
-                                [_c("i", { staticClass: "fa fa-trash" })]
-                              ),
-                            ]),
-                          ])
-                        }),
-                        0
+                        "button",
+                        {
+                          staticClass: "btn btn-primary ml-15",
+                          staticStyle: { "border-radius": "7px !important" },
+                          attrs: { type: "button" },
+                          on: { click: _vm.searchCompany },
+                        },
+                        [
+                          _vm._v(
+                            "\n                    Tìm kiếm\n                  "
+                          ),
+                        ]
                       ),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("paginate", { attrs: { "page-count": _vm.lastPage } }),
-                ],
-                1
-              ),
+                    ]),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "box-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "table-responsive" },
+                  [
+                    _c(
+                      "table",
+                      {
+                        staticClass: "table table-bordered table-striped",
+                        attrs: { id: "example1" },
+                      },
+                      [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.listCompanies, function (item) {
+                            return _c("tr", { key: item.id }, [
+                              _c("td", [_vm._v(_vm._s(item.name))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.email))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.phone))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.address))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-info",
+                                    attrs: {
+                                      href: "/admin/company/edit/" + item.id,
+                                      title: "Edit Data",
+                                    },
+                                  },
+                                  [_c("i", { staticClass: "fa fa-pencil" })]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-danger action-delete",
+                                    attrs: {
+                                      href: "",
+                                      "data-url":
+                                        "/admin/company/delete/" + item.id,
+                                      title: "Delete Data",
+                                      id: "delete",
+                                    },
+                                  },
+                                  [_c("i", { staticClass: "fa fa-trash" })]
+                                ),
+                              ]),
+                            ])
+                          }),
+                          0
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("paginate", { attrs: { "page-count": _vm.lastPage } }),
+                  ],
+                  1
+                ),
+              ]),
             ]),
           ]),
         ]),
       ]),
-    ]),
-  ])
+      _vm._v(" "),
+      _c("loading", {
+        attrs: { active: _vm.isLoading, "is-full-page": _vm.fullPage },
+      }),
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function () {
@@ -41958,106 +42331,178 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-full" }, [
-    _c("section", { staticClass: "content" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12" }, [
-          _c("div", { staticClass: "box" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "box-body" }, [
-              _c(
-                "div",
-                { staticClass: "table-responsive" },
-                [
-                  _c(
-                    "table",
-                    {
-                      staticClass: "table table-bordered table-striped",
-                      attrs: { id: "example1" },
-                    },
-                    [
-                      _vm._m(1),
+  return _c(
+    "div",
+    { staticClass: "container-full" },
+    [
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "box" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "box-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-12 col-md-4" }, [
+                    _c("div", { staticClass: "input-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.searchKey,
+                            expression: "searchKey",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        staticStyle: { "border-radius": "7px !important" },
+                        attrs: {
+                          type: "search",
+                          id: "search-data",
+                          name: "search_key",
+                        },
+                        domProps: { value: _vm.searchKey },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.searchKey = $event.target.value
+                          },
+                        },
+                      }),
                       _vm._v(" "),
                       _c(
-                        "tbody",
-                        _vm._l(_vm.coupons, function (item) {
-                          return _c("tr", { key: item.id }, [
-                            _c("td", [_vm._v(_vm._s(item.coupon_name))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.coupon_discount))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.coupon_validity))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              item.status == 1
-                                ? _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "badge badge-pill badge-success",
-                                    },
-                                    [_vm._v(" Active ")]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              item.status == 0
-                                ? _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "badge badge-pill badge-danger",
-                                    },
-                                    [_vm._v("Not Active ")]
-                                  )
-                                : _vm._e(),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-info",
-                                  attrs: {
-                                    href: "/admin/coupon/edit/" + item.id,
-                                    title: "Edit Data",
-                                  },
-                                },
-                                [_c("i", { staticClass: "fa fa-pencil" })]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-danger action-delete",
-                                  attrs: {
-                                    href: "",
-                                    "data-url":
-                                      "/admin/coupon/delete/" + item.id,
-                                    title: "Delete Data",
-                                    id: "delete",
-                                  },
-                                },
-                                [_c("i", { staticClass: "fa fa-trash" })]
-                              ),
-                            ]),
-                          ])
-                        }),
-                        0
+                        "button",
+                        {
+                          staticClass: "btn btn-primary ml-15",
+                          staticStyle: { "border-radius": "7px !important" },
+                          attrs: { type: "button" },
+                          on: { click: _vm.searchCoupon },
+                        },
+                        [
+                          _vm._v(
+                            "\n                    Tìm kiếm\n                  "
+                          ),
+                        ]
                       ),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("paginate", { attrs: { "page-count": _vm.lastPage } }),
-                ],
-                1
-              ),
+                    ]),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "box-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "table-responsive" },
+                  [
+                    _c(
+                      "table",
+                      {
+                        staticClass: "table table-bordered table-striped",
+                        attrs: { id: "example1" },
+                      },
+                      [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.listCoupons, function (item) {
+                            return _c("tr", { key: item.id }, [
+                              _c("td", [_vm._v(_vm._s(item.coupon_name))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.coupon_discount))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.coupon_validity))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  _vm._s(
+                                    item.minimum_price.toLocaleString("it-IT", {
+                                      style: "currency",
+                                      currency: "vnd",
+                                    })
+                                  )
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.admin.name))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                item.status == 1
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "badge badge-pill badge-success",
+                                      },
+                                      [_vm._v(" Active ")]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                item.status == 0
+                                  ? _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "badge badge-pill badge-danger",
+                                      },
+                                      [_vm._v("Not Active ")]
+                                    )
+                                  : _vm._e(),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-info",
+                                    attrs: {
+                                      href: "/admin/coupon/edit/" + item.id,
+                                      title: "Edit Data",
+                                    },
+                                  },
+                                  [_c("i", { staticClass: "fa fa-pencil" })]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-danger action-delete",
+                                    attrs: {
+                                      href: "",
+                                      "data-url":
+                                        "/admin/coupon/delete/" + item.id,
+                                      title: "Delete Data",
+                                      id: "delete",
+                                    },
+                                  },
+                                  [_c("i", { staticClass: "fa fa-trash" })]
+                                ),
+                              ]),
+                            ])
+                          }),
+                          0
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("paginate", { attrs: { "page-count": _vm.lastPage } }),
+                  ],
+                  1
+                ),
+              ]),
             ]),
           ]),
         ]),
       ]),
-    ]),
-  ])
+      _vm._v(" "),
+      _c("loading", {
+        attrs: { active: _vm.isLoading, "is-full-page": _vm.fullPage },
+      }),
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function () {
@@ -42085,15 +42530,19 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Mã Coupon")]),
+        _c("th", [_vm._v("Mã giảm giá")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Coupon discount")]),
+        _c("th", [_vm._v("Phần trăm giảm")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Thời hạn mã giảm giá")]),
+        _c("th", [_vm._v("Thời hạn")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Mức giá tối thiểu")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Người tạo")]),
         _vm._v(" "),
         _c("th", [_vm._v("Trạng thái")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Action")]),
+        _c("th", [_vm._v("Thao tác")]),
       ]),
     ])
   },
@@ -42120,90 +42569,167 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-full" }, [
-    _c("section", { staticClass: "content" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12" }, [
-          _c("div", { staticClass: "box" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "box-body" }, [
-              _c(
-                "div",
-                { staticClass: "table-responsive" },
-                [
-                  _c(
-                    "table",
-                    {
-                      staticClass: "table table-bordered table-striped",
-                      attrs: { id: "example1" },
-                    },
-                    [
-                      _vm._m(1),
+  return _c(
+    "div",
+    { staticClass: "container-full" },
+    [
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "box" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "box-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-12 col-md-4" }, [
+                    _c("div", { staticClass: "input-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.searchKey,
+                            expression: "searchKey",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        staticStyle: { "border-radius": "7px !important" },
+                        attrs: {
+                          type: "search",
+                          id: "search-data",
+                          name: "search_key",
+                        },
+                        domProps: { value: _vm.searchKey },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.searchKey = $event.target.value
+                          },
+                        },
+                      }),
                       _vm._v(" "),
                       _c(
-                        "tbody",
-                        _vm._l(_vm.employees, function (item) {
-                          return _c("tr", { key: item.id }, [
-                            _c("td", [
-                              _c("img", {
-                                attrs: {
-                                  src: item.profile_photo_path,
-                                  alt: "",
-                                  width: "50px",
-                                },
-                              }),
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.name))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.email))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-info",
-                                  attrs: {
-                                    href: "/admin/employee/edit/" + item.id,
-                                    title: "Edit Data",
-                                  },
-                                },
-                                [_c("i", { staticClass: "fa fa-pencil" })]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-danger action-delete",
-                                  attrs: {
-                                    href: "",
-                                    "data-url":
-                                      "/admin/employee/delete/" + item.id,
-                                    title: "Delete Data",
-                                    id: "delete",
-                                  },
-                                },
-                                [_c("i", { staticClass: "fa fa-trash" })]
-                              ),
-                            ]),
-                          ])
-                        }),
-                        0
+                        "button",
+                        {
+                          staticClass: "btn btn-primary ml-15",
+                          staticStyle: { "border-radius": "7px !important" },
+                          attrs: { type: "button" },
+                          on: { click: _vm.searchEmployee },
+                        },
+                        [
+                          _vm._v(
+                            "\n                    Tìm kiếm\n                  "
+                          ),
+                        ]
                       ),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("paginate", { attrs: { "page-count": _vm.lastPage } }),
-                ],
-                1
-              ),
+                    ]),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "box-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "table-responsive" },
+                  [
+                    _c(
+                      "table",
+                      {
+                        staticClass: "table table-bordered table-striped",
+                        attrs: { id: "example1" },
+                      },
+                      [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.listEmployees, function (item) {
+                            return _c("tr", { key: item.id }, [
+                              _c("td", [
+                                _c("img", {
+                                  attrs: {
+                                    src: item.profile_photo_path
+                                      ? item.profile_photo_path
+                                      : "/backend/images/no-image.jpg",
+                                    alt: "",
+                                    width: "50px",
+                                  },
+                                }),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.name))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.email))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.phone))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.cccd))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.address))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(item.role.name))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  _vm._s(
+                                    item.status == 1 ? "Đang làm" : "Nghỉ làm"
+                                  )
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-info",
+                                    attrs: {
+                                      href: "/admin/employee/edit/" + item.id,
+                                      title: "Edit Data",
+                                    },
+                                  },
+                                  [_c("i", { staticClass: "fa fa-pencil" })]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-danger action-delete",
+                                    attrs: {
+                                      href: "",
+                                      "data-url":
+                                        "/admin/employee/delete/" + item.id,
+                                      title: "Delete Data",
+                                      id: "delete",
+                                    },
+                                  },
+                                  [_c("i", { staticClass: "fa fa-trash" })]
+                                ),
+                              ]),
+                            ])
+                          }),
+                          0
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("paginate", { attrs: { "page-count": _vm.lastPage } }),
+                  ],
+                  1
+                ),
+              ]),
             ]),
           ]),
         ]),
       ]),
-    ]),
-  ])
+      _vm._v(" "),
+      _c("loading", {
+        attrs: { active: _vm.isLoading, "is-full-page": _vm.fullPage },
+      }),
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function () {
@@ -42237,7 +42763,17 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Email")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Action")]),
+        _c("th", [_vm._v("Số điện thoại")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Số căn cước")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Địa chỉ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Vị trí")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Trạng thái")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Thao tác")]),
       ]),
     ])
   },

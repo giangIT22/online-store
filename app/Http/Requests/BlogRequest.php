@@ -25,7 +25,6 @@ class BlogRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'slug' => 'required',
             'post_image' => 'required',
             'content' => 'required'
         ];
@@ -35,7 +34,6 @@ class BlogRequest extends FormRequest
     {
         return [
             'title.required' => 'Vui lòng nhập tên bài viết',
-            'slug.required' => 'Vui lòng nhập slug',
             'post_image.required' => 'Vui lòng chọn ảnh bài viết',
             'content.required' => 'Vui lòng nhập nội dung',
         ];

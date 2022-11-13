@@ -26,7 +26,7 @@
                                 {{-- <span class="review">6 Comments</span> --}}
                                 <span class="date-time">{{ $blog->created_at->toDateTimeString() }}</span>
                                 <p class="blog-content">{{ $blog->content }}</p>
-                                <a href="{{ route('blog.detail', ['blog_title' => $blog->slug])}}" class="btn btn-upper btn-primary read-more">read more</a>
+                                <a href="{{ route('blog.detail', ['blog_id' => $blog->id])}}" class="btn btn-upper btn-primary read-more">read more</a>
                             </div>
                         @endforeach
 

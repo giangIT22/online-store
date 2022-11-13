@@ -8,4 +8,5 @@ interface CouponServiceInterface
     public function createCoupon($params);
     public function getInfoCoupon($couponId);
     public function updateCoupon($couponId, $params);
+    public function search($params);
 }

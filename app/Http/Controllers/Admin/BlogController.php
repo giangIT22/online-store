@@ -38,7 +38,7 @@ class BlogController extends Controller
         $data = $request->all();
         $blogImage = $this->uploadImage($request, 'post_image', 'blog');
         $data['post_image'] = $blogImage['file_path'];
-
+        $data['admin_id'] = auth('admin')->user()->id;
         DB::beginTransaction();
         try {
             $this->blogService->createBlog($data);
