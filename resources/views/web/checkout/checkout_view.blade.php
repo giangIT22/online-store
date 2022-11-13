@@ -33,7 +33,7 @@
                                         <div class="form-group">
                                             <label>Họ và tên</label>
                                             <input type="text" class="form-control" name="name"
-                                                value="{{ old('name') }}">
+                                                value="{{ old('name', Auth::user()->name) }}">
                                             @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -41,7 +41,7 @@
                                         <div class="form-group">
                                             <label>Số diện thoại</label>
                                             <input type="text" class="form-control" name="phone"
-                                                value="{{ old('phone') }}">
+                                                value="{{ old('phone', Auth::user()->phone) }}">
                                             @error('phone')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -49,7 +49,7 @@
                                         <div class="form-group">
                                             <label>Địa chỉ</label>
                                             <input type="text" class="form-control" name="address"
-                                                value="{{ old('address') }}">
+                                                value="{{ old('address', Auth::user()->address) }}">
                                             @error('address')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror

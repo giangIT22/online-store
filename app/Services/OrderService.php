@@ -105,10 +105,10 @@ class OrderService implements OrderServiceInterface
 
     public function getOrders()
     {
-        $data = Order::orderByDesc('created_at')->paginate(Order::PER_PAGE);
+        $data = Order::with('admin')->orderByDesc('created_at')->paginate(Order::PER_PAGE);
 
         return [
-            'listOrder' =>  $data->items(),
+            'listOrders' =>  $data->items(),
             'total' => $data->total(),
             'lastPage' => $data->lastPage(),
         ];
@@ -208,6 +208,18 @@ class OrderService implements OrderServiceInterface
             'min_year' => $invoiceTimeEarliest ? $invoiceTimeEarliest->created_at->year : 0,
             'max_year' => $invoiceTimeLatest ? $invoiceTimeLatest->created_at->year : 0,
             'maximum_date' => $maximumDate->year ?? 0
+        ];
+    }
+
+    public function search($params)
+    {
+        $dataSearch = Order::search($params)->query(function($builder){
+            return $builder->with('admin');
+        })->paginate(Coupon::PER_PAGE);
+
+        return [
+            'listOrders' => $dataSearch->items(),
+            'lastPage' => $dataSearch->lastPage()
         ];
     }
 }

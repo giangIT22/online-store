@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     const PER_PAGE = 10;
     
@@ -22,4 +23,25 @@ class Order extends Model
     
     protected $guarded = [];
 
+    /**
+     * Get the name of the index associated with the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'orders_index';
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'order_code' => $this->order_code,
+        ];
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
 }

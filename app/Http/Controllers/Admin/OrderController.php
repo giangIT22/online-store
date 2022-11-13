@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Services\OrderServiceInterface;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -36,6 +37,7 @@ class OrderController extends Controller
         }
 
         $order->update([
+            'admin_id' => auth('admin')->user()->id,
             'status' => Order::CONFIRMED
         ]);
 
@@ -87,5 +89,22 @@ class OrderController extends Controller
         $this->orderService->cancelOrder($orderCode);
         
         return redirect()->route('all.orders');
+    }
+
+    public function search(Request $request)
+    {
+        try {
+            if ($request->search_key) {
+                $data = $this->orderService->search($request->search_key);
+                return response()->json($data);
+            } else {
+                $data = $this->orderService->getOrders();
+                return response()->json($data);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
     }
 }

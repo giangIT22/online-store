@@ -2,7 +2,7 @@
 @php
     $orders = collect([]);
 
-    foreach ($listOrder as $order) {
+    foreach ($listOrders as $order) {
         $orders->push($order);
     } 
 @endphp

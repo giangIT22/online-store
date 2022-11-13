@@ -141,12 +141,14 @@ Route::middleware(['auth:admin', 'prevent-back-history'])->group(function () {
         Route::get('/delivered-order/{order_code}', [OrdePrimaryrController::class, 'deliveredOrder'])->name('order.delivered');
         Route::get('/cancel-order/{order_code}', [OrderController::class, 'cancelOrder'])->name('order.cancel');
         Route::get('/dowload/{order_code}', [OrderController::class, 'dowloadOrderPdf'])->name('order.dowload');
+        Route::get('/search', [OrderController::class, 'search'])->name('order.search');
     });
 
     // Admin Get All User Routes 
     Route::prefix('user')->group(function () {
         Route::get('/view', [AdminProfileController::class, 'allUsers'])->name('all.users');
         Route::get('/delete/{user_id}', [AdminProfileController::class, 'deleteUser'])->name('user.delete');
+        Route::get('/search', [AdminProfileController::class, 'search'])->name('user.search');
     });
 
     //===== all employee ==================

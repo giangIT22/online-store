@@ -11,4 +11,5 @@ interface OrderServiceInterface
     public function cancelOrder($orderCode);
     public function getInvoiceMonthy();
     public function getInvoiceYearLy();
+    public function search($params);
 }

@@ -10,6 +10,30 @@
                 <h3 class="box-title">Danh sách đơn hàng</h3>
               </div>
             </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-sm-12 col-md-4">
+                  <div class="input-group">
+                    <input
+                      type="search"
+                      id="search-data"
+                      name="search_key"
+                      class="form-control"
+                      style="border-radius: 7px !important"
+                      v-model="searchKey"
+                    />
+                    <button
+                      type="button"
+                      @click="searchOrder"
+                      class="btn btn-primary ml-15"
+                      style="border-radius: 7px !important"
+                    >
+                      Tìm kiếm
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <!-- /.box-header -->
             <div class="box-body">
               <div class="table-responsive">
@@ -26,7 +50,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="item in orders" :key="item.id">
+                    <tr v-for="item in listOrders" :key="item.id">
                       <td>{{ item.order_code }}</td>
                       <td>{{ formatDate(item.created_at) }}</td>
                       <td>
@@ -107,18 +131,34 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
+    <loading :active="isLoading"
+                 :is-full-page="fullPage"/>
   </div>
 </template>
 
 <script>
 import Paginate from "../Paginate.vue";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
+const axios = require('axios');
 export default {
-  components: { Paginate },
+  components: { Paginate, Loading },
   props: {
     orders: Array,
     total: Number,
     lastPage: Number,
+  },
+  data() {
+    return {
+      listOrders: [],
+      searchKey: "",
+      isLoading: false,
+      fullPage: true
+    };
+  },
+  created() {
+    this.listOrders = this.orders;
   },
   methods: {
     formatDate(date) {
@@ -131,6 +171,15 @@ export default {
       if (day.length < 2) day = "0" + day;
 
       return [year, month, day].join("-");
+    },
+    searchOrder: async function () {
+      this.isLoading = true;
+      const response = await axios.get(`/admin/orders/search?search_key=${this.searchKey}`);
+      setTimeout(() => {
+        this.isLoading = false;
+        this.lastPage = response.data.lastPage;
+        this.listOrders = response.data.listOrders;
+      }, 500);
     },
   },
 };

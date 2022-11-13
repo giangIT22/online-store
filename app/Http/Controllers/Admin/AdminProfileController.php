@@ -8,6 +8,7 @@ use App\Http\Requests\AdminUpdateProfileRequest;
 use App\Models\Admin;
 use App\Models\User;
 use App\Traits\StoreImageTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -99,5 +100,32 @@ class AdminProfileController extends Controller
                 'message' => $e->getMessage()
             ]);
         }
+    }
+
+    public function search(Request $request)
+    {
+        try {
+            if ($request->search_key) {
+                $data = $this->searchUser($request->search_key);
+                return response()->json($data);
+            } else {
+                $data = $this->allUsers();
+                return response()->json($data);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function searchUser($params)
+    {
+        $dataSearch = User::search($params)->paginate(User::PER_PAGE);
+
+        return [
+            'listUsers' => $dataSearch->items(),
+            'lastPage' => $dataSearch->lastPage()
+        ];
     }
 }
