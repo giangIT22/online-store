@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row checkout-form">
                 <div class="col-md-12 ">
-                    <form action="{{ route('checkout.store') }}" method="post">
+                    <form action="{{ route('checkout.store') }}" method="post" class="save-order">
                         @csrf
                         <div class="row">
                             <div class="info-customer col-md-8">
@@ -120,8 +120,6 @@
                                                     Thanh toán khi giao hàng
                                                 </label>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -149,22 +147,21 @@
                                                         <span class="size-item-cart">{{ $product->size_name }} </span>
                                                     </div>
                                                 </div>
-                                                <small class="text-muted">Số lượng: {{ $product->amount }}</small>
+                                                <small class="text-muted amount-text">Số lượng: {{ $product->amount }}</small>
                                             </div>
                                             <span
-                                                class="text-muted item-price">{{ number_format($product->amount * $product->product_price) }}
-                                                vnd</span>
+                                                class="text-muted item-price">{{ number_format($product->amount * $product->product_price) }}</span>
                                         </li>
                                     @endforeach
                                     <li class="list-group-item bg-light fee-shipping">
                                         <div class="text-success fix-flex">
-                                            <h6 class="my-0">Phí vận chuyển</h6>
+                                            <h6 class="my-0 charge-text">Phí vận chuyển</h6>
                                             <span class="fee_charge_item">0</span>
                                         </div>
                                     </li>
                                     <li class="list-group-item fix-flex">
-                                        <span>Tổng cộng</span>
-                                        <input type="hidden" value="{{ $sum }}" name="sum_price">
+                                        <span class="sum-text">Tổng cộng</span>
+                                        <input type="hidden" value="{{ $sum }}" name="sum_price" class="hidden_sum_price">
                                         <strong class="sum_price_item">{{ number_format($sum) }} vnd</strong>
                                     </li>
                                 </ul>
@@ -183,7 +180,7 @@
                                 <div class="order-product">
                                     <a href="{{ route('cart.view') }}" style="padding: 0">
                                         < Quay về trang chủ</a>
-                                            <button class="btn btn-primary btn-lg" type="submit">Đặt hàng</button>
+                                            <button class="btn btn-primary btn-lg submit-order" type="submit">Đặt hàng</button>
                                 </div>
                             </div>
                         </div>

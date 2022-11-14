@@ -484,11 +484,10 @@ jQuery(document).ready(function() {
         }
     });
 
-
     $('.apply-coupon').click(function(e) {
         e.preventDefault();
         let couponName = $('.input-coupon').val();
-
+        let sumPrice = $('.hidden_sum_price').val();
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -499,7 +498,8 @@ jQuery(document).ready(function() {
             type: "post",
             url: "/checkout/apply-coupon",
             data: {
-                'coupon_name': couponName
+                'coupon_name': couponName,
+                'sum_price': sumPrice
             },
             success: function(response) {
                 if (response.status) {
@@ -785,4 +785,29 @@ jQuery(document).ready(function() {
             $('.add-cart-product').prop('disabled', true);
         }
     });
+
+    //========================SHow ma giam gia=================
+    $('.btn-show-coupon').on('click', function() {
+        $('.list-coupon').css('visibility', 'visible');
+        $('.list-coupon').css('opacity', 1);
+        document.body.style.overflow = 'hidden';
+    });
+
+    $('.close-coupon').on('click', function() {
+        $('.list-coupon').css('visibility', 'hidden');
+        $('.list-coupon').css('opacity', 0);
+        document.body.style.overflow = 'visible';
+    })
+
+    $('.coppy-code').on('click', function() {
+        navigator.clipboard.writeText($(this).data('code-coupon'));
+        $('.coppy-coupon-success').css('visibility', 'visible');
+        $('.coppy-coupon-success').css('opacity', 1);
+    });
+
+    $('.close-success-coupon').on('click', function() {
+        $('.coppy-coupon-success').css('visibility', 'hidden');
+        $('.coppy-coupon-success').css('opacity', 0);
+    });
+
 })
