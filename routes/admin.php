@@ -138,7 +138,7 @@ Route::middleware(['auth:admin', 'prevent-back-history'])->group(function () {
         Route::get('/detail/{order_code}', [OrderController::class, 'detail'])->name('order.detail');
         Route::get('/confirm-order/{order_code}', [OrderController::class, 'confirmOrder'])->name('order.confirm');
         Route::get('/shipping-order/{order_code}', [OrderController::class, 'shippingOrder'])->name('order.shipping');
-        Route::get('/delivered-order/{order_code}', [OrdePrimaryrController::class, 'deliveredOrder'])->name('order.delivered');
+        Route::get('/delivered-order/{order_code}', [OrderController::class, 'deliveredOrder'])->name('order.delivered');
         Route::get('/cancel-order/{order_code}', [OrderController::class, 'cancelOrder'])->name('order.cancel');
         Route::get('/dowload/{order_code}', [OrderController::class, 'dowloadOrderPdf'])->name('order.dowload');
         Route::get('/search', [OrderController::class, 'search'])->name('order.search');

@@ -28,5 +28,12 @@ class ReceiptController extends Controller
     public function store(Request $request)
     {
         $this->receiptService->storeReceipt($request->all());
+
+        $notification = [
+            'message' => 'Tạo phiếu nhập kho thành công',
+            'alert-type' => 'success'
+        ];
+        
+        return redirect()->route('all.receipts')->with($notification);
     }
 }

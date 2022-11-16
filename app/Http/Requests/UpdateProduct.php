@@ -25,26 +25,18 @@ class UpdateProduct extends FormRequest
     {
         return [
             'name' => ['required', 'unique:products,name,' . $this->product_id],
-            'description' => 'required',
-            'product_slug' => 'required',
-            'product_price' => 'required|numeric',
-            'product_code' => 'required',
+            // 'product_price' => 'required|numeric'            
             'category_id' => 'required',
-            'sale_price' => 'nullable|numeric',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng nhập trường này',
-            'description.required' => 'Vui lòng nhập trường này',
-            'product_slug.required' => 'Vui lòng nhập trường này',            
-            'product_code.required' => 'Vui lòng nhập trường này',
+            'name.required' => 'Vui lòng nhập trường này',            
             'category_id.required' => 'Vui lòng nhập trường này',
-            'product_price.required' => 'Vui lòng nhập trường này',
-            'product_price.numeric' => 'Giá tiền phải là số',
-            'sale_price.numeric' => 'Giá tiền phải là số',
+            // 'product_price.required' => 'Vui lòng nhập trường này',
+            // 'product_price.numeric' => 'Giá tiền phải là số',
         ];
     }
 }

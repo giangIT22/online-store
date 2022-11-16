@@ -25,7 +25,7 @@
                       <th>Mã sản phẩm</th>
                       <th>Ảnh sản phẩm</th>
                       <th>Tên</th>
-                      <th>Giá sản phẩm</th>
+                      <th>Giá bán</th>
                       <th>Số lượng</th>
                       <th>Giá sale</th>
                       <th>Trạng thái</th>
@@ -42,11 +42,11 @@
                       <td><img :src="item.image" alt="" width="100px" /></td>
                       <td style="width:200px;">{{ item.name }}</td>
                       <td>
-                        {{
+                        {{ item.product_price ? 
                           item.product_price.toLocaleString("it-IT", {
                             style: "currency",
                             currency: "vnd",
-                          })
+                          }) : 0
                         }}
                       </td>
                       <td>{{ item.amount }}</td>
@@ -55,7 +55,7 @@
                           item.sale_price.toLocaleString("it-IT", {
                             style: "currency",
                             currency: "vnd",
-                          }) : ""
+                          }) : 0
                         }}
                       </td>
                       <td>

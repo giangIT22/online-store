@@ -43359,13 +43359,15 @@ var render = function () {
                                 _vm._v(
                                   "\n                      " +
                                     _vm._s(
-                                      item.product_price.toLocaleString(
-                                        "it-IT",
-                                        {
-                                          style: "currency",
-                                          currency: "vnd",
-                                        }
-                                      )
+                                      item.product_price
+                                        ? item.product_price.toLocaleString(
+                                            "it-IT",
+                                            {
+                                              style: "currency",
+                                              currency: "vnd",
+                                            }
+                                          )
+                                        : 0
                                     ) +
                                     "\n                    "
                                 ),
@@ -43385,7 +43387,7 @@ var render = function () {
                                               currency: "vnd",
                                             }
                                           )
-                                        : ""
+                                        : 0
                                     ) +
                                     "\n                    "
                                 ),
@@ -43480,7 +43482,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Tên")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Giá sản phẩm")]),
+        _c("th", [_vm._v("Giá bán")]),
         _vm._v(" "),
         _c("th", [_vm._v("Số lượng")]),
         _vm._v(" "),

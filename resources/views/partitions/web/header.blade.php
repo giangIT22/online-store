@@ -79,7 +79,9 @@
                                                 ->get();
                                     
                                             foreach ($products as $item) {
-                                                $productDetail = DB::table('product_details')->where('id', $item->product_detail_id)->first();
+                                                $productDetail = DB::table('product_details')
+                                                    ->where('id', $item->product_detail_id)
+                                                    ->first();
                                                 $product = DB::table('products')
                                                     ->where('id', $productDetail->product_id)
                                                     ->first();
@@ -195,11 +197,13 @@
                                 <li class="{{ Route::current()->uri == '/' ? 'active' : '' }}"> <a
                                         href="{{ route('index') }}">Trang chủ</a> </li>
                                 @foreach ($categories as $category)
-                                    <li
-                                        class=" {{ $category->id == request()->category_id ? 'active' : '' }} dropdown hidden-sm">
-                                        <a
-                                            href="{{ route('category.index', ['category_id' => $category->id]) }}">{{ $category->name }}</a>
-                                    </li>
+                                    @if (isset($category->products) && $category->products->sum('amount') > 0)
+                                        <li
+                                            class=" {{ $category->id == request()->category_id ? 'active' : '' }} dropdown hidden-sm">
+                                            <a
+                                                href="{{ route('category.index', ['category_id' => $category->id]) }}">{{ $category->name }}</a>
+                                        </li>
+                                    @endif
                                 @endforeach
                                 <li class="{{ Route::current()->uri == '/blog' ? 'active' : '' }}"> <a
                                         href="{{ route('blog.view') }}">Tin tức</a> </li>

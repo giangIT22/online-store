@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->integer('amount')->default(0);
             $table->double('import_price')->nullable();
-            $table->double('product_price');
-            $table->text('description');
+            $table->double('product_price')->nullable()->default(0);
+            $table->text('description')->nullable();
             $table->double('sale_price')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->integer('category_id');

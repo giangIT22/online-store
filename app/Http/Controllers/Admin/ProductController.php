@@ -44,9 +44,12 @@ class ProductController extends Controller
 
     public function store(StoreProduct $request)
     {
-     
         $data = $request->except(['image_path']);
-        $data['product_code'] = 'SP' . rand();
+        do {
+            $data['product_code'] = 'SP' . rand();
+            $product = Product::where('product_code', $data['product_code'])->first();       
+        } while (isset($product));
+
         $productImage = $this->uploadImage($request, 'image', 'product', $data['product_code']);
         $data['image'] = $productImage['file_path'];
         DB::beginTransaction();
@@ -134,9 +137,8 @@ class ProductController extends Controller
 
     public function update(UpdateProduct $request, $productId)
     {
-        $data = $request->except(['image_path', 'tags', 'sizes', 'amounts']);
+        $data = $request->except(['image_path']);
         $product = Product::findOrFail($productId);
-        $data['product_qty'] = array_sum($request->amounts);
 
         if ($request->image) {
             $productImage = $this->uploadImage($request, 'image', 'product', $product->product_code);
@@ -154,15 +156,6 @@ class ProductController extends Controller
                     'image_path' => $path['file_path'],
                 ]);
             }
-        }
-
-        //Update product_size
-        foreach ($request->sizes as $key => $size) {
-            DB::table('product_size')
-                ->updateOrInsert([
-                    'product_id' => $product->id,
-                    'size_id' => $size,
-                ], ['amount' => $request->amounts[$key]]);
         }
 
         $notification = [

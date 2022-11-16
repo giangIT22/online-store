@@ -86,11 +86,7 @@
                                                 <div class="form-group">
                                                     <h5>Mô tả<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="description" class="form-control"
-                                                            value="{{ old('description') }}">
-                                                        @error('description')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <textarea name="description" class="form-control" cols="30" rows="10">{{ old('description') }}</textarea>
                                                     </div>
                                                 </div>
 
@@ -115,10 +111,10 @@
                                             </div> <!-- end col md 4 -->
                                         </div> <!-- end 3RD row  --> --}}
 
-                                        <div class="row">
+                                        {{-- <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <h5>Giá<span class="text-danger">*</span></h5>
+                                                    <h5>Giá bán<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_price" class="form-control"
                                                             value="{{ old('product_price') }}">
@@ -127,20 +123,9 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <h5>Giá sale</h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="sale_price" class="form-control"
-                                                            value="{{ old('sale_price') }}">
-                                                        @error('sale_price')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-
                                             </div> <!-- end col md 4 -->
 
-                                        </div> <!-- end 5th row  -->
+                                        </div> <!-- end 5th row  --> --}}
 
                                         <div class="row">
                                             <div class="col-md-8">

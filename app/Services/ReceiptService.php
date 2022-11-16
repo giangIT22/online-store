@@ -16,7 +16,6 @@ class ReceiptService implements ReceiptServiceInterface
 {
     public function all()
     {
-        
     }
 
     public function getData()
@@ -36,7 +35,13 @@ class ReceiptService implements ReceiptServiceInterface
 
     public function storeReceipt($params)
     {
-    
+        do {
+            $params['receipt_code'] = 'KH' . rand();
+            $receipt = Receipt::where('receipt_code', $params['receipt_code'])->first();
+        } while (isset($receipt));
+
+        DB::beginTransaction();
+        try {
             $receipt = Receipt::create([
                 'receipt_code' => $params['receipt_code'],
                 'notes' => $params['notes'],
@@ -44,7 +49,7 @@ class ReceiptService implements ReceiptServiceInterface
                 'supply_company_id' => $params['supply_company_id'],
                 'admin_id' => Auth::guard('admin')->user()->id
             ]);
-
+    
             foreach ($params['products'] as $key => $id) {
                 $productDetail = ProductDetail::where('product_id', $id)->where('color_id', $params['colors'][$key])
                     ->where('size_id', $params['sizes'][$key])->first();
@@ -59,7 +64,9 @@ class ReceiptService implements ReceiptServiceInterface
                     ]);
                     $product->update([
                         'amount' => $product->amount + $productDetail->amount,
-                        'import_price' => $params['import_prices'][$key]
+                        'import_price' => $params['import_prices'][$key],
+                        'product_price' => $params['import_prices'][$key] + ($params['import_prices'][$key] * 10 / 100),
+                        'status' => Product::PUBLIC
                     ]);
                 } else {
                     $productDetail2 = ProductDetail::create([
@@ -68,20 +75,27 @@ class ReceiptService implements ReceiptServiceInterface
                         'size_id' => $params['sizes'][$key],
                         'color_id' => $params['colors'][$key]
                     ]);
-
+    
                     ReceiptDetail::create([
                         'import_amount' => $params['import_amounts'][$key],
                         'import_price' => $params['import_prices'][$key],
                         'product_detail_id' => $productDetail2->id,
                         'receipt_id' => $receipt->id
                     ]);
-
+    
                     $product->update([
                         'amount' => $product->amount + $productDetail2->amount,
-                        'import_price' => $params['import_prices'][$key]
+                        'import_price' => $params['import_prices'][$key],
+                        'product_price' => $params['import_prices'][$key] + ($params['import_prices'][$key] * 10 / 100),
+                        'status' => Product::PUBLIC
                     ]);
                 }
             }
-           
+
+            DB::commit();
+        } catch( \Exception $e) {
+            DB::rollBack();
+            dd($e->getMessage());
+        }
     }
 }

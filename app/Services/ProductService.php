@@ -51,32 +51,30 @@ class ProductService implements ProductServiceInterface
 
     public function getBestSellProducts()
     {
-        // $products = DB::table('order_item')
-        //     ->join('products', 'order_item.product_id', 'products.id')
-        //     ->join('orders', 'order_item.order_id', 'orders.id')
-        //     ->select(
-        //         'order_item.product_id',
-        //         'products.name',
-        //         'products.product_slug',
-        //         'products.image',
-        //         'products.product_price',
-        //         'products.sale_price',
-        //         DB::raw('SUM(order_item.amount) as total_amount')
-        //     )
-        //     ->where('orders.status', Order::DELIVERED)
-        //     ->groupBy(
-        //         'order_item.product_id',
-        //         'products.name',
-        //         'products.product_slug',
-        //         'products.image',
-        //         'products.product_price',
-        //         'products.sale_price'
-        //     )
-        //     ->orderBy('total_amount', 'desc')
-        //     ->limit(8)
-        //     ->get();
+        $products = DB::table('order_item')
+            ->join('orders', 'order_item.order_id', 'orders.id')
+            ->join('product_details', 'order_item.product_detail_id', 'product_details.id')
+            ->join('products', 'product_details.product_id', 'products.id')
+            ->select(
+                'order_item.product_detail_id',
+                'products.name',
+                'products.id as product_id',
+                'products.image',
+                'products.product_price',
+                'products.sale_price',
+                DB::raw('SUM(order_item.amount) as total_amount')
+            )
+            ->where('orders.status', Order::DELIVERED)
+            ->groupBy(
+                'order_item.product_detail_id',
+                'products.name',
+                'products.image',
+            )
+            ->orderBy('total_amount', 'desc')
+            ->limit(8)
+            ->get();
 
-        // return $products;
+        return $products;
     }
 
     public function getAllProduct($params)

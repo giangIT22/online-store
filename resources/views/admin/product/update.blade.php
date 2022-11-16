@@ -95,11 +95,7 @@
                                                 <div class="form-group">
                                                     <h5>Mô tả<span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="description" class="form-control"
-                                                            value="{{ old('description', $product->description) }}">
-                                                        @error('description')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <textarea name="description" class="form-control" cols="30" rows="10">{{ old('description', $product->description ) }}</textarea>
                                                     </div>
                                                 </div>
                                             </div> <!-- end col md 4 -->
@@ -127,7 +123,7 @@
                                                     <h5>Số lượng<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" class="form-control"
-                                                            value="{{ $product->product_qty }}" disabled>
+                                                            value="{{ $product->amount ?? 0 }}" disabled>
                                                     </div>
                                                 </div>
 
@@ -140,20 +136,14 @@
                                                     <h5>Giá<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_price" class="form-control"
-                                                            value="{{ old('product_price', $product->product_price) }}">
-                                                        @error('product_price')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                            value="{{ $product->product_price ?? 0 }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <h5>Giá sale<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="sale_price" class="form-control"
-                                                            value="{{ old('sale_price', $product->sale_price ?? '') }}">
-                                                        @error('sale_price')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                            value="{{ $product->sale_price ?? 0 }}">
                                                     </div>
                                                 </div>
 
@@ -250,7 +240,6 @@
                                             </div>
                                             @endforeach
                                         </div> --}}
-                                        <button type="button" class="btn btn-success">Thêm tùy chọn</button>
 
                                         <hr>
 
