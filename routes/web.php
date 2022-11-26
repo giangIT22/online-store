@@ -77,7 +77,7 @@ Route::prefix('/product')->group(function () {
 
 //============Shopping===============================
 Route::get('/category/{category_id}', [CategoryController::class, 'index'])->name('category.index');
-Route::get('/sub-category/{category_id}', [CategoryController::class, 'getProductBySubCategory'])->name('sub_category.index');
+Route::get('/sub-category/{sub_category_id}', [CategoryController::class, 'getProductBySubCategory'])->name('sub_category.index');
 Route::get('/all-product', [CategoryController::class, 'allProducts'])->name('category.all.products');
 
 //=======================cart=====================

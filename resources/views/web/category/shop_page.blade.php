@@ -1,20 +1,20 @@
 @extends('layouts.guest')
 
 @php
-$minDate = \Carbon\Carbon::now()->subDays(15);
-$routeName = Route::current()->getName();
-if ($routeName == 'sub_category.index') {
-    $subCategory = DB::table('sub_categories')
-        ->where('id', request('category_id'))
-        ->first();
-    $category = DB::table('categories')
-        ->where('id', $subCategory->category_id)
-        ->first();
-} else {
-    $category = DB::table('categories')
-        ->where('id', request('category_id'))
-        ->first();
-}
+    $minDate = \Carbon\Carbon::now()->subDays(15);
+    $routeName = Route::current()->getName();
+    if ($routeName == 'sub_category.index') {
+        $subCategory = DB::table('sub_categories')
+            ->where('id', request('sub_category_id'))
+            ->first();
+        $category = DB::table('categories')
+            ->where('id', $subCategory->category_id)
+            ->first();
+    } else {
+        $category = DB::table('categories')
+            ->where('id', request('category_id'))
+            ->first();
+    }
 @endphp
 
 @section('content')
@@ -24,8 +24,7 @@ if ($routeName == 'sub_category.index') {
                 <ul class="list-inline list-unstyled">
                     <li><a href="{{ route('index') }}">Trang chủ </a></li>/
                     @if (isset($subCategory))
-                        <li><a
-                                href="{{ route('category.index', ['category_id' => $category->id]) }}">{{ $category->name }}
+                        <li><a href="{{ route('category.index', ['category_id' => $category->id]) }}">{{ $category->name }}
                             </a></li>/
                         <li class='active'>{{ $subCategory->sub_category_name }}</li>
                     @else
@@ -55,7 +54,9 @@ if ($routeName == 'sub_category.index') {
                                     <h4 class="widget-title">GIÁ SẢN PHẨM</h4>
                                 </div>
                                 <form
-                                    action="{{ route('category.index', ['category_slug' => request()->category_slug, 'category_id' => request('category_id')]) }}"
+                                    @if (isset($subCategory)) action="{{ route('sub_category.index', ['sub_category_id' => request('sub_category_id')]) }}"
+                                    @else
+                                        action="{{ route('category.index', ['category_id' => request('category_id')]) }}" @endif
                                     class="filter-price" method="get">
                                     <ul class="list-value">
                                         <li class="filter-item">
@@ -127,14 +128,14 @@ if ($routeName == 'sub_category.index') {
                     @endphp
                     <div id="category" class="category-carousel hidden-xs">
                         <div class="item">
-                            <div class="image"> <img src="{{ $slider->image }}" alt=""
-                                    class="img-responsive"> </div>
+                            <div class="image"> <img src="{{ $slider->image }}" alt="" class="img-responsive">
+                            </div>
                         </div>
                     </div>
 
                     <div class="clearfix filters-container m-t-10">
                         <div class="row">
-                            <div class="col col-sm-6 col-md-2">
+                            {{-- <div class="col col-sm-6 col-md-2">
                                 <div class="filter-tabs">
                                     <ul id="filter-tabs" class="nav nav-tabs nav-tab-box nav-tab-fa-icon">
                                         <li class="active"> <a data-toggle="tab" href="#grid-container"><i
@@ -144,9 +145,9 @@ if ($routeName == 'sub_category.index') {
                                     </ul>
                                 </div>
                                 <!-- /.filter-tabs -->
-                            </div>
+                            </div> --}}
                             <!-- /.col -->
-                            <div class="col col-sm-12 col-md-6">
+                            <div class="col col-sm-12 col-md-8">
                                 <div class="col col-sm-3 col-md-6 no-padding">
                                     <div class="lbl-cnt"> <span class="lbl">Sắp xếp</span>
                                         <div class="fld inline">
@@ -156,26 +157,40 @@ if ($routeName == 'sub_category.index') {
                                                 <ul role="menu" class="dropdown-menu">
                                                     <li role="presentation">
                                                         <a
-                                                            href="{{ route(
-                                                                'category.index',
+                                                            @if (isset($subCategory)) href="{{ route(
+                                                                'sub_category.index',
                                                                 array_merge(request()->query(), [
-                                                                    'category_slug' => request('category_slug'),
-                                                                    'category_id' => request('category_id'),
+                                                                    'sub_category_id' => request('sub_category_id'),
                                                                     'sort' => 0,
                                                                 ]),
-                                                            ) }}">Giá:
+                                                            ) }}"
+                                                            @else
+                                                                href="{{ route(
+                                                                    'category.index',
+                                                                    array_merge(request()->query(), [
+                                                                        'category_id' => request('category_id'),
+                                                                        'sort' => 0,
+                                                                    ]),
+                                                                ) }}" @endif>Giá:
                                                             tăng dần</a>
                                                     </li>
                                                     <li role="presentation">
                                                         <a
-                                                            href="{{ route(
-                                                                'category.index',
+                                                            @if (isset($subCategory)) href="{{ route(
+                                                                'sub_category.index',
                                                                 array_merge(request()->query(), [
-                                                                    'category_slug' => request('category_slug'),
-                                                                    'category_id' => request('category_id'),
+                                                                    'sub_category_id' => request('sub_category_id'),
                                                                     'sort' => 1,
                                                                 ]),
-                                                            ) }}">Giá:
+                                                            ) }}"
+                                                    @else
+                                                        href="{{ route(
+                                                            'category.index',
+                                                            array_merge(request()->query(), [
+                                                                'category_id' => request('category_id'),
+                                                                'sort' => 1,
+                                                            ]),
+                                                        ) }}" @endif>Giá:
                                                             giảm dần</a>
                                                     </li>
                                                 </ul>
@@ -192,36 +207,58 @@ if ($routeName == 'sub_category.index') {
                                     <div class="pagination-container">
                                         <ul class="list-inline list-unstyled">
                                             <li class="prev"><a
+                                                    @if (isset($subCategory)) href="{{ route(
+                                                        'sub_category.index',
+                                                        array_merge(request()->query(), [
+                                                            'sub_category_id' => request('sub_category_id'),
+                                                            'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
+                                                        ]),
+                                                    ) }}"
+                                                @else
+                                                href="{{ route(
+                                                    'category.index',
+                                                    array_merge(request()->query(), [
+                                                        'category_id' => request('category_id'),
+                                                        'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
+                                                    ]),
+                                                ) }}" @endif>
+                                                    <i class="fa fa-angle-left"></i></a></li>
+                                            @for ($i = 1; $i <= $lastPage; $i++)
+                                                <li class="{{ $i == $currentPage ? 'active' : '' }}">
+                                                    <a
+                                                        @if (isset($subCategory)) href="{{ route(
+                                                            'sub_category.index',
+                                                            array_merge(request()->query(), [
+                                                                'sub_category_id' => request('sub_category_id'),
+                                                                'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
+                                                            ]),
+                                                        ) }}"
+                                                    @else
                                                     href="{{ route(
                                                         'category.index',
                                                         array_merge(request()->query(), [
-                                                            'category_slug' => request()->category_slug,
                                                             'category_id' => request('category_id'),
                                                             'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
                                                         ]),
-                                                    ) }}">
-                                                    <i class="fa fa-angle-left"></i></a></li>
-                                            @for ($i = 1; $i <= $lastPage; $i++)
-                                                <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
-                                                        href="{{ route(
-                                                            'category.index',
-                                                            array_merge(request()->query(), [
-                                                                'category_slug' => request()->category_slug,
-                                                                'category_id' => request('category_id'),
-                                                                'page' => $i,
-                                                            ]),
-                                                        ) }}">{{ $i }}</a>
+                                                    ) }}" @endif>{{ $i }}</a>
                                                 </li>
                                             @endfor
                                             <li class="next"><a
-                                                    href="{{ route(
-                                                        'category.index',
+                                                    @if (isset($subCategory)) href="{{ route(
+                                                        'sub_category.index',
                                                         array_merge(request()->query(), [
-                                                            'category_slug' => request()->category_slug,
-                                                            'category_id' => request('category_id'),
-                                                            'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1,
+                                                            'sub_category_id' => request('sub_category_id'),
+                                                            'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
                                                         ]),
-                                                    ) }} "><i
+                                                    ) }}"
+                                            @else
+                                            href="{{ route(
+                                                'category.index',
+                                                array_merge(request()->query(), [
+                                                    'category_id' => request('category_id'),
+                                                    'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
+                                                ]),
+                                            ) }}" @endif><i
                                                         class="fa fa-angle-right"></i></a></li>
                                         </ul>
                                     </div>
@@ -244,9 +281,8 @@ if ($routeName == 'sub_category.index') {
                                                         <div class="product-image">
                                                             <div class="image">
                                                                 <a
-                                                                    href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">
-                                                                    <img height="249px;"
-                                                                        src="{{ asset($product->image) }}"
+                                                                    href="{{ route('product.detail', ['product_id' => $product->id]) }}">
+                                                                    <img height="249px;" src="{{ asset($product->image) }}"
                                                                         alt=""></a>
                                                             </div>
                                                             @if ($product->created_at > $minDate && $product->created_at < now())
@@ -255,7 +291,7 @@ if ($routeName == 'sub_category.index') {
                                                         </div>
                                                         <div class="product-info text-left">
                                                             <h3 class="name"><a
-                                                                    href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
+                                                                    href="{{ route('product.detail', ['product_id' => $product->id]) }}">{{ $product->name }}</a>
                                                             </h3>
                                                             @include('partitions.web.rating', [
                                                                 'productId' => $product->id,
@@ -276,11 +312,11 @@ if ($routeName == 'sub_category.index') {
                                                                 @endIf
                                                             </div>
                                                         </div>
-                                                        <div class="cart clearfix animate-effect fix-style">
+                                                        {{-- <div class="cart clearfix animate-effect fix-style">
                                                             <div class="action">
                                                                 <ul class="list-unstyled">
                                                                     <li class="add-cart-button btn-group">
-                                                                        <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
+                                                                        <a href="{{ route('product.detail', ['product_id' => $product->id]) }}"
                                                                             data-toggle="tooltip"
                                                                             class="btn btn-primary icon" type="button"
                                                                             data-original-title="" title=""> <i
@@ -296,7 +332,7 @@ if ($routeName == 'sub_category.index') {
                                                                         </a> </li>
                                                                 </ul>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -324,7 +360,7 @@ if ($routeName == 'sub_category.index') {
                                                         <div class="col col-sm-8 col-lg-8">
                                                             <div class="product-info">
                                                                 <h3 class="name fix-lh"><a
-                                                                        href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}">{{ $product->name }}</a>
+                                                                        href="{{ route('product.detail', ['product_id' => $product->id]) }}">{{ $product->name }}</a>
                                                                 </h3>
                                                                 @include('partitions.web.rating', [
                                                                     'productId' => $product->id,
@@ -349,7 +385,7 @@ if ($routeName == 'sub_category.index') {
                                                                     <div class="action">
                                                                         <ul class="list-unstyled">
                                                                             <li class="add-cart-button btn-group">
-                                                                                <a href="{{ route('product.detail', ['product_id' => $product->id, 'slug' => $product->product_slug]) }}"
+                                                                                <a href="{{ route('product.detail', ['product_id' => $product->id]) }}"
                                                                                     data-toggle="tooltip"
                                                                                     class="btn btn-primary icon"
                                                                                     type="button" data-original-title=""
@@ -388,35 +424,56 @@ if ($routeName == 'sub_category.index') {
                                     <div class="pagination-container">
                                         <ul class="list-inline list-unstyled">
                                             <li class="prev"><a
-                                                    href="{{ route(
-                                                        'category.index',
+                                                    @if (isset($subCategory)) href="{{ route(
+                                                        'sub_category.index',
                                                         array_merge(request()->query(), [
-                                                            'category_slug' => request()->category_slug,
-                                                            'category_id' => request('category_id'),
+                                                            'sub_category_id' => request('sub_category_id'),
                                                             'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
                                                         ]),
-                                                    ) }}">
+                                                    ) }}"
+                                            @else
+                                            href="{{ route(
+                                                'category.index',
+                                                array_merge(request()->query(), [
+                                                    'category_id' => request('category_id'),
+                                                    'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
+                                                ]),
+                                            ) }}" @endif>
                                                     <i class="fa fa-angle-left"></i></a></li>
                                             @for ($i = 1; $i <= $lastPage; $i++)
                                                 <li class="{{ $i == $currentPage ? 'active' : '' }}"><a
-                                                        href="{{ route(
-                                                            'category.index',
+                                                        @if (isset($subCategory)) href="{{ route(
+                                                            'sub_category.index',
                                                             array_merge(request()->query(), [
-                                                                'category_slug' => request()->category_slug,
-                                                                'category_id' => request('category_id'),
-                                                                'page' => $i,
+                                                                'sub_category_id' => request('sub_category_id'),
+                                                                'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
                                                             ]),
-                                                        ) }}">{{ $i }}</a>
+                                                        ) }}"
+                                                @else
+                                                href="{{ route(
+                                                    'category.index',
+                                                    array_merge(request()->query(), [
+                                                        'category_id' => request('category_id'),
+                                                        'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
+                                                    ]),
+                                                ) }}" @endif>{{ $i }}</a>
                                             @endfor
                                             <li class="next"><a
-                                                    href="{{ route(
-                                                        'category.index',
+                                                    @if (isset($subCategory)) href="{{ route(
+                                                        'sub_category.index',
                                                         array_merge(request()->query(), [
-                                                            'category_slug' => request()->category_slug,
-                                                            'category_id' => request('category_id'),
-                                                            'page' => $currentPage == $lastPage ? $lastPage : $currentPage + 1,
+                                                            'sub_category_id' => request('sub_category_id'),
+                                                            'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
                                                         ]),
-                                                    ) }} "><i
+                                                    ) }}"
+                                            @else
+                                            href="{{ route(
+                                                'category.index',
+                                                array_merge(request()->query(), [
+                                                    'category_id' => request('category_id'),
+                                                    'page' => $currentPage == 1 ? $currentPage : $currentPage - 1,
+                                                ]),
+                                            ) }}" @endif><i
                                                         class="fa fa-angle-right"></i></a></li>
                                         </ul>
                                     </div>

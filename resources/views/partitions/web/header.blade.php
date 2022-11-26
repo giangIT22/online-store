@@ -205,7 +205,7 @@
                                         </li>
                                     @endif
                                 @endforeach
-                                <li class="{{ Route::current()->uri == '/blog' ? 'active' : '' }}"> <a
+                                <li class="{{ Route::current()->uri == 'tin-tuc' ? 'active' : '' }}"> <a
                                         href="{{ route('blog.view') }}">Tin tức</a> </li>
                             </ul>
                             <!-- /.navbar-nav -->

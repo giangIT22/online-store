@@ -37,11 +37,11 @@ class CategoryController extends Controller
             'lastPage', 'currentPage'));
     }
 
-    public function getProductBySubCategory($categoryId, Request $request)
+    public function getProductBySubCategory($subCategoryId, Request $request)
     {
         $categories = Category::with('subCategories')->get();
         $sliders = Banner::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
-        list($products, $currentPage, $lastPage) = $this->productService->getProductsBySubCategory($request->all(), $categoryId);
+        list($products, $currentPage, $lastPage) = $this->productService->getProductsBySubCategory($request->all(), $subCategoryId);
 
         $validator = Validator::make($request->all(), [
             'sort' => 'in:0,1',

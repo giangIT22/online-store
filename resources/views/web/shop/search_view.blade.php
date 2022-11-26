@@ -129,7 +129,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
 
                                                             </div>
                                                             <!-- /.product-info -->
-                                                            <div class="cart clearfix animate-effect fix-style">
+                                                            {{-- <div class="cart clearfix animate-effect fix-style">
                                                                 <div class="action">
                                                                     <ul class="list-unstyled">
                                                                         <li class="add-cart-button btn-group">
@@ -150,7 +150,7 @@ $minDate = \Carbon\Carbon::now()->subDays(15);
                                                                     </ul>
                                                                 </div>
                                                                 <!-- /.action -->
-                                                            </div>
+                                                            </div> --}}
                                                             <!-- /.cart -->
                                                         </div>
                                                         <!-- /.product -->

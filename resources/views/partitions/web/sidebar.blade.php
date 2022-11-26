@@ -16,7 +16,7 @@
                                                 @if (isset($item->products) && $item->products->sum('amount') > 0)
                                                     <li>
                                                         <a
-                                                            href="{{ route('sub_category.index', ['category_id' => $item->id]) }}">
+                                                            href="{{ route('sub_category.index', ['sub_category_id' => $item->id]) }}">
                                                             {{ $item->sub_category_name }}
                                                         </a>
                                                     </li>

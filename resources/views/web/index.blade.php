@@ -106,7 +106,7 @@
                                                             </div>
                                                         </div>
                                                         <!-- /.product-info -->
-                                                        <div class="cart clearfix animate-effect fix-style">
+                                                        {{-- <div class="cart clearfix animate-effect fix-style">
                                                             <div class="action">
                                                                 <ul class="list-unstyled">
                                                                     <li class="add-cart-button btn-group">
@@ -126,7 +126,7 @@
                                                                 </ul>
                                                             </div>
                                                             <!-- /.action -->
-                                                        </div>
+                                                        </div> --}}
                                                         <!-- /.cart -->
                                                     </div>
                                                     <!-- /.product -->
@@ -196,7 +196,7 @@
                                                                 </div>
                                                             </div>
                                                             <!-- /.product-info -->
-                                                            <div class="cart clearfix animate-effect">
+                                                            {{-- <div class="cart clearfix animate-effect">
                                                                 <div class="action">
                                                                     <ul class="list-unstyled">
                                                                         <li class="add-cart-button btn-group">
@@ -218,7 +218,7 @@
                                                                     </ul>
                                                                 </div>
                                                                 <!-- /.action -->
-                                                            </div>
+                                                            </div> --}}
                                                             <!-- /.cart -->
                                                         </div>
                                                         <!-- /.product -->
@@ -287,7 +287,7 @@
 
                                         </div>
                                         <!-- /.product-info -->
-                                        <div class="cart clearfix animate-effect fix-style">
+                                        {{-- <div class="cart clearfix animate-effect fix-style">
                                             <div class="action">
                                                 <ul class="list-unstyled">
                                                     <li class="add-cart-button btn-group">
@@ -306,7 +306,7 @@
                                                         </a> </li>
                                                 </ul>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <!-- /.cart -->
                                     </div>
                                     <!-- /.product -->
@@ -366,7 +366,7 @@
 
                                                 </div>
                                                 <!-- /.product-info -->
-                                                <div class="cart clearfix animate-effect fix-style">
+                                                {{-- <div class="cart clearfix animate-effect fix-style">
                                                     <div class="action">
                                                         <ul class="list-unstyled">
                                                             <li class="add-cart-button btn-group">
@@ -386,7 +386,7 @@
                                                                 </a> </li>
                                                         </ul>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <!-- /.cart -->
                                             </div>
                                             <!-- /.product -->
