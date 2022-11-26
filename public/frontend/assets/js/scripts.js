@@ -643,78 +643,94 @@ jQuery(document).ready(function() {
             }
         });
 
-        $.ajax({
-            method: "POST",
-            url: '/delete-cart',
-            data: {
-                'product_id': productId,
-                'size_id': sizeId,
-                'color_id': colorId
-            },
-            success: function(response) {
-                let count = 0;
-                let sumPrice = 0;
-                if (response.status) {
-                    $(`#cancel${productId}-${sizeId}-${colorId}`).parent().parent().remove();
-                    $('.cart-grand-total span').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+        Swal.fire({
+            title: 'Bạn có muốn xóa sản phẩm này không',
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: "Hủy bỏ",
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Đồng ý'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    method: "POST",
+                    url: '/delete-cart',
+                    data: {
+                        'product_id': productId,
+                        'size_id': sizeId,
+                        'color_id': colorId
+                    },
+                    success: function(response) {
+                        let count = 0;
+                        let sumPrice = 0;
+                        Swal.fire(
+                            'Xóa sản phẩm thành công',
+                        ).then(function() {
+                            if (response.status) {
+                                $(`#cancel${productId}-${sizeId}-${colorId}`).parent().parent().remove();
+                                $('.cart-grand-total span').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
 
-                    //update box-cart
-                    if (response.products.length > 0) {
-                        let listProducts = response.products.map((product) => {
-                            let priceProduct = product.product_price.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' });
-                            return `<div class="row" style="margin-bottom: 10px;">
-                            <div class="col-xs-4">
-                                <div class="image"> <a
-                                        href="/product/detail/${product.product_id}/${product.product_slug}"><img
-                                            src="${product.product_image}"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="col-xs-7">
-                                <h3 class="name"><a
-                                        href="/product/detail/${product.product_id}/${product.product_slug}">${product.product_name}</a>
-                                </h3>
-                                <div class="price">
-                                    ${priceProduct}
-                                </div>
-                            </div>
-                        </div>`
-                        });
+                                //update box-cart
+                                if (response.products.length > 0) {
+                                    let listProducts = response.products.map((product) => {
+                                        let priceProduct = product.product_price.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' });
+                                        return `<div class="row" style="margin-bottom: 10px;">
+                                        <div class="col-xs-4">
+                                            <div class="image"> <a
+                                                    href="/product/detail/${product.product_id}/${product.product_slug}"><img
+                                                        src="${product.product_image}"
+                                                        alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <h3 class="name"><a
+                                                    href="/product/detail/${product.product_id}">${product.product_name}</a>
+                                            </h3>
+                                            <div class="price">
+                                                ${priceProduct}
+                                            </div>
+                                        </div>
+                                    </div>`
+                                    });
 
-                        $('.list-item-cart').html(listProducts.join(' '));
+                                    $('.list-item-cart').html(listProducts.join(' '));
 
-                        for (let product of response.products) {
-                            count += product.amount;
-                            sumPrice += product.amount * product.product_price;
-                        }
+                                    for (let product of response.products) {
+                                        count += product.amount;
+                                        sumPrice += product.amount * product.product_price;
+                                    }
 
-                        sumPrice = sumPrice.toLocaleString('it-IT', {
-                            style: 'currency',
-                            currency: 'vnd'
-                        });
-                        document.querySelector('.basket-item-count').innerHTML = count;
-                        document.querySelector('.basket-item-count').innerHTML = count;
-                        document.querySelector('.total-price-basket .value').innerHTML = sumPrice;
-                        $('.sum-price-product').text(sumPrice);
-                    } else {
-                        document.querySelector('.basket-item-count').innerHTML = count;
-                        document.querySelector('.total-price-basket .value').innerHTML = sumPrice;
-                    }
-                }
+                                    sumPrice = sumPrice.toLocaleString('it-IT', {
+                                        style: 'currency',
+                                        currency: 'vnd'
+                                    });
+                                    document.querySelector('.basket-item-count').innerHTML = count;
+                                    document.querySelector('.basket-item-count').innerHTML = count;
+                                    document.querySelector('.total-price-basket .value').innerHTML = sumPrice;
+                                    $('.sum-price-product').text(sumPrice);
+                                } else {
+                                    document.querySelector('.basket-item-count').innerHTML = count;
+                                    document.querySelector('.total-price-basket .value').innerHTML = sumPrice;
+                                }
+                            }
 
-                if (response.flag) {
-                    $('.box-cart').remove();
-                    $('.show-list-item-cart').after(`<div class="dropdown-menu not-product">
-                            Không có sản phẩm nào trong giỏ hàng
-                        </div>`);
-                    $('.shopping-cart').remove();
-                    $('.cart').html(`<div class="not-cart">
-                                    <h1>Giỏ hàng</h2>
-                                    <h4>Không có sản phẩm nào trong giỏ hàng. Quay lại cửa hàng để tiếp tục mua sắm.</p>
+                            if (response.flag) {
+                                $('.box-cart').remove();
+                                $('.show-list-item-cart').after(`<div class="dropdown-menu not-product">
+                                        Không có sản phẩm nào trong giỏ hàng
                                     </div>`);
-                }
+                                $('.shopping-cart').remove();
+                                $('.cart').html(`<div class="not-cart">
+                                                <h1>Giỏ hàng</h2>
+                                                <h4>Không có sản phẩm nào trong giỏ hàng. Quay lại cửa hàng để tiếp tục mua sắm.</p>
+                                                </div>`);
+                            }
+                        })
+                    }
+                });
             }
-        });
+        })
     });
 
 

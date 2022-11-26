@@ -36,16 +36,11 @@ class CartController extends Controller
                     'products' => $products
                 ]
             );
-        } else {
-            $products = $this->cartService->addProductToCart($request->all());
-
-            return response()->json(
-                [
-                    'status' => true,
-                    'products' => $products
-                ]
-            );
         }
+
+        return response()->json([
+            'status' => false
+        ]);
     }
 
     public function view()

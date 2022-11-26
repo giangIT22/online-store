@@ -9,7 +9,7 @@ function actionDelete(event) {
         cancelButtonText: "Hủy bỏ",
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Đòng ý'
+        confirmButtonText: 'Đồng ý'
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({

@@ -6,8 +6,6 @@ use App\Models\Cart;
 use App\Models\Product;
 use App\Models\ProductCart;
 use App\Models\ProductDetail;
-use App\Models\Size;
-use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -17,16 +15,16 @@ class CartService implements CartServiceInterface
     {
         $product = Product::findOrFail($params['product_id']);
         $productDetail = ProductDetail::where('product_id', $product->id)
-                        ->where('color_id', $params['color_id'])
-                        ->where('size_id', $params['size_id'])
-                        ->first();
+            ->where('color_id', $params['color_id'])
+            ->where('size_id', $params['size_id'])
+            ->first();
         $cart = Cart::where('user_id', Auth::id())->first();
 
         if (!$cart) {
             $cart = Cart::create([
                 'user_id' => Auth::id()
             ]);
- 
+
             ProductCart::create([
                 'cart_id' => $cart->id,
                 'amount' => $params['amount'],
@@ -75,19 +73,14 @@ class CartService implements CartServiceInterface
         return $productsInCart;
     }
 
-    public function addProductToSection($params)
-    {
-        
-    }
-
     public function deleteCart($params)
     {
         $cart = Auth::user()->cart;
         $flag = false;
         $productDetail = ProductDetail::where('product_id', $params['product_id'])
-                        ->where('size_id', $params['size_id'])
-                        ->where('color_id', $params['color_id'])
-                        ->first();
+            ->where('size_id', $params['size_id'])
+            ->where('color_id', $params['color_id'])
+            ->first();
         $query = ProductCart::where('cart_id', $cart->id)
             ->where('product_detail_id', $productDetail->id);
         $product = $query->first();
@@ -135,9 +128,9 @@ class CartService implements CartServiceInterface
     {
         $cart = Auth::user()->cart;
         $productDetail = ProductDetail::where('product_id', $params['product_id'])
-                        ->where('size_id', $params['size_id'])
-                        ->where('color_id', $params['color_id'])
-                        ->first();
+            ->where('size_id', $params['size_id'])
+            ->where('color_id', $params['color_id'])
+            ->first();
         $query = ProductCart::where('cart_id', $cart->id)
             ->where('product_detail_id', $productDetail->id);
         $product = $query->first();

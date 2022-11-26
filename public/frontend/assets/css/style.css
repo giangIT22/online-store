@@ -299,3 +299,16 @@ label {
 .coupon-price input.form-control {
     font-weight: bold;
 }
+
+.swal2-popup {
+    padding: 30px 17px!important;
+}
+
+.swal2-popup .swal2-title {
+    margin-bottom: 30px !important;
+    font-size: 20px;
+}
+
+.swal2-popup .swal2-styled {
+    font-size: 15px !important;
+}
