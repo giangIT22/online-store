@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Auth;
 use App\Actions\Fortify\AttemptToAuthenticate;
+use Illuminate\Support\Facades\Redirect;
 use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
 use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
@@ -47,7 +48,12 @@ class LoginController extends Controller
     public function store(LoginRequest $request)
     {
         return $this->loginPipeline($request)->then(function ($request) {
-            return redirect()->route('index');
+            $notification = [
+                'message' => 'Bạn đã đăng nhập thành công',
+                'alert-type' => 'success'
+            ];
+         
+            return back()->with($notification);
         });
     }
 

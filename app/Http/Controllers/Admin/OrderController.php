@@ -86,7 +86,7 @@ class OrderController extends Controller
 
     public function cancelOrder($orderCode)
     {
-        $this->orderService->cancelOrder($orderCode);
+        $this->orderService->cancelOrder($orderCode, Order::CANCELED);
         
         return redirect()->route('all.orders');
     }

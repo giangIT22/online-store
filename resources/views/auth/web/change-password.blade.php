@@ -9,7 +9,7 @@
                     <!-- create a new account -->
                     <div class="col-md-18 col-sm-6 create-new-account">
                         <h4 class="checkout-subtitle">Thay đổi mật khẩu</h4>
-                        <form class="register-form outer-top-xs" role="form" method="post" action="{{route('password.update', ['user_id' => $userId])}}">
+                        <form class="register-form outer-top-xs" role="form" method="post" action="{{route('password.user-update', ['user_id' => $userId])}}">
                             @csrf
                             <div class="form-group">
                                 <label class="info-title" >Mật khẩu mới<span>*</span></label>

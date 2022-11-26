@@ -114,32 +114,31 @@ class OrderService implements OrderServiceInterface
         ];
     }
 
-    public function cancelOrder($orderCode)
+    public function cancelOrder($orderCode, $status)
     {
         $order = Order::where('order_code', $orderCode)->first();
 
         $order->update([
             'cancel_date' => now(),
-            'status' => Order::CANCELED
+            'status' => $status
         ]);
 
         $products = DB::table('order_item')->where('order_id', $order->id)->get();
 
         foreach ($products as $item) {
             //caculate amount of product after cancel order
-            $product = Product::findOrFail($item->product_id);
+            $productDetail = ProductDetail::findOrFail($item->product_detail_id);
+            $product = $productDetail->product;
             $product->amount = $product->amount + $item->amount;
+            $productDetail->amount = $productDetail->amount + $item->amount;
+            $productDetail->save();
             $product->save();
-
-            $query = DB::table('product_size')
-                ->where('product_id', $item->product_id)
-                ->where('size_id', $item->size_id);
-            $productSize = $query->first();
-
-            $query->update([
-                'amount' => $productSize->amount + $item->amount
-            ]);
         }
+    }
+    
+    public function returnedOrder($orderCode, $status)
+    {
+        $this->cancelOrder($orderCode, $status);
     }
 
     /**

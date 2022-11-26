@@ -18,6 +18,7 @@ class Order extends Model
     const DELIVERED = 3;
     const REQUEST_CANCEL = 4;
     const CANCELED = 5;
+    const RETEURNED = 6;
 
     const PAID = 1;
     

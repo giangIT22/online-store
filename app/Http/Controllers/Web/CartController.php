@@ -37,7 +37,14 @@ class CartController extends Controller
                 ]
             );
         } else {
-            return response()->json(['status' => false]);
+            $products = $this->cartService->addProductToCart($request->all());
+
+            return response()->json(
+                [
+                    'status' => true,
+                    'products' => $products
+                ]
+            );
         }
     }
 

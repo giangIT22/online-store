@@ -93,9 +93,9 @@
                                     <div class="col-md-6">
                                         <h4 class="mb-3">Phí giao hàng</h4>
                                         <div class="transport">
-                                            <div class="alert alert-info" role="alert">
+                                            {{-- <div class="alert alert-info" role="alert">
                                                 Vui lóng nhập thông tin giao hàng
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <h4 class="mb-3">Thanh toán</h4>
                                         @error('payment_type')

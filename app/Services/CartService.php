@@ -75,6 +75,11 @@ class CartService implements CartServiceInterface
         return $productsInCart;
     }
 
+    public function addProductToSection($params)
+    {
+        
+    }
+
     public function deleteCart($params)
     {
         $cart = Auth::user()->cart;

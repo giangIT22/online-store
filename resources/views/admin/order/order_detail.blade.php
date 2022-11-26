@@ -64,9 +64,9 @@
                                             @elseif ($order->status == 3)
                                                 <span class="badge badge-pill badge-primary">Đã giao hàng</span>
                                             @elseif ($order->status == 4)
-                                                <span class="badge badge-pill badge-primary">Yêu cầu hủy đơn hàng</span>
+                                                <span class="badge badge-pill badge-danger">Yêu cầu hủy đơn hàng</span>
                                             @elseif ($order->status == 5)
-                                                <span class="badge badge-pill badge-primary">Đơn hàng đã bị hủy</span>
+                                                <span class="badge badge-pill badge-danger">Đơn hàng đã bị hủy</span>
                                             @endif
                                         </th>
                                     </tr>
@@ -103,7 +103,13 @@
                                 </table>
 
                             </div>
-                        </div> <!--  // cod md -6 -->
+                        </div>
+                        @if ($order->status == 2)
+                            <div class="col-md-3">
+                                <a href="{{ route('order.cancel', ['order_code' => $order->order_code]) }}"
+                                    class="btn btn-block btn-success" id="delivered">Xác nhận đơn hàng bị hoàn lại</a>
+                            </div>
+                        @endif
                     </div>
                     <!-- /.row -->
                 </div>

@@ -36,7 +36,7 @@ Route::middleware(['guest:web', 'prevent-back-history'])->group(function () {
     Route::get('/forgot-password', [ResetPasswordController::class, 'forgetPassword'])->name('password.request');
     Route::post('/forgot-password', [ResetPasswordController::class, 'store'])->name('password.email');
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'verify'])->name('password.reset');
-    Route::post('/reset-password/{user_id}', [ResetPasswordController::class, 'updatePassword'])->name('password.update');
+    Route::post('/reset-password/{user_id}', [ResetPasswordController::class, 'updatePassword'])->name('password.user-update');
 });
 
 Route::get('/register/verify/{code}', [RegisterController::class, 'verify'])->name('verify.email'); // xac thuc email khi dky user
