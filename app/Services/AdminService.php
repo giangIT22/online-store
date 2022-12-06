@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Admin;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class AdminService implements AdminServiceInterface
 {
@@ -25,6 +27,28 @@ class AdminService implements AdminServiceInterface
         return [
             'listEmployees' => $dataSearch->items(),
             'lastPage' => $dataSearch->lastPage()
+        ];
+    }
+
+    public function makeDataVerifyMail(string $email)
+    {
+        $admin = Admin::where('email', $email)->first();
+        if (!$admin) {
+            return false;
+        }
+        $admin->update([
+            'email_verified_at' => Carbon::now(),
+        ]);        
+
+        $token = Hash::make(sprintf('%s%s', $admin->id, $email));
+
+        return [
+            'email' => $email,
+            'name' => $admin->name,
+            'link' => route('admin-password.reset', [
+                'token' => $token,
+                'admin_id' => $admin->id,
+            ]),
         ];
     }
 }

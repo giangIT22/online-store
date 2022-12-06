@@ -31,7 +31,7 @@ class Admin extends Authenticatable
         'email',
         'password',
         'address', 'phone', 'cccd',
-        'profile_photo_path', 'role_id', 'status'
+        'profile_photo_path', 'role_id', 'status', 'email_verified_at'
     ];
 
     /**

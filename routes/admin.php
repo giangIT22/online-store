@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReceiptController;
 use App\Http\Controllers\Admin\RegisterController;
+use App\Http\Controllers\Admin\ResetPasswordController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SupplyCompanyController;
@@ -22,6 +23,10 @@ Route::middleware(['guest:admin', 'prevent-back-history'])->group(function () {
     Route::post('/login', [LoginController::class, 'store'])->name('admin.login.store');
     Route::get('/register', [RegisterController::class, 'index'])->name('admin.register');
     Route::post('/register', [RegisterController::class, 'store'])->name('admin.register.store');
+    Route::get('/forgot-password', [ResetPasswordController::class, 'forgetPassword'])->name('admin-password.request');
+    Route::post('/forgot-password', [ResetPasswordController::class, 'store'])->name('admin-password.email');
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'verifyEmail'])->name('admin-password.reset');
+    Route::post('/reset-password/{admin_id}', [ResetPasswordController::class, 'updatePassword'])->name('password.admin-update');
 });
 
 Route::get('/logout', [LoginController::class, 'destroy'])->name('admin.logout');

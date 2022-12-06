@@ -18,7 +18,7 @@
                                     <span>{{$message}}</span>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn-upper btn btn-primary ">Tìm kiếm</button>
+                            <button type="submit" class="btn-upper btn btn-primary ">Lấy lại mật khẩu</button>
                             <a href="{{route('index')}}" class="btn" style="display:inline-block; color:rgb(54, 144, 228)">Hủy</a>
                         </form>
 
