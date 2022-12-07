@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\ProductDetail;
 use App\Models\ProductImage;
 use App\Models\Size;
+use App\Services\ProductServiceInterface;
 use App\Traits\StoreImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,18 +20,16 @@ class ProductController extends Controller
 {
     use StoreImageTrait;
 
+    protected $productService;
+
+    public function __construct(ProductServiceInterface $productService)
+    {
+        $this->productService = $productService;
+    }
+
     public function index(Request $request)
     {
-        $page = (int) $request->page ?? 1;
-        $data = Product::with(['category', 'subCategory'])->orderBy('created_at', 'desc')->get();
-        $products = $data->forPage($page, 10);
-        $lastPage = ceil(count($data) / Product::PER_PAGE);
-
-        return view('admin.product.index', [
-            'products' => $products,
-            'lastPage' => $lastPage,
-            'total' => count($data)
-        ]);
+        return view('admin.product.index', $this->productService->all());
     }
 
     public function create()
@@ -164,5 +163,22 @@ class ProductController extends Controller
         ];
 
         return redirect()->route('all.products')->with($notification);
+    }
+
+    public function search(Request $request)
+    {
+        try {
+            if ($request->search_key) {
+                $data = $this->productService->search($request->search_key);
+                return response()->json($data);
+            } else {
+                $data = $this->productService->all();
+                return response()->json($data);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
     }
 }

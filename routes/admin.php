@@ -75,6 +75,7 @@ Route::middleware(['auth:admin', 'prevent-back-history'])->group(function () {
         Route::post('/update/{product_id}', [ProductController::class, 'update'])->name('product.update');
         Route::get('/edit/{product_id}', [ProductController::class, 'edit'])->name('product.edit');
         Route::get('/delete/{product_id}', [ProductController::class, 'delete'])->name('product.delete');
+        Route::get('/search', [ProductController::class, 'search'])->name('product.search');
     });
 
     //===== All route receipt =====
@@ -83,8 +84,9 @@ Route::middleware(['auth:admin', 'prevent-back-history'])->group(function () {
         Route::get('/create', [ReceiptController::class, 'create'])->name('receipt.create');
         Route::post('/store', [ReceiptController::class, 'store'])->name('receipt.store');
         Route::post('/update/{receipt_id}', [ReceiptController::class, 'update'])->name('receipt.update');
-        Route::get('/edit/{receipt_id}', [ReceiptController::class, 'edit'])->name('receipt.edit');
+        Route::get('/detail/{receipt_id}', [ReceiptController::class, 'detail'])->name('receipt.edit');
         Route::get('/delete/{receipt_id}', [ReceiptController::class, 'delete'])->name('receipt.delete');
+        Route::get('/search', [ReceiptController::class, 'search'])->name('receipt.search');
     });
 
      //===== All route supply company =====

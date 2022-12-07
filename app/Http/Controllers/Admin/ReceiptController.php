@@ -17,7 +17,8 @@ class ReceiptController extends Controller
 
     public function all()
     {
-        return view('admin.receipt.index');
+        $receipts = $this->receiptService->all();
+        return view('admin.receipt.index', $receipts);
     }
 
     public function create()
@@ -35,5 +36,27 @@ class ReceiptController extends Controller
         ];
         
         return redirect()->route('all.receipts')->with($notification);
+    }
+
+    public function search(Request $request)
+    {
+        try {
+            if ($request->search_key) {
+                $data = $this->receiptService->search($request->search_key);
+                return response()->json($data);
+            } else {
+                $data = $this->receiptService->all();
+                return response()->json($data);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function detail()
+    {
+        
     }
 }

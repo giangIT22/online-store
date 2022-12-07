@@ -16,6 +16,13 @@ class ReceiptService implements ReceiptServiceInterface
 {
     public function all()
     {
+        $data = Receipt::with('admin')->orderBy('created_at', 'desc')->paginate(Receipt::PER_PAGE);
+
+        return [
+            'listReceipts' =>  $data->items(),
+            'total' => $data->total(),
+            'lastPage' => $data->lastPage()
+        ];
     }
 
     public function getData()
@@ -97,5 +104,17 @@ class ReceiptService implements ReceiptServiceInterface
             DB::rollBack();
             dd($e->getMessage());
         }
+    }
+
+    public function search($params)
+    {
+        $dataSearch = Receipt::search($params)->query(function($builder){
+            return $builder->with('admin');
+        })->paginate(Receipt::PER_PAGE);
+
+        return [
+            'listReceipts' => $dataSearch->items(),
+            'lastPage' => $dataSearch->lastPage()
+        ];
     }
 }

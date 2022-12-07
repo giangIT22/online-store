@@ -1,17 +1,17 @@
 @extends('layouts.admin', ['titlePage' => 'Danh sách phiếu nhập kho'])
-{{-- @php
-    $coupons = collect([]);
+@php
+    $receipts = collect([]);
 
-    foreach ($listCoupons as $coupon) {
-        $coupons->push($coupon);
+    foreach ($listReceipts as $receipt) {
+        $receipts->push($receipt);
     } 
-@endphp --}}
+@endphp
 @section('content')
     <list-receipt
-        {{-- @if ($coupons) 
-            :coupons="{{ $coupons }}"
+        @if ($receipts) 
+            :receipts="{{ $receipts }}"
             :total="{{ $total }}"
             :last-page="{{ $lastPage }}"
-        @endif     --}}
+        @endif    
     ></list-receipt>
 @endsection

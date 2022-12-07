@@ -161,4 +161,24 @@ class ProductService implements ProductServiceInterface
         $sizes = Size::whereIn('id', $data)->get();
         return $sizes;
     }
+
+    public function all()
+    {
+        $data = Product::with(['category', 'subCategory'])->orderBy('created_at', 'desc')->paginate(Product::PER_PAGE);
+        return [
+            'listProducts' =>  $data->items(),
+            'total' => $data->total(),
+            'lastPage' => $data->lastPage()
+        ];
+    }
+
+    public function search($params)
+    {
+        $dataSearch = Product::search($params)->paginate(Product::PER_PAGE);
+
+        return [
+            'listProducts' => $dataSearch->items(),
+            'lastPage' => $dataSearch->lastPage()
+        ];
+    }
 }

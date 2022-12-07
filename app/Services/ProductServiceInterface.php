@@ -13,4 +13,6 @@ interface ProductServiceInterface
     public function getAllProduct($params);
     public function getDataForHomePage();
     public function getSizeByColor($params);
+    public function search($params);
+    public function all();
 }

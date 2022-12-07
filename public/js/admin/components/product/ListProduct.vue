@@ -16,6 +16,30 @@
                 >
               </div>
             </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-sm-12 col-md-4">
+                  <div class="input-group">
+                    <input
+                      type="search"
+                      id="search-data"
+                      name="search_key"
+                      class="form-control"
+                      style="border-radius: 7px !important"
+                      v-model="searchKey"
+                    />
+                    <button
+                      type="button"
+                      @click="searchProduct"
+                      class="btn btn-primary ml-15"
+                      style="border-radius: 7px !important"
+                    >
+                      Tìm kiếm
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <!-- /.box-header -->
             <div class="box-body">
               <div class="table-responsive">
@@ -35,7 +59,7 @@
                   <tbody>
                     <tr
                       class="fix-font"
-                      v-for="item in products"
+                      v-for="item in listProducts"
                       :key="item.id"
                     >
                       <td style="width:200px;">{{ item.product_code }}</td>
@@ -92,18 +116,45 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
+    <loading :active="isLoading"
+                 :is-full-page="fullPage"/>
   </div>
 </template>
 
 <script>
 import Paginate from "../Paginate.vue";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
+const axios = require('axios');
 export default {
-  components: { Paginate },
+  components: { Paginate, Loading },
   props: {
     products: Array,
     total: Number,
     lastPage: Number,
+  },
+  data() {
+    return {
+      listProducts: [],
+      searchKey: "",
+      isLoading: false,
+      fullPage: true
+    };
+  },
+  created() {
+    this.listProducts = this.products;
+  },
+  methods: {
+    searchProduct: async function () {
+      this.isLoading = true;
+      const response = await axios.get(`/admin/product/search?search_key=${this.searchKey}`);
+      setTimeout(() => {
+        this.isLoading = false;
+        this.lastPage = response.data.lastPage;
+        this.listProducts = response.data.listProducts;
+      }, 500);
+    },
   },
 };
 </script>

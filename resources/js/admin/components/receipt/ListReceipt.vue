@@ -16,6 +16,30 @@
                 >
               </div>
             </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-sm-12 col-md-4">
+                  <div class="input-group">
+                    <input
+                      type="search"
+                      id="search-data"
+                      name="search_key"
+                      class="form-control"
+                      style="border-radius: 7px !important"
+                      v-model="searchKey"
+                    />
+                    <button
+                      type="button"
+                      @click="searchReceipt"
+                      class="btn btn-primary ml-15"
+                      style="border-radius: 7px !important"
+                    >
+                      Tìm kiếm
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <!-- /.box-header -->
             <div class="box-body">
               <div class="table-responsive">
@@ -30,27 +54,15 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="item in companies" :key="item.id">
-                      <td >{{ item.name }}</td>
-                      <td >{{ item.email }}</td>
-                      <td>{{ item.phone }}</td>
-                      <td>{{ item.address }}</td>
+                    <tr v-for="item in listReceipts" :key="item.id">
+                      <td>{{ item.receipt_code }}</td>
+                      <td>{{ item.notes }}</td>
+                      <td>{{ item.admin.name }}</td>
+                      <td>{{ formatDate(item.created_at) }}</td>
                       <td>
-                        <a
-                          :href="`/admin/company/edit/${item.id}`"
-                          class="btn btn-info"
-                          title="Edit Data"
-                          ><i class="fa fa-pencil"></i>
+                        <a :href="`/admin/receipt/detail/${item.id}`" class="btn btn-info"
+                          ><i class="fa fa-eye"></i>
                         </a>
-                        <a
-                          href=""
-                          :data-url="`/admin/company/delete/${item.id}`"
-                          class="btn btn-danger action-delete"
-                          title="Delete Data"
-                          id="delete"
-                        >
-                          <i class="fa fa-trash"></i
-                        ></a>
                       </td>
                     </tr>
                   </tbody>
@@ -66,22 +78,56 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
+    <loading :active="isLoading"
+                 :is-full-page="fullPage"/>
   </div>
 </template>
 
 <script>
 import Paginate from "../Paginate.vue";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
+const axios = require('axios');
 export default {
-  components: { Paginate },
+  components: { Paginate, Loading },
   props: {
-    companies: Object,
+    receipts: Array,
     total: Number,
     lastPage: Number,
   },
+  data() {
+    return {
+      listReceipts: [],
+      searchKey: "",
+      isLoading: false,
+      fullPage: true
+    };
+  },
+  created() {
+    this.listReceipts = this.receipts;
+  },
+  methods: {
+    formatDate(date) {
+      var d = new Date(date),
+        month = "" + (d.getMonth() + 1),
+        day = "" + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2) month = "0" + month;
+      if (day.length < 2) day = "0" + day;
+
+      return [year, month, day].join("-");
+    },
+    searchReceipt: async function () {
+      this.isLoading = true;
+      const response = await axios.get(`/admin/receipt/search?search_key=${this.searchKey}`);
+      setTimeout(() => {
+        this.isLoading = false;
+        this.lastPage = response.data.lastPage;
+        this.listReceipts = response.data.listReceipts;
+      }, 500);
+    },
+  },
 };
 </script>
-
-<style lang="scss" scoped>
-
-</style>
