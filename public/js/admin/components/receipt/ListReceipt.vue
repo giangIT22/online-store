@@ -48,7 +48,7 @@
                     <tr>
                       <th>Mã đơn hàng</th>
                       <th>Ghi chú</th>
-                      <th>Người nhập</th>
+                      <th>Người tạo</th>
                       <th>Ngày tạo</th>
                       <th>Thao tác</th>
                     </tr>

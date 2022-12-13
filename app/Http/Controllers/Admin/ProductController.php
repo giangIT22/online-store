@@ -125,7 +125,7 @@ class ProductController extends Controller
         $colors = Color::all();
         $options = ProductDetail::join('sizes', 'product_details.size_id', 'sizes.id')
             ->join('colors', 'product_details.color_id', 'colors.id')
-            ->select('colors.name as color_name', 'product_details.size_id', 'product_details.amount')
+            ->select('colors.name as color_name', 'product_details.size_id', 'product_details.amount as product_amount')
             ->addSelect('sizes.name as size_name', 'product_details.color_id' )
             ->where('product_id', $product->id)
             ->get();

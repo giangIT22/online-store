@@ -43914,7 +43914,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Ghi chú")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Người nhập")]),
+        _c("th", [_vm._v("Người tạo")]),
         _vm._v(" "),
         _c("th", [_vm._v("Ngày tạo")]),
         _vm._v(" "),

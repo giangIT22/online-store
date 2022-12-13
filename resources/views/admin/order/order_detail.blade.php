@@ -1,4 +1,4 @@
-@extends('layouts.admin',['titlePage' => 'Chi tiết đơn hàng'])
+@extends('layouts.admin', ['titlePage' => 'Chi tiết đơn hàng'])
 @section('content')
     <div class="container-full">
         <!-- Content Header (Page header) -->
@@ -23,6 +23,10 @@
                                         <th class="text-danger"> {{ $order->order_code }} </th>
                                     </tr>
                                     <tr>
+                                        <th> Tên nhân viên: </th>
+                                        <th> {{ $order->admin->name }} </th>
+                                    </tr>
+                                    <tr>
                                         <th> Tên khách hàng: </th>
                                         <th> {{ $order->name }} </th>
                                     </tr>
@@ -31,7 +35,7 @@
                                         <th> Số điện thoại: </th>
                                         <th> {{ $order->phone }} </th>
                                     </tr>
-                                    
+
                                     <tr>
                                         <th> Email: </th>
                                         <th> {{ $order->email }} </th>
@@ -70,6 +74,12 @@
                                             @endif
                                         </th>
                                     </tr>
+                                    @if ($order->status == 5)
+                                        <tr>
+                                            <th>Lý do hủy: </th>
+                                            <th>{{ $order->reason_cancel }}</th>
+                                        </tr>
+                                    @endif
                                     @if ($order->status == 4)
                                         <tr>
                                             <th> Lý do hủy đơn hàng: </th>
@@ -78,36 +88,46 @@
                                             </th>
                                         </tr>
                                     @endif
-                                    <tr>
-                                        <th> </th>
-                                        <th>
-                                            @if ($order->status == 0)
-                                                <a href="{{ route('order.confirm', ['order_code' => $order->order_code]) }}"
-                                                    class="btn btn-block btn-success" id="confirm">Xác nhận đơn hàng</a>
-                                            @elseif($order->status == 1)
-                                                <a href="{{ route('order.shipping', ['order_code' => $order->order_code]) }}"
-                                                    class="btn btn-block btn-success" id="shipping">Thực hiện giao
-                                                    hàng</a>
-                                            @elseif($order->status == 2)
-                                                <a href="{{ route('order.delivered', ['order_code' => $order->order_code]) }}"
-                                                    class="btn btn-block btn-success" id="delivered">Xác nhận đã giao
-                                                    hàng</a>
-                                            @elseif($order->status == 4)
-                                                <a href="{{ route('order.cancel', ['order_code' => $order->order_code]) }}"
-                                                    class="btn btn-block btn-success" id="delivered">Xác nhận hủy đơn hàng</a>
-                                            @endif
+                                    @if ($order->status != 5 && $order->status != 3)
+                                        <tr>
+                                            <th> </th>
+                                            <th>
+                                                @if ($order->status == 0)
+                                                    <a href="{{ route('order.confirm', ['order_code' => $order->order_code]) }}"
+                                                        class="btn btn-block btn-success" id="confirm">Xác nhận đơn
+                                                        hàng</a>
+                                                @elseif($order->status == 1)
+                                                    <a href="{{ route('order.shipping', ['order_code' => $order->order_code]) }}"
+                                                        class="btn btn-block btn-success" id="shipping">Thực hiện giao
+                                                        hàng</a>
+                                                @elseif($order->status == 2)
+                                                    <a href="{{ route('order.delivered', ['order_code' => $order->order_code]) }}"
+                                                        class="btn btn-block btn-success" id="delivered">Xác nhận đã giao
+                                                        hàng</a>
+                                                @elseif($order->status == 4)
+                                                    <a href="{{ route('order.cancel', ['order_code' => $order->order_code]) }}"
+                                                        class="btn btn-block btn-success" id="delivered">Xác nhận hủy đơn
+                                                        hàng</a>
+                                                @endif
 
-                                        </th>
-                                    </tr>
+                                            </th>
+                                        </tr>
+                                    @endif
 
                                 </table>
 
                             </div>
                         </div>
                         @if ($order->status == 2)
-                            <div class="col-md-3">
-                                <a href="{{ route('order.cancel', ['order_code' => $order->order_code]) }}"
-                                    class="btn btn-block btn-success" id="delivered">Xác nhận đơn hàng bị hoàn lại</a>
+                            <div class="col-md-4">
+                                <form action="{{ route('order.cancel', ['order_code' => $order->order_code]) }}"
+                                    method="get">
+                                    <textarea required placeholder="Nhập lý do hủy đơn hàng..." rows="5" cols="5" class="form-control"
+                                        name="reason_cancel">{{ $order->reason_cancel }}</textarea>
+                                    <button type="submit" style="width: 300px;margin-top:30px;"
+                                        class="btn btn-block btn-success" id="delivered">Xác nhận đơn hàng bị hoàn
+                                        lại</button>
+                                </form>
                             </div>
                         @endif
                     </div>
@@ -156,7 +176,8 @@
                                         </td>
 
                                         <td width="20%">
-                                            <label for=""> {{ $item->name . ' ' . '(' . $item->size_name . ' - ' . $item->color_name .')' }}</label>
+                                            <label for="">
+                                                {{ $item->name . ' ' . '(' . $item->size_name . ' - ' . $item->color_name . ')' }}</label>
                                         </td>
 
 
@@ -173,7 +194,8 @@
                                         </td>
 
                                         <td width="10%">
-                                            <label for=""> {{ number_format($item->product_price * $item->amount) }}
+                                            <label for="">
+                                                {{ number_format($item->product_price * $item->amount) }}
                                                 vnd</label>
                                         </td>
                                     </tr>

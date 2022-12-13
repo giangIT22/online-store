@@ -35,4 +35,9 @@ class Receipt extends Model
             'receipt_code' => $this->order_code,
         ];
     }
+
+    public function supplyCompany()
+    {
+        return $this->belongsTo(SupplyCompany::class);
+    }
 }

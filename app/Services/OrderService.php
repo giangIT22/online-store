@@ -120,7 +120,9 @@ class OrderService implements OrderServiceInterface
 
         $order->update([
             'cancel_date' => now(),
-            'status' => $status
+            'status' => $status,
+            'reason_cancel' => request('reason_cancel') ?? $order->reason_cancel,
+            'admin_id' => Auth::user()->id
         ]);
 
         $products = DB::table('order_item')->where('order_id', $order->id)->get();
