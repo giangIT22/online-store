@@ -45,7 +45,7 @@
                       <th>Email</th>
                       <th>Số điện thoại</th>
                       <th>Địa chỉ</th>
-                      <th>Action</th>
+                      <th v-if="role == 1">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -65,7 +65,7 @@
                       <td>{{ item.email }}</td>
                       <td>{{ item.phone }}</td>
                       <td>{{ item.address }}</td>
-                      <td>
+                      <td v-if="role == 1">
                         <a
                           href=""
                           :data-url="`/admin/user/delete/${item.id}`"
@@ -107,6 +107,7 @@ export default {
     users: Array,
     total: Number,
     lastPage: Number,
+    role: Number
   },
   data() {
     return {

@@ -81,7 +81,8 @@ class AdminProfileController extends Controller
         return view('admin.user.index', [
             'listUsers' => $data->items(),
             'total' => $data->total(),
-            'lastPage' => $data->lastPage()
+            'lastPage' => $data->lastPage(),
+            'role' => Auth::user()->role_id
         ]);
     }
 

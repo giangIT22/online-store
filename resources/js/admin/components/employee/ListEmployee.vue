@@ -85,7 +85,7 @@
                           title="Edit Data"
                           ><i class="fa fa-pencil"></i>
                         </a>
-                        <a
+                        <a v-if="role == 1"
                           href=""
                           :data-url="`/admin/employee/delete/${item.id}`"
                           class="btn btn-danger action-delete"
@@ -125,6 +125,7 @@ export default {
     employees: Array,
     total: Number,
     lastPage: Number,
+    role: Number
   },
   data() {
     return {

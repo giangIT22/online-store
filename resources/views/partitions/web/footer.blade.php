@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="module-heading">
-                        <h4 class="module-title">Contact Us</h4>
+                        <h4 class="module-title">Liên hệ</h4>
                     </div>
                     <!-- /.module-heading -->
 
@@ -14,21 +14,20 @@
                                 <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i
                                             class="fa fa-map-marker fa-stack-1x fa-inverse"></i> </span> </div>
                                 <div class="media-body">
-                                    <p>ThemesGround, 789 Main rd, Anytown, CA 12345 USA</p>
+                                    <p>Hai Bà Trừng, Hà Nội</p>
                                 </div>
                             </li>
                             <li class="media">
                                 <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i
                                             class="fa fa-mobile fa-stack-1x fa-inverse"></i> </span> </div>
                                 <div class="media-body">
-                                    <p>+(888) 123-4567<br>
-                                        +(888) 456-7890</p>
+                                    <p>0944837882</p>
                                 </div>
                             </li>
                             <li class="media">
                                 <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i
                                             class="fa fa-envelope fa-stack-1x fa-inverse"></i> </span> </div>
-                                <div class="media-body"> <span><a href="#">flipmart@themesground.com</a></span>
+                                <div class="media-body"> <span><a href="#">giang22.fit@gmail.com</a></span>
                                 </div>
                             </li>
                         </ul>
@@ -39,17 +38,16 @@
 
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="module-heading">
-                        <h4 class="module-title">Customer Service</h4>
+                        <h4 class="module-title">Chính sách</h4>
                     </div>
                     <!-- /.module-heading -->
 
                     <div class="module-body">
                         <ul class='list-unstyled'>
-                            <li class="first"><a href="#" title="Contact us">My Account</a></li>
-                            <li><a href="#" title="About us">Order History</a></li>
-                            <li><a href="#" title="faq">FAQ</a></li>
-                            <li><a href="#" title="Popular Searches">Specials</a></li>
-                            <li class="last"><a href="#" title="Where is my order?">Help Center</a></li>
+                            <li class="first"><a href="#" title="Contact us">Chính sách bảo mật</a></li>
+                            <li><a href="#" title="About us">Chính sách bảo mật</a></li>
+                            <li><a href="#" title="faq">Chính sách vận chuyển</a></li>
+                            <li><a href="#" title="Popular Searches">Chính sách sử dụng</a></li>
                         </ul>
                     </div>
                     <!-- /.module-body -->
@@ -58,17 +56,14 @@
 
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="module-heading">
-                        <h4 class="module-title">Corporation</h4>
+                        <h4 class="module-title">Hỗ trợ khách hàng</h4>
                     </div>
                     <!-- /.module-heading -->
 
                     <div class="module-body">
                         <ul class='list-unstyled'>
-                            <li class="first"><a title="Your Account" href="#">About us</a></li>
-                            <li><a title="Information" href="#">Customer Service</a></li>
-                            <li><a title="Addresses" href="#">Company</a></li>
-                            <li><a title="Addresses" href="#">Investor Relations</a></li>
-                            <li class="last"><a title="Orders History" href="#">Advanced Search</a></li>
+                            <li class="first"><a title="Your Account" href="#">Đăng nhập</a></li>
+                            <li><a title="Information" href="#">Đăng ký</a></li>
                         </ul>
                     </div>
                     <!-- /.module-body -->
@@ -77,17 +72,13 @@
 
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="module-heading">
-                        <h4 class="module-title">Why Choose Us</h4>
+                        <h4 class="module-title">Theo doĩ chúng tôi</h4>
                     </div>
                     <!-- /.module-heading -->
 
                     <div class="module-body">
                         <ul class='list-unstyled'>
-                            <li class="first"><a href="#" title="About us">Shopping Guide</a></li>
-                            <li><a href="#" title="Blog">Blog</a></li>
-                            <li><a href="#" title="Company">Company</a></li>
-                            <li><a href="#" title="Investor Relations">Investor Relations</a></li>
-                            <li class=" last"><a href="#" title="Suppliers">Contact Us</a>
+                            <li class="first"><a href="#" title="About us">Facebook</a></li>
                             </li>
                         </ul>
                     </div>

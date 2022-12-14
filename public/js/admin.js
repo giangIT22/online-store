@@ -3071,7 +3071,8 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
   props: {
     employees: Array,
     total: Number,
-    lastPage: Number
+    lastPage: Number,
+    role: Number
   },
   data: function data() {
     return {
@@ -4159,7 +4160,8 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
   props: {
     users: Array,
     total: Number,
-    lastPage: Number
+    lastPage: Number,
+    role: Number
   },
   data: function data() {
     return {
@@ -43068,20 +43070,23 @@ var render = function () {
                                   [_c("i", { staticClass: "fa fa-pencil" })]
                                 ),
                                 _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-danger action-delete",
-                                    attrs: {
-                                      href: "",
-                                      "data-url":
-                                        "/admin/employee/delete/" + item.id,
-                                      title: "Delete Data",
-                                      id: "delete",
-                                    },
-                                  },
-                                  [_c("i", { staticClass: "fa fa-trash" })]
-                                ),
+                                _vm.role == 1
+                                  ? _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "btn btn-danger action-delete",
+                                        attrs: {
+                                          href: "",
+                                          "data-url":
+                                            "/admin/employee/delete/" + item.id,
+                                          title: "Delete Data",
+                                          id: "delete",
+                                        },
+                                      },
+                                      [_c("i", { staticClass: "fa fa-trash" })]
+                                    )
+                                  : _vm._e(),
                               ]),
                             ])
                           }),
@@ -44443,7 +44448,23 @@ var render = function () {
                         attrs: { id: "example1" },
                       },
                       [
-                        _vm._m(1),
+                        _c("thead", [
+                          _c("tr", [
+                            _c("th", [_vm._v("Ảnh người dùng")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Tên")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Email")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Số điện thoại")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Địa chỉ")]),
+                            _vm._v(" "),
+                            _vm.role == 1
+                              ? _c("th", [_vm._v("Action")])
+                              : _vm._e(),
+                          ]),
+                        ]),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -44469,22 +44490,25 @@ var render = function () {
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(item.address))]),
                               _vm._v(" "),
-                              _c("td", [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-danger action-delete",
-                                    attrs: {
-                                      href: "",
-                                      "data-url":
-                                        "/admin/user/delete/" + item.id,
-                                      title: "Delete Data",
-                                      id: "delete",
-                                    },
-                                  },
-                                  [_c("i", { staticClass: "fa fa-trash" })]
-                                ),
-                              ]),
+                              _vm.role == 1
+                                ? _c("td", [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "btn btn-danger action-delete",
+                                        attrs: {
+                                          href: "",
+                                          "data-url":
+                                            "/admin/user/delete/" + item.id,
+                                          title: "Delete Data",
+                                          id: "delete",
+                                        },
+                                      },
+                                      [_c("i", { staticClass: "fa fa-trash" })]
+                                    ),
+                                  ])
+                                : _vm._e(),
                             ])
                           }),
                           0
@@ -44519,26 +44543,6 @@ var staticRenderFns = [
         _c("h3", { staticClass: "box-title" }, [
           _vm._v("Danh sách người dùng"),
         ]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Ảnh người dùng")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Tên")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Số điện thoại")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Địa chỉ")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Action")]),
       ]),
     ])
   },

@@ -14,6 +14,7 @@
             :employees="{{ $employees }}"
             :total="{{ $total }}"
             :last-page="{{ $lastPage }}"
+            :role={{ $role }}
         @endif    
     ></list-employee>
 @endsection

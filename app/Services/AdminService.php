@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Admin;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminService implements AdminServiceInterface
@@ -15,7 +16,8 @@ class AdminService implements AdminServiceInterface
         return [
             'listEmployees' => $data->items(),
             'total' => $data->total(),
-            'lastPage' => $data->lastPage()
+            'lastPage' => $data->lastPage(),
+            'role' => Auth::user()->role_id
         ];
     }
 

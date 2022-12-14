@@ -154,18 +154,18 @@ Route::middleware(['auth:admin', 'prevent-back-history'])->group(function () {
     // Admin Get All User Routes 
     Route::prefix('user')->group(function () {
         Route::get('/view', [AdminProfileController::class, 'allUsers'])->name('all.users');
-        Route::get('/delete/{user_id}', [AdminProfileController::class, 'deleteUser'])->name('user.delete');
+        Route::get('/delete/{user_id}', [AdminProfileController::class, 'deleteUser'])->name('user.delete')->middleware('role');;
         Route::get('/search', [AdminProfileController::class, 'search'])->name('user.search');
     });
 
     //===== all employee ==================
     Route::prefix('/employee')->group(function() {
         Route::get('/view', [EmployeeController::class, 'index'])->name('all.employees');
-        Route::get('/create', [EmployeeController::class, 'create'])->name('employee.create');
-        Route::post('/store', [EmployeeController::class, 'store'])->name('employee.store');
-        Route::post('/update/{employee_id}', [EmployeeController::class, 'update'])->name('employee.update');
-        Route::get('/edit/{employee_id}', [EmployeeController::class, 'edit'])->name('employee.edit');
-        Route::get('/delete/{employee_id}', [EmployeeController::class, 'delete'])->name('employee.delete');
+        Route::get('/create', [EmployeeController::class, 'create'])->name('employee.create')->middleware('role');;
+        Route::post('/store', [EmployeeController::class, 'store'])->name('employee.store')->middleware('role');;
+        Route::post('/update/{employee_id}', [EmployeeController::class, 'update'])->name('employee.update')->middleware('role');;
+        Route::get('/edit/{employee_id}', [EmployeeController::class, 'edit'])->name('employee.edit')->middleware('role');;
+        Route::get('/delete/{employee_id}', [EmployeeController::class, 'delete'])->name('employee.delete')->middleware('role');;
         Route::get('/search', [EmployeeController::class, 'search'])->name('employee.search');
     });   
 });

@@ -12,6 +12,7 @@
             :users="{{ $users }}"
             :total="{{ $total }}"
             :last-page="{{ $lastPage }}"
+            :role="{{ $role }}"
         @endif    
     ></list-user>
 @endsection
