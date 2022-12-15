@@ -555,7 +555,7 @@ jQuery(document).ready(function() {
             let sizeId = $(obj).attr('id').slice(start + 1, finish);
             let colorId = $(obj).attr('id').slice(finish + 1);
             let amount = $(`#qty-input-${productId}-${sizeId}-${colorId}`).val();
-            console.log(colorId);
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -572,12 +572,18 @@ jQuery(document).ready(function() {
                     'color_id': colorId
                 },
                 success: function(response) {
-                    let sumPrice = response.product.amount * response.product.product_price;
-                    $(`#sum-${productId}-${sizeId}-${colorId}`).text(sumPrice.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
-                    $('.cart-grand-total span').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
-                    $('.sum-price-product').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
-                    $('.total-price-basket .value').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
-                    $('.basket-item-count').text(response.count);
+                    console.log(response);
+                    if (response.status == false) {
+                        alert(`Sản phẩm này không còn đủ số lượng để đặt hàng. \nSố lượng sản phẩm này còn: ${response.amount}.`);
+                        $(`#qty-input-${productId}-${sizeId}-${colorId}`).val(response.amount_current_cart);
+                    } else {
+                        let sumPrice = response.product.amount * response.product.product_price;
+                        $(`#sum-${productId}-${sizeId}-${colorId}`).text(sumPrice.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                        $('.cart-grand-total span').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                        $('.sum-price-product').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                        $('.total-price-basket .value').text(response.sumTotal.toLocaleString('it-IT', { style: 'currency', currency: 'vnd' }));
+                        $('.basket-item-count').text(response.count);
+                    }
                 }
             });
         });

@@ -21,6 +21,13 @@ class CartService implements CartServiceInterface
         $cart = Cart::where('user_id', Auth::id())->first();
 
         if (!$cart) {
+            if ($params['amount'] > $productDetail->amount) {
+                return [
+                    'status' => false,
+                    'amount' => $productDetail->amount
+                ];
+            }
+
             $cart = Cart::create([
                 'user_id' => Auth::id()
             ]);
@@ -37,6 +44,12 @@ class CartService implements CartServiceInterface
                 ->first();
 
             if ($productInCart) {
+                if (($params['amount'] + $productInCart->amount) > $productDetail->amount) {
+                    return [
+                        'status' => false,
+                        'amount' => $productDetail->amount
+                    ];
+                }
                 DB::table('product_cart')
                     ->where('cart_id', $cart->id)
                     ->where('product_detail_id', $productDetail->id)
@@ -45,6 +58,12 @@ class CartService implements CartServiceInterface
                         'product_price' => $product->sale_price != 0 ? $product->sale_price : $product->product_price,
                     ]);
             } else {
+                if (($params['amount']) > $productDetail->amount) {
+                    return [
+                        'status' => false,
+                        'amount' => $productDetail->amount
+                    ];
+                }
                 DB::table('product_cart')->insert([
                     'cart_id' => $cart->id,
                     'amount' => $params['amount'],
@@ -135,6 +154,13 @@ class CartService implements CartServiceInterface
             ->where('product_detail_id', $productDetail->id);
         $product = $query->first();
 
+        if ($params['amount'] > $productDetail->amount) {
+            return [
+                'status' => false,
+                'amount' => $productDetail->amount,
+                'amount_current_cart' => $product->amount
+            ];
+        }
         if ($params['amount'] > $product->amount) {
             $amount = ++$product->amount;
             $query->update([

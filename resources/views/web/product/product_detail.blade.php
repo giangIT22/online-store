@@ -464,5 +464,8 @@
             }
 
         });
+        $('.add-cart-product').click(function(e) {
+            i = 1;            
+        })
     </script>
 @endpush

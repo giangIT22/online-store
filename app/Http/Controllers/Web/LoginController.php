@@ -52,8 +52,13 @@ class LoginController extends Controller
                 'message' => 'Bạn đã đăng nhập thành công',
                 'alert-type' => 'success'
             ];
+
+            if ($request->session()->get('productDetail')) {
+                $productId = $request->session()->get('productDetail');
+                return redirect()->route('product.detail', ['product_id' => $productId])->with($notification);
+            }
          
-            return back()->with($notification);
+            return redirect()->route('index')->with($notification);
         });
     }
 

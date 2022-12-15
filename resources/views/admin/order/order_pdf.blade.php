@@ -9,7 +9,9 @@
 </head>
 
 <body>
+    <h1 style="font-family: DejaVu Sans;">Mã đơn hàng: {{ $order->order_code }}</h1>
     <h1>{{ $order->name }}</h1>
+    <h1 style="font-family: DejaVu Sans;">Địa chỉ: {{ $order->address }}</h1>
 </body>
 
 </html>

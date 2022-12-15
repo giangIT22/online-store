@@ -38,6 +38,7 @@ class CartController extends Controller
             );
         }
 
+        $request->session()->put('productDetail', $request->product_id);
         return response()->json([
             'status' => false
         ]);
@@ -96,12 +97,16 @@ class CartController extends Controller
 
     public function updateCart(Request $request)
     {
-        list($product, $sumTotal, $count) = $this->cartService->updateCart($request->all());
+        $data = $this->cartService->updateCart($request->all());
+
+        if (isset($data['status'])) {
+            return response()->json($data);
+        }
 
         return response()->json([
-            'product' => $product,
-            'sumTotal' => $sumTotal,
-            'count' => $count
+            'product' => $data[0],
+            'sumTotal' => $data[1],
+            'count' => $data[2]
         ]);
     }
 }

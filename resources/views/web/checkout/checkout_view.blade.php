@@ -104,15 +104,15 @@
                                             </div>
                                         @enderror
                                         <div class="payment">
-                                            <div class="form-check pay-item">
-                                                <input class="form-check-input" type="radio" value="PayPal"
-                                                    name="payment_type" id="pay-card" disabled>
-                                                <label class="form-check-label" for="pay-card">
+                                            {{-- <div class="form-check pay-item"> --}}
+                                                {{-- <input class="form-check-input" type="radio" value="PayPal"
+                                                    name="payment_type" id="pay-card" disabled> --}}
+                                                {{-- <label class="form-check-label" for="pay-card">
                                                     Thanh toán qua VNPAY
-                                                </label>
+                                                </label> --}}
                                                 {{-- <img src="{{ asset('frontend/assets/images/payments/1.png') }}"
                                                     alt="" style="margin-left: 20px;"> --}}
-                                            </div>
+                                            {{-- </div> --}}
                                             <div class="form-check pay-item">
                                                 <input class="form-check-input" type="radio" value="COD"
                                                     name="payment_type" id="pay-transport">
