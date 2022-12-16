@@ -78,7 +78,7 @@
                             href="{{ route('all.categories') }}"><i class="ti-more"></i>Quản lý danh mục sản phẩm</a>
                     </li>
                     <li class="{{ $route == 'all.sub_categories' ? 'active' : '' }}"><a
-                            href="{{ route('all.sub_categories') }}"><i class="ti-more"></i>Danh sách danh mục
+                            href="{{ route('all.sub_categories') }}"><i class="ti-more"></i>Quản lý danh mục
                             con</a>
                     </li>
                     <li class="{{ $route == 'all.companies' ? 'active' : '' }}"><a

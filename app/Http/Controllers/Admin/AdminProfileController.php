@@ -110,7 +110,13 @@ class AdminProfileController extends Controller
                 $data = $this->searchUser($request->search_key);
                 return response()->json($data);
             } else {
-                $data = $this->allUsers();
+                $data = User::orderBy('created_at', 'desc')->paginate(10);
+                $data = [
+                    'listUsers' => $data->items(),
+                    'total' => $data->total(),
+                    'lastPage' => $data->lastPage(),
+                    'role' => Auth::user()->role_id
+                ];
                 return response()->json($data);
             }
         } catch (\Exception $e) {

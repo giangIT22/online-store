@@ -28,6 +28,7 @@ class SupplyCompany extends Model
     {
         return [
             'name' => $this->name,
+            'email' => $this->email
         ];
     }
 }

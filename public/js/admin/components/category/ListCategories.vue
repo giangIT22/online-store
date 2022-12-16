@@ -26,6 +26,7 @@
                       name="search_key"
                       class="form-control"
                       style="border-radius: 7px !important"
+                      placeholder="Nhập tên danh mục ..."
                       v-model="searchKey"
                     />
                     <button

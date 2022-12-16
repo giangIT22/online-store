@@ -26,6 +26,7 @@
                       name="search_key"
                       class="form-control"
                       style="border-radius: 7px !important"
+                      placeholder="Nhập tên hoặc mã sản phẩm ..."
                       v-model="searchKey"
                     />
                     <button
@@ -49,6 +50,7 @@
                       <th>Mã sản phẩm</th>
                       <th>Ảnh sản phẩm</th>
                       <th>Tên</th>
+                      <th>Loại sản phẩm</th>
                       <th>Giá bán</th>
                       <th>Số lượng</th>
                       <th>Giá sale</th>
@@ -65,6 +67,7 @@
                       <td style="width:200px;">{{ item.product_code }}</td>
                       <td><img :src="item.image" alt="" width="100px" /></td>
                       <td style="width:200px;">{{ item.name }}</td>
+                      <td style="width:200px;">{{ item.category.name }}</td>
                       <td>
                         {{ item.product_price ? 
                           item.product_price.toLocaleString("it-IT", {

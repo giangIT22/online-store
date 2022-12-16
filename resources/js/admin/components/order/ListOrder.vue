@@ -20,6 +20,7 @@
                       name="search_key"
                       class="form-control"
                       style="border-radius: 7px !important"
+                      placeholder="Nhập mã đơn hàng..."
                       v-model="searchKey"
                     />
                     <button

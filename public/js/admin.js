@@ -2370,6 +2370,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -2519,6 +2520,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -2556,6 +2559,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -2851,6 +2855,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -2942,6 +2947,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -3292,6 +3298,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -3392,6 +3399,9 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
 //
 //
 //
@@ -4049,6 +4059,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -42192,6 +42203,7 @@ var render = function () {
                           type: "search",
                           id: "search-data",
                           name: "search_key",
+                          placeholder: "Nhập tên danh mục ...",
                         },
                         domProps: { value: _vm.searchKey },
                         on: {
@@ -42395,6 +42407,8 @@ var render = function () {
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(item.sub_category_name))]),
                             _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.category.name))]),
+                            _vm._v(" "),
                             _c("td", [
                               _vm._v(
                                 _vm._s(
@@ -42456,7 +42470,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-header with-border" }, [
       _c("div", { staticClass: "d-flex justify-content-between" }, [
-        _c("h3", { staticClass: "box-title" }, [_vm._v("Danh mục phụ")]),
+        _c("h3", { staticClass: "box-title" }, [_vm._v("Danh mục sản phẩm")]),
         _vm._v(" "),
         _c(
           "a",
@@ -42478,6 +42492,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("Mã danh mục")]),
         _vm._v(" "),
         _c("th", [_vm._v("Tên")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tên danh mục cha")]),
         _vm._v(" "),
         _c("th", [_vm._v("Ngày cập nhật")]),
         _vm._v(" "),
@@ -42537,6 +42553,7 @@ var render = function () {
                           type: "search",
                           id: "search-data",
                           name: "search_key",
+                          placeholder: "Nhập tên, email ...",
                         },
                         domProps: { value: _vm.searchKey },
                         on: {
@@ -42738,6 +42755,7 @@ var render = function () {
                           type: "search",
                           id: "search-data",
                           name: "search_key",
+                          placeholder: "Nhập mã giảm giá",
                         },
                         domProps: { value: _vm.searchKey },
                         on: {
@@ -42976,6 +42994,7 @@ var render = function () {
                           type: "search",
                           id: "search-data",
                           name: "search_key",
+                          placeholder: "Nhập tên, email ...",
                         },
                         domProps: { value: _vm.searchKey },
                         on: {
@@ -43210,6 +43229,7 @@ var render = function () {
                           type: "search",
                           id: "search-data",
                           name: "search_key",
+                          placeholder: "Nhập mã đơn hàng...",
                         },
                         domProps: { value: _vm.searchKey },
                         on: {
@@ -43522,6 +43542,7 @@ var render = function () {
                           type: "search",
                           id: "search-data",
                           name: "search_key",
+                          placeholder: "Nhập tên hoặc mã sản phẩm ...",
                         },
                         domProps: { value: _vm.searchKey },
                         on: {
@@ -43590,6 +43611,10 @@ var render = function () {
                                 _vm._v(" "),
                                 _c("td", { staticStyle: { width: "200px" } }, [
                                   _vm._v(_vm._s(item.name)),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticStyle: { width: "200px" } }, [
+                                  _vm._v(_vm._s(item.category.name)),
                                 ]),
                                 _vm._v(" "),
                                 _c("td", [
@@ -43727,6 +43752,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("Ảnh sản phẩm")]),
         _vm._v(" "),
         _c("th", [_vm._v("Tên")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Loại sản phẩm")]),
         _vm._v(" "),
         _c("th", [_vm._v("Giá bán")]),
         _vm._v(" "),
@@ -44405,6 +44432,7 @@ var render = function () {
                           type: "search",
                           id: "search-data",
                           name: "search_key",
+                          placeholder: "Nhập tên, email ...",
                         },
                         domProps: { value: _vm.searchKey },
                         on: {

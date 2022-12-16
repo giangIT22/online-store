@@ -22,10 +22,12 @@
                                         <th> Đơn hàng: </th>
                                         <th class="text-danger"> {{ $order->order_code }} </th>
                                     </tr>
-                                    <tr>
-                                        <th> Tên nhân viên: </th>
-                                        <th> {{ $order->admin->name }} </th>
-                                    </tr>
+                                    @if (!empty($order->admin))
+                                        <tr>
+                                            <th> Tên nhân viên: </th>
+                                            <th> {{ $order->admin->name }} </th>
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <th> Tên khách hàng: </th>
                                         <th> {{ $order->name }} </th>

@@ -7,7 +7,7 @@
           <div class="box">
             <div class="box-header with-border">
               <div class="d-flex justify-content-between">
-                <h3 class="box-title">Danh mục phụ</h3>
+                <h3 class="box-title">Danh mục sản phẩm</h3>
                 <a
                   href="/admin/category/sub/create"
                   type="button"
@@ -24,6 +24,7 @@
                     <tr>
                       <th>Mã danh mục</th>
                       <th>Tên</th>
+                      <th>Tên danh mục cha</th>
                       <th>Ngày cập nhật</th>
                       <th>Thao tác</th>
                     </tr>
@@ -32,6 +33,7 @@
                     <tr v-for="item in subCategory" :key="item.id">
                         <td>{{ item.id }}</td>
                       <td>{{ item.sub_category_name }}</td>
+                      <td>{{ item.category.name }}</td>
                       <td>{{ new Date(item.updated_at).toLocaleDateString() }}</td>
                       <td>
                         <a
