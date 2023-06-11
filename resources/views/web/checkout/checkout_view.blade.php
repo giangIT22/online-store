@@ -25,7 +25,7 @@
                                         <div class="form-group">
                                             <label>Email</label>
                                             <input type="text" class="form-control" name="email"
-                                                value="{{ Auth::user()->email }}">
+                                                value="{{ Auth::user()->email }}" readonly>
                                             @error('email')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -104,15 +104,15 @@
                                             </div>
                                         @enderror
                                         <div class="payment">
-                                            {{-- <div class="form-check pay-item"> --}}
-                                                {{-- <input class="form-check-input" type="radio" value="PayPal"
-                                                    name="payment_type" id="pay-card" disabled> --}}
-                                                {{-- <label class="form-check-label" for="pay-card">
+                                            <div class="form-check pay-item">
+                                                <input class="form-check-input" type="radio" value="Visa"
+                                                    name="payment_type" id="pay-card">
+                                                <label class="form-check-label" for="pay-card">
                                                     Thanh toán qua VNPAY
-                                                </label> --}}
-                                                {{-- <img src="{{ asset('frontend/assets/images/payments/1.png') }}"
-                                                    alt="" style="margin-left: 20px;"> --}}
-                                            {{-- </div> --}}
+                                                </label>
+                                                <img src="{{ asset('frontend/assets/images/payments/1.png') }}"
+                                                    alt="" style="margin-left: 20px;">
+                                            </div>
                                             <div class="form-check pay-item">
                                                 <input class="form-check-input" type="radio" value="COD"
                                                     name="payment_type" id="pay-transport">

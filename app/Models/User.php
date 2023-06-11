@@ -10,10 +10,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
+use Laravel\Cashier\Billable;
 
 class User extends Authenticatable implements CanResetPassword
 {
     use HasApiTokens, HasFactory, Notifiable, PasswordsCanResetPassword, Searchable;
+    use Billable;
 
     const PER_PAGE = 10;
     

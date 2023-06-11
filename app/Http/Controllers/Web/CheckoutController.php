@@ -7,7 +7,9 @@ use App\Http\Requests\OrderRequest;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Coupon;
+use App\Models\Order;
 use App\Models\ProductCart;
+use App\Notifications\SendOrderNotification;
 use App\Services\OrderServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,14 +65,23 @@ class CheckoutController extends Controller
 
     public function storeOrder(OrderRequest $request)
     {
-        $this->orderService->storeOrder($request->all());
+        DB::beginTransaction();
+        try {  
+            $this->orderService->storeOrder($request->all());
+            DB::commit();
+            if ($request->payment_type == 'Visa') {
+                return redirect()->route('checkout.pay');
+            }
 
-        $notification = [
-            'message' => 'Đặt hàng thành công',
-            'alert-type' => 'success'
-        ];
+            $notification = [
+                'message' => 'Đặt hàng thành công',
+                'alert-type' => 'success'
+            ];
 
-        return redirect()->route('index')->with($notification);
+            return redirect()->route('index')->with($notification);
+        } catch(\Exception $e) {
+            DB::rollBack();
+        }
     }
 
     public function applyCoupon(Request $request)
@@ -83,13 +94,6 @@ class CheckoutController extends Controller
         }
         
         if ($coupon->minimum_price <= $request->sum_price) {
-            // $cart = Cart::where('user_id', Auth::id())->first();
-            // $products = DB::table('product_cart')
-            //     ->select('product_cart.product_detail_id', DB::raw('SUM(product_cart.amount * product_cart.price) as totalPrice'))
-            //     ->where('cart_id', $cart->id)
-            //     ->groupBy('product_cart.product_detail_id')
-            //     ->get();
-
             if ($coupon) {
                 return response()->json([
                     'status' => true,
@@ -116,5 +120,50 @@ class CheckoutController extends Controller
             'status' => true,
             'total_price' => $products->sum('totalPrice')
         ]);
+    }
+
+    /**
+     * Open form checkout payment with credit card
+     */
+    public function pay()
+    {
+        if (Auth::check()) {
+            $order = Order::where('user_id', auth()->id())
+                ->where('payment_status', 0)
+                ->latest()->firstOrfail();
+
+            $categories = Category::with('subCategories')->get();
+            $paymentIntent = auth()->user()->createSetupIntent();//same csrf , it should have before post
+
+            return view('web.checkout.checkout_pay', compact('order', 'categories', 'paymentIntent'));
+        }
+
+        return redirect()->route('index');
+    }
+
+    public function storePay(Request $request)
+    {
+        $order = Order::findOrFail($request->order_id);
+        $user = auth()->user();
+        $price = round($order->sum_price / 23000, 2);
+        $paymentMethod = $request->payment_method;
+
+        try {
+            $user->createOrGetStripeCustomer();
+            $user->updateDefaultPaymentMethod($paymentMethod);
+            $user->charge($price * 100, $paymentMethod);
+            $order->update([
+                'payment_status' => Order::PAID
+            ]);
+        } catch (\Exception $e) {
+            return back()->with('errors', $e->getMessage());
+        }
+
+        $notification = [
+            'message' => 'Đặt hàng thành công',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('index')->with($notification);
     }
 }

@@ -19,46 +19,44 @@ class OrderService implements OrderServiceInterface
     {
         $data = $params;
 
-        if ($params['payment_type'] == 'COD') {
-            //create oder
-            $data['user_id'] = Auth::id();
-            do {
-                $data['order_code'] = 'Order' . rand(1000000, 2000000);
-                $order = Order::where('order_code', $data['order_code'])->first();
-            } while (isset($order));
+        //create oder
+        $data['user_id'] = Auth::id();
+        do {
+            $data['order_code'] = 'Order' . rand(1000000, 2000000);
+            $order = Order::where('order_code', $data['order_code'])->first();
+        } while (isset($order));
 
-            $order = Order::create($data);
+        $order = Order::create($data);
 
-            //create order_item
-            $cart = Cart::where('user_id', Auth::id())->first();
-            $products = ProductCart::where('cart_id', $cart->id)->get();
+        //create order_item
+        $cart = Cart::where('user_id', Auth::id())->first();
+        $products = ProductCart::where('cart_id', $cart->id)->get();
 
-            foreach ($products as $item) {
-                DB::table('order_item')->insert([
-                    'order_id' => $order->id,
-                    'product_detail_id' => $item->product_detail_id,
-                    'amount' => $item->amount,
-                    'product_price' => $item->product_price,
-                    'created_at' => now()
-                ]);
+        foreach ($products as $item) {
+            DB::table('order_item')->insert([
+                'order_id' => $order->id,
+                'product_detail_id' => $item->product_detail_id,
+                'amount' => $item->amount,
+                'product_price' => $item->product_price,
+                'created_at' => now()
+            ]);
 
-                //caculate amount of product
-                $product = ProductDetail::findOrFail($item->product_detail_id)->product;
-                $product->amount = $product->amount - $item->amount;
-                $product->save();
+            //caculate amount of product
+            $product = ProductDetail::findOrFail($item->product_detail_id)->product;
+            $product->amount = $product->amount - $item->amount;
+            $product->save();
 
-                $query = DB::table('product_details')
-                    ->where('id', $item->product_detail_id);
-                $productDetail = $query->first();
+            $query = DB::table('product_details')
+                ->where('id', $item->product_detail_id);
+            $productDetail = $query->first();
 
-                $query->update([
-                    'amount' => $productDetail->amount - $item->amount
-                ]);
+            $query->update([
+                'amount' => $productDetail->amount - $item->amount
+            ]);
 
-                DB::table('product_cart')->where('cart_id', $cart->id)->delete();
+            DB::table('product_cart')->where('cart_id', $cart->id)->delete();
 
-                $cart->delete();
-            }
+            $cart->delete();
         }
     }
 

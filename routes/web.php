@@ -101,4 +101,8 @@ Route::get('/get-district/{province_id}', [CheckoutController::class, 'getDistri
 Route::get('/get-ward/{district_id}', [CheckoutController::class, 'getWard'])->name('checkout.ward');
 Route::post('/checkout/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('checkout.apply_coupon');
 Route::get('/checkout/remove-coupon', [CheckoutController::class, 'removeCoupon'])->name('checkout.remove_coupon');
-// Route::post('/checkout/momo-payment', [CheckoutController::class, 'paymentByMomo'])->name('checkout.momo');
+Route::get('/checkout/pay', [CheckoutController::class, 'pay'])->name('checkout.pay');
+Route::post('/checkout/pay', [CheckoutController::class, 'storePay'])->name('checkout.store.pay');
+
+//start caching webhook when excute stripe
+Route::stripeWebhooks('webhook');
