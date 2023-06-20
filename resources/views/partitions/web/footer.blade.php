@@ -14,7 +14,7 @@
                                 <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i
                                             class="fa fa-map-marker fa-stack-1x fa-inverse"></i> </span> </div>
                                 <div class="media-body">
-                                    <p>Hai Bà Trừng, Hà Nội</p>
+                                    <p>Hai Bà Trưng, Hà Nội</p>
                                 </div>
                             </li>
                             <li class="media">
