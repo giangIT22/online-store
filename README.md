@@ -7,6 +7,7 @@
 5. connect DB with env
 6. php artisan key:generate
 7. php artisan migrate
+8. php artisan storage:link
 
 # configuration permission
 
