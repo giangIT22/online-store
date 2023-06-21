@@ -174,7 +174,9 @@ class ProductService implements ProductServiceInterface
 
     public function search($params)
     {
-        $dataSearch = Product::search($params)->paginate(Product::PER_PAGE);
+        $dataSearch = Product::search($params)->query(function ($builder) {
+            $builder->with('category');
+        })->paginate(Product::PER_PAGE);
 
         return [
             'listProducts' => $dataSearch->items(),

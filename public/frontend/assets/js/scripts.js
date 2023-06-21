@@ -822,7 +822,15 @@ jQuery(document).ready(function() {
     })
 
     $('.coppy-code').on('click', function() {
-        navigator.clipboard.writeText($(this).data('code-coupon'));
+        const text = $(this).data('code-coupon');
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
+  
+        textarea.select();
+        document.execCommand("copy");
+  
+        document.body.removeChild(textarea);
         $('.coppy-coupon-success').css('visibility', 'visible');
         $('.coppy-coupon-success').css('opacity', 1);
     });
